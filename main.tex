@@ -1,0 +1,59 @@
+% --------- TEMPLATE FOR A THESIS IN ECONOMICS -------------- %
+%   Made by Hugo Norinder
+%   First created: 2024-05-22
+%   Updated: 2024-05-22
+%
+%
+%This template was made to guide students in making a thesis that looks like a publishable article
+% ---------- ********************************* -------------- %
+
+\documentclass[a4paper, 12pt]{article}
+\input{setup}
+\title{Means Testing in BAföG: The Impact of Income Eligibility Thresholds on Student Labor Supply
+\footnote{\textbf{Acknowledgement:} You can thank who you want, but it is common to thank you supervisor(s), commenters, or other people you think deserve a mention
+}}
+\author{
+María Sól Antonsdóttir 
+\and 
+Alexander Eriksson Byström
+}
+\date{Seminar date}
+\begin{document}
+
+%THE UNFORTUNATE TITLE PAGE THAT NEEDS TO BE INCLUDED
+\input{title}
+\newpage
+%\maketitle
+\begin{abstract}
+\setstretch{1}
+\lipsum[1] \\
+    \noindent \textbf{Keywords:}  3 -- 5 key words\\
+    \noindent \textbf{JEL codes:} Find appropriate codes at
+    \url{https://www.aeaweb.org/econlit/jelCodes.php?view=jel}  %Standard in econ literature view=jel
+\end{abstract}
+\newpage
+\setcounter{page}{1}
+
+%INTRODUCTION
+\hypersetup{linkcolor=blue}
+\input{sections/1 intro}
+
+%PREVIOUS LITERATURE
+\input{sections/2 literature}
+
+%REFERENCES
+\titleformat{\section}{\normalfont\huge\bfseries}{\thesection}{1em}{} 
+\newpage
+\addcontentsline{toc}{section}{References} 
+\bibliography{bibliography}
+\newpage
+
+%APPENDICES
+\appendix
+\setcounter{page}{1} %Restarts page counting to 1
+\pagenumbering{roman} %Differentiates the appendix page numbers from the main article
+
+\titleformat{\section}{\centering\normalfont\normalsize\bfseries}{Appendix \thesection: }{0em}{}
+\input{appendix/appendix_tables}
+\input{appendix/appendix_figures}
+\end{document}
