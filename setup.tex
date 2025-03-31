@@ -1,6 +1,7 @@
 %------ SETUP OF THE DOCUMENT ------%
 %This part of the document sets up the document and makes it easier to read the main.tex file
 %Changes in the setup file are recommended if you wish to customize things like colors in links and such.
+
 %------ ********************* ------%
 \usepackage[margin = 25mm]{geometry} %
 \usepackage{graphicx} % Required for inserting images
@@ -11,6 +12,8 @@
 \usepackage[flushleft]{threeparttable}
 \usepackage[round, numbers, authoryear]{natbib}
 \usepackage[hidelinks]{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
 
 \hypersetup{
      colorlinks   = true, %If links to papers should be colored
@@ -22,12 +25,21 @@
 \graphicspath{{figures/}}
 
 %CHANGE SECTION STYLE
-\titleformat{\section}{\centering\normalfont\normalsize\bfseries}{\thesection}{0.5em}{} %bfseries makes the headings bold
-\titleformat{\subsection}{\normalfont\normalsize\itshape}{\thesubsection}{0.5em}{} %itshape makes the headings in italics
-\titleformat{\subsubsection}{\normalfont\normalsize\itshape}{\thesubsubsection}{0.5em}{}
-
-%TABLE OF CONTENTS FIXING
-\renewcommand*\contentsname{CONTENTS} %Change name
-\setcounter{tocdepth}{2} %How many subsections are visible, 1 is only section headings, 3 include subsubsections
 
 \bibliographystyle{apalike} %closest to LUSEM Harvard referencing guide
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Table formatting
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\arraystretch}{0.8}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Equation Formatting
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\numberwithin{equation}{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% List Formatting
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlist[itemize]{itemsep=0.05em}

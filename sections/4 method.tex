@@ -1,0 +1,134 @@
+\section{Method}
+
+
+\subsection{Individual Students' Monthly Requirement}
+The monthly requirement the student is eligible for is contingent on the financial support 
+the student is currently receiving from his or her family. 
+Firstly, the student receives a constant requirement of EUR 475, which is not contingent on the students' financial 
+circumstances. To this basic amount the student receives requirements for \textbf{accommodation} (A), 
+\textbf{health insurance} (HI), \textbf{long term care insurance} (LTCI) and an additional amount per the 
+\textbf{number of children} (C) the student has. 
+The requirement received for health insurance, long-term care insurance and accommodation is contingent on 
+whether the parents are already providing these benefits. 
+The total requirement the student will receive is therefore 
+
+\begin{equation} \label{eq:total-requirement}
+  \text{R} = 475 + \text{A} + \text{HI} + \text{LTCI} + \text{C}
+\end{equation}
+where
+\begin{table}[H]
+\small
+\centering
+  \begin{tabular}{lrr}
+  \hline
+  Variable & Provided by parents & Not provided by parents \\
+  \hline
+  A & 59 & 380 \\
+  HI & 0 & 102 \\
+  LTCI & 0 & 35 \\
+  \hline
+  \end{tabular}
+\caption{Benefits contingent on parental provision (values in EUR).}
+\end{table}
+
+
+
+
+
+
+
+\subsection{Deductions from Requirement}
+Parental and Student Income.
+
+\begin{equation} \label{eq:parental-reduction}
+  PR = \text{Parental Reduction} = 
+  \begin{cases}
+    0 & \text{if } E_5 \text{ or } (T_3 \text{ and } E_3) \\
+    0 & \text{if } \text{Age}_{30} \\
+    0.5 \times (\text{Parental Income} - \text{Exemption}) & \text{otherwise}
+  \end{cases}
+\end{equation}
+
+\begin{itemize}
+  \item \( E_5 \): Employed for 5 years after age 18
+  \item \( T_3 \): Completed 3 years of vocational training
+  \item \( E_3 \): Employed for 3 years after vocational training
+  \item \( \text{Age}_{30} \): Older than 30 at the start of training
+\end{itemize}
+
+\begin{table}[H]
+\small
+\centering
+  \begin{tabular}{lr}
+  \hline
+  Household Type & Exemption \\
+  \hline
+  Parents living together & 2,540 \\
+  Parents live separately & 1,690 \\
+  Spouse or Cohabiting Partner & 1,690 \\
+  \hline
+  \end{tabular}
+\caption{Tax-free amount contingent on household type (values in EUR).} 
+%NOTE: Add the fact that it's the penultimate year before approval period that is taken into consideration.
+\end{table}
+
+Let 
+\[
+SR = \text{Student Reduction} = 
+\begin{cases} 
+    0.5 \times \left( (\text{Income} - 556) + \max(0, \text{Assets} - 15,000)  \right) & \text{if Age}_{30} \\
+    0.5 \times \left( (\text{Income} - 556) + \max(0, \text{Assets} - 45,000) \right) & \text{else}
+\end{cases}
+\]
+\[
+\text{BAföG}^\text{final}_{i} = \max(0, R - (PR + SR)) % Received BAföG amount
+\]
+
+% \[
+% D_i = 
+% \begin{cases}
+% 1, & \text{if } \text{BAföG}_\text{final} = 0 \quad \text{(Ineligible for full requirement)} \\
+% 0, & \text{otherwise}
+% \end{cases}
+% \]
+
+Define a loss function out of the requirements and the deductions 
+\begin{equation}
+L(R, PR, SR) = R - (PR + SR)
+\end{equation}
+
+
+\subsection{Construction of Fuzzy RD}
+
+
+Dummy variable for whether student loses any of his or her BAföG requirement
+\begin{equation}
+D_{i} = 
+\begin{cases}
+  1, \quad \text{if } L(R, PR, SR) > 0 \quad \text{(Some BAföG deduction occur)} \\
+  0, \quad \text{if } L(R, PR, SR) = 0 \quad \text{(No deductions, full requirement)}
+\end{cases}
+\end{equation}
+
+REVISE THIS ENTIRELY! Use a logit/probit for the first step then 
+use these fitted values as regressor for second stage! 
+Look into assumptions of both models and determine according to the 
+characteristics of our data. 
+
+
+First Stage (REVISE! Make into Logit/Probit)
+\[ 
+\text{BAFÖG}_{i} = \alpha + \beta D_{i} + \gamma X_{i} + \varepsilon_{i}
+\]
+
+Second Stage
+\[ 
+ \text{LabourSupply}_{i} = \delta + \lambda \widehat{\text{BAföG}}_{i} + \mu X_{i} + \nu_{i}
+\]
+
+\( \lambda \) coefficient for whether BAföG receipt reduces labour supply
+
+
+
+
+

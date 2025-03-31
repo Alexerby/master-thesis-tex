@@ -1,29 +1,16 @@
-% --------- TEMPLATE FOR A THESIS IN ECONOMICS -------------- %
-%   Made by Hugo Norinder
-%   First created: 2024-05-22
-%   Updated: 2024-05-22
-%
-%
-%This template was made to guide students in making a thesis that looks like a publishable article
-% ---------- ********************************* -------------- %
-
-\documentclass[a4paper, 12pt]{article}
+\documentclass[a4paper]{article}
 \input{setup}
-\title{Means Testing in BAföG: The Impact of Income Eligibility Thresholds on Student Labor Supply
-\footnote{\textbf{Acknowledgement:} You can thank who you want, but it is common to thank you supervisor(s), commenters, or other people you think deserve a mention
-}}
-\author{
-María Sól Antonsdóttir 
-\and 
-Alexander Eriksson Byström
-}
+
 \date{Seminar date}
 \begin{document}
 
-%THE UNFORTUNATE TITLE PAGE THAT NEEDS TO BE INCLUDED
+% TITLE PAGE 
 \input{title}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ABSTRACT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-%\maketitle
 \begin{abstract}
 \setstretch{1}
 \lipsum[1] \\
@@ -34,12 +21,17 @@ Alexander Eriksson Byström
 \newpage
 \setcounter{page}{1}
 
-%INTRODUCTION
 \hypersetup{linkcolor=blue}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CONTENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{sections/1 intro}
 
 %PREVIOUS LITERATURE
 \input{sections/2 literature}
+\input{sections/3 data}
+\input{sections/4 method}
 
 %REFERENCES
 \titleformat{\section}{\normalfont\huge\bfseries}{\thesection}{1em}{} 
