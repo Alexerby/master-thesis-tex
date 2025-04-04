@@ -2,3 +2,49 @@
 \section{Tables}
 \renewcommand{\thetable}{\thesection \arabic{table}}
 \setcounter{table}{0}
+
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{0.8}  % Increase the height of the header
+\begin{tabular}{lrrrr}
+\hline
+\hline
+Year & \multicolumn{3}{c}{(\%) Supported Students} & Avg. Monthly Payment (2023 prices) \\
+\cline{2-4}
+     & Partially & Fully & Total & \\
+\hline
+1998 & 13 & 5 & 19 & 498.34 \\
+1999 & 13 & 6 & 19 & 502.83 \\
+2000 & 14 & 6 & 19 & 503.90 \\
+2001 & 15 & 7 & 22 & 553.19 \\
+2002 & 15 & 9 & 23 & 554.36 \\
+2003 & 15 & 9 & 24 & 547.26 \\
+2004 & 16 & 10 & 25 & 539.85 \\
+2005 & 16 & 10 & 26 & 536.96 \\
+2006 & 16 & 10 & 25 & 528.53 \\
+2007 & 16 & 10 & 25 & 516.68 \\
+2008 & 14 & 11 & 25 & 534.48 \\
+2009 & 16 & 10 & 26 & 580.82 \\
+2010 & 16 & 10 & 27 & 577.54 \\
+2011 & 17 & 10 & 27 & 586.09 \\
+2012 & 17 & 10 & 27 & 570.14 \\
+2013 & 16 & 10 & 25 & 559.06 \\
+2014 & 15 & 9 & 24 & 556.19 \\
+2015 & 14 & 8 & 22 & 553.24 \\
+2016 & 12 & 8 & 21 & 569.99 \\
+2017 & 12 & 8 & 20 & 604.08 \\
+2018 & 10 & 8 & 18 & 586.47 \\
+2019 & 10 & 7 & 17 & 602.85 \\
+2020 & 9 & 7 & 16 & 669.86 \\
+2021 & 9 & 7 & 16 & 655.38 \\
+2022 & 8 & 8 & 17 & 647.04 \\
+2023 & 9 & 9 & 17 & 663.00 \\
+\hline
+\end{tabular}
+\caption{
+  Descriptives from 1998--2023 showing the fraction of HE students partially and fully 
+  supported by BAföG, along with the average monthly payment adjusted for the German Consumer Price Index (CPI) from Destatis.
+}
+\label{tab:support_fraction_financial_expenditure}
+\end{table}
