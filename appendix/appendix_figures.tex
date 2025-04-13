@@ -3,11 +3,24 @@
 \renewcommand{\thefigure}{\thesection \arabic{figure}}
 \setcounter{figure}{0}
 
+
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.95\linewidth]{bafog_support_over_time.png}
-  \caption{
-      Trends in CPI-adjusted average monthly payments from 1998 to 2023, expressed in 2023 prices. The figure also illustrates the fraction of enrolled students in Germany receiving partial, full, or combined partial and full loans and grants over the same period.
-  }
-  \label{fig:test}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=0.95\linewidth]{fraction_of_enrolled_students_receiving_bafog.png}
+    \caption{
+      The figure illustrates the fraction of enrolled students in Germany receiving partial, full, or combined partial and full loans and grants over the same period.
+    }
+  \label{figure:bafoeg_support}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=0.95\linewidth]{payout_over_time.png}
+    \caption{Average nominal and real payout under the Federal Training Assistance Act (BAföG) for category students (pupils excluded).}
+  \label{figure:payout_over_time}
+  \end{minipage}
+
 \end{figure}
