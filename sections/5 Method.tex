@@ -1,5 +1,48 @@
 \section{Method}
 
+\subsection{Requirement}
+\begin{equation}
+  \text{Requirement} = \text{Bedarfssatz} + \text{Accommodation} + \text{Health Insurance} + \text{Long Term Health Insurance} + (\text{Children} \times \text{No. of Children} )
+\end{equation}
+
+\begin{equation}
+  \text{Theoretical BAföG} = \text{Requirement} - \text{Anrechenbares Einkommen (student + parents)}
+\end{equation}
+
+% Find reductions
+\subsection{Anrechenbares Einkommen}
+\subsubsection{Parental Contribution (Elternbeitrag)}
+\subsubsection{Student's own Income (Eigene Einkünfte)}
+
+
+\subsection{Construct Probit Model}
+Construct a probit model in order to find the probably of not taking up the BAföG loan. 
+With this model we will get a non-take-up rate for bafög loans.
+
+
+
+
+
+% Define three groups 
+% \begin{itemize}
+%   \item Eligible + Takes BAföG
+%   \item Eligible + Does not take BAföG
+%   \item Not Eligible + Takes BAföG (missclassifications/errors)
+% \end{itemize}
+
+% Model the probability of student taking up the loan using a logistic regression 
+% \begin{equation}
+%   \text{Pr}(\text{Takeup}_{i} = 1 \mid X_{i} )
+% \end{equation}
+
+
+
+
+
+
+
+
+
 
 \subsection{Individual Students' Monthly Requirement}
 The monthly requirement the student is eligible for is contingent on the financial support 
@@ -12,6 +55,7 @@ The requirement received for health insurance, long-term care insurance and acco
 whether the parents are already providing these benefits. 
 The total requirement the student will receive is therefore 
 
+% R is the Bedarfssatz, rename this
 \begin{equation} \label{eq:total-requirement}
   \text{R} = \text{RR}  + \text{A} + \text{HI} + \text{LTCI} + \text{C}
 \end{equation}
