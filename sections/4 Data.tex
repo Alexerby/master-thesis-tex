@@ -1,0 +1,37 @@
+\section{Data}
+This study utilizes data from the \textbf{German Socio-Economic Panel (SOEP)}, a nationally representative longitudinal survey conducted annually since 1984. The dataset provides rich individual and household-level information, including detailed data on income, education, household composition, labor market behavior, and demographics. Among its various survey components, this study relies exclusively on \textbf{SOEP-Core}, the central and most comprehensive module.
+
+We restrict our analysis to the period \textbf{2002–2022}, following the introduction of the euro, to ensure consistency in income data. Our sample is further limited to \textit{individuals who are currently enrolled in education}, identified through a harmonized education variable in SOEP. This yields an unbalanced panel of students observed for varying numbers of years.
+
+A key strength of the SOEP is its household structure, which allows us to \textit{link students to their parents, siblings, and—in many cases—partners}. Through these links, we construct a comprehensive dataset including:
+
+Using this data, we construct a comprehensive dataset that includes detailed student-level and household-level characteristics. For students, we observe age, gender, federal state (Bundesland), household type, and income (if any). Parental information includes gross and net income, employment status, household structure, tax burdens, and relationship status. Where applicable, we also observe sibling characteristics such as enrollment status, income, and household composition. Finally, for students who report having a partner, we include the partner’s income and household role.
+
+Using this data, we simulate the \textbf{theoretical BAföG eligibility and award} based on statutory rules in place during each year. This involves implementing a detailed microsimulation model that replicates the BAföG means test.
+
+\subsection{Sample Description}
+The final dataset contains approximately \textbf{N = [UPDATE THIS WHEN WE KNOW]} student-year observations. Each row represents a student in a particular year.
+
+We observe considerable heterogeneity in the length of time individuals appear in the panel. Some students are observed for only a single survey wave, while others are followed for several years. This variation reflects real-world differences in educational trajectories, dropout rates, and survey participation over time.
+
+\subsection{Limitations}
+
+While the SOEP offers an unparalleled breadth of socioeconomic information, a few caveats remain that readers should bear in mind.
+
+\paragraph{Parental income coverage.}
+To compute a credible BAföG means test, some information on parental income is indispensable.  Requiring data for \emph{both} parents would exclude too many observations, artificially driving simulated eligibility toward zero.  We therefore retain students with at least one parent’s income record.  For split or single‑parent households this exactly matches reality; in two‑parent households it may understate total resources, but the gain in sample size and representativeness outweighs this modest downward bias.  The approach keeps the analysis firmly grounded in the population of interest while avoiding the selection problems that a stricter filter would entail.
+
+Because the SOEP does not identify BAföG‑eligible respondents directly, we construct eligibility through a microsimulation that mirrors the legal rules of the Bundesausbildungsförderungsgesetz (BAföG) for the years 2002–2022 \citep{bafoeg_law,bafoeg20,bafoeg21,bafoeg22,bafoeg23,bafoeg24,bafoeg25,bafoeg26,bafoeg27,bafoeg28,bafoeg29}.  The model implements the need calculation in §\,13 and the dynamic allowance schedule of §\,25, explicitly updating thresholds in line with each amendment act.  Although administrative discretion and undocumented special cases can never be captured perfectly, our code follows the statute as closely as possible and ensures year‑consistent treatment of every survey wave.
+
+\paragraph{Modelling taxes.}
+Full tax‑return simulations, as in \cite{herber_non-take-up_2019}, require detailed information (e.\,g.\ deductions, extraordinary expenses) that the SOEP does not always provide.  
+We therefore approximate net parental income with the statutory bracket formulas of §\,32a EStG—updated for every year since 2002 \citep{estg_law,estg_2025,estg_2024,estg_2023,estg_2022,estg_2021,estg_2020,estg_2019,estg_2018,estg_2017,estg_2016,estg_2015,estg_2014,estg_2013,estg_2012,estg_2007,estg_2006,estg_lohninfo_2012}.  
+Where historical schedules were unavailable for 2002–2006, we used linear interpolation as a pragmatic bridge.  
+This method trades a small loss of precision for substantial feasibility: it reproduces the primary tax burden, aligns exactly with headline bracket reforms, and keeps the focus on BAföG‑relevant income differences rather than idiosyncratic deductions.  
+Solidarity surcharge rates (5.5\% until 2020 and the phased reductions thereafter) follow \citet{solzg_2018,solzg_2019,solzg_2023}, and church tax is applied at 9\% (8\% in Bavaria and Baden‑Württemberg) conditional on reported church membership.
+
+\paragraph{Residual divergence from administration.}
+Even with statute‑faithful rules, results can deviate from official BAföG decisions because of case‑by‑case discretion or incomplete household information.  Nonetheless, the simulation yields a coherent, legally grounded benchmark that supports robust analyses of take‑up behaviour across two decades.
+
+Despite these limitations, the SOEP remains the richest German micro‑dataset for studying student finance.  The eligibility construct developed here combines legal accuracy with maximum sample coverage, enabling a nuanced investigation of BAföG non‑take‑up and its determinants.
+
