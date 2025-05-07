@@ -5,23 +5,38 @@
 We define non take up of welfare in line with Nelson and Nieuwenhuis (2019), as the circumstance when a person is eligible for welfare, but does not receive it. This is in line with terminology commonly used in literature on welfare take up rates. Non take up rate is thus the number of people who are eligible, but do not receive it, divided by the total number of people eligible. It is worth noting, however, that these situations often prove to be more complicated. In some cases, some individuals might receive welfare even though they aren’t eligible. This might for example happen due to fraud or errors made on the administrative level. This presents the issue of type two beta errors \citep{herber_non-take-up_2019, nelson_towards_2021}.
 
 \subsection{Microsimulation of Theoretical BAföG Calculation}
-After simulating statutory eligibility, we analyse the \textit{behavioural} non-take-up.
-That is the probability that an eligible student refrains from taking up BAföG, even though they would theoretically, according to our statutory microsimulation be eligible to do so. Formally, we model 
-\begin{equation}
-  \mathrm{Pr}(A_{i} = 0 \mid T_{i} = 1,\; \mathbf{X}_{i}),
-\end{equation}
-where \( T_{i} = 1 \) denotes that the individual is \textit{theoretically} eligible according to our microsimulation. \( A_{i} \) is the \textit{actual} take-up indicator observed in the SOEP-Core dataset. 
-\( A_{i} \) therefore denotes whether the individual \textit{de facto} did take up BAföG. 
 
-Due to the nature of our dependent variable being binary, we employ a Probit model with standard-normal link
+After simulating statutory eligibility, we analyse the \textit{behavioural} non-take-up: 
+that is, the probability that a student refrains from taking up BAföG even though they are theoretically eligible according to our statutory microsimulation. 
+Formally, we model:
 \begin{equation}
-  y_{i}^* = \mathbf{X}_{i} + \varepsilon_{i}, 
-  \quad 
-  \varepsilon \sim \mathcal{N}(0,1), 
-  \quad 
-  y_{i} = \mathbf{1} \{ y_{i}^* > 0 \}
+  \Pr(\mathrm{NTU}_i = 1 \mid \mathbf{X}_i), \quad \text{with } T_i = 1 \text{ for all } i,
 \end{equation}
-where \( y_{i} = 1 \) flags the non-take-up of BAföG. 
+where \( T_i = 1 \) indicates theoretical eligibility, and \( \mathrm{NTU}_i := \mathbf{1}\{A_i = 0\} \) is a binary indicator for non-take-up, derived from the observed take-up variable \( A_i \) in the SOEP-Core dataset.
+
+Due to the binary nature of the dependent variable, we employ a Probit model with a standard normal link function. Specifically, we assume a latent index structure for the unobserved propensity to forego BAföG:
+\begin{equation}
+  \mathrm{NTU}_i^* = \mathbf{X}_i \beta + \varepsilon_i, 
+  \quad 
+  \varepsilon_i \sim \mathcal{N}(0,1),
+\end{equation}
+and observe:
+\begin{equation}
+  \mathrm{NTU}_i = \mathbf{1} \{ \mathrm{NTU}_i^* > 0 \}.
+\end{equation}
+That is, \( \mathrm{NTU}_i = 1 \) if and only if the student's latent utility for not applying exceeds zero.
+
+This specification implies the following probability model:
+\begin{equation}
+  \Pr(\mathrm{NTU}_i = 1 \mid \mathbf{X}_i) = \Pr(\mathrm{NTU}_i^* > 0 \mid \mathbf{X}_i) = \Phi(\mathbf{X}_i \beta),
+\end{equation}
+where \( \Phi(\cdot) \) denotes the cumulative distribution function (CDF) of the standard normal distribution.
+
+Hence, the latent-index formulation yields the conditional non-take-up probability for each student, and aligns with our empirical target:
+\[
+\Pr(A_i = 0 \mid \mathbf{X}_i) = \Phi(\mathbf{X}_i \beta), \quad \text{for all } i \text{ such that } T_i = 1.
+\]
+
 % TODO: Explain here why we are not using Logit 
 % and maybe we also should do that and compare outcomes?
 
@@ -36,7 +51,13 @@ The design matrix (\( \mathbf{X} \)) combines three partitions
 \end{equation}
 where \( \mathbf{Z}_{i} \) (such as \textit{age, number of siblings}) contains continuous covariates, \( \mathbf{B}_{i} \) containing binary indicators (such as \textit{livings with parents})  and \( \mathbf{D}_{i} \) containing dummy vectors (such as \textit{sex, federal state, employment status}). 
 
-The parameters are obtained by maximum-likelihood (ML) where the inference relies on the well known \textbf{Huber-White (HC0)} robust standard errors to guard against residual heteroskedasticity which often arises in large observational panels such as ours.
+The parameters are estimated by maximum likelihood (ML), and inference is conducted using heteroskedasticity-robust standard errors of the \textbf{MacKinnon and White (1985) HC2} type \citep{mackinnon_heteroskedasticity-consistent_1985}. These standard errors account for potential residual heteroskedasticity, which is common in large-scale observational panel data such as the SOEP-Core.\footnote{
+We use the HC2 estimator following \citet{mackinnon_heteroskedasticity-consistent_1985}, which adjusts the residual variance by downweighting high-leverage observations. Specifically, the variance-covariance matrix of the estimator is given by:
+\(
+\widehat{\mathrm{Var}}(\hat{\beta}) = (X^\top X)^{-1} X^\top \operatorname{diag}\left( \frac{e_i^2}{1 - h_{ii}} \right) X (X^\top X)^{-1},
+\)
+where \( e_i \) are the residuals and \( h_{ii} \) are the diagonal elements of the hat matrix \( H = X(X^\top X)^{-1}X^\top \). This choice is motivated by \citet{chesher_hajek_1989} and \citet[Section 4]{chesher_finite-sample_1991}, who show that HC2 might be better as HC3 tends to be upward biased and HC1 downwards-biased.
+}
 
 % What is meant by latent index?
 As raw Probit coefficients represents shifts in the latent index\footnote{
