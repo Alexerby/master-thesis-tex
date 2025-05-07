@@ -5,8 +5,43 @@
 We define non take up of welfare in line with Nelson and Nieuwenhuis (2019), as the circumstance when a person is eligible for welfare, but does not receive it. This is in line with terminology commonly used in literature on welfare take up rates. Non take up rate is thus the number of people who are eligible, but do not receive it, divided by the total number of people eligible. It is worth noting, however, that these situations often prove to be more complicated. In some cases, some individuals might receive welfare even though they aren’t eligible. This might for example happen due to fraud or errors made on the administrative level. This presents the issue of type two beta errors \citep{herber_non-take-up_2019, nelson_towards_2021}.
 
 \subsection{Microsimulation of Theoretical BAföG Calculation}
+After simulating statutory eligibility, we analyse the \textit{behavioural} non-take-up.
+That is the probability that an eligible student refrains from taking up BAföG, even though they would theoretically, according to our statutory microsimulation be eligible to do so. Formally, we model 
+\begin{equation}
+  \mathrm{Pr}(A_{i} = 0 \mid T_{i} = 1,\; \mathbf{X}_{i}),
+\end{equation}
+where \( T_{i} = 1 \) denotes that the individual is \textit{theoretically} eligible according to our microsimulation. \( A_{i} \) is the \textit{actual} take-up indicator observed in the SOEP-Core dataset. 
+\( A_{i} \) therefore denotes whether the individual \textit{de facto} did take up BAföG. 
 
-\subsection{Construct Probit Model}
-Construct a probit model in order to find the probably of not taking up the BAföG loan. 
-With this model we will get a non-take-up rate or bafög loans.
+Due to the nature of our dependent variable being binary, we employ a Probit model with standard-normal link
+\begin{equation}
+  y_{i}^* = \mathbf{X}_{i} + \varepsilon_{i}, 
+  \quad 
+  \varepsilon \sim \mathcal{N}(0,1), 
+  \quad 
+  y_{i} = \mathbf{1} \{ y_{i}^* > 0 \}
+\end{equation}
+where \( y_{i} = 1 \) flags the non-take-up of BAföG. 
+% TODO: Explain here why we are not using Logit 
+% and maybe we also should do that and compare outcomes?
+
+The condition \( T_{i} = 1 \) restricts the dataset to students for whom the microsimulation yields positive statutory entitlement. Therefore, all the inferences pertains to this eligible sub-population whom are \textit{theoretically} (statutorily) eligible. 
+
+The design matrix (\( \mathbf{X} \)) combines three partitions 
+\begin{equation}
+  \mathbf{X}_{i} = 
+  \begin{bmatrix}
+    \mathbf{Z}_{i} \mid \mathbf{B}_{i} \mid \mathbf{D}_{i}
+  \end{bmatrix}
+\end{equation}
+where \( \mathbf{Z}_{i} \) (such as \textit{age, number of siblings}) contains continuous covariates, \( \mathbf{B}_{i} \) containing binary indicators (such as \textit{livings with parents})  and \( \mathbf{D}_{i} \) containing dummy vectors (such as \textit{sex, federal state, employment status}). 
+
+The parameters are obtained by maximum-likelihood (ML) where the inference relies on the well known \textbf{Huber-White (HC0)} robust standard errors to guard against residual heteroskedasticity which often arises in large observational panels such as ours.
+
+% What is meant by latent index?
+As raw Probit coefficients represents shifts in the latent index\footnote{
+With the latent index we refer to the continuous "score" which drives the true/false decision, but is not itself observed. That is the unseen propensity that the model assumes sits underneath every given binary outcome.
+}
+and are not directly comparable across covariates. To make these comparable, we report the average marginal effects (AMEs) in the results section. This translates the covariate changes into percentage-point differences in the non-take-up probability of the individuals.
+
 
