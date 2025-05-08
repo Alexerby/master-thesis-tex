@@ -1,0 +1,192 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  APPENDIX – MICROSIMULATION PIPELINE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% -------------------------------------------------------------------------
+%  Introductory motivation (BEFORE the \section command)
+% -------------------------------------------------------------------------
+%
+%  Put this paragraph in the appendix file right before \section{Microsimulation Pipeline}.
+%  It explains why the pipeline matters and sets up the detailed sub-sections.
+
+
+\newpage
+% ========================================================================
+\section{Microsimulation Pipeline}
+% ========================================================================
+
+This appendix documents the microsimulation pipeline used to construct the analysis dataset from raw SOEP extracts. 
+The goal is to make each step in the process transparent and reproducible. 
+% For each part of the pipeline, we briefly explain what was done, why it was necessary, and how it relates to the legal rules (e.g., § 9a EStG or § 25 Abs. 3 BAföG). 
+% Where helpful, we include schematic diagrams to show how the different components fit together.
+
+The pipeline is organized into four main components: a sociodemographic module, a student status module, a student income module, and a parental income module. 
+
+Each of these is wrapped into a separate function and explained in this appendix.
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[node distance=1.2cm and 2.2cm] % vertical & horizontal spacing
+    \node[sourcebox] (raw) {Raw SOEP panels};
+    \node[pipelinebox,below=of raw] (sociodemographic) {Sociodemographic Data};
+    \node[pipelinebox,below=of sociodemographic] (studentstatus) {Student status pipeline};
+    \node[actionbox,below=of studentstatus] (split) {Split by individual type};
+
+    \node[pipelinebox,below left=2.0cm and 2.0cm of split] (student) {Student pipeline};
+    \node[pipelinebox,below right=2.0cm and 2.0cm of split] (parent) {Parental pipeline};
+
+    \node[auxbox,below=of split] (tax) {Tax Service};
+
+    \node[pipelinebox,below=3.0cm of tax] (merge) {Merge \& Compute Final Theoretical BAföG Amount};
+
+    % arrows
+    \draw[arrow] (raw) -- (sociodemographic);
+    \draw[arrow] (sociodemographic) -- (studentstatus);
+    \draw[arrow] (studentstatus) -- (split);
+    \draw[arrow] (split) -- (student);
+    \draw[arrow] (split) -- (parent);
+
+    \draw[arrow] (tax) -- ++(-2,0) |- (student);
+    \draw[arrow] (tax) -- ++(2,0) |- (parent);
+
+    \draw[arrow] (student) |- (merge);
+    \draw[arrow] (parent) |- (merge);
+  \end{tikzpicture}
+  \caption{End-to-end pipeline overview}
+  \label{fig:pipeline-overview}
+\end{figure}
+
+
+
+\noindent
+Figure~\ref{fig:pipeline-overview} maps the entire data-flow.  
+The remainder of this appendix zooms into each shaded box in the order shown
+and documents (i)~the exact sequence of transformation functions,
+(ii)~the statutory or econometric rationale, and (iii)~any runtime
+optimisations implemented to keep the workflow scalable.
+
+% -------------------------------------------------------------------------
+\subsection{Student-Income Mini-Pipeline}
+% -------------------------------------------------------------------------
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[node distance=1cm]
+    \node[pipelinebox] (m1) {Merge labour income \\ {\footnotesize(pgen)}};
+    \node[pipelinebox,below=of m1] (m2) {Werbungskosten‐\\Pauschale (§~9a)};
+    \node[pipelinebox,below=of m2] (m3) {22.3 \% SI allowance \\ (§~21 II 1)};
+    \node[pipelinebox,below=of m3] (m4) {Income-tax calc. \\ (§§~32a–36b)};
+    \node[pipelinebox,below=of m4] (m5) {§~23 allowances};
+
+    \draw[arrow] (m1) -- (m2);
+    \draw[arrow] (m2) -- (m3);
+    \draw[arrow] (m3) -- (m4);
+    \draw[arrow] (m4) -- (m5);
+  \end{tikzpicture}
+  \caption{Student-income mini-pipeline}
+  \label{fig:student-pipeline}
+\end{figure}
+
+% \vspace{0.5em}
+% \noindent
+% Figure~\ref{fig:student-pipeline} mirrors the wrapper in
+% \texttt{build.py}.  Table~\ref{tab:student-steps} below lists each function,
+% the input columns it consumes, and the new variables it emits.
+%
+% % ----- Step table skeleton (fill as needed) -------------------------------
+% \begin{table}[H]
+% \centering
+% \begin{tabular}{clp{6cm}}
+% \toprule
+% \# & Function & Statutory / economic logic \\
+% \midrule
+% 1 & \texttt{merge\_income} & Gross labour income from \texttt{pgen}. Invalid codes pruned. \\
+% 2 & \texttt{apply\_lump\_sum\_deduction\_student} & Werbungskosten‐Pauschale (§ 9a EStG). \\
+% 3 & \texttt{apply\_social\_insurance\_allowance} & Flat 22.3 \% deduction (§ 21 II 1 BAföG). \\
+% 4 & \texttt{apply\_student\_income\_tax} & Einkommensteuer per § 32a EStG schedule. \\
+% 5 & \texttt{apply\_student\_income\_deduction} & Personal/spouse/child allowances (§ 23 BAföG). \\
+% \bottomrule
+% \end{tabular}
+% \caption{Processing steps in the student-income pipeline}
+% \label{tab:student-steps}
+% \end{table}
+
+% -------------------------------------------------------------------------
+\subsection{Parental-Income Mini-Pipeline}
+% -------------------------------------------------------------------------
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[node distance=0.9cm]
+    \node[pipelinebox] (p1) {Merge parental incomes};
+    \node[pipelinebox,below=of p1] (p2) {Werbungskosten‐\\Pauschale};
+    \node[pipelinebox,below=of p2] (p3) {22.3 \% SI allowance};
+    \node[pipelinebox,below=of p3] (p4) {Find siblings};
+    \node[pipelinebox,below=of p4] (p5) {Merge sibling income};
+    \node[pipelinebox,below=of p5] (p6) {Parental income-tax calc.};
+    \node[pipelinebox,below=of p6] (p7) {Flag relationship};
+    \node[pipelinebox,below=of p7] (p8) {Basic allowance};
+    \node[pipelinebox,below=of p8] (p9) {Sibling allowance};
+    \node[pipelinebox,below=of p9] (p10) {Additional allowance};
+    \node[pipelinebox,below=of p10] (p11) {Split contribution \\ (§~25 III)};
+
+    \foreach \i/\j in {p1/p2, p2/p3, p3/p4, p4/p5, p5/p6,
+                       p6/p7, p7/p8, p8/p9, p9/p10, p10/p11}
+      \draw[arrow] (\i) -- (\j);
+  \end{tikzpicture}
+  \caption{Parental-income mini-pipeline}
+  \label{fig:parental-pipeline}
+\end{figure}
+
+% -------------------------------------------------------------------------
+\subsection{Demographics Mini-Pipeline}
+% -------------------------------------------------------------------------
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[node distance=1cm]
+    \node[pipelinebox] (d1) {Add region \& household \\ context};
+    \node[pipelinebox,below=of d1] (d2) {East-German indicator};
+    \node[pipelinebox,below=of d2] (d3) {Merge education records};
+    \draw[arrow] (d1) -- (d2);
+    \draw[arrow] (d2) -- (d3);
+  \end{tikzpicture}
+  \caption{Demographics mini-pipeline}
+  \label{fig:demo-pipeline}
+\end{figure}
+
+% -------------------------------------------------------------------------
+\subsection{Student-Status Mini-Pipeline}
+% -------------------------------------------------------------------------
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[node distance=1cm]
+    \node[pipelinebox] (s1) {Grant dummy \\ (\texttt{pequiv})};
+    \node[pipelinebox,below=of s1] (s2) {Living with parents flag};
+    \node[pipelinebox,below=of s2] (s3) {Receives BAföG flag};
+    \node[pipelinebox,below=of s3] (s4) {Employment status};
+    \node[pipelinebox,below=of s4] (s5) {Partner status};
+    \node[pipelinebox,below=of s5] (s6) {Own-children count};
+    \draw[arrow] (s1) -- (s2);
+    \draw[arrow] (s2) -- (s3);
+    \draw[arrow] (s3) -- (s4);
+    \draw[arrow] (s4) -- (s5);
+    \draw[arrow] (s5) -- (s6);
+  \end{tikzpicture}
+  \caption{Student-status mini-pipeline}
+  \label{fig:status-pipeline}
+\end{figure}
+
+% -------------------------------------------------------------------------
+\subsection{Benchmarking \& Optimisation}
+\label{subsec:benchmark}
+% -------------------------------------------------------------------------
+
+% (Insert runtime / memory table or figure here—see blueprint.)
+
+% -------------------------------------------------------------------------
+\subsection{Variable Dictionary}
+% -------------------------------------------------------------------------
+
+% (Insert longtable of final variables—see blueprint.)

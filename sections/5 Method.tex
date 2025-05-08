@@ -25,8 +25,14 @@ support. If many eligible or vulnerable individuals go without welfare benefits,
 inefficient. This concept aligns closely with the broader definition of tertiary non-take-up, which includes
 all vulnerable individuals who are unable to access support, regardless of the reason \citep{mechelen_who_2017, goedeme_concept_2020}.
 
-\subsection{Microsimulation of Theoretical BAföG Calculation}
 
+\subsection{Overview of Simulation Approach}
+
+
+\subsection{Pipeline Design}
+
+
+\subsection{Modelling of non-take-up rate}
 After simulating statutory eligibility, we analyse the \textit{behavioural} non-take-up: 
 that is, the probability that a student refrains from taking up BAföG even though they are theoretically eligible according to our statutory microsimulation. 
 Formally, we model:
@@ -55,7 +61,7 @@ where \( \Phi(\cdot) \) denotes the cumulative distribution function (CDF) of th
 
 Hence, the latent-index formulation yields the conditional non-take-up probability for each student, and aligns with our empirical target:
 \[
-\Pr(A_i = 0 \mid \mathbf{X}_i) = \Phi(\mathbf{X}_i \beta), \quad \text{for all } i \text{ such that } T_i = 1.
+\Pr(A_i = 0 \mid \mathbf{X}_i) = \Phi(\mathbf{X}^\top_i \beta), \quad \text{for all } i \text{ such that } T_i = 1.
 \]
 
 % TODO: Explain here why we are not using Logit 

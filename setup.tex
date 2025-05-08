@@ -17,12 +17,83 @@
 \usepackage{parskip}
 \usepackage[utf8]{inputenc}
 
+
+
 \hypersetup{
      colorlinks   = true, %If links to papers should be colored
      citecolor    = blue, %color of citation text
      urlcolor = blue, %if you use an URL, this is how it is colored
     linkcolor = black
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% Tikz
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, shapes.geometric}
+
+
+\tikzset{
+  pipelinebox/.style={
+    rectangle,
+    draw=black,
+    fill=gray!10,
+    align=center,
+    font=\footnotesize,
+    inner sep=8pt,            % ⬅️ reduce internal padding
+    minimum height=1cm,       % ⬅️ reduce box height
+    minimum width=3.5cm       % ⬅️ reduce box width
+  },
+  arrow/.style={
+    thick, ->, >=stealth
+  }
+}
+
+\tikzset{
+  auxbox/.style={
+    rectangle,
+    draw=black,
+    fill=orange!20,
+    align=center,
+    font=\footnotesize\itshape,
+    inner sep=8pt,
+    minimum height=1cm,
+    minimum width=3.5cm,
+    dashed
+  }
+}
+
+\tikzset{
+  sourcebox/.style={
+    rectangle,
+    draw=black,
+    fill=blue!15,
+    align=center,
+    font=\footnotesize\bfseries,
+    inner sep=8pt,
+    minimum height=1cm,
+    minimum width=3.5cm
+  }
+}
+
+\tikzset{
+  actionbox/.style={
+    diamond,
+    draw=black,
+    fill=orange!20,
+    align=center,
+    font=\footnotesize,
+    aspect=2,
+    inner sep=2pt,
+    minimum height=1.2cm,
+    minimum width=3.5cm
+  }
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \graphicspath{{figures/}}
 
