@@ -26,94 +26,322 @@ Each of these is wrapped into a separate function and explained in this appendix
 
 \begin{figure}[H]
   \centering
-  \begin{tikzpicture}[node distance=1.2cm and 2.2cm] % vertical & horizontal spacing
-    \node[sourcebox] (raw) {Raw SOEP panels};
-    \node[pipelinebox,below=of raw] (sociodemographic) {Sociodemographic Data};
-    \node[pipelinebox,below=of sociodemographic] (studentstatus) {Student status pipeline};
-    \node[actionbox,below=of studentstatus] (split) {Split by individual type};
+  \begin{tikzpicture}[node distance=1.2cm and 1.2cm]
 
-    \node[pipelinebox,below left=2.0cm and 2.0cm of split] (student) {Student pipeline};
-    \node[pipelinebox,below right=2.0cm and 2.0cm of split] (parent) {Parental pipeline};
+  % Dataset nodes (stacked on the left)
+  \node[datasetbox] (ds1) at (-7,1.2) {\texttt{ppathl}};
+  \node[datasetbox, below=0.4cm of ds1] (ds2) {\texttt{pl}};
+  \node[datasetbox, below=0.4cm of ds2] (ds3) {\texttt{pgen}};
+  \node[datasetbox, below=0.4cm of ds3] (ds4) {\texttt{bioparen}};
+  \node[datasetbox, below=0.4cm of ds4] (ds5) {\texttt{regionl}};
+  \node[datasetbox, below=0.4cm of ds5] (ds6) {\texttt{hgen}};
+  \node[datasetbox, below=0.4cm of ds6] (ds7) {\texttt{pequiv}};
 
-    \node[auxbox,below=of split] (tax) {Tax Service};
+  % Brace grouping
+  % \draw[decorate,decoration={brace,amplitude=8pt},thick]
+  %   ([yshift=4pt]ds1.north west) -- ([yshift=-4pt]ds7.south west)
+  %   node[midway,xshift=-1.0cm,rotate=90]{Raw datasets};
 
-    \node[pipelinebox,below=3.0cm of tax] (merge) {Merge \& Compute Final Theoretical BAföG Amount};
+  % SOEP pipeline
+  \node[sourcebox, right=1.5cm of ds3] (raw) {Raw SOEP panels};
+  \node[pipelinebox, below=of raw] (sociodemographic) {Sociodemographic pipeline};
+  \node[pipelinebox, below=of sociodemographic] (studentstatus) {Student status pipeline};
+  \node[actionbox, below=of studentstatus] (split) {Split by individual type};
 
-    % arrows
-    \draw[arrow] (raw) -- (sociodemographic);
-    \draw[arrow] (sociodemographic) -- (studentstatus);
-    \draw[arrow] (studentstatus) -- (split);
-    \draw[arrow] (split) -- (student);
-    \draw[arrow] (split) -- (parent);
+  \node[pipelinebox, below left=2cm and 2cm of split] (student) {Student pipeline};
+  \node[pipelinebox, below right=2cm and 2cm of split] (parent) {Parental pipeline};
 
-    \draw[arrow] (tax) -- ++(-2,0) |- (student);
-    \draw[arrow] (tax) -- ++(2,0) |- (parent);
+  \node[auxbox, below=of split] (tax) {Tax Service};
 
-    \draw[arrow] (student) |- (merge);
-    \draw[arrow] (parent) |- (merge);
+  \node[actionbox, below=3.0cm of tax] (merge) {Merge \& Compute Final \\ Theoretical BAföG Amount};
+
+  % Arrow from datasets to SOEP panel box
+  % \draw[arrow] ([xshift=0.1cm]ds4.east) -- (raw.west);
+
+  % Main pipeline arrows
+  \draw[arrow] (raw) -- (sociodemographic);
+  \draw[arrow] (sociodemographic) -- (studentstatus);
+  \draw[arrow] (studentstatus) -- (split);
+  \draw[arrow] (split) -- (student);
+  \draw[arrow] (split) -- (parent);
+  \draw[arrow] (tax) -- ++(-2,0) |- (student);
+  \draw[arrow] (tax) -- ++(2,0) |- (parent);
+  \draw[arrow] (student) |- (merge);
+  \draw[arrow] (parent) |- (merge);
+
   \end{tikzpicture}
-  \caption{End-to-end pipeline overview}
+  \caption{End-to-end pipeline overview with grouped raw SOEP sources}
   \label{fig:pipeline-overview}
 \end{figure}
 
-
-
-\noindent
 Figure~\ref{fig:pipeline-overview} maps the entire data-flow.  
 The remainder of this appendix zooms into each shaded box in the order shown
-and documents (i)~the exact sequence of transformation functions,
-(ii)~the statutory or econometric rationale, and (iii)~any runtime
-optimisations implemented to keep the workflow scalable.
+and explains the pipeline in more detail. 
+
+
+
+% -------------------------------------------------------------------------
+\subsection{Sociodemographic Mini-Pipeline}
+% -------------------------------------------------------------------------
+
+This step adds essential background characteristics to each individual in the dataset. The goal is to ensure that, for every person, we know their sex, age, household type, and federal state of residence. These variables are necessary both for identifying students and for applying rules that vary by region, such as East vs. West Germany distinctions in BAföG law.
+
+The information comes from three SOEP sources:
+\begin{itemize}
+  \item \texttt{ppathl} (variables: \texttt{sex}, \texttt{gebjahr}) — for sex and birth year
+  \item \texttt{hgen} (variable: \texttt{hgtyp1hh}) — for household type
+  \item \texttt{regionl} (variable: \texttt{bula}) — for federal state of residence.
+\end{itemize}
+
+Based on the federal state (\texttt{bula}), an East-West indicator is constructed to distinguish between former East and West German states. Together, these steps create a basic sociodemographic profile for each person in the sample. Figure~\ref{fig:demo-overview} summarizes the logic visually.
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[
+    node distance=1.0cm and 1.8cm, 
+    every node/.style={text centered},
+    >=stealth
+  ]
+
+    % Top row (input boxes)
+    \node[pipelinebox] (sexage) {Sex, Birth Month, Birth Year\\(\texttt{sex}, \texttt{gebmonat}, \texttt{gebjahr})};
+    \node[pipelinebox, right=of sexage] (household) {Household Type\\(\texttt{hgtyp1hh})};
+    \node[pipelinebox, right=of household] (region) {Federal State\\(\texttt{bula})};
+
+    % Middle: derived East/West
+    \node[pipelinebox, below=of region] (eastwest) {East/West Indicator};
+
+    % Output box
+    \node[pipelinebox, below=of household] (out) {Demographics-Enriched Dataset};
+
+    % Arrows
+    \draw[arrow] (sexage) -- (out);
+    \draw[arrow] (household) -- (out);
+    \draw[arrow] (region) -- (eastwest);
+    \draw[arrow] (eastwest) -- (out);
+
+  \end{tikzpicture}
+  \caption{Demographic data enrichment steps}
+  \label{fig:demo-overview}
+\end{figure}
+
+
+% -------------------------------------------------------------------------
+\subsection{Student-Status Mini-Pipeline}
+% -------------------------------------------------------------------------
+
+This step identifies which individuals are students and gathers additional status information required to determine theoretical BAföG eligibility. The result is a filtered dataset containing only eligible students, enriched with flags needed for both benefit calculation and modeling take-up.
+
+The following checks and enrichments are performed:
+
+\begin{itemize}
+  \item \textbf{BAföG support and education status:} Information from \texttt{pl} is used to add BAföG receipt indicators (\texttt{plc0168\_h}), education enrollment (\texttt{plg0012\_h}), and religion (\texttt{plh0258\_h}).
+  
+  \item \textbf{Living situation:} Using household information from \texttt{ppathl}, the pipeline flags whether the student lives with their parents, which affects the housing allowance. 
+    The method for finding whether the student lives in their parents household that has been used is to check to check if the unique id (uid) of the student, father and mother are in the same household id (hid) in the given survey wave.
+
+  \item \textbf{Employment status:} Data from \texttt{pgen} adds the employment status (\texttt{pgemplst}), since allowances for earned income must be considered for working students.
+    It is further used in the method to see whether the type of work (full-time, part-time, vocactional-training, etc.) has an effect on taking up BAföG.
+
+\item \textbf{Parental status:} Information from \texttt{bioparen} is used to count how many children each student has. This is done by reversing the usual direction of the table: instead of linking children to their parents, we identify individuals who appear as parents (in either \texttt{fnr} or \texttt{mnr}) and count how often they occur. The result is a student-level flag for the number of biological children.
+
+  \item \textbf{Partnership:} A flag is created to indicate if the student has a partner, which influences whether to count parents our partners income when applying for BAföG.
+
+  \item \textbf{Filtering:} Only individuals who are students in the relevant sense are kept for further analysis.
+\end{itemize}
+
+\vspace{0.8em}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[
+    node distance=1.2cm and 2.5cm,
+    every node/.style={text centered},
+    >=stealth
+  ]
+
+    % Individual input nodes
+    \node[pipelinebox] (pl) {Education, BAföG, Religion\\(\texttt{plg0012\_h}, \texttt{plc0168\_h}, \texttt{plh0258\_h})};
+    \node[pipelinebox, right=of pl] (ppath) {Living with Parents\\(\texttt{ppathl})};
+    \node[pipelinebox, below=of pl] (pgen) {Employment Status\\(\texttt{pgemplst})};
+    \node[pipelinebox, right=of pgen] (bioparen) {Children\\(\texttt{bioparen})};
+    \node[pipelinebox, below=of bioparen] (partner) {Partnership\\(inferred from \texttt{ppathl})};
+
+    % Fit node to enclose input layer
+    \node[draw=black, thick, dashed, 
+          fit={(pl) (ppath) (pgen) (bioparen) (partner)}, 
+          inner sep=0.5em, 
+          label=above:{Input Layer}] 
+    (inputgroup) {};
+
+    % Processing and output
+    \node[pipelinebox, below=2.5cm of inputgroup] (status) {Student Status \& Eligibility Flags};
+    \node[pipelinebox, below=of status] (out) {Filtered Student Sample};
+
+    % Arrows
+    \draw[arrow] (inputgroup) -- (status);
+    \draw[arrow] (status) -- (out);
+
+  \end{tikzpicture}
+  \caption{Student status and eligibility filtering}
+  \label{fig:student-status-overview}
+\end{figure}
+
+
 
 % -------------------------------------------------------------------------
 \subsection{Student-Income Mini-Pipeline}
 % -------------------------------------------------------------------------
 
+This component estimates the net income from student employment that is relevant for BAföG eligibility and award calculation. The income is based on monthly gross labour earnings reported in the SOEP, and it is processed through a sequence of statutory deductions and exemptions, following the rules of the BAföG and German income tax law.
+
+\medskip
+\noindent
+The following steps are applied:
+
+\begin{enumerate}
+  \item \textbf{Labour income is extracted and annualised.}  
+  Monthly gross income from employment is taken from SOEP survey data. Invalid or top-coded values are removed, and income is annualised under the assumption of year-round employment.
+
+  \item \textbf{A fixed advertising-cost deduction is subtracted.}  
+  This deduction corresponds to the \emph{Wer\-bungskosten-Pauschale} defined in §~9a EStG. Its value depends on the survey year and reflects typical work-related expenses that reduce taxable income.
+
+  \item \textbf{A flat-rate social insurance allowance is applied.}  
+  To account for contributions to health, pension, and unemployment insurance, a standard 22.3\% of the adjusted gross income is deducted, in line with §~21 Abs.~2 Nr.~1 of the BAföG law.
+
+  \item \textbf{Statutory income taxes are computed and subtracted.}  
+  Based on the social-insurance-adjusted income, the model calculates income tax, church tax, and the solidarity surcharge. These are subtracted to arrive at the net annual income.
+
+  \item \textbf{Personal allowances are compared to net income.}  
+  Monthly net income is compared with applicable allowances for the student, their partner, and children, as specified in §~23 of the BAföG law. Any amount exceeding these thresholds is treated as income that reduces the BAföG entitlement.
+\end{enumerate}
+
+\medskip
+\noindent
+The result is a measure of each student’s \emph{BAföG-relevant income}, which accounts for deductions and exemptions but excludes parental income. This value is used later in the model to determine theoretical benefit levels and eligibility thresholds.
+
+\medskip
+\noindent
+Figure~\ref{fig:student-income-inputs} summarizes the inputs used in the calculation, while Figure~\ref{fig:student-pipeline} shows the steps in order of application.
+
+
+
+% ---------------------------------------------------------------------
+% grouped input layer → processing box
+% ---------------------------------------------------------------------
 \begin{figure}[H]
   \centering
-  \begin{tikzpicture}[node distance=1cm]
-    \node[pipelinebox] (m1) {Merge labour income \\ {\footnotesize(pgen)}};
-    \node[pipelinebox,below=of m1] (m2) {Werbungskosten‐\\Pauschale (§~9a)};
-    \node[pipelinebox,below=of m2] (m3) {22.3 \% SI allowance \\ (§~21 II 1)};
-    \node[pipelinebox,below=of m3] (m4) {Income-tax calc. \\ (§§~32a–36b)};
-    \node[pipelinebox,below=of m4] (m5) {§~23 allowances};
+  \begin{tikzpicture}[
+    node distance=1.2cm and 2.5cm,
+    every node/.style={text centered},
+    >=stealth
+  ]
+    % individual inputs
+    \node[pipelinebox] (pgen)  {Gross Labour Income\\(\texttt{pglabgro})};
+    \node[pipelinebox, right=of pgen] (werb) {Werbungskosten Table\\(\texttt{werbung\_df})};
+    \node[pipelinebox, below=of pgen] (tax)  {Income-Tax Service};
+    \node[pipelinebox, right=of tax]  (all)  {§~23 Allowance Table};
 
-    \draw[arrow] (m1) -- (m2);
-    \draw[arrow] (m2) -- (m3);
-    \draw[arrow] (m3) -- (m4);
-    \draw[arrow] (m4) -- (m5);
+    % dashed frame
+    \node[draw=black, thick, dashed,
+          fit={(pgen) (werb) (tax) (all)},
+          inner sep=0.6em,
+          label=above:{Input Layer}] (grp) {};
+
+    % processing
+    \node[pipelinebox, below=2.6cm of grp]
+          (proc) {Student-Income Pipeline\\(net BAföG-relevant income)};
+
+    \draw[arrow] (grp) -- (proc);
   \end{tikzpicture}
-  \caption{Student-income mini-pipeline}
+  \caption{External inputs for the student-income pipeline}
+  \label{fig:student-income-inputs}
+\end{figure}
+
+% ---------------------------------------------------------------------
+% vertical deduction chain (compact)
+% ---------------------------------------------------------------------
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[node distance=1.2cm, >=stealth, every node/.style={text centered}]
+    \node[pipelinebox] (s1) {Merge labour income};
+    \node[pipelinebox, below=of s1] (s2) {Werbungskosten (§~9a)};
+    \node[pipelinebox, below=of s2] (s3) {22.3\,\% SI allowance (§~21 II)};
+    \node[pipelinebox, below=of s3] (s4) {Income tax};
+    \node[pipelinebox, below=of s4] (s5) {§~23 allowances};
+    \node[pipelinebox, below=1.4cm of s5] (out)
+          {Net BAföG-relevant income};
+
+    \foreach \a/\b in {s1/s2, s2/s3, s3/s4, s4/s5, s5/out}
+      \draw[arrow] (\a) -- (\b);
+  \end{tikzpicture}
+  \caption{Sequential deductions in the student-income mini-pipeline}
   \label{fig:student-pipeline}
 \end{figure}
 
-% \vspace{0.5em}
-% \noindent
-% Figure~\ref{fig:student-pipeline} mirrors the wrapper in
-% \texttt{build.py}.  Table~\ref{tab:student-steps} below lists each function,
-% the input columns it consumes, and the new variables it emits.
-%
-% % ----- Step table skeleton (fill as needed) -------------------------------
-% \begin{table}[H]
-% \centering
-% \begin{tabular}{clp{6cm}}
-% \toprule
-% \# & Function & Statutory / economic logic \\
-% \midrule
-% 1 & \texttt{merge\_income} & Gross labour income from \texttt{pgen}. Invalid codes pruned. \\
-% 2 & \texttt{apply\_lump\_sum\_deduction\_student} & Werbungskosten‐Pauschale (§ 9a EStG). \\
-% 3 & \texttt{apply\_social\_insurance\_allowance} & Flat 22.3 \% deduction (§ 21 II 1 BAföG). \\
-% 4 & \texttt{apply\_student\_income\_tax} & Einkommensteuer per § 32a EStG schedule. \\
-% 5 & \texttt{apply\_student\_income\_deduction} & Personal/spouse/child allowances (§ 23 BAföG). \\
-% \bottomrule
-% \end{tabular}
-% \caption{Processing steps in the student-income pipeline}
-% \label{tab:student-steps}
-% \end{table}
 
 % -------------------------------------------------------------------------
 \subsection{Parental-Income Mini-Pipeline}
 % -------------------------------------------------------------------------
+
+This part of the pipeline estimates the contribution of the student's parents to the BAföG assessment. According to the legal rules, parental income plays a central role in determining both eligibility and the amount of support granted. The procedure closely follows the BAföG statute and aims to reconstruct the income base used in official calculations.
+
+\medskip
+\noindent
+The pipeline focuses on three core steps:
+
+\begin{enumerate}
+  \item \textbf{Identify relevant parents.}  
+  For each student, biological parents are linked using SOEP’s family linkage file. The pipeline finds the mother and father based on identifiers in the student’s record and merges in their income records from the same survey wave.
+
+  \item \textbf{Compute net taxable income.}  
+  Each parent's annual gross income is read from the survey and adjusted by subtracting standard work-related and tax deductions. These include lump-sum advertising costs, social insurance contributions, and applicable tax allowances under German tax law (EStG). The process uses the same tax model as in the student-income pipeline, adapted for adult earnings.
+
+  \item \textbf{Apply BAföG-specific allowances.}  
+  From the adjusted net income, allowances are applied for each parent individually, as set by §~25 BAföG. Additional deductions are made for dependent children and for special circumstances if applicable. The remaining amount—if positive—is treated as the parental income share and enters the final BAföG entitlement formula.
+\end{enumerate}
+
+\medskip
+\noindent
+In households where information is available for both parents, incomes are aggregated before applying the relevant thresholds. If only one parent is observed, the assessment continues using the available data. The result is a student-level variable reflecting the share of income expected to be contributed by parents according to the BAföG guidelines.
+
+\medskip
+\noindent
+Figure~\ref{fig:parental-income-inputs} outlines the external data sources used, and Figure~\ref{fig:parental-pipeline} illustrates the logical flow of the parental income pipeline.
+
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[
+    node distance=1.2cm and 3cm,
+    every node/.style={text centered},
+    >=stealth
+  ]
+
+    % input nodes
+    \node[pipelinebox] (bioparen) {Parental links\\(\texttt{bioparen})};
+    \node[pipelinebox, right=of bioparen] (pgen) {Gross income of parents\\(\texttt{pgen})};
+    \node[pipelinebox, below=of bioparen] (siblings) {Sibling count\\(derived from \texttt{bioparen})};
+    \node[pipelinebox, right=of siblings] (relationship) {Partner status flag\\(based on \texttt{ppathl})};
+
+    % allowances node
+    \node[pipelinebox, below=of siblings] (allowances) {Allowance table\\(§~25 BAföG: base, sibling, relationship)};
+
+    % fit box
+    \node[draw=black, thick, dashed,
+          fit={(bioparen) (pgen) (siblings) (relationship) (allowances)},
+          inner sep=0.6em,
+          label=above:{Input Layer}] (inputgroup) {};
+
+    % processing
+    \node[pipelinebox, below=2.8cm of inputgroup]
+          (proc) {Parental-Income Pipeline\\(BAföG-relevant contribution)};
+
+    \draw[arrow] (inputgroup) -- (proc);
+
+  \end{tikzpicture}
+  \caption{External inputs for the parental-income pipeline}
+  \label{fig:parental-income-inputs}
+\end{figure}
 
 \begin{figure}[H]
   \centering
@@ -128,7 +356,7 @@ optimisations implemented to keep the workflow scalable.
     \node[pipelinebox,below=of p7] (p8) {Basic allowance};
     \node[pipelinebox,below=of p8] (p9) {Sibling allowance};
     \node[pipelinebox,below=of p9] (p10) {Additional allowance};
-    \node[pipelinebox,below=of p10] (p11) {Split contribution \\ (§~25 III)};
+    \node[pipelinebox,below=of p10] (p11) {Split contribution \\ (BAföG §~25 III)};
 
     \foreach \i/\j in {p1/p2, p2/p3, p3/p4, p4/p5, p5/p6,
                        p6/p7, p7/p8, p8/p9, p9/p10, p10/p11}
@@ -138,52 +366,7 @@ optimisations implemented to keep the workflow scalable.
   \label{fig:parental-pipeline}
 \end{figure}
 
-% -------------------------------------------------------------------------
-\subsection{Demographics Mini-Pipeline}
-% -------------------------------------------------------------------------
 
-\begin{figure}[H]
-  \centering
-  \begin{tikzpicture}[node distance=1cm]
-    \node[pipelinebox] (d1) {Add region \& household \\ context};
-    \node[pipelinebox,below=of d1] (d2) {East-German indicator};
-    \node[pipelinebox,below=of d2] (d3) {Merge education records};
-    \draw[arrow] (d1) -- (d2);
-    \draw[arrow] (d2) -- (d3);
-  \end{tikzpicture}
-  \caption{Demographics mini-pipeline}
-  \label{fig:demo-pipeline}
-\end{figure}
-
-% -------------------------------------------------------------------------
-\subsection{Student-Status Mini-Pipeline}
-% -------------------------------------------------------------------------
-
-\begin{figure}[H]
-  \centering
-  \begin{tikzpicture}[node distance=1cm]
-    \node[pipelinebox] (s1) {Grant dummy \\ (\texttt{pequiv})};
-    \node[pipelinebox,below=of s1] (s2) {Living with parents flag};
-    \node[pipelinebox,below=of s2] (s3) {Receives BAföG flag};
-    \node[pipelinebox,below=of s3] (s4) {Employment status};
-    \node[pipelinebox,below=of s4] (s5) {Partner status};
-    \node[pipelinebox,below=of s5] (s6) {Own-children count};
-    \draw[arrow] (s1) -- (s2);
-    \draw[arrow] (s2) -- (s3);
-    \draw[arrow] (s3) -- (s4);
-    \draw[arrow] (s4) -- (s5);
-    \draw[arrow] (s5) -- (s6);
-  \end{tikzpicture}
-  \caption{Student-status mini-pipeline}
-  \label{fig:status-pipeline}
-\end{figure}
-
-% -------------------------------------------------------------------------
-\subsection{Benchmarking \& Optimisation}
-\label{subsec:benchmark}
-% -------------------------------------------------------------------------
-
-% (Insert runtime / memory table or figure here—see blueprint.)
 
 % -------------------------------------------------------------------------
 \subsection{Variable Dictionary}

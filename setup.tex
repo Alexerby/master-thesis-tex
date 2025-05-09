@@ -31,7 +31,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 \usepackage{tikz}
-\usetikzlibrary{positioning, arrows.meta, shapes.geometric}
+\usetikzlibrary{positioning, arrows.meta, shapes.geometric, fit}
 
 
 \tikzset{
@@ -91,6 +91,17 @@
   }
 }
 
+\tikzset{
+  datasetbox/.style={
+    rectangle, 
+    draw=black, 
+    fill=gray!10, 
+    dashed,
+    minimum height=1.5em, 
+    minimum width=3cm, 
+    text centered, 
+  },
+}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
