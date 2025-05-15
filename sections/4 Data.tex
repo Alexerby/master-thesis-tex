@@ -1,7 +1,9 @@
 \section{Data}
-This study utilizes data from the German Socio-Economic Panel (SOEP), a nationally representative longitudinal survey conducted annually by the DIW (Deutsches Institut für Wirtschaftsforschung) since 1984. Respondents of the survey must be at least 17 year old. The dataset provides individual and household-level information, including data on income, education, household composition, labor market behavior, and demographics. This study relies exclusively on SOEP-Core, the central and most comprehensive module.
 
-We restrict our analysis to the period 2002–2022, following the introduction of the euro, to ensure consistency in income data. Our sample is limited to individuals who are currently enrolled in education, identified through a harmonized education variable in SOEP. This yields an unbalanced panel of students observed for varying numbers of years.
+This study utilizes data from the German Socio-Economic Panel (SOEP), one of the longest-standing multidisciplinary household surveys in the world. Conducted annually since 1984 by the German Institute for Economic Research (DIW Berlin), the SOEP is a nationally representative longitudinal survey that gathers data from approximately 30,000 individuals across 22,000 households each year. The survey includes respondents aged 17 and older and provides rich individual- and household-level information on income, education, labor market behavior, household composition, and demographics. This study relies exclusively on SOEP-Core, the central and most comprehensive module of the dataset \citep{berlin_diw_nodate}.
+
+We restrict our analysis to the period between 2002 and 2022, following the introduction of the euro, to ensure consistency in income data. Our sample is limited to individuals who are currently enrolled in education, identified through a harmonized education variable in SOEP. This yields an unbalanced panel of students observed for varying numbers of years.
+NOTE, NO LONGER 2002 BUT 2007 - HAVE TO REASON ABOUT THAT AND DROP THE INTRODUCTION OF THE EURO EXPLANATION
 
 A key strength of the SOEP is its household structure, which allows us to link students to their parents, siblings and, in many cases, partners.
 Using this data, we construct a comprehensive dataset that includes detailed student-level and household-level characteristics. For students, we observe age, gender, federal state (Bundesland), household type, and income (if any). Parental information includes gross and net income, employment status, household structure, tax burdens, and relationship status. Where applicable, we also observe sibling characteristics such as enrollment status, income, and household composition. Finally, for students who report having a partner, we include the partner’s income and household role.
@@ -42,3 +44,7 @@ Even when closely following the legal rules, the simulation can differ from actu
 
 While many SOEP variables approximate administrative data, its still the most suitable dataset for examining the BAföG non-take-up rate. 
 The eligibility measure used here reflects the legal framework and is sufficiently accurate for a systematic analysis of non-take-up and its underlying factors.
+
+...
+
+It should be noted that some data on student support might include other support than BAföG, for example merit based grants, so when self-reported numbers from students are compared to eligible income, there could be a mismatch in that parental/spousal/own income is above the threshold to be eligible for BAföG, but students still report receiving aid. REPHRASE
