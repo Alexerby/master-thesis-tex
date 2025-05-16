@@ -30,20 +30,68 @@ all vulnerable individuals who are unable to access support, regardless of the r
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Method
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Overview of Analytical Strategy}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Microsimulation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Microsimulation of Theoretical BAföG Eligibility} 
 \subsubsection{Purpose and Scope}
-% Explain what we are doing
-\subsubsection{Data Sources and Legal Basis}
+The microsimulation pipeline is designed to calculate a theoretical BAföG eligibility status and award amount for students in the SOEP-Core sample. 
+Its primary purpose is to compare these simulated entitlements with de facto BAföG take-up, as reported in SOEP.
+
+To construct the theoretical values, the model replicates the legal rules and means-testing procedures defined in the Bundesausbildungsförderungsgesetz (BAföG) for the years 2007 to 2022. 
+These rules are applied to individual-level SOEP data, including detailed information on income, assets, housing costs, and household structure.
+
+This approach enables a systematic assessment of the alignment between statutory entitlements and actual BAföG participation. 
+Deviations between the modeled and reported outcomes may arise from reporting errors, exceptional administrative decisions, or incomplete data. 
+Full documentation of the simulation logic and input structure is provided in Appendix ~\ref{appendix:microsimulation-pipeline} and ~\ref{appendix:simulation-example}.
+
 % Maybe ref all our data sources, the statutory and soep
 \subsubsection{Simulation Pipeline}
-% Explain simulation pipeline and reference appendix tables for reader to get more information
-\subsubsection{Validation Strategy} % No idea what this means
+
+\paragraph{Constructing the Student Dataset.}
+The pipeline begins by assembling a harmonized dataset of student-level observations from SOEP-Core. 
+This is achieved by filtering for individuals who are enrolled in education, fall within the relevant survey years, and are at least 18 years old. 
+To ensure a valid estimation of parental contributions, the dataset is further restricted to cases where income data from both legal parents are observable in the panel.
+
+The resulting student-level dataframe integrates sociodemographic variables including sex, age, partnership status, number of siblings, number of children, household composition, and federal state of residence. 
+Gross student income is also appended at this stage. 
+Net student income is derived from gross values by applying year-specific rules for income tax, solidarity surcharge, church tax (where applicable), and standard deductions (e.g., Werbungskostenpauschale), in accordance with §§\,21–23 BAföG \citep{bafoeg_law}.
+This net income will later be used to compute the student’s excess income as part of the BAföG need assessment.
+
+
+\paragraph{Estimating Parental Contributions.}
+In the next step, the simulation pipeline aggregates and evaluates parental income to estimate the expected contribution toward the student’s BAföG entitlement. 
+For each student, the incomes of both legal parents—identified within the household and linked through SOEP family structure data—are retrieved and converted into annual net income. 
+These values account for deductions such as income tax, solidarity surcharge, and church tax, where applicable.
+
+Net incomes from both parents are combined into a joint parental income measure. 
+From this, the model subtracts statutory allowances as defined in §§\,24–25 BAföG \citep{bafoeg_law}, which vary depending on the number of parents, number of dependent children, and year-specific legal thresholds. 
+Additional deductions are applied if the student has siblings who might also be eligible for support. 
+The result is a measure of excess parental income, which feeds directly into the theoretical award calculation in the next stage.
+
+A complete breakdown of the income transformation, applicable thresholds, and illustrative examples is provided in Appendix~\ref{appendix:simulation-example}.
+
+\paragraph{Asset Test.}
+The simulation includes an asset test to assess whether students hold financial resources above the statutory exemption thresholds. 
+For each student, information on financial assets, real estate, business holdings, private insurances, vehicles, and other tangible property is combined, and reported debts are subtracted to derive total net assets.
+
+Since asset data in SOEP are only collected every five years, missing observations for non-surveyed years are filled using linear interpolation. 
+This approach allows for year-specific asset estimates that remain consistent with observed data and ensures full coverage across the entire simulation period.
+
+Total assets are then compared against exemption thresholds defined in §\,29 BAföG \citep{bafoeg_law}, which vary by age, partnership status, and number of dependent children. 
+Any amount exceeding the applicable allowance is classified as excess assets and contributes to reducing the student's calculated need. 
+
+
+\paragraph{Need Calculation and Theoretical Entitlement.}
+In the final stage, the simulation model calculates the student's funding need by summing the statutory base need, housing allowance, and health insurance supplement, as defined in §\,13 BAföG \citep{bafoeg_law}. 
+From this total, the model subtracts any excess income attributable to the student, their parents, and their assets. 
+The resulting amount determines the theoretical monthly BAföG entitlement.
+
+A positive entitlement does not automatically imply eligibility: the model also applies age-based eligibility criteria. 
+Students are only considered theoretically eligible if they meet the age requirements defined in the law, typically under 30 for undergraduate studies and under 35 for graduate-level programs. 
+The final output includes both the simulated monthly award and a binary eligibility flag, which are used for comparison against self-reported values in SOEP. 
+Detailed examples of this calculation and relevant thresholds are provided in Appendix~\ref{appendix:simulation-example}.
 
 
 
