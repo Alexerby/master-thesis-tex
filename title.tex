@@ -1,20 +1,26 @@
-\setstretch{1.5}
+% Suppress overfull warning *only* on title page using \sloppy locally
+% and immediately restore with \fussy afterward.
 
-    %\includegraphics[scale = 0.3]{images/LU RGB.png}
-    %\includegraphics[scale = 0.3]{images/LU Black.png} 
-    \includegraphics[scale = 0.15]{images/LUSEM_RGB.png} %I recommend using this one but the others are fine too
-    %\includegraphics[scale = 0.15]{images/LUSEM_BLACK.png}
+% Title Page
+\setstretch{1.5}
+\sloppy  % Allow slightly stretched lines on this page
+
+%\includegraphics[scale = 0.3]{images/LU RGB.png}
+%\includegraphics[scale = 0.3]{images/LU Black.png} 
+\includegraphics[scale = 0.15]{images/LUSEM_RGB.png} %I recommend using this one but the others are fine too
+%\includegraphics[scale = 0.15]{images/LUSEM_BLACK.png}
 
 \vspace{2cm}
-    \begin{center}       
-        \vspace*{2cm}
-        {\LARGE {\textbf{Unclaimed Aid in the German Student Aid System}  \\ 
-          A Microsimulation of BAföG Eligibility and Non-Take-Up
-        }} \\
-        \vspace{1cm}
-        \Large{Alexander Eriksson Byström \& María Sól Antonsdóttir} \normalsize{\\ Department of Economics \\ Lund University School of Economics and Management}
-    \end{center}
-    \vspace{2cm}
+\begin{center}       
+    \vspace*{2cm}
+    {\LARGE \textbf{Unclaimed Aid in the German Student Aid System} \\ 
+    \textbf{A Microsimulation of BAföG Eligibility and Non-Take-Up}} \\
+    \vspace{1cm}
+    \Large Alexander Eriksson Byström \& María Sól Antonsdóttir \\[0.3cm]
+    \normalsize Department of Economics \\ 
+    Lund University School of Economics and Management
+\end{center}
+\vspace{2cm}
 
 \vfill
 \noindent 
@@ -22,6 +28,8 @@
 NEKN01 - Master Thesis in Economics 15 ECTS \\ 
 Seminar date: Month Day, Year
 \thispagestyle{empty}
+
+\fussy  % Restore normal spacing behavior
 
 \newpage
 \tableofcontents
