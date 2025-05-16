@@ -1,0 +1,543 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  APPENDIX – EXAMPLE FROM MICROSIMULATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% -------------------------------------------------------------------------
+%  Introductory motivation 
+% -------------------------------------------------------------------------
+
+\newpage
+% ========================================================================
+\section[Example Calculation: Theoretical BAföG Eligibility]{Example Calculation: Theoretical BAföG Eligibility\footnote{Based on calculations using the microsimulation pipeline introduced in Appendix~\ref{appendix:microsimulation-pipeline}.}}
+\label{appendix:bafoeg-example}
+% ========================================================================
+
+This appendix documents the step-by-step calculation of theoretical BAföG eligibility for a selected individual from the SOEP-Core dataset. The example is based on data from survey year 2018 and focuses on a university student identified by \texttt{pid = 20156903}.
+
+The purpose of this example is to illustrate how legal rules governing student financial aid—particularly those defined in the Federal Training Assistance Act (BAföG)—are operationalized within the microsimulation pipeline. Each component of the calculation is made transparent, including the determination of the student's assessed need, applicable supplements, and deductions based on income and assets.
+
+The case selected is representative of a full-time student living independently, with modest student income, limited parental support, and non-negligible declared assets. The final theoretical BAföG award is computed by subtracting excess income and asset contributions from the total assessed need.
+
+A summary of the key outcome variables is presented in Table~\ref{table:bafoeg_example_summary}. Subsequent sections decompose and document the logic and parameters behind each component in detail.
+
+
+
+
+
+% -------------------------------------------------------------------------
+%  Base Need
+% -------------------------------------------------------------------------
+
+
+\subsection{Total Base Need}
+\subsubsection{Base Need}
+The base need (\texttt{base\_need}) is a flat-rate amount representing the monthly minimum subsistence level for students in higher education. It is specified in §~13(1) Nr.~1 of the Federal Training Assistance Act (BAföG) and does not vary by income, living arrangement, or demographic characteristics.
+
+For all eligible university students during the relevant period, the base need was set at 399 EUR. Since the student in this case study meets the criteria for university-level BAföG support, this full amount is assigned without adjustment.
+
+\begin{table}[H]
+\scriptsize
+\centering
+\begin{tabular}{llr}
+\toprule
+\textbf{Component} & \textbf{Explanation} & \textbf{Value (EUR)} \\
+\midrule
+Base Need & Flat-rate monthly amount for university students & 399 \\
+\bottomrule
+\end{tabular}
+\caption{Base need (\texttt{base\_need}) for pid 20156903, in accordance with §~13(1) Nr.~1 BAföG.}
+\label{table:bafoeg_base_need}
+\end{table}
+
+\subsubsection{Housing Allowance}
+The housing allowance (\texttt{housing\_allowance}) compensates students for living expenses incurred while living outside the parental home. According to §~13(1) Nr.~2 BAföG, students who do not reside with their parents are entitled to a fixed monthly supplement to cover rent and related costs.
+
+In this example, the student was classified as living independently. While the statutory maximum at the time was 399 EUR, the simulation applies a standardized flat amount of 250 EUR to align with data quality and institutional thresholds reflected in the SOEP housing variables.
+
+\begin{table}[H]
+\scriptsize
+\centering
+\begin{tabular}{llr}
+\toprule
+\textbf{Component} & \textbf{Explanation} & \textbf{Value (EUR)} \\
+\midrule
+Housing Allowance & Standard flat rate applied for non-parental housing & 250 \\
+\bottomrule
+\end{tabular}
+\caption{Housing allowance (\texttt{housing\_allowance}) for pid 20156903, based on §~13(1) Nr.~2 BAföG.}
+\label{table:bafoeg_housing}
+\end{table}
+
+\subsubsection{Insurance Supplement}
+Students with statutory health and long-term care insurance are entitled to receive flat-rate supplements as defined in §~13a(1) BAföG. These rates vary by time period and are adjusted periodically by legal amendment.
+
+For survey year 2018, the applicable values—according to the 2020-08-01 rates still valid at the time—were:
+\begin{itemize}
+    \item 61 EUR for health insurance (§~13a(1) Nr.~1 BAföG)
+    \item 25 EUR for long-term care insurance (§~13a(1) Nr.~2 BAföG)
+\end{itemize}
+
+These two components sum to 86 EUR, which is assigned as the total insurance supplement for this individual.
+
+\begin{table}[H]
+\scriptsize
+\centering
+\begin{tabular}{llr}
+\toprule
+\textbf{Component} & \textbf{Explanation} & \textbf{Value (EUR)} \\
+\midrule
+Insurance Supplement & Sum of flat-rate statutory insurance allowances & 86 \\
+\quad Health insurance & §~13a(1) Nr.~1 BAföG (statutory health insurance) & 61 \\
+\quad Care insurance & §~13a(1) Nr.~2 BAföG (statutory long-term care insurance) & 25 \\
+\bottomrule
+\end{tabular}
+\caption{Insurance supplement (\texttt{insurance\_supplement}) for pid 20156903. Rates valid for the 2018 survey year.}
+\label{table:bafoeg_insurance}
+\end{table}
+
+
+% -------------------------------------------------------------------------
+%  Student Excess Income
+% -------------------------------------------------------------------------
+\subsection{Student Excess Income}
+The student’s excess income (\texttt{excess\_income\_stu}) represents the amount by which their own annual income—after standard deductions—exceeds the personal allowance defined under §~23(1) Nr.~1 BAföG. This component is subtracted from the total assessed need to determine theoretical eligibility.
+
+\paragraph{Step 1: Estimating Gross Annual Income}  
+The student’s income is derived from the SOEP variable \texttt{kal2a03\_h}, which reports average gross monthly earnings. This value is multiplied by the number of working months in the previous calendar year (\texttt{kal2a02}) to estimate gross annual income.  
+For \texttt{pid = 20156903}:
+\begin{itemize}
+    \item Gross monthly income: 523 EUR
+    \item Months worked: 12
+    \item $\Rightarrow$ Gross annual income: $523 \times 12 = 6{,}276$ EUR
+\end{itemize}
+
+\paragraph{Step 2: Standard Deductions}  
+Two statutory deductions are applied to estimate net taxable income:
+\begin{itemize}
+    \item \textbf{Werbungskostenpauschale} (fixed deduction for work-related expenses): 290 EUR (2018)
+    \item \textbf{Sozialversicherungs-Pauschale} (fixed social insurance deduction): 17.2\% of remaining income, capped at 17,200 EUR
+\end{itemize}
+
+\begin{itemize}
+    \item Step 1: $6{,}276 - 290 = 5{,}986$ EUR
+    \item Step 2: $5{,}986 \times 0.828 = 4{,}152.21$ EUR (after 17.2\% deduction)
+\end{itemize}
+
+\paragraph{Step 3: Applying Income Tax}
+The BAföG calculator applies German income tax tables to compute statutory income tax liabilities. In this case, the taxable income falls below the basic allowance threshold (9,000 EUR in 2018), so no income tax, church tax, or solidarity surcharge is applied:
+\begin{itemize}
+    \item Income tax: 0 EUR
+    \item Church tax: 0 EUR
+    \item Solidarity surcharge: 0 EUR
+    \item $\Rightarrow$ Net annual income: 4,152.21 EUR
+\end{itemize}
+
+\paragraph{Step 4: Monthly Net Income and Allowance}
+The student’s net monthly income is calculated as:
+\[
+\frac{4{,}152.21}{12} \approx 346.02~\text{EUR}
+\]
+
+The personal allowance specified in §~23(1) Nr.~1 BAföG for the year 2018 was 290 EUR per month. Thus, the student’s excess income is:
+\[
+346.02 - 290 = 56.02~\text{EUR}
+\]
+
+\begin{table}[H]
+\scriptsize
+\centering
+\begin{tabular}{llr}
+\toprule
+\textbf{Component} & \textbf{Explanation} & \textbf{Value (EUR)} \\
+\midrule
+Gross monthly income & From SOEP variable \texttt{kal2a03\_h} & 523 \\
+Working months (previous year) & From SOEP variable \texttt{kal2a02} & 12 \\
+Gross annual income & Estimated income before deductions & 6,276 \\
+Werbungskostenpauschale & Work-related fixed deduction (§~21(2) BAföG) & 290 \\
+Sozialversicherungs-Pauschale & 17.2\% statutory deduction & 1,133.79 \\
+Net annual income & Income after deductions & 4,152.21 \\
+Net monthly income & Annual net income divided by 12 & 346.02 \\
+Personal allowance & §~23(1) Nr.~1 BAföG (2018) & 290 \\
+\textbf{Student excess income} & Amount exceeding allowance & \textbf{56.02} \\
+\bottomrule
+\end{tabular}
+\caption{Calculation of student’s excess income (\texttt{excess\_income\_stu}) for pid 20156903.}
+\label{table:bafoeg_excess_income_stu}
+\end{table}
+
+
+
+% -------------------------------------------------------------------------
+%  Parental Income Father
+% -------------------------------------------------------------------------
+\subsection{Parental Income Evaluation: Father (pid = 20156901)}
+
+This section documents the step-by-step derivation of net income for the student's father using variables from the SOEP-Core dataset and applying BAföG-compliant statutory deductions.
+
+\paragraph{Step 1: Gross Income}
+
+The parent reported a gross monthly income of 3,500 EUR and worked 12 months in the prior year, resulting in:
+
+\[
+\text{Gross annual income} = 3{,}500 \times 12 = 42{,}000~\text{EUR}
+\]
+
+\paragraph{Step 2: Werbungskostenpauschale (§~21 Abs.~2 BAföG)}
+
+A fixed deduction of 1,000 EUR is applied to account for work-related expenses:
+
+\[
+\texttt{inc\_w} = 42{,}000 - 1{,}000 = 41{,}000~\text{EUR}
+\]
+
+\paragraph{Step 3: Sozialversicherungs-Pauschale (§~21 Abs.~2 BAföG)}
+
+Next, a 21.3\% deduction is applied to the income after Werbungskosten:
+
+\[
+\texttt{inc\_si} = 41{,}000 \times (1 - 0.213) = 41{,}000 \times 0.787 = 32{,}267~\text{EUR}
+\]
+
+\paragraph{Step 4: Income Tax Calculation (§~32a EStG)}
+
+The parent is assessed as an individual (not jointly filed). Based on the 2018 tax table and a taxable income of 32,267 EUR, the following taxes are applied:
+
+- \textbf{Income tax:} 6,062 EUR (per simulation based on §~32a EStG)
+- \textbf{Church tax:} 0 EUR (not church-affiliated in SOEP)
+- \textbf{Solidarity surcharge (Soli):} 333 EUR
+
+The solidarity surcharge applies since taxable income exceeds the 2018 exemption threshold of 972 EUR (§~32a Abs.~5 \& 6 EStG, pre-2020 version). The surcharge is 5.5\% of income tax, capped by taper rules.
+
+\paragraph{Step 5: Net Annual and Monthly Income}
+
+\[
+\texttt{inc\_net} = 32{,}267 - 6{,}062 - 0 - 333 = 25{,}872~\text{EUR}
+\]
+\[
+\texttt{net\_monthly\_income} = \frac{25{,}872}{12} = 2{,}156~\text{EUR}
+\]
+
+\begin{table}[H]
+\scriptsize
+\centering
+\begin{tabular}{llr}
+\toprule
+\textbf{Component} & \textbf{Explanation} & \textbf{Value (EUR)} \\
+\midrule
+Gross monthly income & Reported by SOEP & 3,500 \\
+Working months & From SOEP (previous year) & 12 \\
+Gross annual income & $3{,}500 \times 12$ & 42,000 \\
+Werbungskostenpauschale & Fixed work-related deduction (§~21(2)) & 1,000 \\
+Post-werbung income (\texttt{inc\_w}) & After deduction & 41,000 \\
+Sozialversicherungs-Pauschale & 21.3\% of \texttt{inc\_w} & 8,733 \\
+Income after SI (\texttt{inc\_si}) & $41{,}000 \times 0.787$ & 32,267 \\
+Income tax & Based on §~32a EStG table & 6,062 \\
+Church tax & SOEP indicates no affiliation & 0 \\
+Solidarity surcharge & 5.5\% of income tax (capped) & 333 \\
+Net annual income (\texttt{inc\_net}) & After all taxes & 25,872 \\
+Net monthly income & $25{,}872 \div 12$ & 2,156 \\
+\bottomrule
+\end{tabular}
+\caption{Income derivation for father (pid = 20156901) in 2018.}
+\label{table:bafoeg_parent_father}
+\end{table}
+
+
+% -------------------------------------------------------------------------
+%  Parental Income Mother
+% -------------------------------------------------------------------------
+\subsection{Parental Income Evaluation: Mother (pid = 20156902)}
+
+The same procedure is applied to evaluate the income of the student’s mother. This parent reports a lower monthly income, but the same deductions are used to compute a BAföG-compliant net income value.
+
+\paragraph{Step 1: Gross Income}
+
+The mother reported a gross monthly income of 300 EUR and worked 12 months in the previous year:
+
+\[
+\text{Gross annual income} = 300 \times 12 = 3{,}600~\text{EUR}
+\]
+
+\paragraph{Step 2: Werbungskostenpauschale (§~21 Abs.~2 BAföG)}
+
+A fixed work-related deduction of 1,000 EUR is applied:
+
+\[
+\texttt{inc\_w} = 3{,}600 - 1{,}000 = 2{,}600~\text{EUR}
+\]
+
+\paragraph{Step 3: Sozialversicherungs-Pauschale (§~21 Abs.~2 BAföG)}
+
+A 21.3\% deduction is then applied:
+
+\[
+\texttt{inc\_si} = 2{,}600 \times 0.787 = 2{,}046.20~\text{EUR}
+\]
+
+\paragraph{Step 4: Income Tax and Surcharges}
+
+Because the income falls well below the basic exemption threshold, no income tax or surcharges apply:
+
+- Income tax: 0 EUR
+- Church tax: 0 EUR
+- Solidarity surcharge: 0 EUR
+
+\paragraph{Step 5: Net Annual and Monthly Income}
+
+\[
+\texttt{inc\_net} = 2{,}046.20~\text{EUR}
+\qquad\quad
+\texttt{net\_monthly\_income} = \frac{2{,}046.20}{12} = 170.52~\text{EUR}
+\]
+
+\begin{table}[H]
+\scriptsize
+\centering
+\begin{tabular}{llr}
+\toprule
+\textbf{Component} & \textbf{Explanation} & \textbf{Value (EUR)} \\
+\midrule
+Gross monthly income & Reported by SOEP & 300 \\
+Working months & From SOEP (previous year) & 12 \\
+Gross annual income & $300 \times 12$ & 3,600 \\
+Werbungskostenpauschale & Fixed deduction (§~21(2)) & 1,000 \\
+Post-werbung income (\texttt{inc\_w}) & After deduction & 2,600 \\
+Sozialversicherungs-Pauschale & 21.3\% of \texttt{inc\_w} & 553.80 \\
+Income after SI (\texttt{inc\_si}) & $2{,}600 \times 0.787$ & 2,046.20 \\
+Income tax & Below exemption threshold & 0 \\
+Church tax & SOEP indicates no affiliation & 0 \\
+Solidarity surcharge & Below threshold & 0 \\
+Net annual income (\texttt{inc\_net}) & After all taxes & 2,046.20 \\
+Net monthly income & $2{,}046.20 \div 12$ & 170.52 \\
+\bottomrule
+\end{tabular}
+\caption{Income derivation for mother (pid = 20156902) in 2018.}
+\label{table:bafoeg_parent_mother}
+\end{table}
+
+
+% -------------------------------------------------------------------------
+%  Joint Parental Income
+% -------------------------------------------------------------------------
+\subsection{Joint Parental Income and Deductions}
+
+After calculating net income for each parent individually, their incomes are combined and assessed jointly, following the rules laid out in §~25 and §~21 of the BAföG Act. This section outlines how the parental income is evaluated as a unit, and how the applicable deductions reduce the contribution relevant for BAföG eligibility.
+
+\paragraph{Step 1: Joint Income}
+
+The net monthly incomes of both parents are summed to form the joint income base:
+
+\[
+\texttt{joint\_income} = 2{,}156 + 170.52 = 2{,}326.52~\text{EUR}
+\]
+
+\paragraph{Step 2: Parental Allowance (§~25(1) Nr.~1 BAföG)}
+
+Because both parents are financially active, the applicable allowance is the joint parental allowance. According to the BAföG schedule valid from 2015-01-01 (25. BAföGÄndG), the relevant allowance value is:
+
+\[
+\texttt{total\_allowance} = 1{,}715~\text{EUR}
+\]
+
+The remaining income after allowance is:
+
+\[
+\texttt{joint\_income\_less\_ba} = 2{,}326.52 - 1{,}715 = 611.52~\text{EUR}
+\]
+
+\paragraph{Step 3: Sibling Deduction (§~25(3) BAföG)}
+
+The student has two siblings who are eligible for sibling-related deductions. According to the 2015 allowance table:
+
+- The sibling deduction per eligible sibling is 260 EUR
+- Total deduction: $2 \times 260 = 520$ EUR
+
+\[
+\texttt{joint\_income\_less\_ba\_and\_sib} = 611.52 - 520 = 91.52~\text{EUR}
+\]
+
+\paragraph{Step 4: Additional Allowance (§~25(4) BAföG)}
+
+In addition, §~25(4) BAföG entitles parents to a percentage-based deduction on the remaining income. According to the allowance rules:
+
+- A base allowance of 50\% of the remainder applies
+- Plus 5\% per sibling with a positive deduction
+
+Thus, the applied rate is:
+
+\[
+50\% + (2 \times 5\%) = 60\%
+\]
+
+\[
+\texttt{additional\_allowance} = 91.52 \times 0.60 = 54.91~\text{EUR}
+\]
+
+\paragraph{Step 5: Final Excess Parental Income}
+
+The final contribution from parental income is the remaining amount after all deductions:
+
+\[
+\texttt{excess\_income} = 91.52 - 54.91 = 36.61~\text{EUR}
+\]
+
+\begin{table}[H]
+\scriptsize
+\centering
+\begin{tabular}{llr}
+\toprule
+\textbf{Component} & \textbf{Explanation} & \textbf{Value (EUR)} \\
+\midrule
+Joint income & Sum of both parents’ net monthly incomes & 2,326.52 \\
+Parental allowance & §~25(1) Nr.~1 BAföG (joint allowance) & 1,715 \\
+Remaining after allowance & $2{,}326.52 - 1{,}715$ & 611.52 \\
+Sibling deduction & $2 \times 260$ (§~25(3) BAföG) & 520 \\
+Remaining after siblings & $611.52 - 520$ & 91.52 \\
+Additional allowance & 60\% of remaining income (§~25(4)) & 54.91 \\
+\textbf{Excess parental income} & Final contribution to be deducted & \textbf{36.61} \\
+\bottomrule
+\end{tabular}
+\caption{Calculation of joint parental excess income for pid 20156903 (2018).}
+\label{table:bafoeg_joint_income}
+\end{table}
+
+
+% -------------------------------------------------------------------------
+%  Asset Excess
+% -------------------------------------------------------------------------
+\subsection{Asset-Based Contribution}
+
+Students whose personal assets exceed a legally defined exemption threshold are required to contribute the excess toward their BAföG need (§~29 BAföG). The following table lists all relevant asset categories reported in the SOEP and their treatment in the eligibility assessment for this individual.
+
+\paragraph{Step 1: Declared Asset Categories}
+
+The student’s asset-related information for the 2018 survey year is as follows:
+
+\begin{table}[H]
+\scriptsize
+\centering
+\begin{tabular}{lr}
+\toprule
+\textbf{Asset Category} & \textbf{Value (EUR)} \\
+\midrule
+Financial assets (e.g., savings, stocks) & 0 \\
+Real estate (e.g., land, housing property) & 0 \\
+Business assets & 0 \\
+Private insurance assets & 0 \\
+Vehicles (e.g., car ownership) & 7,940 \\
+Tangible assets (furniture, equipment) & 0 \\
+Eligible debts (offsetting) & 0 \\
+\midrule
+\textbf{Total assets} & 7,940 \\
+\textbf{Debts} & 0 \\
+\textbf{Net assets} & 7,940 \\
+\bottomrule
+\end{tabular}
+\caption{Declared asset categories for pid 20156903 in 2018.}
+\label{table:bafoeg_declared_assets}
+\end{table}
+
+\paragraph{Step 2: Asset Allowance (§~29 BAföG)}
+
+Since the student was 25 years old in 2018 (i.e., under 30), the asset allowance for students under age 30 applied. According to the table valid from 2016-08-01 (25. BAföGÄndG), this exemption was:
+
+\[
+\texttt{asset\_allowance} = 7{,}500~\text{EUR}
+\]
+
+\paragraph{Step 3: Excess Asset Contribution}
+
+The contribution from assets is computed as the difference between net assets and the legal allowance:
+
+\[
+\texttt{excess\_assets} = \max(7{,}940 - 7{,}500, 0) = 440~\text{EUR}
+\]
+
+\begin{table}[H]
+\scriptsize
+\centering
+\begin{tabular}{llr}
+\toprule
+\textbf{Component} & \textbf{Explanation} & \textbf{Value (EUR)} \\
+\midrule
+Net assets & Total assets minus eligible debts & 7,940 \\
+Asset allowance & §~29 BAföG (U30 threshold in 2018) & 7,500 \\
+\textbf{Excess asset contribution} & Final deduction from BAföG entitlement & \textbf{440} \\
+\bottomrule
+\end{tabular}
+\caption{Excess asset calculation for pid 20156903 in 2018.}
+\label{table:bafoeg_excess_assets}
+\end{table}
+
+
+\subsubsection*{Final Theoretical BAföG Award}
+
+After accounting for all relevant supplements and income-based deductions, the theoretical BAföG award is computed by subtracting the student’s and parents’ contributions—as well as any asset-based contributions—from the total assessed need.
+
+\paragraph{Step 1: Total Assessed Need}
+
+The total monthly need is composed of:
+\begin{itemize}
+    \item Base need (\texttt{base\_need}): 399 EUR
+    \item Housing allowance (\texttt{housing\_allowance}): 250 EUR
+    \item Insurance supplement (\texttt{insurance\_supplement}): 86 EUR
+\end{itemize}
+
+\[
+\texttt{total\_base\_need} = 399 + 250 + 86 = 735~\text{EUR}
+\]
+
+\paragraph{Step 2: Total Deductions}
+
+The following deductions apply:
+\begin{itemize}
+    \item Student excess income: 56.02 EUR
+    \item Parental excess income: 36.61 EUR
+    \item Excess asset contribution: 440.00 EUR
+\end{itemize}
+
+\[
+\texttt{total\_deductions} = 56.02 + 36.61 + 440 = 532.63~\text{EUR}
+\]
+
+\paragraph{Step 3: Theoretical Award Calculation}
+
+\[
+\texttt{theoretical\_bafög} = \max(735 - 532.63,\ 0) = \textbf{202.38~EUR}
+\]
+
+\begin{table}[H]
+\scriptsize
+\centering
+\begin{tabular}{llr}
+\toprule
+\textbf{Component} & \textbf{Explanation} & \textbf{Value (EUR)} \\
+\midrule
+Base need & §~13(1) Nr.~1 BAföG & 399 \\
+Housing allowance & §~13(1) Nr.~2 BAföG & 250 \\
+Insurance supplement & §~13a(1) BAföG & 86 \\
+\midrule
+\textbf{Total base need} & Monthly assessed need & \textbf{735} \\
+\midrule
+Student excess income & §~23(1) Nr.~1 BAföG & 56.02 \\
+Parental excess income & §~25 BAföG + sibling adjustment & 36.61 \\
+Excess asset contribution & §~29 BAföG & 440.00 \\
+\midrule
+\textbf{Total deductions} & Income and asset-based contributions & \textbf{532.63} \\
+\midrule
+\textbf{Theoretical BAföG award} & \textbf{Maximum eligible amount} & \textbf{202.38} \\
+\bottomrule
+\end{tabular}
+\caption{Final theoretical BAföG award for pid 20156903 in 2018.}
+\label{table:bafoeg_final_award}
+\end{table}
+
+\paragraph{Note on Eligibility Status}
+
+This student qualifies for BAföG under the legal eligibility criteria defined by income, asset, and need thresholds. While their theoretical eligibility status is coded as \texttt{1} (eligible), they did not receive or report any BAföG support in the SOEP dataset:
+
+\begin{itemize}
+    \item \texttt{received\_bafög} = 0 EUR
+    \item \texttt{reported\_bafög} = 0 EUR
+    \item \texttt{theoretical\_eligibility} = 1 (eligible)
+\end{itemize}

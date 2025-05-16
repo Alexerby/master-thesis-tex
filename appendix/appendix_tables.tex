@@ -3,13 +3,74 @@
 \renewcommand{\thetable}{\thesection \arabic{table}}
 \setcounter{table}{0}
 
-\begin{table}[H]
+\begingroup
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{0.95}
+  \begin{table}
+  \centering
+  \begin{tabular}{rcc|rr|rr}
+  \toprule
+  Year & \multicolumn{2}{c|}{Consumer Price Index} & \multicolumn{2}{c|}{Average Payout (EUR)} & \multicolumn{2}{c}{Financial Expenditure (EUR 1,000)} \\
+  \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(l){6-7}
+  & Index (2020=100) & Price Factor (2023) & Nominal & Real (2023) & Nominal & Real (2023) \\
+  \midrule
+  1991 & 61 & 1.885 & 290 & 547 & 1,538,590 & 2,900,701 \\
+  1992 & 65 & 1.795 & 290 & 521 & 1,539,929 & 2,764,764 \\
+  1993 & 67 & 1.719 & 297 & 510 & 1,458,164 & 2,506,152 \\
+  1994 & 69 & 1.674 & 295 & 494 & 1,257,002 & 2,104,621 \\
+  1995 & 71 & 1.644 & 304 & 500 & 1,133,989 & 1,863,894 \\
+  1996 & 72 & 1.621 & 322 & 522 & 1,059,270 & 1,716,900 \\
+  1997 & 73 & 1.590 & 319 & 507 & 910,038 & 1,446,886 \\
+  1998 & 74 & 1.577 & 316 & 498 & 861,688 & 1,358,905 \\
+  1999 & 74 & 1.566 & 321 & 503 & 871,140 & 1,364,591 \\
+  2000 & 75 & 1.546 & 326 & 504 & 906,857 & 1,401,724 \\
+  2001 & 77 & 1.516 & 365 & 553 & 1,161,922 & 1,760,990 \\
+  2002 & 78 & 1.494 & 371 & 554 & 1,350,543 & 2,018,032 \\
+  2003 & 78 & 1.479 & 370 & 547 & 1,446,120 & 2,138,937 \\
+  2004 & 80 & 1.455 & 371 & 540 & 1,513,641 & 2,202,517 \\
+  2005 & 81 & 1.432 & 375 & 537 & 1,554,602 & 2,226,037 \\
+  2006 & 82 & 1.409 & 375 & 529 & 1,538,770 & 2,168,773 \\
+  2007 & 84 & 1.378 & 375 & 517 & 1,490,718 & 2,053,917 \\
+  2008 & 86 & 1.343 & 398 & 534 & 1,590,638 & 2,136,104 \\
+  2009 & 87 & 1.338 & 434 & 581 & 1,875,731 & 2,510,295 \\
+  2010 & 88 & 1.325 & 436 & 578 & 2,019,078 & 2,674,533 \\
+  2011 & 90 & 1.297 & 452 & 586 & 2,269,706 & 2,943,052 \\
+  2012 & 91 & 1.273 & 448 & 570 & 2,364,963 & 3,009,718 \\
+  2013 & 93 & 1.253 & 446 & 559 & 2,349,400 & 2,944,951 \\
+  2014 & 94 & 1.241 & 448 & 556 & 2,280,748 & 2,831,524 \\
+  2015 & 94 & 1.235 & 448 & 553 & 2,157,634 & 2,664,506 \\
+  2016 & 95 & 1.228 & 464 & 570 & 2,099,110 & 2,578,590 \\
+  2017 & 96 & 1.211 & 499 & 604 & 2,181,049 & 2,640,336 \\
+  2018 & 98 & 1.190 & 493 & 586 & 2,001,732 & 2,381,265 \\
+  2019 & 99 & 1.173 & 514 & 603 & 1,954,449 & 2,292,303 \\
+  2020 & 100 & 1.167 & 574 & 670 & 2,210,920 & 2,580,143 \\
+  2021 & 103 & 1.132 & 579 & 655 & 2,316,926 & 2,622,553 \\
+  2022 & 110 & 1.059 & 611 & 647 & 2,454,392 & 2,599,161 \\
+  2023 & 116 & 1.000 & 663 & 663 & 2,863,514 & 2,863,514 \\
+  \bottomrule
+  \end{tabular}
+  \caption{
+    Average nominal and inflation-adjusted payout under the Federal Training Assistance Act (BAföG) 
+    for student recipients (excluding pupils), based on official data published by Destatis.  
+    The table includes the Consumer Price Index (CPI, variable \textbf{PREIS1}, base year 2020 = 100) and 
+    a derived price factor (column “Factor (2023)”) calculated using these CPI values to express nominal amounts in 2023 euros.  
+    The inflation-adjusted average payouts and total financial expenditures were computed using this deflator and are not 
+    reported as such in the original Destatis tables.
+  }
+  \label{table:payout_over_time}
+  \end{table}
+\endgroup
+
+\begin{landscape}
+\setlength{\tabcolsep}{4pt} % horizontal spacing between columns
+\renewcommand{\arraystretch}{0.95} % vertical spacing between rows
+\begin{table}
 \centering
 \begin{tabular}{rrrrrrrr}
 \toprule
-Year & BIL002 & \multicolumn{3}{|c|}{Supported Persons} & \multicolumn{3}{c}{Proportion Supported (\%)} \\
+Year & Students (BIL002) & \multicolumn{3}{|c|}{Number of Supported Students} & \multicolumn{3}{c}{Proportion Supported (\%)} \\
 \midrule
- & & PER010 & PER011 & PER012 & PER010 & PER011 & PER012 \\
+ & & Total Supported & Fully Supported & Partially Supported & Total & Fully & Partially \\
 \midrule
 2023 & 2,868,311 & 501,425 & 245,255 & 256,170 & 17.5 & 8.6 & 8.9 \\
 2022 & 2,920,263 & 489,347 & 244,559 & 244,788 & 16.8 & 8.4 & 8.4 \\
@@ -36,15 +97,20 @@ Year & BIL002 & \multicolumn{3}{|c|}{Supported Persons} & \multicolumn{3}{c}{Pro
 2001 & 1,868,331 & 406,776 & 134,933 & 271,843 & 21.8 & 7.2 & 14.6 \\
 2000 & 1,798,863 & 348,799 & 100,913 & 247,886 & 19.4 & 5.6 & 13.8 \\
 1999 & 1,770,489 & 338,427 & 103,239 & 235,188 & 19.1 & 5.8 & 13.3 \\
-1998 & 1,800,651 & 336,355 & 97,539.& 238,810 & 18.7 & 5.4 & 13.3 \\
+1998 & 1,800,651 & 336,355 & 97,539 & 238,810 & 18.7 & 5.4 & 13.3 \\
 \bottomrule
 \end{tabular}
 \caption{
-  Number and percentage of students receiving BAföG support (BIL002).  
-  PER010: Total supported students, PER011: Fully supported students, PER012: Partially supported students.
+  Number and percentage of students receiving BAföG support.  
+  Columns:  
+  \textbf{BIL002} = total number of students;  
+  \textbf{PER010} = total supported students;  
+  \textbf{PER011} = fully supported students;  
+  \textbf{PER012} = partially supported students.
 }
-\label{table:bafoeg_support}
+\label{table:bafoeg_support_landscape}
 \end{table}
+\end{landscape}
 
 % # Variable codes 
 % # PER 010 | Supported persons
@@ -53,57 +119,5 @@ Year & BIL002 & \multicolumn{3}{|c|}{Supported Persons} & \multicolumn{3}{c}{Pro
 % # PER 013 | Supported persons (average monthly stock)
 % # PER 014 | Average monthly assistance payment per person
 
-
-
-
-\begin{table}[H]
-\centering
-\begin{tabular}{rcc|rr|rr}
-\hline
-Year & \multicolumn{2}{c|}{\textbf{CPI (PREIS1)}} & \multicolumn{2}{c|}{\textbf{Average Payout}} & \multicolumn{2}{c}{\textbf{Fin. Exp. (EUR 1000)}} \\
-\cline{2-7}
-& Index (2020) & Factor (2023) & Nominal & 2023 Prices & Nominal & 2023 Prices \\
-\hline
-1991 & 61 & 1.885 & 290 & 547 & 1,538,590 & 2,900,701 \\
-1992 & 65 & 1.795 & 290 & 521 & 1,539,929 & 2,764,764 \\
-1993 & 67 & 1.719 & 297 & 510 & 1,458,164 & 2,506,152 \\
-1994 & 69 & 1.674 & 295 & 494 & 1,257,002 & 2,104,621 \\
-1995 & 71 & 1.644 & 304 & 500 & 1,133,989 & 1,863,894 \\
-1996 & 72 & 1.621 & 322 & 522 & 1,059,270 & 1,716,900 \\
-1997 & 73 & 1.590 & 319 & 507 & 910,038 & 1,446,886 \\
-1998 & 74 & 1.577 & 316 & 498 & 861,688 & 1,358,905 \\
-1999 & 74 & 1.566 & 321 & 503 & 871,140 & 1,364,591 \\
-2000 & 75 & 1.546 & 326 & 504 & 906,857 & 1,401,724 \\
-2001 & 77 & 1.516 & 365 & 553 & 1,161,922 & 1,760,990 \\
-2002 & 78 & 1.494 & 371 & 554 & 1,350,543 & 2,018,032 \\
-2003 & 78 & 1.479 & 370 & 547 & 1,446,120 & 2,138,937 \\
-2004 & 80 & 1.455 & 371 & 540 & 1,513,641 & 2,202,517 \\
-2005 & 81 & 1.432 & 375 & 537 & 1,554,602 & 2,226,037 \\
-2006 & 82 & 1.409 & 375 & 529 & 1,538,770 & 2,168,773 \\
-2007 & 84 & 1.378 & 375 & 517 & 1,490,718 & 2,053,917 \\
-2008 & 86 & 1.343 & 398 & 534 & 1,590,638 & 2,136,104 \\
-2009 & 87 & 1.338 & 434 & 581 & 1,875,731 & 2,510,295 \\
-2010 & 88 & 1.325 & 436 & 578 & 2,019,078 & 2,674,533 \\
-2011 & 90 & 1.297 & 452 & 586 & 2,269,706 & 2,943,052 \\
-2012 & 91 & 1.273 & 448 & 570 & 2,364,963 & 3,009,718 \\
-2013 & 93 & 1.253 & 446 & 559 & 2,349,400 & 2,944,951 \\
-2014 & 94 & 1.241 & 448 & 556 & 2,280,748 & 2,831,524 \\
-2015 & 94 & 1.235 & 448 & 553 & 2,157,634 & 2,664,506 \\
-2016 & 95 & 1.228 & 464 & 570 & 2,099,110 & 2,578,590 \\
-2017 & 96 & 1.211 & 499 & 604 & 2,181,049 & 2,640,336 \\
-2018 & 98 & 1.190 & 493 & 586 & 2,001,732 & 2,381,265 \\
-2019 & 99 & 1.173 & 514 & 603 & 1,954,449 & 2,292,303 \\
-2020 & 100 & 1.167 & 574 & 670 & 2,210,920 & 2,580,143 \\
-2021 & 103 & 1.132 & 579 & 655 & 2,316,926 & 2,622,553 \\
-2022 & 110 & 1.059 & 611 & 647 & 2,454,392 & 2,599,161 \\
-2023 & 116 & 1.000 & 663 & 663 & 2,863,514 & 2,863,514 \\
-\hline
-\end{tabular}
-% \caption{Financial Data over the Years (Adjusted for 2023 Prices)}
-\caption{Average nominal and real payout under the Federal Training Assistance Act (BAföG) 
-for category students (pupils excluded). Table also shows the total Financial Expenditures (Fin. Exp.) 
-in nominal and real prices.}
-\label{table:payout_over_time}
-\end{table}
 
 
