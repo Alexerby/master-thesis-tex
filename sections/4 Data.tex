@@ -6,7 +6,7 @@ This study relies exclusively on SOEP-Core, the central and most comprehensive m
 
 We restrict our analysis to the period between 2007 and 2022, as this is the range for which we were able to consistently collect and harmonize the necessary statutory parameters from official BAföG regulations \cite{bafoeg_law}. 
 This includes annual updates to base need rates, income allowances, asset thresholds, and other legally defined components relevant to BAföG eligibility and award determination.\footnote{
-  See Appendix \ref{appendix:bafoeg-example} for an example of how these rules are applied.
+  See Appendix \ref{appendix:simulation-example} for an example of how these rules are applied.
 }
 Earlier years were excluded due to inconsistencies or incomplete availability of comparable legal documentation. 
 By focusing on this window, we ensure that the simulation model is fully grounded in verifiable legal norms and reflects the actual policy environment faced by students during this time.
@@ -40,7 +40,7 @@ Accurate parental income information is essential for constructing a credible BA
 To ensure consistency in the simulation, the analysis is restricted to students for whom income data from both legal parents are available within the household files. 
 This means that cases where one or both parents cannot be identified or linked within the dataset—such as due to absence, non-response, or household separation—are excluded from the simulation sample.
 
-Because the SOEP dataset does not directly indicate BAföG eligibility, we construct theoretical eligibility through a microsimulation that mirrors the statutory rules of the Bundesausbildungsförderungsgesetz (BAföG) from 2002 to 2022 \citep{bafoeg_law,bafoeg20,bafoeg21,bafoeg22,bafoeg23,bafoeg24,bafoeg25,bafoeg26,bafoeg27,bafoeg28,bafoeg29}. 
+Because the SOEP dataset does not directly indicate BAföG eligibility, we construct theoretical eligibility through a microsimulation that mirrors the statutory rules of the Bundesausbildungsförderungsgesetz (BAföG) from 2002 to 2021 \citep{bafoeg_law,bafoeg20,bafoeg21,bafoeg22,bafoeg23,bafoeg24,bafoeg25,bafoeg26,bafoeg27,bafoeg28,bafoeg29}. 
 The model implements the need calculation under §\,13 and the evolving allowance schedule under §\,25, incorporating adjustments from each amendment. 
 While undocumented exemptions or special cases cannot be captured, the simulation provides a consistent, rule-based approximation across survey waves.
 
