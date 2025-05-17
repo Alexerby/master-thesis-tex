@@ -1,0 +1,17 @@
+- Discuss beta error in appendix? Beta error in line with SOEP study on NTU. Beta error must be discussed.
+- https://www.ssrn.com/abstract=3352378 table 2.4 . Should we have something similar?
+
+- Measurement error. How to deal with?
+- Rename one part of method to Binary Choice Model and include probit + logit
+
+- Discussion: Policy Relevance
+- include phrf in probit/logit model and whatever other model 
+- Distribution of households at the boundary of eligibility 
+
+
+- Non-take-up and beta error rate by model specification. 
+https://download.ssrn.com/19/03/14/ssrn_id3352378_code428549.pdf?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQCAocrLAX9djEvkSTRHHpd9TYDiV7r5DRjaC%2FysONbeaAIhAN69MGWR82TSuXszHOmYG5TE%2BTImSS8UczRcrSlyiguqKr0FCFsQBBoMMzA4NDc1MzAxMjU3Igz9PvGx4SX%2B4t8tvIMqmgXK0QdCE3H8ZB1h5kRi2Wv98ueIv%2B5gWtQQQfhXvZJZUDWhF6V%2FuVDHEjWaH5103BhCivvgu3k142wNJ194h43E2AUUm84DLR30eMdE6oOyMNMWHFxfAQub0rQdwdy6Tla7U7hBd1%2BaVADYiXRnz%2ByX%2BsdeGttuQX4FyKTUAVrlK5MVarWoedazrLeMOYGuUd8KDtlF%2BQtVwoVaLTYyE3OqTyggeMe32rZA230jWhqWqWzkJ%2F8ng3446aZut1f1yIWyJAFWWprcrCQopBI2Fx8SPss9mSr31sDDPkd2CeUVi0wNd8Y4FlCJJQeo12RaBT1elt49w7a%2BjvDGC5kHqjJrJvLFeLnKB6mcsZesXyrvGV9nIIFF3eMbg%2BdM86v219p%2FYiDNUvtn1MmiRkqHlnzAAf6gaM0GMK0hPvbwfyNsR39Ll1JIQMvwrmWmyA9LlayA81ZP3SP%2BoGRXEXvQOo62YX8l9YwV7bYRY0ppfLJUV%2FDPK%2FDvCfDPrZ6hjPgEpbZJCPhNy5RjwLSJxZTe6QLR8bdQvyZ8oHpmZ1kEoJ5sSlYGjG%2Bd0dNSSvtELdF0evWYpVxvhOZl77mhS3fUbsWJNnSxGxL7w9%2Fn6Ie2hlUiz3Tmc8AifXsPcKJex08RmF18kKYRvw0V%2FaqUnCOrJnqqldpab1X5eKXR4uhyeKSEcko6PeIbrWDbjPkTbaRkj93ZRE2BgcNzlSOKjuweJW5y5v2Jz2b6vxHC76FbQ1lW0aR%2F5kxxMl79zulQj1oBJFhTgFgBfUlQZobudYM%2FakBvXMKA9JgxSVKz8cplcbU4ZmTqPnU8S1cSflGRzkyMQl6eJg32ZfDBZj%2F5DD9HOK%2FBaZDGPvBVERFTpQ%2B71BD0OQudoevamIX2zk4wmbehwQY6sAHMjG36nfXtedyu8w5eQiEhawUFftRXXn1rbB7CFVd9RyYSwvYXJYcWm2yfz%2FWIjbv9mLjGzsZRVDjBkIkkvIIEIdymSYhH6VkE1O9bbh8gQp7kK600pyjZXaewXK6iLevnLPP1LziPbxwuIXCJZycdXoZcbFAjQ1bm2rEgexnS9noAx3PssLdVcjWqBokwTUq49J6G9iCTMmw%2Bz9PO7Twk%2FKMBc9D3Yt1ztQfJyonkcg%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250517T101141Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAUPUUPRWETOZIRNIF%2F20250517%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=d8891a6fcd8ab31fb8d1e46576575fcc41595ed8530afeb95ab11c0a34c61247&abstractId=3352378
+
+ Table B3
+
+ Define model in method, probit, logit
