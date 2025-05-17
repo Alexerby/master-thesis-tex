@@ -39,7 +39,7 @@ all vulnerable individuals who are unable to access support, regardless of the r
 The microsimulation pipeline is designed to calculate a theoretical BAföG eligibility status and award amount for students in the SOEP-Core sample. 
 Its primary purpose is to compare these simulated entitlements with de facto BAföG take-up, as reported in SOEP.
 
-To construct the theoretical values, the model replicates the legal rules and means-testing procedures defined in the Bundesausbildungsförderungsgesetz (BAföG) for the years 2007 to 2022. 
+To construct the theoretical values, the model replicates the legal rules and means-testing procedures defined in the Bundesausbildungsförderungsgesetz (BAföG) for the years 2007 to 2021. 
 These rules are applied to individual-level SOEP data, including detailed information on income, assets, housing costs, and household structure.
 
 This approach enables a systematic assessment of the alignment between statutory entitlements and actual BAföG participation. 
@@ -129,10 +129,6 @@ Hence, the latent-index formulation yields the conditional non-take-up probabili
 \[
 \Pr(\mathrm{NTU}_i = 1 \mid \mathbf{X}_i) = \Phi(\mathbf{X}_i \beta), \quad \text{for all } i \text{ such that } T_i = 1.
 \]
-
-% TODO: Explain here why we are not using Logit 
-% and maybe we also should do that and compare outcomes?
-
 The condition \( T_{i} = 1 \) restricts the dataset to students for whom the microsimulation yields positive statutory entitlement. Therefore, all the inferences pertains to this eligible sub-population whom are \textit{theoretically} (statutorily) eligible. 
 
 The design matrix (\( \mathbf{X} \)) combines three partitions 
