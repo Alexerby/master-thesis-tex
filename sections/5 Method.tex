@@ -1,6 +1,6 @@
 \section{Method} 
 
-MOVE THIS TEXT TO THE LITERATURE REVIEW SECTION
+\textcolor{red}{MOVE THIS TEXT TO THE LITERATURE REVIEW SECTION}
 
 \paragraph{Non take up of welfare.}
 
@@ -119,7 +119,7 @@ Total assets are then compared against exemption thresholds defined in §\,29 BA
 Any amount exceeding the applicable allowance is classified as excess assets and contributes to reducing the student's calculated need. 
 
 
-\paragraph{Need Calculation and Theoretical Entitlement.}
+\paragraph{Need calculation and theoretical entitlement.}
 In the final stage, the simulation model calculates the student's funding need by summing the statutory base need, housing allowance, and health insurance supplement, as defined in §\,13 BAföG \citep{bafoeg_law}. 
 From this total, the model subtracts any excess income attributable to the student, their parents, and their assets. 
 The resulting amount determines the theoretical monthly BAföG entitlement.
@@ -166,3 +166,16 @@ Since raw logit and probit coefficients reflect changes in the latent index and 
 Our models include a set of control variables to account for observed heterogeneity that may influence the probability of non-take-up. These controls include demographic factors (e.g., sex, migration background, partnership status, living situation), socioeconomic characteristics (e.g., parental income, own income, parental education), and family context (e.g., sibling previously claimed BAföG). We also control for regional differences using an East/West Germany background indicator, reflecting known structural and cultural variations. Finally, to capture behavioral differences that might affect take-up decisions, we include a measure of individual risk appetite. These covariates help isolate the association between key predictors and non-take-up by adjusting for potential confounders.
 
 
+\subsection{Model limitations}
+\label{subsection:model_limitations}
+
+\paragraph{Addressing beta errors in eligibility simulations.}
+In simulating benefit non-take-up, beta errors occur when individuals report receiving a benefit but are classified by the model as ineligible. These mismatches typically reflect limitations in the input data, particularly concerning income, assets, or household structure. Since the data this study utilises on both income and benefit receipt is self-reported, inaccuracies can arise from either source. Without administrative records, it is not possible to confirm whether a student was truly eligible or actually received the benefit. Some studies suggest that beta errors are more often caused by issues in the income or asset data used for eligibility simulation, rather than incorrect reporting of benefit receipt \citep{frick_claim_2007, janssens_takemod_2022}.
+
+A key reason for beta errors is that benefit eligibility often depends on precise income thresholds. Even small errors in reported income can shift households across these cut-offs, especially when only annual income is available, despite eligibility being assessed monthly in practice \citep{herber_non-take-up_2019}. Further complications arise from missing or outdated information on assets and the difficulty of capturing criteria like actual household composition or work availability. Unlike more discretionary benefits such as social assistance, BAföG eligibility is determined by clearly codified national rules, leaving little room for individual judgment by administrators. As a result, administrative discretion is unlikely to be a major source of beta errors in this context. \textcolor{red}{MAYBE REMOVE THE LAST TWO SENTENCES}
+
+To address these limitations, several strategies are used in the literature. These include conducting sensitivity checks by adjusting income levels and applying post-simulation corrections to reclassify borderline cases \citep{herber_non-take-up_2019}. Some studies also emphasize the value of combining different data sources where possible, such as using more detailed survey modules on assets or household composition to improve the accuracy of eligibility simulations \citep{janssens_takemod_2022}. While this approach is not possible in all settings, efforts to reduce data limitations can help lower the risk of beta errors and strengthen the credibility of non-take-up estimates. \textcolor{red}{MAYBE REMOVE THE LAST TWO SENTENCES HERE, ARE WE REALLY DOING THAT?}
+
+Although beta errors cannot be completely avoided, it is important to recognise their potential impact on the results. In this thesis, particular attention is paid to identifying where beta errors may occur and considering how they might influence the findings. Sensitivity checks are applied where relevant to assess the robustness of the findings and to reduce the risk of misinterpretation.
+
+\textcolor{red}{OVERALL MAYBE SHORTEN THIS WHOLE BETA ERROR TEXT}
