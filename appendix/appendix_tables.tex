@@ -121,39 +121,6 @@ Year & Students & \multicolumn{3}{|c|}{Number of Supported Students} & \multicol
 
 
 
-\begin{table}[htbp]
-\centering
-\begin{tabular}{rrrrrr}
-\toprule
-\textbf{Year} & \(\bar{T}\) & \(\bar{R}\) & \(TU_T\,(\%)\) & \(TU_R\,(\%)\) & \(\Delta TU\,(\%)\) \\
-\midrule
-2007 & 273.76 & 295.62 & 17 & 15 & 2 \\
-2008 & 328.19 & 283.12 & 22 & 18 & 4 \\
-2009 & 345.99 & 312.12 & 21 & 18 & 4 \\
-2010 & 347.84 & 299.32 & 22 & 17 & 4 \\
-2011 & 408.08 & 358.95 & 32 & 21 & 11 \\
-2012 & 429.39 & 393.09 & 33 & 23 & 10 \\
-2013 & 384.99 & 356.63 & 31 & 23 & 8 \\
-2014 & 404.91 & 383.70 & 32 & 23 & 10 \\
-2015 & 407.80 & 364.48 & 34 & 18 & 16 \\
-2016 & 407.84 & 354.35 & 33 & 20 & 13 \\
-2017 & 425.46 & 406.28 & 37 & 19 & 18 \\
-2018 & 462.37 & 385.60 & 36 & 21 & 15 \\
-2019 & 450.52 & 397.07 & 30 & 16 & 14 \\
-2020 & 528.82 & 454.99 & 30 & 19 & 11 \\
-2021 & 529.51 & 418.95 & 34 & 17 & 17 \\
-\bottomrule
-\end{tabular}
-\caption{Average BAföG amounts and take-up rates by survey year. 
-\(\bar{T}\): average theoretical BAföG; 
-\(\bar{R}\): average reported BAföG; 
-\(TU_T\): theoretical take-up rate; 
-\(TU_R\): reported take-up rate; 
-\(\Delta TU = TU_T - TU_R\); 
-\(TU_R / TU_T\): ratio of reported to theoretical take-up.}
-\end{table}
-
-
 
 \begin{landscape}
 \begin{table}[htbp]
@@ -191,3 +158,29 @@ Sibling received BAföG    & 61.54 & 64.71 & 46.15 & 53.33 & 48.48 & 32.14 & 37.
 \caption{Non-take-up rates by household type, migration background, sex, region, number of siblings, and sibling BAföG history.}
 \end{table}
 \end{landscape}
+
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[t]{0.48\linewidth}
+    \includegraphics[width=\linewidth]{parental_joint_excess_income_pdf.png}
+    \caption{Parental joint excess income}
+    \label{fig:parental-excess}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.48\linewidth}
+    \includegraphics[width=\linewidth]{student_excess_income_pdf.png}
+    \caption{Student excess income}
+    \label{fig:student-excess}
+  \end{subfigure}
+  \caption{Simulated mean excess income for parents (\subref{fig:parental-excess}) and students (\subref{fig:student-excess}).}
+  \label{fig:excess-income}
+\end{figure}
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\linewidth]{theo_vs_reported_distribution.png}
+  \caption{Comparison of the distribution of reported BAföG receipt in the SOEP-Core sample with the simulated (theoretical) distribution of simulated BAföG entitlements from our model.}
+  \label{fig:theo-vs-reported}
+\end{figure}
