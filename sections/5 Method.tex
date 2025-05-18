@@ -46,6 +46,42 @@ This approach enables a systematic assessment of the alignment between statutory
 Deviations between the modeled and reported outcomes may arise from reporting errors, exceptional administrative decisions, or incomplete data. 
 Full documentation of the simulation logic and input structure is provided in Appendix ~\ref{appendix:microsimulation-pipeline} and ~\ref{appendix:simulation-example}.
 
+\paragraph{Identifying the Non-Take-Up (NTU) Rate and Beta Error}
+In the conditional probabilities 
+
+Following the microsimulation of theoretical BAföG eligibility, we define the non-take-up (NTU) rate as the conditional probability that a student does not receive BAföG, despite being theoretically eligible according to our model. Formally, this is expressed as:
+
+\begin{equation}
+\Pr(\text{NTU} = 1 \mid M = 1) = \frac{\sum_{i=1}^{N} \mathbf{1}\{R_i = 0 \ \text{and} \ M_i = 1\}}{\sum_{i=1}^{N} \mathbf{1}\{M_i = 1\}}, \quad\text{where} 
+\end{equation}
+
+\begin{equation}
+  \mathbf{1}\{\cdot\} =
+  \begin{cases}
+  1 & \text{if individual } i \text{ is eligible but does not take up BAföG}, \\
+  0 & \text{otherwise}.
+  \end{cases}
+\label{eq:indicator-function-ntu}
+\end{equation}
+
+
+\paragraph{Beta Error (Type II Error).}  
+The beta error measures the probability that a student receives BAföG despite being classified as theoretically ineligible by our model. This error captures false positives in eligibility classification, indicating cases where students who should not qualify according to the simulation do receive financial support. Formally, it is expressed as:
+
+\begin{equation}
+\Pr(\text{TU} = 1 \mid M = 0) = \frac{\sum_{i=1}^{N} \mathbf{1}\{R_i = 1 \ \text{and} \ M_i = 0\}}{\sum_{i=1}^{N} \mathbf{1}\{M_i = 0\}},
+\end{equation}
+
+where \( \mathbf{1}\{\cdot\} \) is the indicator function defined in equation \eqref{eq:indicator-function-ntu}, but here:
+
+\[
+\mathbf{1}\{\cdot\} =
+\begin{cases}
+1 & \text{if individual } i \text{ is ineligible but receives BAföG}, \\
+0 & \text{otherwise}.
+\end{cases}
+\]
+
 % Maybe ref all our data sources, the statutory and soep
 \subsubsection{Simulation Pipeline}
 
@@ -96,62 +132,37 @@ Detailed examples of this calculation and relevant thresholds are provided in Ap
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Econometric Modelling of Non-Take-Up
+% Binary Choice Model of Non-Take-Up
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Econometric Modelling of Non-Take-Up}
-After simulating statutory eligibility, we analyse the \textit{behavioural} non-take-up: 
-that is, the probability that a student refrains from taking up BAföG even though they are theoretically eligible according to our statutory microsimulation. 
-Formally, we model:
+\subsection{Binary Choice Model}
+After simulating statutory eligibility, we analyse behavioural non-take-up: the probability that a student refrains from taking up BAföG despite being theoretically eligible according to our microsimulation. 
+We model both using a Logit and a Probit model.
+
+\subsubsection{Probit Model}
+Formally, we model
 \begin{equation}
-  \Pr(\mathrm{NTU}_i = 1 \mid \mathbf{X}_i), \quad \text{with } T_i = 1 \text{ for all } i,
+  \Pr(\mathrm{NTU}_i = 1 \mid \mathbf{X}_i) = \Phi(\mathbf{X}^\top \boldsymbol{\beta})
+  , \qquad \text{for all } i \text{ with } T_i = 1,
 \end{equation}
-where \( T_i = 1 \) indicates theoretical eligibility, and \( \mathrm{NTU}_i := \mathbf{1}\{A_i = 0\} \) is a binary indicator for non-take-up, derived from the observed take-up variable \( A_i \) in the SOEP-Core dataset.
+where \( \Phi(\cdot) \) denotes the cumulative distribution function of the standard normal distribution. 
 
-Due to the binary nature of the dependent variable, we employ a Probit model with a standard normal link function. Specifically, we assume a latent index structure for the unobserved propensity to forego BAföG:
+Here, \( T_i = 1 \) indicates the theoretical eligibility outcome of our microsimulation, and \( \mathrm{NTU}_i := \mathbf{1}\{R_i = 0\} \) is a binary indicator for non-take-up, based on the observed receipt in SOEP-Core (with \( R_i = 1 \) indicating receipt of BAföG and \( R_i = 0 \) otherwise).
+
+\subsubsection{Logit Model}
+In the same way as the Probit model, we fit a Logit model
 \begin{equation}
-  \mathrm{NTU}_i^* = \mathbf{X}_i \beta + \varepsilon_i, 
-  \quad 
-  \varepsilon_i \sim \mathcal{N}(0,1),
+  \Pr(\mathrm{NTU}_i = 1 \mid \mathbf{X}_i) = \Lambda(\mathbf{X}^\top \boldsymbol{\beta})
+  , \qquad \text{for all } i \text{ with } T_i = 1,
 \end{equation}
-and observe:
+where \( \Lambda(\cdot) \) denotes the logistic cumulative distribution function
 \begin{equation}
-  \mathrm{NTU}_i = \mathbf{1} \{ \mathrm{NTU}_i^* > 0 \}.
+  \Lambda(z) = \frac{1}{1 + e^{-z}}.
 \end{equation}
-That is, \( \mathrm{NTU}_i = 1 \) if and only if the student's latent utility for not applying exceeds zero.
 
-This specification implies the following probability model:
-\begin{equation}
-  \Pr(\mathrm{NTU}_i = 1 \mid \mathbf{X}_i) = \Pr(\mathrm{NTU}_i^* > 0 \mid \mathbf{X}_i) = \Phi(\mathbf{X}_i \beta),
-\end{equation}
-where \( \Phi(\cdot) \) denotes the cumulative distribution function (CDF) of the standard normal distribution.
+\subsubsection{Interpretation.} %TODO: Maybe explain latent index more -- don't fully understand atm
+Since raw logit and probit coefficients reflect changes in the latent index and are not directly interpretable in terms of outcome probabilities, we report average marginal effects (AMEs) for all covariates. These AMEs quantify the average change in the probability of non-take-up associated with a one-unit change in each covariate, holding other variables at their observed values.
 
-Hence, the latent-index formulation yields the conditional non-take-up probability for each student, and aligns with our empirical target:
-\[
-\Pr(\mathrm{NTU}_i = 1 \mid \mathbf{X}_i) = \Phi(\mathbf{X}_i \beta), \quad \text{for all } i \text{ such that } T_i = 1.
-\]
-The condition \( T_{i} = 1 \) restricts the dataset to students for whom the microsimulation yields positive statutory entitlement. Therefore, all the inferences pertains to this eligible sub-population whom are \textit{theoretically} (statutorily) eligible. 
-
-The design matrix (\( \mathbf{X} \)) combines three partitions 
-\begin{equation}
-  \mathbf{X}_{i} = 
-  \begin{bmatrix}
-    \mathbf{Z}_{i} \mid \mathbf{B}_{i} \mid \mathbf{D}_{i}
-  \end{bmatrix}
-\end{equation}
-where \( \mathbf{Z}_{i} \) (such as \textit{age, number of siblings}) contains continuous covariates, \( \mathbf{B}_{i} \) containing binary indicators (such as \textit{livings with parents})  and \( \mathbf{D}_{i} \) containing dummy vectors (such as \textit{sex, federal state, employment status}). 
-
-The parameters are estimated by maximum likelihood (ML), and inference is conducted using heteroskedasticity-robust standard errors of the \textbf{MacKinnon and White (1985) HC2} type \citep{mackinnon_heteroskedasticity-consistent_1985}. These standard errors account for potential residual heteroskedasticity, which is common in large-scale observational panel data such as the SOEP-Core.\footnote{
-We use the HC2 estimator following \citet{mackinnon_heteroskedasticity-consistent_1985}, which adjusts the residual variance by downweighting high-leverage observations. Specifically, the variance-covariance matrix of the estimator is given by:
-\(
-\widehat{\mathrm{Var}}(\hat{\beta}) = (X^\top X)^{-1} X^\top \operatorname{diag}\left( \frac{e_i^2}{1 - h_{ii}} \right) X (X^\top X)^{-1},
-\)
-where \( e_i \) are the residuals and \( h_{ii} \) are the diagonal elements of the hat matrix \( H = X(X^\top X)^{-1}X^\top \). This choice is motivated by \citet{chesher_hajek_1989} and \citet[Section 4]{chesher_finite-sample_1991}, who show that HC2 might be better as HC3 tends to be upward biased and HC1 downwards-biased.
-}
-
-% What is meant by latent index?
-As raw Probit coefficients represents shifts in the latent index\footnote{
-With the latent index we refer to the continuous "score" which drives the true/false decision, but is not itself observed. That is the unseen propensity that the model assumes sits underneath every given binary outcome.
-}
-and are not directly comparable across covariates. To make these comparable, we report the average marginal effects (AMEs) in the results section. This translates the covariate changes into percentage-point differences in the non-take-up probability of the individuals.
+\paragraph{Control Variables}
+Our models include a set of control variables to account for observed heterogeneity that may influence the probability of non-take-up. These controls include demographic factors (e.g., sex, migration background, partnership status, living situation), socioeconomic characteristics (e.g., parental income, own income, parental education), and family context (e.g., sibling previously claimed BAföG). We also control for regional differences using an East/West Germany background indicator, reflecting known structural and cultural variations. Finally, to capture behavioral differences that might affect take-up decisions, we include a measure of individual risk appetite. These covariates help isolate the association between key predictors and non-take-up by adjusting for potential confounders.
 
 
