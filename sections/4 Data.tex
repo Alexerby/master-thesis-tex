@@ -1,8 +1,10 @@
 \section{Data}
-This study utilizes data from the German Socio-Economic Panel (SOEP), one of the longest-standing multidisciplinary household surveys in the world. 
-Conducted annually since 1984 by the German Institute for Economic Research (DIW Berlin)  \citep{soepcore_v39}, the SOEP is a nationally representative longitudinal survey that gathers data from approximately 30,000 individuals across 22,000 households each year. %TODO: Is the numbers correct?
-The survey includes respondents aged 17 and older and provides rich individual- and household-level information on income, education, labor market behavior, household composition, and demographics. 
-This study relies exclusively on SOEP-Core, the central and most comprehensive module of the dataset \citep{berlin_diw_nodate}.
+
+To estimate non-take-up rates of welfare benefits, researchers typically rely on one or more of three data sources: administrative records, specially designed surveys, and general purpose household surveys. Each comes with its own trade-offs. Administrative data are accurate for tracking benefit receipt but usually lack information on those who do not apply. Special surveys can provide richer detail on eligibility and claiming behaviour, though they are costly and rarely implemented. General purpose surveys are more readily available and widely used in empirical research on non-take-up, even if they are not designed with this purpose in mind \citep{mechelen_who_2017}.
+
+In line with much of the existing literature, this study relies on data from the German Socio-Economic Panel (SOEP), which falls into the third category of general-purpose household surveys. As one of the longest-standing multidisciplinary household surveys in the world, the SOEP has been conducted annually since 1984 by the German Institute for Economic Research (DIW Berlin) \citep{soepcore_v39}. It is a nationally representative longitudinal study that collects data from around 30,000 individuals in 22,000 households each year. The survey includes respondents aged 17 and older and provides rich individual- and household-level information on income, education, labour market activity, household structure, and demographics. This study uses the SOEP-Core sample, the central and most comprehensive module of the dataset \citep{berlin_diw_nodate}.
+
+While such general purpose surveys like SOEP are not specifically designed to measure non take up, they have the advantage of covering both benefit receipt and the before mentioned characteristics needed to estimate eligibility \citep{mechelen_who_2017}.
 
 We restrict our analysis to the period between 2007 and 2022, as this is the range for which we were able to consistently collect and harmonize the necessary statutory parameters from official BAföG regulations \cite{bafoeg_law}. 
 This includes annual updates to base need rates, income allowances, asset thresholds, and other legally defined components relevant to BAföG eligibility and award determination.\footnote{
@@ -34,6 +36,9 @@ A descriptive overview of key variables is provided in Appendix ~\ref{appendix:m
 \subsection{Limitations}
 
 Although the SOEP provides comprehensive socioeconomic data, certain limitations persist.
+
+
+\textcolor{red}{However, it comes with some limitations. First of all, there are potential biases due to non response bias and undercoverage. Vulnerable groups, such as those without a permanent address or people living in institutions, are often missing from survey samples. Non response may also be correlated with non take up, which can distort estimates. Second of all, measurement errors can be a concern, especially in regards income, asset reporting, and welfare receipt. Respondents may misreport their income or confuse the benefits they receive, leading to inaccurate estimates of eligibility and take up. Third of all, mismatches in the timing and definition of income used in surveys compared to what administrations use to assess eligibility can result in classification errors. For example, surveys often report annual income, but eligibility is commonly assessed monthly. Lastly, general purpose surveys often lack detailed information about reasons for non take up, making it difficult to distinguish between, for example, lack of awareness and administrative barriers \citep{mechelen_who_2017}. REPHRASE SO THAT THIS FITS IN HERE}
 
 \paragraph{Parental income coverage.} %TODO: Move to method and do sensitivity analysis 
 Accurate parental income information is essential for constructing a credible BAföG means test. 
