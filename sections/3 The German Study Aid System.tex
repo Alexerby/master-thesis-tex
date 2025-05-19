@@ -97,13 +97,18 @@ While a drop in financial aid rates might suggest that fewer students are in nee
 
 \subsubsection{How BAföG Entitlements Are Calculated}
 \label{subsection:how-bafog-entitlement-is-calculated}
+To understand eligibility for BAföG and the amount of support, it is essential to comprehend the means-testing process. 
+The BAföG system calculates entitlements based primarily on the income and assets of both the student and their parents. 
+This involves a detailed review of the applicant’s financial situation, including the income of the parents after accounting for taxes, social security contributions, and other standard allowances. 
+Any income exceeding a predefined threshold is deducted directly from the student’s potential entitlement.
 
-To understand who qualifies for BAföG and how much support they receive, it's helpful to briefly outline how the entitlement is calculated. The system is based on a means test that primarily considers the income of the applicant’s parents. After deducting taxes, social security contributions, and standard allowances for parents and certain dependents, any income that remains after deductions is compared to a threshold. The amount above this threshold is subtracted directly from the student’s potential BAföG entitlement. 
-The basic structure of the calculation is shown in Appendix~\ref{appendix:microsimulation-pipeline}.
+The application process may also require various supporting documents. 
+If the student does not live with their parents, proof of residency, such as a registration certificate or tenancy agreement, is necessary. 
+Similarly, proof of health insurance and, if applicable, documentation of income (e.g., pay slips or scholarship notices) must be provided. 
+Additional forms are required if the student has assets, such as bank statements, or owns a car, in which case, the vehicle’s estimated value must be submitted.
 
-...
-
-\textcolor{red}{Alex, I need your take on this, should we just remove tthis subsction maybe? MAYBE DO A SEPARATE PIPELINE JUST FOR THE BAFÖG CALCULATIONS (IRRESPECTIVE OF HOW WE FOUND IT THROUGH THE SOEP DATA)}
+A description of the process is visualized in Figure~\ref{fig:pipeline-overview}, which outlines a simplified version of the calculation of income and asset adjustments for both students and parents.
+For a more detailed simulation example of an individual in our dataset, see Appendix~\ref{appendix:simulation-example}.
 
 \subsubsection{Institutional Design and Policy Instruments} 
 \label{section:institutional-design-and-policy-instruments}
@@ -111,6 +116,8 @@ The basic structure of the calculation is shown in Appendix~\ref{appendix:micros
 \subsubsection*{The Income Exemption Threshold and the Support Rate}
 \label{subsection:the-income-exemption-threshold-and-the-support-rate}
 BAföG uses two main tools in order to achieve its central objectives, the so-called Freibetragsgrenzen, which is the income exemption threshold, and the so-called Bedarfssätze, which is the support rate \citep{meier_bafog_2024}.
+%TODO: Maybe remove reference here. 
+% This indicates that we used Meiers paper as a basis for our understanding of the system, which we didn't I think?
 
 \paragraph{Support Rates.}
 In order to determine the support rates, three main reference points are used: 1) the development of basic social security benefits (”citizens allowance” or Bürgergeld), 2) the development of consumer prices, which reflects the increase in general costs of living, and 3) the specific living expenses of students, which are surveyed every four to five years in the Sozialerhebung (”the social survey”). Additionally, the financial situation of the federal government is taken into account in order to ensure that increases in support rates, income exemption thresholds and social allowances are fiscally feasible \citep{meier_bafog_2024}.
