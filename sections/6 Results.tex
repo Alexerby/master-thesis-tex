@@ -1,12 +1,22 @@
 \section{Results}
 
 \subsection{Microsimulation Non-take-up}
-Our microsimulation results indicate that the non-take-up-rate of BAföG, among theoretically eligible students ranged from approximately 50--70\% across the survey years 2007--2021, with an average of 60\%  (Table \ref{table:microsimulation-ntu}).
+Our microsimulation results indicate that the non-take-up-rate of BAföG, among theoretically eligible students ranged from approximately 50--70\% across the survey years 2007--2021, with an average of 60\%  (Table \ref{table:microsimulation-ntu}). \textcolor{red}{Is this the type of situation where we need to reference our own work?}
 
 These estimates are broadly in line with previous findings on non-take-up of social benefits in Germany, which generally falls between 40--67\%, depending on the program and time period (see Table \ref{table:NTU-studies}). 
 While our estimates are broadly consistent with prior research, they are noticeably higher than the 36--40\% non-take-up rate for BAföG reported by \cite{herber_non-take-up_2019}, who also use SOEP survey data, but for the period 2002--2013.
 
 This discrepancy may be attributable to several factors, including differences in the estimation of theoretical eligibility. These factors include the specific SOEP variables used to capture income and reported BAföG receipt, the time periods under study (with our analysis covering 2007--2021, compared to \cite{herber_non-take-up_2019}, which covers 2002--2013), as well as other differences in the microsimulation design and modeling approach.
+
+...
+
+While there is some variation in non-take-up across years, NTU remains consistently quite high throughout the period. The rate fluctuates between a low of 50\% in 2013 and a high of around 68\% in 2019. Notably, the results show a decline from 2010 to 2013, which is then followed by a gradual upwards trend throughout the rest of the period. The increase in NTU in the years leading up to 2020 could potentially reflect behavioural or institutional factors such as changes in awareness, perceived complexity or attitudes toward debt, but it could also be partly driven by policy changes. Several BAföG reforms were introduced during this period, including increases in grant amounts and adjustments to income thresholds, which may have influenced both eligibility and perceived attractiveness of the program. Since the simulation accounts for these legal changes, the results capture not just behavioural responses but also how reforms may have affected take-up incentives over time.
+
+\textcolor{red}{Maybe further elaborations belong in the discussion part?}
+
+The second column in Table~\ref{tab:NTU_rates} shows the estimated beta error, which is the share of students who are classified as ineligible by the simulation but report receiving BAföG. On average, the beta error is about 15\% across the full period. This level of misclassification is in line with what other studies have found when working with survey data, where income reporting and timing mismatches are common issues \citep{frick_claim_2007}. While this level of beta error is not negligible, the simulation seems to capture eligibility status fairly well overall, even if some noise is unavoidable.
+
+Taken together, the results suggest that a large share of eligible students do not take up BAföG, and that this has been the case fairly consistently over time. The high average non-take-up rate, around 60\%, points to persistent barriers such as lack of information or procedural hurdles. The financial attractiveness of BAföG may also be a factor. Although support amounts were increased at several points during the period, the maximum monthly payments have remained relatively modest compared to typical student living costs, especially in larger cities \textcolor{red}{(REMEMBER TO ADD SOURCE HERE)}. This could help explain why some students perceive the benefit as not worth the effort of applying. These findings underline the importance of outreach efforts and suggest that further reforms may be needed to make the program more accessible and appealing.
 
 %TODO: Refer to the table of the distributions of reported bafög vs theoretical, see appendix for table.
 
@@ -52,6 +62,9 @@ This discrepancy may be attributable to several factors, including differences i
 
 
 \subsection{Determinants of Non-take-up}
+
+\textcolor{red}{Add some text here? Could refer back to the method chapter where we go over the control variables}
+
 \subsubsection{Binary Choice Model}
 
 
@@ -60,22 +73,7 @@ This discrepancy may be attributable to several factors, including differences i
 \input{tables/iv_regression_table.tex}
 
 
-
-
-\paragraph{Risk attitudes.} In this analysis, a variable for students' self-assessed willingness to take risks is included. Even though BAföG offers relatively safe and generous conditions, some students might still be hesitant to take on any form of debt if they are generally risk-averse. By including this variable, we aim to capture whether differences in individual risk preferences help explain why some eligible students choose not to apply.
-
-Herber and Kalinowski (2016) also include a risk preference variable in their study, mainly to control for the possibility that risk attitudes could affect take-up behavior or influence how other factors, like impatience, play a role. They do not find a strong effect of risk aversion on BAföG take-up, but they still argue it is useful to control for \citep{herber_non-take-up_2019}. In a similar way, we include this variable to improve our model and to see whether risk aversion plays any role in students’ decisions to reject BAföG.
-
-\paragraph{East German socialization.}  A variable indicating whether the student lives in East Germany is included to account for potential differences in attitudes toward state support rooted in historical and regional context. Alesina and Fuchs-Schündeln (2007) show that individuals from the former GDR tend to have stronger preferences for redistribution and a greater belief in the role of the state in providing social services, and that these differences in preferences can persist for one to two generations after reunification \citep{alesina_good-bye_2007}. Current residence in East Germany may reflect continued exposure to these norms and institutions and can serve as a reasonable proxy for this form of socialization. Since the variable is statistically significant at the 5\% level in our model, we interpret it as capturing persistent regional differences in how students view and respond to publicly provided financial support like BAföG.
-
-\paragraph{Sibling prior experience with BAföG.} An indicator for whether the student has an older sibling who previously received BAföG is included to capture potential differences in access to informal support and familiarity with the application process. Students with siblings who have already gone through the steps of applying may be more aware of eligibility rules and practical requirements. Herber and Kalinowski (2016) highlight that such sibling experience can help reduce informational and procedural barriers, making it more likely that students follow through with the application \citep{herber_non-take-up_2019}. This variable is intended to reflect how previous exposure to the system within the family can shape students’ confidence and ability to navigate what is often perceived as a complex process.
-
-\paragraph{Migration background.} A variable for migration background is included to explore whether differences in familiarity with the BAföG system may influence take-up. Some students may come from households with less exposure to German administrative processes or financial aid structures, which could affect their understanding of eligibility or the application itself. In addition, studies show that individuals with a migration background in Germany often have lower financial literacy, which may make it harder to evaluate financial aid options like BAföG \citep{Tsegay_2024}. Including this variable helps capture potential structural or informational factors that may contribute to lower take-up rates among eligible students. In the SOEP data, migration background is measured using the \texttt{MIGBACK} variable, which distinguishes between direct (first-generation, coded as 2) and indirect (second-generation, coded as 3) migration background. \textcolor{red}{- Alex please review and make sure this is correct}
-
-...
-
-\textcolor{red}{ALEX: X many background variables on parental education are included. They are derived/ found from… blabla.
-Parental education background is shown to have an effect on the student’s decision of take-up, although this is only true for the variable that is conditioned on at least one parent having a masters degree.}
+\textcolor{red}{Add some intro text here so we don't just go straight to explaining the results?}
 
 ...
 

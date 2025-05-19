@@ -8,7 +8,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Microsimulation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textcolor{red}{Add some text here?}
+
 \subsection{Microsimulation of Theoretical BAföG Eligibility} 
+
+\textcolor{red}{Add some text here as well?}
+
 \subsubsection{Purpose and Scope}
 The microsimulation pipeline is designed to calculate a theoretical BAföG eligibility status and award amount for students in the SOEP-Core sample. 
 Its primary purpose is to compare these simulated entitlements with de facto BAföG take-up, as reported in SOEP.
@@ -138,12 +144,31 @@ where \( \Lambda(\cdot) \) denotes the logistic cumulative distribution function
   \Lambda(z) = \frac{1}{1 + e^{-z}}.
 \end{equation}
 
-\subsubsection{Interpretation.} %TODO: Maybe explain latent index more -- don't fully understand atm
+\paragraph{Interpretation.} %TODO: Maybe explain latent index more -- don't fully understand atm
 Since raw logit and probit coefficients reflect changes in the latent index and are not directly interpretable in terms of outcome probabilities, we report average marginal effects (AMEs) for all covariates. These AMEs quantify the average change in the probability of non-take-up associated with a one-unit change in each covariate, holding other variables at their observed values.
 
-\paragraph{Control Variables.}
+\subsubsection{Control Variables}
+
 Our models include a set of control variables to account for observed heterogeneity that may influence the probability of non-take-up. These controls include demographic factors (e.g., sex, migration background, partnership status, living situation), socioeconomic characteristics (e.g., parental income, own income, parental education), and family context (e.g., sibling previously claimed BAföG). We also control for regional differences using an East/West Germany background indicator, reflecting known structural and cultural variations. Finally, to capture behavioral differences that might affect take-up decisions, we include a measure of individual risk appetite. These covariates help isolate the association between key predictors and non-take-up by adjusting for potential confounders.
 
+The rationale for including several of these variables is further elaborated below, drawing on prior research and theoretical considerations. In particular, the inclusion of factors like risk attitudes, family experience with the application process, and regional socialization helps account for variation in informational access, institutional trust, and attitudes toward public support.
+
+\paragraph{Risk attitudes.} In this analysis, a variable for students' self-assessed willingness to take risks is included. Even though BAföG offers relatively safe and generous conditions, some students might still be hesitant to take on any form of debt if they are generally risk-averse. By including this variable, we aim to capture whether differences in individual risk preferences help explain why some eligible students choose not to apply.
+
+Herber and Kalinowski (2016) also include a risk preference variable in their study, mainly to control for the possibility that risk attitudes could affect take-up behavior or influence how other factors, like impatience, play a role. They do not find a strong effect of risk aversion on BAföG take-up, but they still argue it is useful to control for \citep{herber_non-take-up_2019}. In a similar way, we include this variable to improve our model and to see whether risk aversion plays any role in students’ decisions to reject BAföG.
+
+\paragraph{East German socialization.}  A variable indicating whether the student lives in East Germany is included to account for potential differences in attitudes toward state support rooted in historical and regional context. Alesina and Fuchs-Schündeln (2007) show that individuals from the former GDR tend to have stronger preferences for redistribution and a greater belief in the role of the state in providing social services, and that these differences in preferences can persist for one to two generations after reunification \citep{alesina_good-bye_2007}. Current residence in East Germany may reflect continued exposure to these norms and institutions and can serve as a reasonable proxy for this form of socialization. Since the variable is statistically significant at the 5\% level in our model, we interpret it as capturing persistent regional differences in how students view and respond to publicly provided financial support like BAföG.
+
+\paragraph{Sibling prior experience with BAföG.} An indicator for whether the student has an older sibling who previously received BAföG is included to capture potential differences in access to informal support and familiarity with the application process. Students with siblings who have already gone through the steps of applying may be more aware of eligibility rules and practical requirements. Herber and Kalinowski (2016) highlight that such sibling experience can help reduce informational and procedural barriers, making it more likely that students follow through with the application \citep{herber_non-take-up_2019}. This variable is intended to reflect how previous exposure to the system within the family can shape students’ confidence and ability to navigate what is often perceived as a complex process.
+
+\paragraph{Migration background.} A variable for migration background is included to explore whether differences in familiarity with the BAföG system may influence take-up. Some students may come from households with less exposure to German administrative processes or financial aid structures, which could affect their understanding of eligibility or the application itself. In addition, studies show that individuals with a migration background in Germany often have lower financial literacy, which may make it harder to evaluate financial aid options like BAföG \citep{Tsegay_2024}. Including this variable helps capture potential structural or informational factors that may contribute to lower take-up rates among eligible students. In the SOEP data, migration background is measured using the \texttt{MIGBACK} variable, which distinguishes between direct (first-generation, coded as 2) and indirect (second-generation, coded as 3) migration background. \textcolor{red}{- Alex please review and make sure this is correct}
+
+...
+
+\textcolor{red}{ALEX: X many background variables on parental education are included. They are derived/ found from… blabla.
+Parental education background is shown to have an effect on the student’s decision of take-up, although this is only true for the variable that is conditioned on at least one parent having a masters degree.}
+
+...
 
 \subsection{Model limitations}
 \label{subsection:model_limitations}
