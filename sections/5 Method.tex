@@ -1,14 +1,9 @@
-\section{Method} 
-
-\textcolor{red}{MOVE THIS TEXT TO THE LITERATURE REVIEW SECTION?}
-
-\paragraph{Non take up of welfare.}
-
-We define non take up of welfare in line with Nelson and Nieuwenhuis (2019), as the circumstance when a person is eligible for welfare, but does not receive it. This is in line with terminology commonly used in literature on welfare take up rates. Non take up rate is thus the number of people who are eligible, but do not receive it, divided by the total number of people eligible. It is worth noting, however, that these situations often prove to be more complicated. In some cases, some individuals might receive welfare even though they aren’t eligible. This might for example happen due to fraud or errors made on the administrative level. This presents the issue of type two beta errors \citep{herber_non-take-up_2019, nelson_towards_2021}.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Method
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Method} 
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Microsimulation
@@ -25,10 +20,11 @@ This approach enables a systematic assessment of the alignment between statutory
 Deviations between the modeled and reported outcomes may arise from reporting errors, exceptional administrative decisions, or incomplete data. 
 Full documentation of the simulation logic and input structure is provided in Appendix ~\ref{appendix:microsimulation-pipeline} and ~\ref{appendix:simulation-example}.
 
-\paragraph{Identifying the Non-Take-Up (NTU) Rate and Beta Error}
-In the conditional probabilities 
+\paragraph{Identifying the Non-Take-Up (NTU) Rate and Beta Error.} %TODO: Not referenced correctly
+We define non-take-up of BAföG in line with Nelson and Nieuwenhuis (2019), as the circumstance when a person is eligible for welfare, but does not receive it. This is in line with terminology commonly used in literature on welfare take up rates. Non take up rate is thus the number of people who are eligible, but do not receive it, divided by the total number of people eligible. 
 
-Following the microsimulation of theoretical BAföG eligibility, we define the non-take-up (NTU) rate as the conditional probability that a student does not receive BAföG, despite being theoretically eligible according to our model. Formally, this is expressed as:
+
+Formally, this is expressed as:
 
 \begin{equation}
 \Pr(\text{NTU} = 1 \mid M = 1) = \frac{\sum_{i=1}^{N} \mathbf{1}\{R_i = 0 \ \text{and} \ M_i = 1\}}{\sum_{i=1}^{N} \mathbf{1}\{M_i = 1\}}, \quad\text{where} 
@@ -45,14 +41,18 @@ Following the microsimulation of theoretical BAföG eligibility, we define the n
 
 
 \paragraph{Beta Error (Type II Error).}  
-The beta error measures the probability that a student receives BAföG despite being classified as theoretically ineligible by our model. This error captures false positives in eligibility classification, indicating cases where students who should not qualify according to the simulation do receive financial support. Formally, it is expressed as:
+It is worth noting, however, that these situations are often more complex. 
+In some cases, individuals may receive BAföG even though they are not eligible. 
+This can occur due to fraud or simply as a result of administrative errors. 
+Such cases introduce the concept of beta errors. 
+A beta error refers to the probability that a student receives BAföG despite being classified as ineligible by our model. 
+It captures false positives in the eligibility classification; cases where students who should not qualify according to the simulation nonetheless receive financial support.
 
+Formally, it is expressed as:
 \begin{equation}
 \Pr(\text{TU} = 1 \mid M = 0) = \frac{\sum_{i=1}^{N} \mathbf{1}\{R_i = 1 \ \text{and} \ M_i = 0\}}{\sum_{i=1}^{N} \mathbf{1}\{M_i = 0\}},
 \end{equation}
-
-where \( \mathbf{1}\{\cdot\} \) is the indicator function defined in equation \eqref{eq:indicator-function-ntu}, but here:
-
+where \( \mathbf{1}\{\cdot\} \) is the indicator function defined as
 \[
 \mathbf{1}\{\cdot\} =
 \begin{cases}
@@ -65,9 +65,9 @@ where \( \mathbf{1}\{\cdot\} \) is the indicator function defined in equation \e
 \subsubsection{Simulation Pipeline}
 
 \paragraph{Constructing the Student Dataset.}
-The pipeline begins by assembling a harmonized dataset of student-level observations from SOEP-Core. 
+The pipeline begins by assembling a harmonized dataset of student-level observations from SOEP-Core and manually harmonizing variables which are not harmonized already.
 This is achieved by filtering for individuals who are enrolled in education, fall within the relevant survey years, and are at least 18 years old. 
-To ensure a valid estimation of parental contributions, the dataset is further restricted to cases where income data from both legal parents are observable in the panel.
+To ensure a valid estimation of parental contributions, the dataset is further restricted to cases where income data from both legal parents are observable in the panel in order to reduce bias and ensure validity of estimated parental contributions.
 
 The resulting student-level dataframe integrates sociodemographic variables including sex, age, partnership status, number of siblings, number of children, household composition, and federal state of residence. 
 Gross student income is also appended at this stage. 
@@ -141,7 +141,7 @@ where \( \Lambda(\cdot) \) denotes the logistic cumulative distribution function
 \subsubsection{Interpretation.} %TODO: Maybe explain latent index more -- don't fully understand atm
 Since raw logit and probit coefficients reflect changes in the latent index and are not directly interpretable in terms of outcome probabilities, we report average marginal effects (AMEs) for all covariates. These AMEs quantify the average change in the probability of non-take-up associated with a one-unit change in each covariate, holding other variables at their observed values.
 
-\paragraph{Control Variables}
+\paragraph{Control Variables.}
 Our models include a set of control variables to account for observed heterogeneity that may influence the probability of non-take-up. These controls include demographic factors (e.g., sex, migration background, partnership status, living situation), socioeconomic characteristics (e.g., parental income, own income, parental education), and family context (e.g., sibling previously claimed BAföG). We also control for regional differences using an East/West Germany background indicator, reflecting known structural and cultural variations. Finally, to capture behavioral differences that might affect take-up decisions, we include a measure of individual risk appetite. These covariates help isolate the association between key predictors and non-take-up by adjusting for potential confounders.
 
 
@@ -149,12 +149,20 @@ Our models include a set of control variables to account for observed heterogene
 \label{subsection:model_limitations}
 
 \paragraph{Addressing beta errors in eligibility simulations.}
-In simulating benefit non-take-up, beta errors occur when individuals report receiving a benefit but are classified by the model as ineligible. These mismatches typically reflect limitations in the input data, particularly concerning income, assets, or household structure. Since the data this study utilises on both income and benefit receipt is self-reported, inaccuracies can arise from either source. Without administrative records, it is not possible to confirm whether a student was truly eligible or actually received the benefit. Some studies suggest that beta errors are more often caused by issues in the income or asset data used for eligibility simulation, rather than incorrect reporting of benefit receipt \citep{frick_claim_2007, janssens_takemod_2022}.
+In simulating benefit non-take-up, beta errors occur when individuals report receiving a benefit but are classified by the model as ineligible. 
+These mismatches typically reflect limitations in the input data, particularly income and assets.
+Since the data in this study is self-reported, inaccuracies may occur in both income and benefit receipt.
+Without administrative records, it is not possible to confirm whether a student was truly eligible or actually received the benefit. 
+Some studies suggest that beta errors are more often caused by issues in the income or asset data used for eligibility simulation, rather than incorrect reporting of benefit receipt \citep{frick_claim_2007, janssens_takemod_2022}. 
 
-A key reason for beta errors is that benefit eligibility often depends on precise income thresholds. Even small errors in reported income can shift households across these cut-offs, especially when only annual income is available, despite eligibility being assessed monthly in practice \citep{herber_non-take-up_2019}. Further complications arise from missing or outdated information on assets and the difficulty of capturing criteria like actual household composition or work availability. Unlike more discretionary benefits such as social assistance, BAföG eligibility is determined by clearly codified national rules, leaving little room for individual judgment by administrators. As a result, administrative discretion is unlikely to be a major source of beta errors in this context. \textcolor{red}{MAYBE REMOVE THE LAST TWO SENTENCES}
+To address these limitations, several strategies are used in the literature. 
+These include conducting sensitivity checks by adjusting income levels and applying post-simulation corrections to reclassify borderline cases \citep{herber_non-take-up_2019}. 
+Some studies also emphasize the value of combining different data sources where possible, such as using more detailed survey modules on assets or household composition to improve the accuracy of eligibility simulations \citep{janssens_takemod_2022}. 
 
-To address these limitations, several strategies are used in the literature. These include conducting sensitivity checks by adjusting income levels and applying post-simulation corrections to reclassify borderline cases \citep{herber_non-take-up_2019}. Some studies also emphasize the value of combining different data sources where possible, such as using more detailed survey modules on assets or household composition to improve the accuracy of eligibility simulations \citep{janssens_takemod_2022}. While this approach is not possible in all settings, efforts to reduce data limitations can help lower the risk of beta errors and strengthen the credibility of non-take-up estimates. \textcolor{red}{MAYBE REMOVE THE LAST TWO SENTENCES HERE, ARE WE REALLY DOING THAT?}
+Although beta errors cannot be completely avoided, it is important to recognise their potential impact on the results. 
+In this thesis, particular attention is paid to identifying where beta errors may occur and considering how they might influence the findings. 
+Sensitivity checks are applied where relevant to assess the robustness of the findings and to reduce the risk of misinterpretation. %TODO: No no sensitivity checks are applied so far.
 
-Although beta errors cannot be completely avoided, it is important to recognise their potential impact on the results. In this thesis, particular attention is paid to identifying where beta errors may occur and considering how they might influence the findings. Sensitivity checks are applied where relevant to assess the robustness of the findings and to reduce the risk of misinterpretation.
+%TODO: Also haven't adressed the interpolation of assets
 
 \textcolor{red}{OVERALL MAYBE SHORTEN THIS WHOLE BETA ERROR TEXT}
