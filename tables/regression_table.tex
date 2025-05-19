@@ -1,0 +1,41 @@
+\begin{table}
+\caption*{$\Pr(\mathrm{NTU} = 1 | \mathbf{X})$}
+\renewcommand{\arraystretch}{1.25}
+\footnotesize
+\centering
+\begin{tabular}{lllllllll}
+\toprule
+ & \multicolumn{4}{c}{Logit} & \multicolumn{4}{c}{Probit} \\
+\cmidrule(lr){2-5} \cmidrule(lr){6-9}
+ & Coef. & SE & AME & SE & Coef. & SE & AME & SE \\
+\midrule
+\multicolumn{9}{l}{\textbf{Main explanatory variables}} \\
+Parental Income$^\dagger$ & -0.226 & 0.242 & -0.039 & 0.042 & -0.136 & 0.145 & -0.040 & 0.042 \\
+Student income$^\dagger$ & 0.643** & 0.261 & 0.111** & 0.044 & 0.383*** & 0.148 & 0.113*** & 0.042 \\
+Simulated BAföG amount & -0.002** & 0.001 & -0.000** & 0.000 & -0.001** & 0.001 & -0.000** & 0.000 \\
+\midrule
+\multicolumn{9}{l}{\textbf{Demographics}} \\
+Age & -0.305 & 0.270 & -0.053 & 0.046 & -0.171 & 0.152 & -0.050 & 0.044 \\
+Age$^2$ & 0.009 & 0.007 & 0.002 & 0.001 & 0.005 & 0.004 & 0.002 & 0.001 \\
+Female & 0.679* & 0.381 & 0.118* & 0.066 & 0.391* & 0.221 & 0.115* & 0.066 \\
+Has partner & 0.860 & 1.289 & 0.149 & 0.223 & 0.534 & 0.661 & 0.157 & 0.194 \\
+Migration background & 0.244 & 0.378 & 0.042 & 0.065 & 0.131 & 0.231 & 0.039 & 0.067 \\
+\midrule
+\multicolumn{9}{l}{\textbf{Psychological traits}} \\
+Self-assessed risk tolerance & 0.032 & 0.040 & 0.006 & 0.007 & 0.018 & 0.025 & 0.005 & 0.007 \\
+Personal patience & 0.166* & 0.092 & 0.029* & 0.016 & 0.100* & 0.055 & 0.029* & 0.016 \\
+Personal impulsiveness & -0.224** & 0.104 & -0.039** & 0.018 & -0.135** & 0.062 & -0.040** & 0.018 \\
+\midrule
+\multicolumn{9}{l}{\textbf{Controls}} \\
+Living at parents’ home$^\P$ & 0.383 & 0.401 & 0.066 & 0.069 & 0.222 & 0.235 & 0.065 & 0.069 \\
+Sibling claimed BAföG before & -0.380 & 0.343 & -0.066 & 0.057 & -0.208 & 0.199 & -0.061 & 0.057 \\
+East background & -1.543*** & 0.453 & -0.267*** & 0.070 & -0.940*** & 0.268 & -0.276*** & 0.071 \\
+Parents are highly educated & 0.164 & 0.461 & 0.028 & 0.080 & 0.118 & 0.261 & 0.035 & 0.077 \\
+\midrule
+Pseudo $R^2$ & \multicolumn{4}{l}{0.1655} & \multicolumn{4}{l}{0.1645} \\
+Observations & \multicolumn{8}{l}{230} \\
+\bottomrule
+\end{tabular}
+\caption{Logit and Probit Coefficients and Average Marginal Effects}
+\label{tab:logit_probit_results}
+\caption*{\small{Notes: Significance levels indicated by $^{*} p < 0.1$, $^{**} p < 0.05$, $^{***} p < 0.01$. Robust standard errors clustered at the student level. Estimated using Python \texttt{statsmodels} \texttt{GLM()} with robust standard errors. $^\dagger$ Log-transformed. $^\P$ Variable is indirectly used in the simulated BAföG calculation.}}\end{table}
