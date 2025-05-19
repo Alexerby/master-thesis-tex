@@ -1,0 +1,40 @@
+\begin{table}
+\caption{Instrumental Variable Estimation: $\Pr(\mathrm{NTU} = 1 \mid \mathbf{X}, \widehat{\text{Simulated BAföG}})$}
+\renewcommand{\arraystretch}{1.25}
+\footnotesize
+\centering
+\begin{tabular}{lllllllll}
+\toprule
+ & \multicolumn{4}{c}{IV Logit} & \multicolumn{4}{c}{IV Probit} \\
+\cmidrule(lr){2-5} \cmidrule(lr){6-9}
+ & Coef. & SE & AME & SE & Coef. & SE & AME & SE \\
+\midrule
+\multicolumn{9}{l}{\textbf{Main explanatory variables}} \\
+Parental Income$^\dagger$ & -0.713* & 0.365 & -0.122** & 0.062 & -0.438** & 0.210 & -0.127** & 0.061 \\
+Student income$^\dagger$ & 0.391 & 0.321 & 0.067 & 0.055 & 0.228 & 0.181 & 0.066 & 0.052 \\
+Simulated BAföG amount (IV) & -0.007** & 0.003 & -0.001** & 0.001 & -0.004** & 0.002 & -0.001** & 0.001 \\
+\midrule
+\multicolumn{9}{l}{\textbf{Demographics}} \\
+Age & 0.389 & 0.504 & 0.067 & 0.087 & 0.252 & 0.282 & 0.073 & 0.082 \\
+Age sq & -0.006 & 0.012 & -0.001 & 0.002 & -0.004 & 0.007 & -0.001 & 0.002 \\
+Female & 0.624* & 0.379 & 0.107* & 0.065 & 0.364* & 0.219 & 0.105* & 0.063 \\
+Has partner & 0.858 & 1.181 & 0.147 & 0.203 & 0.531 & 0.613 & 0.154 & 0.178 \\
+Migration background & 0.034 & 0.428 & 0.006 & 0.073 & 0.014 & 0.254 & 0.004 & 0.074 \\
+\midrule
+\multicolumn{9}{l}{\textbf{Controls}} \\
+Living at parents’ home & -0.386 & 0.615 & -0.066 & 0.106 & -0.246 & 0.350 & -0.071 & 0.101 \\
+Sibling claimed BAföG before & -0.265 & 0.367 & -0.045 & 0.062 & -0.150 & 0.210 & -0.044 & 0.060 \\
+East background & -1.474*** & 0.473 & -0.253*** & 0.073 & -0.895*** & 0.281 & -0.259*** & 0.075 \\
+Parents are highly educated & 0.066 & 0.462 & 0.011 & 0.079 & 0.043 & 0.262 & 0.012 & 0.076 \\
+\midrule
+Pseudo $R^2$ & \multicolumn{4}{l}{0.1693} & \multicolumn{4}{l}{0.1708} \\
+Observations & \multicolumn{8}{l}{230} \\
+\midrule
+First-stage $R^2$ & \multicolumn{8}{l}{0.47} \\
+First-stage F-stat & \multicolumn{8}{l}{12.83} \\
+\bottomrule
+\end{tabular}
+\caption*{IV Logit and IV Probit Coefficients and Average Marginal Effects}
+\label{tab:logit_probit_results}
+\caption*{\small{Notes: Significance levels: $^{*} p < 0.1$, $^{**} p < 0.05$, $^{***} p < 0.01$. Robust standard errors clustered at the student level. $^\dagger$ Indicates log-transformed variables. Durbin-Wu-Hausman test residual coef (Logit) = -0.0017 (p = 0.156), residual coef (Probit) = -0.0009 (p = 0.167).}}
+\end{table}
