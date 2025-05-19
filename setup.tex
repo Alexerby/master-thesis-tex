@@ -26,84 +26,7 @@
     linkcolor = black
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-% Tikz
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-
-\usepackage{tikz}
-\usetikzlibrary{positioning, arrows.meta, shapes.geometric, fit}
-
-
-\tikzset{
-  pipelinebox/.style={
-    rectangle,
-    draw=black,
-    fill=gray!10,
-    align=center,
-    font=\scriptsize,
-    inner sep=4pt,
-    minimum height=1cm,
-    minimum width=2.5cm,
-    text width=2.5cm,   % ⬅️ Force wrapping and fixed width
-    align=center        % ⬅️ Center text in wrapped lines
-  },
-  arrow/.style={
-    thick, ->, >=stealth
-  }
-}
-
-\tikzset{
-  auxbox/.style={
-    rectangle,
-    draw=black,
-    fill=orange!20,
-    align=center,
-    font=\footnotesize\itshape,
-    inner sep=8pt,
-    minimum height=1cm,
-    minimum width=3.5cm,
-    dashed
-  }
-}
-
-\tikzset{
-  sourcebox/.style={
-    rectangle,
-    draw=black,
-    fill=blue!15,
-    align=center,
-    font=\footnotesize\bfseries,
-    inner sep=8pt,
-    minimum height=1cm,
-    minimum width=3.5cm
-  }
-}
-
-\tikzset{
-  actionbox/.style={
-    diamond,
-    draw=black,
-    fill=orange!20,
-    align=center,
-    font=\footnotesize,
-    aspect=2,
-    inner sep=2pt,
-    minimum height=1.2cm,
-    minimum width=3.5cm
-  }
-}
-
-\tikzset{
-  datasetbox/.style={
-    rectangle, 
-    draw=black, 
-    fill=gray!10, 
-    dashed,
-    minimum height=1.5em, 
-    minimum width=3cm, 
-    text centered, 
-  },
-}
+\input{setup/tikz.tex}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -111,11 +34,10 @@
 \graphicspath{{figures/}}
 
 
-%CHANGE SECTION STYLE
 
-%\bibliographystyle{apalike} %closest to LUSEM Harvard referencing guide
-\bibliographystyle{plainnat} %closest to LUSEM Harvard referencing guide
-% \bibliographystyle{plain} %closest to LUSEM Harvard referencing guide
+%\bibliographystyle{apalike} 
+\bibliographystyle{plainnat}
+% \bibliographystyle{plain}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Table formatting

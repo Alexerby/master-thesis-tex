@@ -1,0 +1,77 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% Tikz
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, shapes.geometric, fit}
+
+
+\tikzset{
+  pipelinebox/.style={
+    rectangle,
+    draw=black,
+    align=center,
+    font=\scriptsize,
+    inner sep=4pt,
+    minimum height=1cm,
+    minimum width=2.5cm,
+    text width=2.5cm,
+    align=center
+  },
+  arrow/.style={
+    thick, ->, >=stealth
+  }
+}
+
+\tikzset{
+  auxbox/.style={
+    rectangle,
+    draw=black,
+    fill=orange!20,
+    align=center,
+    font=\footnotesize\itshape,
+    inner sep=8pt,
+    minimum height=1cm,
+    minimum width=3.5cm,
+    dashed
+  }
+}
+
+\tikzset{
+  sourcebox/.style={
+    rectangle,
+    draw=black,
+    align=center,
+    font=\footnotesize\bfseries,
+    text transform=uppercase,
+    inner sep=8pt,
+    minimum height=1cm,
+    minimum width=3.5cm
+  }
+}
+
+\tikzset{
+  actionbox/.style={
+    diamond,
+    draw=black,
+    % fill=orange!20,
+    align=center,
+    font=\footnotesize,
+    aspect=2,
+    inner sep=2pt,
+    minimum height=1.2cm,
+    minimum width=3.5cm
+  }
+}
+
+\tikzset{
+  datasetbox/.style={
+    rectangle, 
+    draw=black, 
+    dashed,
+    minimum height=1.5em, 
+    minimum width=3cm, 
+    text centered, 
+  },
+}

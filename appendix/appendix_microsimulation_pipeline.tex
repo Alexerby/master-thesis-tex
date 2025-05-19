@@ -17,58 +17,60 @@ This appendix documents the microsimulation pipeline used to construct the analy
 
 The pipeline is organized into five main components: a student module, a sociodemographic enrichment module, a student income module, an assets module, and a parental income module. These components interact as illustrated in Figure~\ref{fig:pipeline-overview}.
 
-\begin{figure}[H]
-  \centering
-  \begin{tikzpicture}[node distance=1.0cm and 1.0cm]
+% \begin{figure}[H]
+%   \centering
+%   \begin{tikzpicture}[node distance=1.0cm and 1.0cm]
+%
+%   % Switched layout
+%   \node[pipelinebox] (income) at (0,0) {Income module};
+%   \node[pipelinebox, right=of income] (assets) {Assets module};
+%
+%   \node[pipelinebox, left=of income] (sibling) {Sibling (long)};
+%   \node[pipelinebox, below=of sibling] (sibling_wide) {Sibling grouped (wide)};
+%
+%   \node[pipelinebox, left=of sibling] (parent) {Parent income (long)};
+%   \node[pipelinebox, below=of parent] (parent_wide) {Parents joint income (wide)};
+%
+%   % Center reference node
+%   \path (parent) -- (assets) coordinate[midway] (center);
+%
+%   % Student module centered above the whole group
+%   \node[pipelinebox, above=of center] (student) {Student module};
+%
+%   % Sociodemographic module (to the right of Student module)
+%   \node[pipelinebox, right=of student] (sociodemog) {Sociodemographic module};
+%
+%   % BAföG Calculations module below income/parent_wide/assets
+%   \node[pipelinebox, below=2.2cm of income] (bafoeg) {BAföG Calculations};
+%
+%   % Arrows from submodules to BAföG Calculations
+%   \draw[arrow] (income) -- (bafoeg);
+%   \draw[arrow] (assets) -- (bafoeg);
+%   \draw[arrow] (parent_wide.south)
+%     -- ++(0,-0.8)
+%     coordinate (pstep)
+%     -- ([yshift=0]bafoeg.west |- pstep)
+%     -- ++(0.01,0);
+%   \draw[arrow] (parent) -- (parent_wide);
+%
+%   % Arrows for sibling flow
+%   \draw[arrow] (sibling) -- (sibling_wide);
+%   \draw[arrow] (sibling_wide) -- (parent_wide);
+%
+%   % Arrows from Student module to all first-row modules
+%   \draw[arrow] (student) -- (income);
+%   \draw[arrow] (student) -- (assets);
+%   \draw[arrow] (student) -- (parent);
+%   \draw[arrow] (student) -- (sibling);
+%
+%   \draw[<->, thin] (sociodemog) -- (student);
+%
+%   \end{tikzpicture}
+%   \caption{End-to-end pipeline overview with grouped raw SOEP sources}
+%   \label{fig:pipeline-overview}
+% \end{figure}
 
-  % Switched layout
-  \node[pipelinebox] (income) at (0,0) {Income module};
-  \node[pipelinebox, right=of income] (assets) {Assets module};
 
-  \node[pipelinebox, left=of income] (sibling) {Sibling (long)};
-  \node[pipelinebox, below=of sibling] (sibling_wide) {Sibling grouped (wide)};
-
-  \node[pipelinebox, left=of sibling] (parent) {Parent income (long)};
-  \node[pipelinebox, below=of parent] (parent_wide) {Parents joint income (wide)};
-
-  % Center reference node
-  \path (parent) -- (assets) coordinate[midway] (center);
-
-  % Student module centered above the whole group
-  \node[pipelinebox, above=of center] (student) {Student module};
-
-  % Sociodemographic module (to the right of Student module)
-  \node[pipelinebox, right=of student] (sociodemog) {Sociodemographic module};
-
-  % BAföG Calculations module below income/parent_wide/assets
-  \node[pipelinebox, below=2.2cm of income] (bafoeg) {BAföG Calculations};
-
-  % Arrows from submodules to BAföG Calculations
-  \draw[arrow] (income) -- (bafoeg);
-  \draw[arrow] (assets) -- (bafoeg);
-  \draw[arrow] (parent_wide.south)
-    -- ++(0,-0.8)
-    coordinate (pstep)
-    -- ([yshift=0]bafoeg.west |- pstep)
-    -- ++(0.01,0);
-  \draw[arrow] (parent) -- (parent_wide);
-
-  % Arrows for sibling flow
-  \draw[arrow] (sibling) -- (sibling_wide);
-  \draw[arrow] (sibling_wide) -- (parent_wide);
-
-  % Arrows from Student module to all first-row modules
-  \draw[arrow] (student) -- (income);
-  \draw[arrow] (student) -- (assets);
-  \draw[arrow] (student) -- (parent);
-  \draw[arrow] (student) -- (sibling);
-
-  \draw[<->, thin] (sociodemog) -- (student);
-
-  \end{tikzpicture}
-  \caption{End-to-end pipeline overview with grouped raw SOEP sources}
-  \label{fig:pipeline-overview}
-\end{figure}
 
 Figure~\ref{fig:pipeline-overview} maps the complete microsimulation pipeline, from raw SOEP inputs through modular components to the final BAföG calculation. The remainder of this appendix explains each component in detail.
 
@@ -172,6 +174,9 @@ The final module brings together all student and parental variables to compute a
 \end{itemize}
 
 This results in an estimated monthly benefit, which can be compared to reported values to analyze take-up behavior and simulate reforms.
+
+
+\input{tikzfigs/simulation_algo.tex}
 
 % -------------------------------------------------------------------------
 \subsection{Variable Dictionary}
