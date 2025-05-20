@@ -51,6 +51,12 @@ Taken together, the results suggest that a large share of eligible students do n
 
 \subsubsection{Binary Choice Model}
 
+To check the robustness of our findings, both logit and probit models are estimated and their average marginal effects (AMEs) are compared. As shown in Table~\ref{tab:logit_probit_results}, the results are very similar across the two models. The estimated effects have the same signs, similar magnitudes and are statistically significant in both cases. In particular, the simulated BAföG amount has a negative association with the probability of non-take-up. A 100~EUR increase in the simulated entitlement is linked to a decrease in the likelihood of non-take-up by about 2.9 to 3.0 percentage points. This supports the idea that students are more likely to apply when the potential benefit is higher.
+
+As an additional check, we estimate a linear probability model (LPM), reported in Table~\ref{tab:lpm_results}. Although the LPM comes with known limitations, it allows for a straightforward interpretation of coefficients. The key results remain consistent. The marginal effect of the BAföG amount is estimated to be minus 2.1 percentage points per 100~EUR, and the direction and significance of the main explanatory variables remain stable.
+
+Overall, the consistency of results across logit, probit, and LPM models suggests that the findings are not sensitive to the choice of estimation method. This increases confidence in the reliability of the identified determinants of non-take-up.
+
 \textcolor{red}{Add some intro text here so we don't just go straight to explaining the results?}
 
 \paragraph{Pseudo R-squared.} In models where the traditional R-squared is not defined, such as binary outcome models like logit and probit, researchers commonly use pseudo R-squared measures to get a sense of model fit. These statistics aim to provide an indication of how well the model explains the observed outcomes, though they are not directly comparable to the R-squared in linear regression. Pseudo R-squared values can help assess the explanatory power of a model, but they should be interpreted with care. Unlike the R-squared in OLS, pseudo R-squared values do not have a clear benchmark and are not directly comparable across different models or datasets. Because of this, they should be viewed more as descriptive tools rather than definitive measures of explanatory power. It is generally recommended to use them alongside other model diagnostics rather than relying on them alone \citep{ozili_acceptable_2023}.
