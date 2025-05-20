@@ -3,16 +3,21 @@
 \renewcommand{\thefigure}{\thesection \arabic{figure}}
 \setcounter{figure}{0}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Student and Parental Excess Incomes Figures
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
   \centering
+  % Parental joint excess income distribution
   \begin{subfigure}[t]{0.48\linewidth}
-    \includegraphics[width=\linewidth]{parental_joint_excess_income_pdf.png}
+    \includegraphics[width=\linewidth]{distributions/par_excess_income.png}
     \caption{Parental joint excess income}
     \label{fig:parental-excess}
   \end{subfigure}
   \hfill
+  % Student excess income distribution
   \begin{subfigure}[t]{0.48\linewidth}
-    \includegraphics[width=\linewidth]{student_excess_income_pdf.png}
+    \includegraphics[width=\linewidth]{distributions/stu_excess_income.png}
     \caption{Student excess income}
     \label{fig:student-excess}
   \end{subfigure}
@@ -20,18 +25,55 @@
   \label{fig:excess-income}
 \end{figure}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Distribution Comparison: Theoretical vs Reported BAföG Awards
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.95\linewidth]{theo_vs_reported_distribution.png}
-  \caption{Comparison of the distribution of reported BAföG receipt in the SOEP-Core sample with the simulated (theoretical) distribution of simulated BAföG entitlements from our model.}
-  \label{fig:theo-vs-reported}
+  % Simulated theoretical BAföG award distribution
+  \begin{subfigure}[t]{0.48\linewidth}
+    \includegraphics[width=\linewidth]{distributions/theo.png}
+    \caption{Simulated distribution of theoretical BAföG awards based on microsimulation.}
+    \label{fig:simulated_distribution}
+  \end{subfigure}
+  \hfill
+  % Observed reported BAföG receipt distribution
+  \begin{subfigure}[t]{0.48\linewidth}
+    \includegraphics[width=\linewidth]{distributions/reported.png}
+    \caption{Observed distribution of reported BAföG receipt in SOEP survey data.}
+    \label{fig:reported_distribution}
+  \end{subfigure}
+  \caption{Comparison of theoretical BAföG award simulation with actual reported take-up.}
+  \label{fig:bafoeg_distribution_comparison}
 \end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Timeline Comparison: Theoretical vs Reported BAföG Awards
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+  \centering
+  % Timeline: Simulated theoretical BAföG awards over time
+  \begin{subfigure}[t]{0.48\linewidth}
+    \includegraphics[width=\linewidth]{timeline/theo.png}
+    \caption{Simulated distribution of theoretical BAföG awards based on microsimulation.}
+    \label{fig:simulated_timeline}
+  \end{subfigure}
+  \hfill
+  % Timeline: Observed reported BAföG receipt over time
+  \begin{subfigure}[t]{0.48\linewidth}
+    \includegraphics[width=\linewidth]{timeline/reported.png}
+    \caption{Observed distribution of reported BAföG receipt in SOEP survey data.}
+    \label{fig:reported_timeline}
+  \end{subfigure}
+  \caption{Comparison of theoretical BAföG award simulation with actual reported take-up over time.}
+  \label{fig:bafoeg_timeline_comparison}
+\end{figure}
+
+
 
 
 \begin{figure}[H]
   \centering
-
   \begin{minipage}[t]{0.48\textwidth}
     \centering
     \includegraphics[width=0.95\linewidth]{fraction_of_enrolled_students_receiving_bafog.png}

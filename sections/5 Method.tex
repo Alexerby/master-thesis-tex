@@ -7,25 +7,36 @@
 %TODO: We haven't written about the inclusion of the IV models yet.
 %TODO: Go through text
 %TODO: Maybe reference table A1 in appendix, conditional per different types.
+%TODO: Not mentioned how we dealt with measurement errors
+%TODO: Did you compare simulated eligibility rates with official BAföG statistics?
+
+%TODO: We need to do sensitivity analysis 
+
+Discuss methods of validation:
+%TODO: How closely do simulated award amounts match reported distributions? Use appendix distribution
+%TODO: Also use timeline in appendix for the comparison of theoretical to reported
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Method} 
+This study proceeds in two main steps. 
+First, we perform a microsimulation to calculate theoretical BAföG eligibility and award amounts based on statutory rules applied to individual-level survey data. 
+This simulation serves to identify who should be entitled to student aid under the legal framework.
 
+Second, we estimate binary choice models (Logit and Probit) to analyze behavioural non-take-up. 
+That is, the likelihood that students eligible for BAföG according to the simulation nonetheless do not receive it. 
+These models incorporate relevant socioeconomic and demographic factors to explore determinants of non-take-up beyond eligibility alone.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Microsimulation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\textcolor{red}{Add some text here?}
-
 \subsection{Microsimulation of Theoretical BAföG Eligibility} 
 
 \textcolor{red}{Add some text here as well?}
 
 \subsubsection{Purpose and Scope}
 The microsimulation pipeline is designed to calculate a theoretical BAföG eligibility status and award amount for students in the SOEP-Core sample. 
-Its primary purpose is to compare these simulated entitlements with de facto BAföG take-up, as reported in SOEP.
+Its primary purpose is to compare these simulated entitlements with reported BAföG take-up, as reported in SOEP.
 
 To construct the theoretical values, the model replicates the legal rules and means-testing procedures defined in the Bundesausbildungsförderungsgesetz (BAföG) for the years 2007 to 2021. 
 These rules are applied to individual-level SOEP data, including detailed information on income, assets, housing costs, and household structure.
