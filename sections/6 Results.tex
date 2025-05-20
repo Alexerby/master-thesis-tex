@@ -18,6 +18,9 @@ Our microsimulation results indicate that the non-take-up-rate of BAföG, among 
 These estimates are broadly in line with previous findings on non-take-up of social benefits in Germany, which generally falls between 40--67\%, depending on the program and time period (see Table \ref{table:NTU-studies}). 
 While our estimates are broadly consistent with prior research, they are noticeably higher than the 36--40\% non-take-up rate for BAföG reported by \cite{herber_non-take-up_2019}, who also use SOEP survey data, but for the period 2002--2013.
 
+
+\input{tables/non_takeup.tex}
+
 This discrepancy may be attributable to several factors, including differences in the estimation of theoretical eligibility. These factors include the specific SOEP variables used to capture income and reported BAföG receipt, the time periods under study (with our analysis covering 2007--2021, compared to \cite{herber_non-take-up_2019}, which covers 2002--2013), as well as other differences in the microsimulation design and modeling approach.
 
 ...
@@ -32,37 +35,7 @@ Taken together, the results suggest that a large share of eligible students do n
 
 %TODO: Refer to the table of the distributions of reported bafög vs theoretical, see appendix for table.
 
-\begin{table}[htbp]
-% \footnotesize
-\centering
-\begin{tabular}{l@{\hspace{2em}}r@{\hspace{2em}}r}
-\toprule
-\textbf{Year} & \textbf{Non-Take-Up}  &  \textbf{Beta Error}  \\
-              & \(\Pr(\text{NTU} =1\,|\,\text{M} = 1)\) & \(\Pr(\text{TU} = 1\,|\,\text{M} = 0)\) \\
-\midrule
-2007 & 60.6 & 13.6 \\
-2008 & 63.5 & 17.1 \\
-2009 & 61.0 & 18.6 \\
-2010 & 60.9 & 17.7 \\
-2011 & 53.8 & 16.1 \\
-2012 & 51.5 & 18.9 \\
-2013 & 50.0 & 15.9 \\
-2014 & 55.1 & 16.1 \\
-2015 & 64.0 & 12.6 \\
-2016 & 56.5 & 12.4 \\
-2017 & 62.6 & 10.1 \\
-2018 & 63.9 & 15.3 \\
-2019 & 67.5 & 11.7 \\
-2020 & 63.7 & 13.6 \\
-2021 & 66.7 & 12.3 \\
-\midrule
-\textbf{Average} & \textbf{59.7} & \textbf{15.3} \\
-\bottomrule
-\end{tabular}
-\caption{Non-Take-Up and Beta Error Rates by Survey Year (\%). Non-take-up is the share of theoretically eligible students (\(M=1\)) who do not receive BAföG; beta error is the share of theoretically ineligible students (\(M=0\)) who do receive BAföG.}
-\caption*{\small{Notes: SOEP v39, 2007--2021, weighted with individual weights}}
-\label{table:microsimulation-ntu}
-\end{table}
+
 
 \begin{figure}[htbp]
   \centering
@@ -70,7 +43,6 @@ Taken together, the results suggest that a large share of eligible students do n
   \caption{Development of the probability of non-take-up from 2007--2021.}
   \label{fig:ntu_bounds_over_years}
 \end{figure}
-
 
 
 \subsection{Determinants of Non-take-up}
