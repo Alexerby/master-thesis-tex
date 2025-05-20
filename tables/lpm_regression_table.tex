@@ -1,0 +1,39 @@
+\begin{table}
+\caption{Linear Probability Model: $\Pr(\mathrm{NTU} = 1 \mid \mathbf{X})$}
+\renewcommand{\arraystretch}{1.25}
+\footnotesize
+\centering
+\begin{tabular}{lccc}
+\toprule
+ & Coef. & SE \\
+\midrule
+\multicolumn{4}{l}{\textbf{Main explanatory variables}} \\
+Simulated BAföG amount$^{\circ}$ & -0.021** & 0.010 \\
+\midrule
+\multicolumn{4}{l}{\textbf{Controls: Demographics}} \\
+Age & 0.037*** & 0.003 \\
+Female & 0.004 & 0.046 \\
+Has partner & 0.157* & 0.084 \\
+Direct Migration background & -0.130* & 0.068 \\
+Indirect Migration background & -0.121** & 0.058 \\
+\midrule
+\multicolumn{4}{l}{\textbf{Controls: Household and Socioeconomic Background}} \\
+Living at parents’ home & 0.034 & 0.048 \\
+Sibling claimed BAföG before & -0.107* & 0.056 \\
+East background & -0.252*** & 0.061 \\
+Parents are highly educated & 0.018 & 0.052 \\
+\midrule
+\multicolumn{4}{l}{\textbf{Controls: Behaviour}} \\
+Patience & 0.005 & 0.012 \\
+Impulsiveness & -0.009 & 0.012 \\
+Risk Appetite & -0.002 & 0.006 \\
+\midrule
+$R^2$ & \multicolumn{3}{l}{0.74} \\
+F-statistic & \multicolumn{3}{l}{103.82 (p = 0.00)} \\
+Observations & \multicolumn{3}{l}{458} \\
+\bottomrule
+\end{tabular}
+\caption*{Linear Probability Model (OLS) Coefficients. Robust standard errors clustered at the student level.}
+\label{tab:lpm_results}
+\caption*{\small{Notes: Significance levels: $^{{*}} p < 0.1$, $^{{**}} p < 0.05$, $^{{***}} p < 0.01$. $^\circ$ Indicates per 100 EUR.}}
+\end{table}
