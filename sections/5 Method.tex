@@ -141,8 +141,7 @@ Detailed examples of this calculation and relevant thresholds are provided in Ap
 % Binary Choice Model of Non-Take-Up
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Binary Choice Model}
-After simulating statutory eligibility, we analyse behavioural non-take-up: the probability that a student refrains from taking up BAföG despite being theoretically eligible according to our microsimulation. 
-We model both using a Logit and a Probit model.
+This section presents results from Logit, Probit, and the Linear Probability Model (LPM) estimated by OLS.
 
 \subsubsection{Probit Model}
 Formally, we model
@@ -167,6 +166,11 @@ where \( \Lambda(\cdot) \) denotes the logistic cumulative distribution function
 
 \paragraph{Interpretation.} %TODO: Maybe explain latent index more -- don't fully understand atm
 Since raw logit and probit coefficients reflect changes in the latent index and are not directly interpretable in terms of outcome probabilities, we report average marginal effects (AMEs) for all covariates. These AMEs quantify the average change in the probability of non-take-up associated with a one-unit change in each covariate, holding other variables at their observed values.
+
+
+\subsubsection{Linear Probability Model}
+TO BE WRITTEN.
+%TODO: Write about the Linear Probability model 
 
 \subsubsection{Control Variables}
 Our models include a set of control variables to account for observed heterogeneity that may influence the probability of non-take-up. 
@@ -214,6 +218,8 @@ Sex is included to capture potential gender differences in educational choices, 
 Partnership status is considered, as having a partner could affect an individual’s household resources, financial planning, or the sharing of information relevant to student aid. 
 By controlling for these demographic characteristics, we aim to ensure that our analysis more accurately isolates the effects of other variables of interest.
 
+
+
 \subsection{Model limitations}
 \label{subsection:model_limitations}
 \paragraph{Addressing beta errors in eligibility simulations.}
@@ -232,4 +238,6 @@ In this thesis, particular attention is paid to identifying where beta errors ma
 Sensitivity checks are applied where relevant to assess the robustness of the findings and to reduce the risk of misinterpretation. %TODO: No no sensitivity checks are applied so far.
 
 %TODO: Also haven't adressed the interpolation of assets
+
+
 
