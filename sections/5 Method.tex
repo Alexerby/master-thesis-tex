@@ -4,7 +4,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%TODO: We haven't written about the inclusion of the IV models yet.
+%TODO: We haven't written about LPM -> OLS yet
 %TODO: Go through text
 %TODO: Maybe reference table A1 in appendix, conditional per different types.
 %TODO: Not mentioned how we dealt with measurement errors
@@ -31,8 +31,10 @@ These models incorporate relevant socioeconomic and demographic factors to explo
 % Microsimulation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Microsimulation of Theoretical BAföG Eligibility} 
-
-\textcolor{red}{Add some text here as well?}
+To analyze non-take-up of BAföG, it is necessary to identify students who would be eligible for support based on statutory criteria, regardless of whether they actually apply or receive benefits. 
+To this end, we implement a microsimulation model that reconstructs individual eligibility and award amounts using detailed SOEP survey data and the relevant legal rules.
+The following section outlines the purpose, methodological approach, and main components of this simulation. 
+For an overview of the approach see Figure \ref{fig:pipeline-overview}.
 
 \subsubsection{Purpose and Scope}
 The microsimulation pipeline is designed to calculate a theoretical BAföG eligibility status and award amount for students in the SOEP-Core sample. 

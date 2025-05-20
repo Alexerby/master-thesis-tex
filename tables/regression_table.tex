@@ -1,43 +1,56 @@
 \begin{table}
 \caption{$\Pr(\mathrm{NTU} = 1 \mid \mathbf{X})$}
 \renewcommand{\arraystretch}{1.25}
-\footnotesize
 \centering
-\begin{tabular}{lllllllll}
+\begin{tabular}{lccccc}
 \toprule
- & \multicolumn{4}{c}{Logit} & \multicolumn{4}{c}{Probit} \\
-\cmidrule(lr){2-5} \cmidrule(lr){6-9}
- & Coef. & SE & AME & SE & Coef. & SE & AME & SE \\
+& \multicolumn{2}{c}{Logit} & \multicolumn{2}{c}{Probit} & LPM \\
+& Coef. & AME & Coef. & AME & Coef. \\
 \midrule
-\multicolumn{9}{l}{\textbf{Main explanatory variables}} \\
-Simulated BAföG amount$^{\circ}$ & -0.160*** & 0.058 & -0.029*** & 0.010 & -0.095*** & 0.034 & -0.030*** & 0.010 \\
+\multicolumn{6}{l}{\textbf{Main explanatory variables}} \\
+Simulated BAföG amount$^{\circ}$ & -0.160*** & -0.029*** & -0.095*** & -0.030*** & -0.021** \\
+ & (0.058) & (0.010) & (0.034) & (0.010) & (0.010) \\
 \midrule
-\multicolumn{9}{l}{\textbf{Controls: Demographics}} \\
-Age & 0.099*** & 0.019 & 0.018*** & 0.003 & 0.058*** & 0.011 & 0.018*** & 0.003 \\
-Female & -0.059 & 0.256 & -0.011 & 0.047 & -0.020 & 0.149 & -0.006 & 0.046 \\
-Has partner & 1.429* & 0.810 & 0.262* & 0.149 & 0.874** & 0.444 & 0.271** & 0.137 \\
-Direct Migration background & -0.700* & 0.378 & -0.128* & 0.068 & -0.419* & 0.219 & -0.130* & 0.067 \\
-Indirect Migration background & -0.689** & 0.299 & -0.127** & 0.053 & -0.407** & 0.179 & -0.126** & 0.054 \\
+\multicolumn{6}{l}{\textbf{Controls: Demographics}} \\
+Age & 0.099*** & 0.018*** & 0.058*** & 0.018*** & 0.037*** \\
+ & (0.019) & (0.003) & (0.011) & (0.003) & (0.003) \\
+Female & -0.059 & -0.011 & -0.020 & -0.006 & 0.004 \\
+ & (0.256) & (0.047) & (0.149) & (0.046) & (0.046) \\
+Has partner & 1.429* & 0.262* & 0.874** & 0.271** & 0.157* \\
+ & (0.810) & (0.149) & (0.444) & (0.137) & (0.084) \\
+Direct Migration background & -0.700* & -0.128* & -0.419* & -0.130* & -0.130* \\
+ & (0.378) & (0.068) & (0.219) & (0.067) & (0.068) \\
+Indirect Migration background & -0.689** & -0.127** & -0.407** & -0.126** & -0.121** \\
+ & (0.299) & (0.053) & (0.179) & (0.054) & (0.058) \\
 \midrule
-\multicolumn{9}{l}{\textbf{Controls: Household and Socioeconomic Background}} \\
-Living at parents’ home & -0.019 & 0.270 & -0.004 & 0.049 & -0.008 & 0.160 & -0.002 & 0.050 \\
-Sibling claimed BAföG before & -0.554* & 0.285 & -0.102** & 0.051 & -0.321* & 0.171 & -0.100* & 0.052 \\
-East background & -1.253*** & 0.313 & -0.230*** & 0.052 & -0.749*** & 0.186 & -0.232*** & 0.054 \\
-Parents are highly educated & -0.015 & 0.293 & -0.003 & 0.054 & 0.004 & 0.175 & 0.001 & 0.054 \\
+\multicolumn{6}{l}{\textbf{Controls: Household and Socioeconomic Background}} \\
+Living at parents’ home & -0.019 & -0.004 & -0.008 & -0.002 & 0.034 \\
+ & (0.270) & (0.049) & (0.160) & (0.050) & (0.048) \\
+Sibling claimed BAföG before & -0.554* & -0.102** & -0.321* & -0.100* & -0.107* \\
+ & (0.285) & (0.051) & (0.171) & (0.052) & (0.056) \\
+East background & -1.253*** & -0.230*** & -0.749*** & -0.232*** & -0.252*** \\
+ & (0.313) & (0.052) & (0.186) & (0.054) & (0.061) \\
+Parents are highly educated & -0.015 & -0.003 & 0.004 & 0.001 & 0.018 \\
+ & (0.293) & (0.054) & (0.175) & (0.054) & (0.052) \\
 \midrule
-\multicolumn{9}{l}{\textbf{Controls: Behaviour}} \\
-Patience & 0.030 & 0.065 & 0.006 & 0.012 & 0.015 & 0.040 & 0.005 & 0.012 \\
-Impulsiveness & -0.039 & 0.068 & -0.007 & 0.012 & -0.021 & 0.042 & -0.006 & 0.013 \\
-Risk Apetite & -0.022 & 0.037 & -0.004 & 0.007 & -0.014 & 0.021 & -0.004 & 0.007 \\
+\multicolumn{6}{l}{\textbf{Controls: Behaviour}} \\
+Patience & 0.030 & 0.006 & 0.015 & 0.005 & 0.005 \\
+ & (0.065) & (0.012) & (0.040) & (0.012) & (0.012) \\
+Impulsiveness & -0.039 & -0.007 & -0.021 & -0.006 & -0.009 \\
+ & (0.068) & (0.012) & (0.042) & (0.013) & (0.012) \\
+Risk Apetite & -0.022 & -0.004 & -0.014 & -0.004 & -0.002 \\
+ & (0.037) & (0.007) & (0.021) & (0.007) & (0.006) \\
 \midrule
-McFadden Pseudo $R^2$ & \multicolumn{4}{l}{0.10} & \multicolumn{4}{l}{0.10} \\
-Cox and Snell Pseudo $R^2$ & \multicolumn{4}{l}{0.11} & \multicolumn{4}{l}{0.11} \\
-Nagelkerke Pseudo $R^2$ & \multicolumn{4}{l}{0.16} & \multicolumn{4}{l}{0.16} \\
-Likelihood Ratio Test & \multicolumn{4}{l}{53.33 (p = 0.00)} & \multicolumn{4}{l}{53.20 (p = 0.00)} \\
-Observations & \multicolumn{8}{l}{458} \\
+McFadden Pseudo $R^2$ & \multicolumn{2}{l}{0.10} & \multicolumn{2}{l}{0.10} & \\
+Cox and Snell Pseudo $R^2$ & \multicolumn{2}{l}{0.11} & \multicolumn{2}{l}{0.11} & \\
+Nagelkerke Pseudo $R^2$ & \multicolumn{2}{l}{0.16} & \multicolumn{2}{l}{0.16} & \\
+Likelihood Ratio Test & \multicolumn{2}{l}{53.33 (p = 0.00)} & \multicolumn{2}{l}{53.20 (p = 0.00)} & \\
+Adjusted $R^2$ & & & & & 0.74 \\
+F-statistic & & & & & 103.8 (p = 0.00) \\
+Observations & \multicolumn{5}{l}{458} \\
 \bottomrule
 \end{tabular}
-\caption*{Logit and Probit Coefficients and Average Marginal Effects}
-\label{tab:logit_probit_results}
-\caption*{\small{Notes: Significance levels: $^{{*}} p < 0.1$, $^{{**}} p < 0.05$, $^{{***}} p < 0.01$. Robust standard errors clustered at the student level. $^\dagger$ Indicates that the variable has been log-transformed. $\circ$ Indicates per 100 EUR.}}
+\caption*{Logit, Probit, and LPM (Linear Probability Model) coefficients. Logit and Probit also report average marginal effects. Standard errors are in parentheses. The LPM is estimated via OLS with MacKinnon and White (1985) robust (HC3) standard errors.}
+\label{tab:logit_probit_lpm_results}
+\caption*{\small{Notes: Significance levels: $^{{*}} p < 0.1$, $^{{**}} p < 0.05$, $^{{***}} p < 0.01$. Robust standard errors clustered at the student level. $\circ$ Indicates per 100 EUR.}}
 \end{table}
