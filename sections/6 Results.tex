@@ -29,7 +29,7 @@ While there is some variation in non-take-up across years, NTU remains consisten
 
 The second column in Table~\ref{table:microsimulation-ntu} shows the estimated beta error, which is the share of students who are classified as ineligible by the simulation but report receiving BAföG. On average, the beta error is about 15\% across the full period. This level of misclassification is in line with what other studies have found when working with survey data, where income reporting and timing mismatches are common issues \citep{frick_claim_2007}. While this level of beta error is not negligible, the simulation seems to capture eligibility status fairly well overall, even if some noise is unavoidable.
 
-Taken together, the results suggest that a large share of eligible students do not take up BAföG, and that this has been the case fairly consistently over time. The high average non-take-up rate, around 60\%, points to persistent barriers such as lack of information or procedural hurdles. The financial attractiveness of BAföG may also be a factor. Although support amounts were increased at several points during the period, the maximum monthly payments have remained relatively modest compared to typical student living costs, especially in larger cities \textcolor{red}{(REMEMBER TO ADD SOURCE HERE)}. This could help explain why some students perceive the benefit as not worth the effort of applying. These findings underline the importance of outreach efforts and suggest that further reforms may be needed to make the program more accessible and appealing.
+Taken together, the results suggest that a large share of eligible students do not take up BAföG, and that this has been the case fairly consistently over time. The high average non-take-up rate, around 60\%, points to persistent barriers such as lack of information or procedural hurdles. The financial attractiveness of BAföG may also be a factor. Although support amounts were increased at several points, the need-based allowances have consistently failed to keep pace with the actual cost of living for students \citep{staack_von_2017}. This could help explain why some students perceive the benefit as not worth the effort of applying. These findings underline the importance of outreach efforts and suggest that further reforms may be needed to make the program more accessible and appealing.
 
 %TODO: Refer to the table of the distributions of reported bafög vs theoretical, see appendix for table.
 
@@ -80,19 +80,23 @@ Taken together, the results suggest that a large share of eligible students do n
 
 \subsubsection{Binary Choice Model}
 
+\textcolor{red}{Add some intro text here so we don't just go straight to explaining the results?}
+
+\paragraph{Pseudo R-squared.} In models where the traditional R-squared is not defined, such as binary outcome models like logit and probit, researchers commonly use pseudo R-squared measures to get a sense of model fit. These statistics aim to provide an indication of how well the model explains the observed outcomes, though they are not directly comparable to the R-squared in linear regression. Pseudo R-squared values can help assess the explanatory power of a model, but they should be interpreted with care. Unlike the R-squared in OLS, pseudo R-squared values do not have a clear benchmark and are not directly comparable across different models or datasets. Because of this, they should be viewed more as descriptive tools rather than definitive measures of explanatory power. It is generally recommended to use them alongside other model diagnostics rather than relying on them alone \citep{ozili_acceptable_2023}.
+
+\textcolor{red}{When we have made a decision on the exact details of the logit/probit and the measure of pseudo R squared then write more about that here (the value we get for pseudo R squared and how it should be interpreted in context of the model)}
+
 
 \input{tables/regression_table.tex}
 
 \input{tables/iv_regression_table.tex}
 
 
-\textcolor{red}{Add some intro text here so we don't just go straight to explaining the results?}
-
 ...
 
 \paragraph{Interpretation of Average Marginal Effects from the Probit Model.} All interpretations below are based on the average marginal effects (AMEs) from the Probit model presented in Table 3.
 
-Student age is found to be significantly associated with NTU of BAföG. On average, each additional year of age increases the probability of NTU by 2.8 percentage points, holding all other variables constant. Similarly, student income has a significant effect, as a 100 EUR increase in gross monthly income is associated with a 1.2 percentage point increase in the probability of NTU, suggesting that higher-earning students may be less inclined to rely on BAföG support. Parental income matters as well. A 100 EUR increase in parental gross monthly income is associated with a 0.6 percentage point increase in the probability of NTU. \textcolor{red}{NOTE ALEX: LOOK BETTER INTO THIS. AME POSITIVE FOR STUDENTS BUT NEGATIVE FOR PARENTS, DON’T THINK IT IS INTERPRETED CORRECTLY HERE ABOVE, ALSO WHY IS IT DIFFERENT? DOES THAT MAKE SENSE?}
+Student age is found to be significantly associated with NTU of BAföG. On average, each additional year of age increases the probability of NTU by 2.8 percentage points, holding all other variables constant. Similarly, student income has a significant effect, as a 100 EUR increase in gross monthly income is associated with a 1.2 percentage point increase in the probability of NTU, suggesting that higher-earning students may be less inclined to rely on BAföG support. Parental income matters as well. A 100 EUR increase in parental gross monthly income is associated with a 0.6 percentage point increase in the probability of NTU. \textcolor{red}{Note: look better into why AME is positive for student income and negative parental income. It could be interpreted in the way that students that work are highly motivated individuals, "on average" more so than those who don't, which could make them more likely to make it through the rigorous application process. Herber et al. say something like that.}
 
 Other variables that have to do with family background were also found to have an effect. For example, having an older sibling who previously received BAföG reduces the probability of NTU by 9.6 percentage points on average, suggesting that familiarity with the system encourages take-up. Migration background is significant only for students with an indirect migration background (those born in Germany to foreign-born parents). For this group, the probability of NTU is 8 percentage points lower on average compared to those without a migration background.  Gender, partnership status, and household size do not appear to significantly affect NTU.
 
