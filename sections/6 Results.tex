@@ -47,7 +47,8 @@ Taken together, the results suggest that a large share of eligible students do n
 
 \subsection{Determinants of Non-take-up}
 
-\textcolor{red}{Add some text here? Could refer back to the method chapter where we go over the control variables}
+%TODO: Add some text here? 
+% Could refer back to the method chapter where we go over the control variables
 
 \subsubsection{Binary Choice Model}
 
@@ -58,9 +59,11 @@ In particular, the simulated BAföG amount has a negative association with the p
 A 100~EUR increase in the simulated entitlement is linked to a decrease in the likelihood of non-take-up by about 2.9 to 3.0 percentage points. 
 This supports the idea that students are more likely to apply when the potential benefit is higher.
 
-To check the robustness of our findings, both logit and probit models are estimated and their average marginal effects (AMEs) are compared. As shown in Table~\ref{tab:logit_probit_results}, the results are very similar across the two models. The estimated effects have the same signs, similar magnitudes and are statistically significant in both cases. In particular, the simulated BAföG amount has a negative association with the probability of non-take-up. A 100~EUR increase in the simulated entitlement is linked to a decrease in the likelihood of non-take-up by about 2.9 to 3.0 percentage points. This supports the idea that students are more likely to apply when the potential benefit is higher.
+To check the robustness of our findings, both logit and probit models are estimated and their average marginal effects (AMEs) are compared. As shown in Table~\ref{tab:logit_probit_lpm_results}, the results are very similar across the two models. The estimated effects have the same signs, similar magnitudes and are statistically significant in both cases. In particular, the simulated BAföG amount has a negative association with the probability of non-take-up. A 100~EUR increase in the simulated entitlement is linked to a decrease in the likelihood of non-take-up by about 2.9 to 3.0 percentage points. This supports the idea that students are more likely to apply when the potential benefit is higher.
 
-As an additional check, we estimate a linear probability model (LPM), reported in Table~\ref{tab:lpm_results}. Although the LPM comes with known limitations, it allows for a straightforward interpretation of coefficients. The key results remain consistent. The marginal effect of the BAföG amount is estimated to be minus 2.1 percentage points per 100~EUR, and the direction and significance of the main explanatory variables remain stable.
+As an additional check, we estimate a linear probability model (LPM), reported in Table~\ref{tab:logit_probit_lpm_results}. 
+Although the LPM comes with known limitations, it allows for a straightforward interpretation of coefficients. 
+The key results remain consistent. The marginal effect of the BAföG amount is estimated to be minus 2.1 percentage points per 100~EUR, and the direction and significance of the main explanatory variables remain stable.
 
 All in all, the consistency of results across logit, probit, and LPM models suggests that the findings aren't sensitive to the choice of estimation method. This increases confidence in the reliability of the identified determinants of non-take-up.
 
@@ -68,7 +71,7 @@ All in all, the consistency of results across logit, probit, and LPM models sugg
 
 \paragraph{Pseudo R-squared.} In models where the traditional R-squared is not defined, such as binary outcome models like logit and probit, researchers commonly use pseudo R-squared measures to get a sense of model fit. These statistics aim to provide an indication of how well the model explains the observed outcomes, though they are not directly comparable to the R-squared in linear regression. Pseudo R-squared values can help assess the explanatory power of a model, but they should be interpreted with care. Unlike the R-squared in OLS, pseudo R-squared values do not have a clear benchmark and are not directly comparable across different models or datasets. Because of this, they should be viewed more as descriptive tools rather than definitive measures of explanatory power. It is generally recommended to use them alongside other model diagnostics rather than relying on them alone \citep{ozili_acceptable_2023}.
 
-\textcolor{red}{When we have made a decision on the exact details of the logit/probit and the measure of pseudo R squared then write more about that here (the value we get for pseudo R squared and how it should be interpreted in context of the model)}
+%TODO: When we have made a decision on the exact details of the logit/probit and the measure of pseudo R squared then write more about that here (the value we get for pseudo R squared and how it should be interpreted in context of the model)
 
 
 \input{tables/regression_table.tex}
@@ -78,15 +81,21 @@ All in all, the consistency of results across logit, probit, and LPM models sugg
 
 \paragraph{Interpretation of Average Marginal Effects from the Probit Model.} All interpretations below are based on the average marginal effects (AMEs) from the Probit model presented in Table 3.
 
-Student age is found to be significantly associated with NTU of BAföG. On average, each additional year of age increases the probability of NTU by 2.8 percentage points, holding all other variables constant. Similarly, student income has a significant effect, as a 100 EUR increase in gross monthly income is associated with a 1.2 percentage point increase in the probability of NTU, suggesting that higher-earning students may be less inclined to rely on BAföG support. Parental income matters as well. A 100 EUR increase in parental gross monthly income is associated with a 0.6 percentage point increase in the probability of NTU. \textcolor{red}{Note: look better into why AME is positive for student income and negative parental income. It could be interpreted in the way that students that work are highly motivated individuals, "on average" more so than those who don't, which could make them more likely to make it through the rigorous application process. Herber et al. say something like that.}
+Student age is found to be significantly associated with NTU of BAföG. 
+On average, each additional year of age increases the probability of NTU by 2.8 percentage points, holding all other variables constant. 
+Similarly, student income has a significant effect, as a 100 EUR increase in gross monthly income is associated with a 1.2 percentage point increase in the probability of NTU, suggesting that higher-earning students may be less inclined to rely on BAföG support. 
+Parental income matters as well. A 100 EUR increase in parental gross monthly income is associated with a 0.6 percentage point increase in the probability of NTU. 
 
-Other variables that have to do with family background were also found to have an effect. For example, having an older sibling who previously received BAföG reduces the probability of NTU by 9.6 percentage points on average, suggesting that familiarity with the system encourages take-up. Migration background is significant only for students with an indirect migration background (those born in Germany to foreign-born parents). For this group, the probability of NTU is 8 percentage points lower on average compared to those without a migration background.  Gender, partnership status, and household size do not appear to significantly affect NTU.
+%TODO: Note: look better into why AME is positive for student income and negative parental income. It could be interpreted in the way that students that work are highly motivated individuals, "on average" more so than those who don't, which could make them more likely to make it through the rigorous application process. Herber et al. say something like that.
+
+Other variables that have to do with family background were also found to have an effect. 
+For example, having an older sibling who previously received BAföG reduces the probability of NTU by 9.6 percentage points on average, suggesting that familiarity with the system encourages take-up. 
+Migration background is significant only for students with an indirect migration background (those born in Germany to foreign-born parents). 
+For this group, the probability of NTU is 8 percentage points lower on average compared to those without a migration background.  
+Gender, partnership status, and household size do not appear to significantly affect NTU.
 
 Students from East Germany are much less likely to forgo BAföG than their West German counterparts. The results show that having an East German background decreases the probability of NTU by about 25.9 percentage points, on average. This substantial difference could reflect regional variation in attitudes towards public support or perceived entitlement.
 
-Furthermore, parental education seems to matter, particularly at the highest levels. Having at least one parent with a level 7 ISCED education (equivalent to a master’s degree \textcolor{red}{IS THIS CORRECT ALEX?}
-) increases the likelihood of NTU by 47.8 percentage points. The effects of lower education levels are not statistically significant in the model.
-
-Lastly, the estimated theoretical BAföG amount is negatively associated with NTU. A 100 EUR increase in the theoretical amount corresponds to a 2.3 percentage point decrease in the probability of NTU, suggesting that higher expected benefits increase take-up. \textcolor{red}{PLEASE CONFIRM THAT THIS MAKES SENSE ALEX}
+Lastly, the estimated theoretical BAföG amount is negatively associated with non-take-up, suggesting that an expected higher amount makes you more likely to apply in the first place.
 
 
