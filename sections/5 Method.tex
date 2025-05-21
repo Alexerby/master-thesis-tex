@@ -19,6 +19,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Method} 
+
+\textcolor{red}{"Brief introductory paragraph clarifying why microsimulation is uniquely suited for this analysis would strengthen this section."}
+
 This study proceeds in two main steps. 
 First, we perform a microsimulation to calculate theoretical BAföG eligibility and award amounts based on statutory rules applied to individual-level survey data. 
 This simulation serves to identify who should be entitled to student aid under the legal framework.
@@ -143,6 +146,10 @@ Detailed examples of this calculation and relevant thresholds are provided in Ap
 \subsection{Binary Choice Model}
 This section presents results from Logit, Probit, and the Linear Probability Model (LPM) estimated by OLS.
 
+\textcolor{red}{"Consider clarifying rationale for selecting both Probit and Logit models explicitly."}
+
+\textcolor{red}{"Mention clearly the expected differences between Logit and Probit results (usually negligible but worth stating explicitly)."}
+
 \subsubsection{Probit Model}
 Formally, we model
 \begin{equation}
@@ -193,9 +200,9 @@ Furthermore, we include a control variable for impulsiveness, measured using a s
 Similarly, we control for patience using a scale based on a different set of questions from the SOEP questionnaire.
 Including these behavioral traits allows us to account for the possibility that impulsiveness or patience may influence students’ decision-making processes and thus help explain variation in BAföG take-up among eligible students.
 
-\paragraph{East German socialization.}  A variable indicating whether the student lives in East Germany is included to account for potential differences in attitudes toward state support rooted in historical and regional context. Alesina and Fuchs-Schündeln (2007) show that individuals from the former GDR tend to have stronger preferences for redistribution and a greater belief in the role of the state in providing social services, and that these differences in preferences can persist for one to two generations after reunification \citep{alesina_good-bye_2007}. Current residence in East Germany may reflect continued exposure to these norms and institutions and can serve as a reasonable proxy for this form of socialization. Since the variable is statistically significant at the 5\% level in our model, we interpret it as capturing persistent regional differences in how students view and respond to publicly provided financial support like BAföG.
+\paragraph{East German socialization.}  A variable indicating whether the student lives in East Germany is included to account for potential differences in attitudes toward state support rooted in historical and regional context. \cite{alesina_good-bye_2007} show that individuals from the former GDR tend to have stronger preferences for redistribution and a greater belief in the role of the state in providing social services, and that these differences in preferences can persist for one to two generations after reunification. Current residence in East Germany may reflect continued exposure to these norms and institutions and can serve as a reasonable proxy for this form of socialization. Since the variable is statistically significant at the 5\% level in our model, we interpret it as capturing persistent regional differences in how students view and respond to publicly provided financial support like BAföG.
 
-\paragraph{Sibling prior experience with BAföG.} An indicator for whether the student has an older sibling who previously received BAföG is included to capture potential differences in access to informal support and familiarity with the application process. Students with siblings who have already gone through the steps of applying may be more aware of eligibility rules and practical requirements. Herber and Kalinowski (2016) highlight that such sibling experience can help reduce informational and procedural barriers, making it more likely that students follow through with the application \citep{herber_non-take-up_2019}. This variable is intended to reflect how previous exposure to the system within the family can shape students’ confidence and ability to navigate what is often perceived as a complex process.
+\paragraph{Sibling prior experience with BAföG.} An indicator for whether the student has an older sibling who previously received BAföG is included to capture potential differences in access to informal support and familiarity with the application process. Students with siblings who have already gone through the steps of applying may be more aware of eligibility rules and practical requirements. \cite{herber_non-take-up_2019} highlight that such sibling experience can help reduce informational and procedural barriers, making it more likely that students follow through with the application. This variable is intended to reflect how previous exposure to the system within the family can shape students’ confidence and ability to navigate what is often perceived as a complex process.
 
 \paragraph{Migration background.} Two variable for indirect and direct migration background is included to explore whether differences in familiarity with the BAföG system may influence take-up. 
 Some students may come from households with less exposure to German administrative processes or financial aid structures, which could affect their understanding of eligibility or the application itself. 
@@ -222,6 +229,9 @@ By controlling for these demographic characteristics, we aim to ensure that our 
 
 \subsection{Model limitations}
 \label{subsection:model_limitations}
+
+\textcolor{red}{Are we also repeating ourselves here?}
+
 \paragraph{Addressing beta errors in eligibility simulations.}
 In simulating benefit non-take-up, beta errors occur when individuals report receiving a benefit but are classified by the model as ineligible. 
 These mismatches typically reflect limitations in the input data, particularly income and assets.
