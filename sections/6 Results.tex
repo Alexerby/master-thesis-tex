@@ -80,7 +80,10 @@ As an additional check, we estimate a linear probability model (LPM), reported i
 Although the LPM comes with known limitations, it allows for a straightforward interpretation of coefficients. 
 The key results remain consistent. The marginal effect of the BAföG amount is estimated to be minus 2.1 percentage points per 100~EUR, and the direction and significance of the main explanatory variables remain stable.
 
+\input{tables/regression_table.tex}
+
 All in all, the consistency of results across logit, probit, and LPM models suggests that the findings aren't sensitive to the choice of estimation method. This increases confidence in the reliability of the identified determinants of non-take-up.
+
 
 ...
 
@@ -89,7 +92,6 @@ All in all, the consistency of results across logit, probit, and LPM models sugg
 %TODO: When we have made a decision on the exact details of the logit/probit and the measure of pseudo R squared then write more about that here (the value we get for pseudo R squared and how it should be interpreted in context of the model)
 
 
-\input{tables/regression_table.tex}
 
 
 ...
@@ -130,3 +132,11 @@ On the other hand, the limited variation in outcome probabilities, even at highe
 This is especially plausible given that eligibility is determined by a complex set of rules and thresholds, and the BAföG formula may exhibit discontinuities or flat regions where small income perturbations have little marginal effect.
 
 In sum, the results provide reassuring evidence that our estimates of non-take-up are not overly sensitive to plausible measurement error in income data, though they also suggest that stronger perturbations or alternative functional forms would be required to observe any nonlinear threshold effects more clearly.
+
+\subsubsection{Robustness to Alternative Eligibility Definition}
+To test the robustness of our findings, we estimate the same models using a more behaviourally meaningful definition of eligibility: we restrict the sample to students with simulated BAföG entitlements of at least 200 EUR per month. 
+This cutoff is motivated by the idea that very low entitlements may not justify the administrative effort of application from the student's perspective and may not reflect true eligibility in a practical sense.
+
+Reassuringly, our main findings remain robust under this alternative specification, which can be found in Appendix \ref{appendix:tables}, Table \ref{tab:logit_probit_lpm_results_200}. 
+The simulated entitlement amount continues to have a negative and significant association with non-take-up, and the demographic determinants (such as age, partner status, and East German background) maintain their direction and significance. 
+This strengthens our interpretation that these factors are stable and meaningful predictors of student aid take-up behaviour.
