@@ -150,6 +150,9 @@ Formally, we model
   , \qquad \text{for all } i \text{ with } T_i = 1,
 \end{equation}
 where \( \Phi(\cdot) \) denotes the cumulative distribution function of the standard normal distribution. 
+\begin{equation}
+  \Phi(z) = \int_{-\infty}^{z} \frac{1}{\sqrt{2\pi}} \exp\left( -\frac{t^2}{2} \right) \, dt
+\end{equation}
 
 Here, \( T_i = 1 \) indicates the theoretical eligibility outcome of our microsimulation, and \( \mathrm{NTU}_i := \mathbf{1}\{R_i = 0\} \) is a binary indicator for non-take-up, based on the observed receipt in SOEP-Core (with \( R_i = 1 \) indicating receipt of BAföG and \( R_i = 0 \) otherwise).
 
@@ -161,7 +164,7 @@ In the same way as the Probit model, we fit a Logit model
 \end{equation}
 where \( \Lambda(\cdot) \) denotes the logistic cumulative distribution function
 \begin{equation}
-  \Lambda(z) = \frac{1}{1 + e^{-z}}.
+  \Lambda(z) = \frac{1}{1 + \exp(-z)}.
 \end{equation}
 
 \paragraph{Interpretation.} %TODO: Maybe explain latent index more -- don't fully understand atm
@@ -169,8 +172,21 @@ Since raw logit and probit coefficients reflect changes in the latent index and 
 
 
 \subsubsection{Linear Probability Model}
-TO BE WRITTEN.
-%TODO: Write about the Linear Probability model 
+Analogously, the linear probability model (LPM) specifies a linear relationship between the covariates and the probability of non-take-up:
+\begin{equation}
+  \Pr(\mathrm{NTU}_i = 1 \mid \mathbf{X}_i) = \mathbf{X}_i^\top \boldsymbol{\beta}
+  , \qquad \text{for all } i \text{ with } T_i = 1,
+\end{equation}
+where, as before, \( \mathbf{X}_i \) denotes the vector of covariates for individual \( i \), and \( \boldsymbol{\beta} \) is the vector of estimated coefficients.
+
+Estimation is performed via ordinary least squares (OLS), clustering standard errors at the student level. 
+Unlike the probit and logit models, the LPM does not constrain predicted probabilities to the interval \([0,1]\), but its coefficients are directly interpretable as approximate marginal effects.
+
+Despite its limitations, the LPM is commonly used in applied work due to its simplicity, transparency, and computational efficiency. In particular, it provides straightforward coefficient interpretation and is easily extended to models with fixed effects or instrumental variables. Moreover, when the primary interest lies in estimating average marginal effects rather than modeling the full distribution of probabilities, the LPM often yields results that are qualitatively similar to those from non-linear models.
+
+For this reason, we include the LPM as a useful benchmark alongside the logit and probit specifications.
+
+
 
 \subsubsection{Control Variables}
 Our models include a set of control variables to account for observed heterogeneity that may influence the probability of non-take-up. 
@@ -220,8 +236,7 @@ By controlling for these demographic characteristics, we aim to ensure that our 
 
 
 
-\subsection{Model limitations}
-\label{subsection:model_limitations}
+\subsection{Model Limitations} \label{subsection:model_limitations}
 \paragraph{Addressing beta errors in eligibility simulations.}
 In simulating benefit non-take-up, beta errors occur when individuals report receiving a benefit but are classified by the model as ineligible. 
 These mismatches typically reflect limitations in the input data, particularly income and assets.
@@ -237,7 +252,12 @@ Although beta errors cannot be completely avoided, it is important to recognise 
 In this thesis, particular attention is paid to identifying where beta errors may occur and considering how they might influence the findings. 
 Sensitivity checks are applied where relevant to assess the robustness of the findings and to reduce the risk of misinterpretation. %TODO: No no sensitivity checks are applied so far.
 
-%TODO: Also haven't adressed the interpolation of assets
+\subsubsection{Measurement Errors in Income Data}
+A persistent challenge in empirical research is the presence of measurement errors in income data, which can bias the estimation of policy outcomes. 
+In the context of our study, accurate measurement of both parental and student incomes is crucial, as these variables are the primary determinants of the theoretical BAföG entitlement to be calculated.
 
+To assess the impact of potential income misreporting or data imperfections, we conduct a sensitivity analysis by introducing normally distributed noise to the log-transformed income variables. 
+Logging is applied to address the right-skewness in the income distributions (see Figure~\ref{fig:income-distributions}). 
+By simulating random measurement errors in logged income, we can evaluate how such noise affects the estimated non-take-up rates and the reliability (i.e., beta errors) of the simulation outcomes.
 
-
+This approach allows us to better understand the robustness of our results to plausible inaccuracies in income reporting, and highlights the importance of data quality in studies of means-tested student aid.

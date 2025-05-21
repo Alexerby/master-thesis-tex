@@ -3,6 +3,29 @@
 \renewcommand{\thefigure}{\thesection \arabic{figure}}
 \setcounter{figure}{0}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Student and Parental Incomes Figures
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+  \centering
+  % Parental joint excess income distribution
+  \begin{subfigure}[t]{0.48\linewidth}
+    \includegraphics[width=\linewidth]{distributions/parental_income.png}
+    \caption{Parental income}
+    \label{fig:parents-income-distribution}
+  \end{subfigure}
+  \hfill
+  % Student excess income distribution
+  \begin{subfigure}[t]{0.48\linewidth}
+    \includegraphics[width=\linewidth]{distributions/student_income.png}
+    \caption{Student income}
+    \label{fig:student-income-distribution}
+  \end{subfigure}
+  \caption{Simulated mean excess income for parents (\subref{fig:parental-excess}) and students (\subref{fig:student-excess}).}
+  \label{fig:income-distributions}
+\end{figure}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Student and Parental Excess Incomes Figures
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

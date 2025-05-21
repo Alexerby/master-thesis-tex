@@ -12,7 +12,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Results}
-\subsection{Microsimulation Non-take-up}
+\subsection{Microsimulation: Non-take-up rates}
 Our microsimulation results indicate that the non-take-up-rate of BAföG, among theoretically eligible students ranged from approximately 50--70\% across the survey years 2007--2021, with an average of 60\%  (Table \ref{table:microsimulation-ntu}). 
 
 These estimates are broadly in line with previous findings on non-take-up of social benefits in Germany, which generally falls between 40--67\%, depending on the program and time period (see Table \ref{table:NTU-studies}). 
@@ -25,15 +25,20 @@ This discrepancy may be attributable to several factors, including differences i
 
 ...
 
-While there is some variation in non-take-up across years, NTU remains consistently quite high throughout the period. The rate fluctuates between a low of 50\% in 2013 and a high of around 68\% in 2019. 
-Notably, the results show a decline from 2010 to 2013, which is then followed by a gradual upwards trend throughout the rest of the period. 
-The increase in NTU in the years leading up to 2019 could potentially reflect behavioural or institutional factors such as changes in awareness, perceived complexity or attitudes toward debt, but it could also be partly driven by policy changes. 
-Several BAföG reforms were introduced during this period, including increases in grant amounts and adjustments to income thresholds, which may have influenced both eligibility and perceived attractiveness of the program. 
-Since the simulation accounts for these legal changes, the results capture not just behavioural responses but also how reforms may have affected take-up incentives over time.
+While there is some variation in non-take-up across years, NTU remains consistently quite high throughout the period. 
+The rate fluctuates between a low of 50\% in 2013 and a high of around 68\% in 2019. 
+This pattern is clearly illustrated in Figure~\ref{fig:ntu_bounds_over_years}, which shows a visible decline from 2010 to 2013, followed by a gradual upward trend leading up to 2019. 
+The increase in NTU in the years preceding 2019 could potentially reflect behavioural or institutional factors such as changes in awareness, perceived complexity, or attitudes toward debt. 
+It could also be partly driven by policy changes. 
+Several BAföG reforms were introduced during this period — including increases in grant amounts and adjustments to income thresholds — which may have influenced both eligibility and the perceived attractiveness of the program. 
+Since the simulation accounts for these legal changes, the results shown in the figure capture not only behavioural responses but also how reforms may have affected take-up incentives over time.
 
 \textcolor{red}{Maybe further elaborations belong in the discussion part?}
 
-The second column in Table~\ref{table:microsimulation-ntu} shows the estimated beta error, which is the share of students who are classified as ineligible by the simulation but report receiving BAföG. On average, the beta error is about 15\% across the full period. This level of misclassification is in line with what other studies have found when working with survey data, where income reporting and timing mismatches are common issues \citep{frick_claim_2007}. While this level of beta error is not negligible, the simulation seems to capture eligibility status fairly well overall, even if some noise is unavoidable.
+The third column in Table~\ref{table:microsimulation-ntu} shows the estimated beta error, which is the share of students who are classified as ineligible by the simulation but report receiving BAföG. 
+On average, the beta error is about 15\% across the full period. 
+This level of misclassification is in line with what other studies face when working with survey data, where income reporting and timing mismatches are common issues \citep{frick_claim_2007}. 
+While this level of beta error is not negligible, the simulation seems to capture eligibility status fairly well overall, even if some noise is unavoidable.
 
 Taken together, the results suggest that a large share of eligible students do not take up BAföG, and that this has been the case fairly consistently over time. The high average non-take-up rate, around 60\%, points to persistent barriers such as lack of information or procedural hurdles. The financial attractiveness of BAföG may also be a factor. Although support amounts were increased at several points, the need-based allowances have consistently failed to keep pace with the actual cost of living for students \citep{staack_von_2017}. This could help explain why some students perceive the benefit as not worth the effort of applying. These findings underline the importance of outreach efforts and suggest that further reforms may be needed to make the program more accessible and appealing.
 
@@ -88,7 +93,6 @@ All in all, the consistency of results across logit, probit, and LPM models sugg
 Student age is found to be significantly associated with NTU of BAföG. 
 On average, each additional year of age increases the probability of NTU by 2.8 percentage points, holding all other variables constant. 
 Similarly, student income has a significant effect, as a 100 EUR increase in gross monthly income is associated with a 1.2 percentage point increase in the probability of NTU, suggesting that higher-earning students may be less inclined to rely on BAföG support. 
-Parental income matters as well. A 100 EUR increase in parental gross monthly income is associated with a 0.6 percentage point increase in the probability of NTU. 
 
 %TODO: Note: look better into why AME is positive for student income and negative parental income. It could be interpreted in the way that students that work are highly motivated individuals, "on average" more so than those who don't, which could make them more likely to make it through the rigorous application process. Herber et al. say something like that.
 
@@ -103,3 +107,20 @@ Students from East Germany are much less likely to forgo BAföG than their West 
 Lastly, the estimated theoretical BAföG amount is negatively associated with non-take-up, suggesting that an expected higher amount makes you more likely to apply in the first place.
 
 
+\subsection{Sensitivity Analysis}
+\subsubsection{Effect of Income Noise on Simulated Take-up Behavior}
+Table~\ref{tab:conditional_probs_noise} reports conditional probabilities relevant to take-up behavior under varying levels of artificially introduced measurement error in income data. 
+Specifically, we inject normally distributed noise with increasing standard deviations (0\%, 10\%, 20\%, 30\%) into the log-transformed income variables before recalculating theoretical BAföG entitlements and resulting non-take-up indicators.
+
+\input{tables/sensitivity_analysis/noise_conditional_probs.tex}
+
+Across all survey years, the probability of observed take-up among those identified as eligible in the simulation (\( \Pr(\mathrm{NTU}=1 \mid M=1) \)) remains remarkably stable. 
+Even under a substantial noise level of 30\%, this key measure fluctuates by only one to two percentage points relative to the baseline. Similarly, the probability of non-eligibility and non-take-up (\( \Pr(\mathrm{NTU}=0 \mid M=0) \)) is virtually unaffected.
+
+This insensitivity suggests that our simulated entitlement outcomes—and consequently our classification of non-take-up—are robust to moderate misreporting or uncertainty in income variables. 
+On one hand, this lends confidence in the reliability of our baseline findings: small deviations in reported incomes do not substantially alter take-up behavior at the population level.
+
+On the other hand, the limited variation in outcome probabilities, even at higher noise levels, indicates that our simulated shocks may not be large enough to push a substantial number of observations across the eligibility threshold. 
+This is especially plausible given that eligibility is determined by a complex set of rules and thresholds, and the BAföG formula may exhibit discontinuities or flat regions where small income perturbations have little marginal effect.
+
+In sum, the results provide reassuring evidence that our estimates of non-take-up are not overly sensitive to plausible measurement error in income data, though they also suggest that stronger perturbations or alternative functional forms would be required to observe any nonlinear threshold effects more clearly.
