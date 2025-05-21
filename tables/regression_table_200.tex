@@ -1,0 +1,57 @@
+\begin{table}
+\small
+\caption{$\Pr(\mathrm{NTU} = 1 \mid \mathbf{X})$}
+\renewcommand{\arraystretch}{1.25}
+\centering
+\begin{tabular}{lccccc}
+\toprule
+& \multicolumn{2}{c}{Logit} & \multicolumn{2}{c}{Probit} & LPM \\
+& Coef. & AME & Coef. & AME & Coef. \\
+\midrule
+\multicolumn{6}{l}{\textbf{Main explanatory variables}} \\
+Simulated BAföG amount$^{\circ}$ & -0.181** & -0.034** & -0.109** & -0.034** & -0.022 \\
+ & (0.077) & (0.014) & (0.045) & (0.014) & (0.014) \\
+\midrule
+\multicolumn{6}{l}{\textbf{Controls: Demographics}} \\
+Age & 0.101*** & 0.019*** & 0.060*** & 0.019*** & 0.037*** \\
+ & (0.024) & (0.004) & (0.014) & (0.004) & (0.004) \\
+Female & 0.007 & 0.001 & 0.020 & 0.006 & 0.016 \\
+ & (0.290) & (0.054) & (0.169) & (0.053) & (0.053) \\
+Has partner & 1.480* & 0.277* & 0.906* & 0.286* & 0.190* \\
+ & (0.882) & (0.164) & (0.483) & (0.151) & (0.102) \\
+Direct Migration background & -0.347 & -0.065 & -0.195 & -0.061 & -0.070 \\
+ & (0.450) & (0.084) & (0.262) & (0.082) & (0.075) \\
+Indirect Migration background & -0.740** & -0.138** & -0.439** & -0.138** & -0.133** \\
+ & (0.324) & (0.058) & (0.194) & (0.059) & (0.064) \\
+\midrule
+\multicolumn{6}{l}{\textbf{Controls: Household and Socioeconomic Background}} \\
+Living at parents’ home & 0.070 & 0.013 & 0.050 & 0.016 & 0.054 \\
+ & (0.311) & (0.058) & (0.183) & (0.058) & (0.056) \\
+Sibling claimed BAföG before & -0.633* & -0.119** & -0.368* & -0.116* & -0.128* \\
+ & (0.331) & (0.060) & (0.198) & (0.061) & (0.066) \\
+East background & -1.437*** & -0.269*** & -0.865*** & -0.273*** & -0.300*** \\
+ & (0.369) & (0.061) & (0.218) & (0.062) & (0.072) \\
+Parents are highly educated & 0.002 & 0.000 & 0.009 & 0.003 & 0.015 \\
+ & (0.360) & (0.067) & (0.213) & (0.067) & (0.066) \\
+\midrule
+\multicolumn{6}{l}{\textbf{Controls: Behaviour}} \\
+Patience & 0.042 & 0.008 & 0.021 & 0.007 & 0.006 \\
+ & (0.072) & (0.013) & (0.044) & (0.014) & (0.013) \\
+Impulsiveness & -0.047 & -0.009 & -0.024 & -0.008 & -0.008 \\
+ & (0.075) & (0.014) & (0.046) & (0.015) & (0.013) \\
+Risk Apetite & -0.014 & -0.003 & -0.008 & -0.003 & -0.000 \\
+ & (0.042) & (0.008) & (0.025) & (0.008) & (0.007) \\
+\midrule
+McFadden Pseudo $R^2$ & \multicolumn{2}{l}{0.11} & \multicolumn{2}{l}{0.11} & \\
+Cox and Snell Pseudo $R^2$ & \multicolumn{2}{l}{0.13} & \multicolumn{2}{l}{0.13} & \\
+Nagelkerke Pseudo $R^2$ & \multicolumn{2}{l}{0.18} & \multicolumn{2}{l}{0.18} & \\
+Likelihood Ratio Test & \multicolumn{2}{l}{48.46 (p = 0.00)} & \multicolumn{2}{l}{48.39 (p = 0.00)} & \\
+Adjusted $R^2$ & & & & & 0.72 \\
+F-statistic & & & & & 71.5 (p = 0.00) \\
+Observations & \multicolumn{5}{l}{352} \\
+\bottomrule
+\end{tabular}
+\caption{Estimates corresponding to Table \ref{tab:logit_probit_lpm_results_200}, using the same model specifications but classifying students as eligible if their theoretical entitlement exceeds 200 EUR.}*
+\label{tab:logit_probit_lpm_results_200}
+\caption*{\small{Notes: Significance levels: $^{{*}} p < 0.1$, $^{{**}} p < 0.05$, $^{{***}} p < 0.01$. Robust standard errors clustered at the student level. $\circ$ Indicates per 100 EUR.}}
+\end{table}
