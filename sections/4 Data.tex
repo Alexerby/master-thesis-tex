@@ -19,13 +19,9 @@ In line with much of the existing literature, this study relies on data from the
 As one of the longest-standing multidisciplinary household surveys in the world, the SOEP has been conducted annually since 1984 by the German Institute for Economic Research (DIW Berlin) \citep{soepcore_v39}. 
 It is a nationally representative longitudinal study that collects data from around 30,000 individuals in 22,000 households each year. 
 The survey includes respondents aged 17 and older and provides rich individual- and household-level information on income, education, labour market activity, household structure, and demographics. 
-This study uses the SOEP-Core sample, the central and most comprehensive module of the dataset \citep{berlin_diw_nodate}.
+This study uses the SOEP-Core sample, the central and most comprehensive module of the dataset \citep{berlin_diw_nodate}. While general purpose surveys like SOEP are not specifically designed to measure non take up, they have the advantage of covering both benefit receipt and the before mentioned characteristics needed to estimate eligibility \citep{mechelen_who_2017}.
 
-While such general purpose surveys like SOEP are not specifically designed to measure non take up, they have the advantage of covering both benefit receipt and the before mentioned characteristics needed to estimate eligibility \citep{mechelen_who_2017}.
-
-We restrict our analysis to the period between 2007 and 2021, as this is the range for which we were able to consistently collect and harmonize the necessary statutory parameters from official BAföG regulations \cite{bafoeg_law}. 
-
-This includes annual updates to base need rates, income allowances, asset thresholds, and other legally defined components relevant to BAföG eligibility and award determination.\footnote{
+We restrict our analysis to the period between 2007 and 2021, as this is the range for which we were able to consistently collect and harmonize the necessary statutory parameters from official BAföG regulations \citep{bafoeg_law}. This includes annual updates to base need rates, income allowances, asset thresholds, and other legally defined components relevant to BAföG eligibility and award determination.\footnote{
   See Appendix \ref{appendix:simulation-example} for an example of how these rules are applied.
 }
 Earlier years were excluded due to inconsistencies or incomplete availability of comparable legal documentation. 
@@ -40,16 +36,14 @@ Using this data, we simulate the theoretical BAföG eligibility and award based 
 This involves implementing a detailed microsimulation model that replicates the BAföG means test.
 
 \subsection{Sample Description}
-The final dataset contains 5,889 student-year observations, where each row represents a student in a given survey year. 
-The sample spans the period from 2007 to 2022 and is derived from a harmonized student panel constructed using SOEP-Core data.
+The final dataset contains 5,889 student-year observations, where each row represents a student in a given survey year. As previously stated, the sample spans the period from 2007 to 2022 and is derived from a harmonized student panel constructed using SOEP-Core data. The panel is unbalanced due to individual variation in education length, dropout behavior, and survey response. 
 
-The panel is unbalanced due to individual variation in education length, dropout behavior, and survey response. 
-While some students are observed for a single year, others are followed across multiple years of their educational trajectory.
-
-Each observation contains detailed information on sociodemographic background, enrollment status, income and assets, housing situation, and reported BAföG receipt. Variables used in the simulation are consistently available for this period.
+While some students are observed for a single year, others are followed across multiple years of their educational trajectory. Each observation contains detailed information on sociodemographic background, enrollment status, income and assets, housing situation, and reported BAföG receipt. Variables used in the simulation are consistently available for this period.
 
 While the SOEP survey is nationally representative, this analytic subsample is conditional on survey respondents who were enrolled in education and met the inclusion criteria of the simulation pipeline. 
 A descriptive overview of key variables is provided in Appendix ~\ref{appendix:microsimulation-pipeline}, Table~\ref{table:variable_dictionary}.
+
+\textcolor{red}{"Provide key descriptive statistics in the main text for immediate clarity (mean age, income levels, etc.)."}
 
 \subsection{Limitations}
 
@@ -67,6 +61,11 @@ While undocumented exemptions or special cases cannot be captured, the simulatio
 \paragraph{Modelling taxes.}
 Full tax‑return simulations, as in \cite{herber_non-take-up_2019}, require detailed information (e.\,g.\ deductions, extraordinary expenses) that the SOEP does not always provide.  
 We therefore approximate net parental income with the statutory bracket formulas of §\,32a EStG—updated for every year since 2002 \citep{estg_law,estg_2025,estg_2024,estg_2023,estg_2022,estg_2021,estg_2020,estg_2019,estg_2018,estg_2017,estg_2016,estg_2015,estg_2014,estg_2013,estg_2012,estg_2007,estg_2006,estg_lohninfo_2012}.  
+
+\textcolor{red}{In our analysis, we compute individual net income for students (as well as their parents, partners and siblings where relevant) by applying relevant tax and transfer rules to each person’s reported gross income. We then simulate deductions such as income tax and social security contributions, which allows us to estimate net income in a consistent way, taking into account both personal characteristics and the policy environment in each year.}
+
+\textcolor{red}{I think there is a term for this in microsimulation literature, add it here for clarification}
+
 \paragraph{Deviation from official outcomes.}
 Even when closely following the legal rules, the simulation can differ from actual BAföG decisions due to missing household details or unobserved individual circumstances. 
 Still, it offers a consistent and transparent benchmark for analysing take-up over time.
@@ -76,12 +75,18 @@ The eligibility measure used here reflects the legal framework and is sufficient
 
 
 \paragraph{Income misreporting.}
-When studying benefit take-up using a probit model, there are two common sources of bias that are important to keep in mind: measurement error in income and incorrect reporting of benefit receipt. Income is a key factor in determining eligibility for means-tested programs like BAföG, but it is often self-reported and can be measured with error. If the income recorded in the data does not reflect individuals' true income, some people may be wrongly classified as eligible or ineligible. This can lead to biased estimates and misleading conclusions about the factors that influence take-up \cite{pudney_impact_2001}.
+When studying benefit take-up using a probit model, there are two common sources of bias that are important to keep in mind: measurement error in income and incorrect reporting of benefit receipt. Income is a key factor in determining eligibility for means-tested programs like BAföG, but it is often self-reported and can be measured with error. If the income recorded in the data does not reflect individuals' true income, some people may be wrongly classified as eligible or ineligible. This can lead to biased estimates and misleading conclusions about the factors that influence take-up \citep{pudney_impact_2001}.
 
-\paragraph{Take-up misreporting.} Another issue is that benefit receipt itself is sometimes misreported. For example, people might say they did not receive aid when they actually did, or the other way around. This kind of misclassification makes it harder to accurately model the take-up decision. As shown in Pudney (2001), even relatively small errors in either income or benefit receipt can have a big impact on the results. This highlights the importance of being aware of potential measurement problems when interpreting the findings from probit models \cite{pudney_impact_2001}.
+\paragraph{Take-up misreporting.} Another issue is that benefit receipt itself is sometimes misreported. For example, people might say they did not receive aid when they actually did, or the other way around. This kind of misclassification makes it harder to accurately model the take-up decision. As shown in \cite{pudney_impact_2001}, even relatively small errors in either income or benefit receipt can have a big impact on the results. This highlights the importance of being aware of potential measurement problems when interpreting the findings from probit models.
 
 \paragraph{Asset data limitations and imputation.}
 SOEP collects asset data only every five years, with available data for the years 2007, 2012, 2017, and 2022. 
 This results in missing information for the intermediate survey waves. 
 To address this, we imputed missing asset values using linear interpolation in both directions. 
 While more advanced imputation methods exist, linear interpolation offers a straightforward and reasonable approach to create a continuous asset measure for the microsimulation.
+
+\textcolor{red}{Should we also address that the same is true for some behavioural characteristics (impatience, impulsiveness etc.)?}
+
+\textcolor{red}{Also, are we maybe kind of repeating ourselves here? Am I tripping or do we also kind of go over this stuff in the method?}
+
+\textcolor{red}{"Acknowledge explicitly if the limitations listed could systematically bias NTU estimates in a certain direction."}
