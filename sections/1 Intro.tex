@@ -4,26 +4,51 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-%TODO: Fix references in above paragraph
-%TODO: Add our main findings at end of introduction
-%TODO: Define the objective of BAföG here instead of later
-
-
 \section{Introduction} \label{sec:intro}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Context and motivation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In recent years, the issue of non-take-up (NTU) of student financial aid, specifically BAföG (Bundesausbildungsförderungsgesetz), has attracted significant attention in Germany. While BAföG remains the primary policy tool for ensuring fair access to higher education, there is increasing skepticism about whether it effectively achieves its core objectives of unlocking educational potential and ensuring equal opportunities. This skepticism stems primarily from the steady decline in the number of eligible students who actually make use of BAföG \citep{gwosc_krisenbewaltigung_2022, meier_bafog_2024}.
 
-Several recent studies highlight significant structural shortcomings of the current BAföG system as central reasons behind the rising NTU rates. Among the main points that critics emphasize is that BAföG allowances have not kept up with the actual living costs, particularly amid rising housing prices and increasing inflation \citep{meier_bafog_2024, meier_zur_2024, staack_von_2017, gwosc_krisenbewaltigung_2022}. As of recent, some policy amendments have been made (such as the 29th BAföG amendment in 2024) in an attempt to incrementally adjust the support rates, but these attempts have to some extent been met with criticism for being inadequate. For example, student expenditures for 2024 are projected to average around 969 EUR per month, significantly more than the maximum BAföG rate of 812 EUR, even after these adjustments \citep{meier_bafog_2024}.
+Several recent studies highlight significant structural shortcomings of the current BAföG system as central reasons behind the rising NTU rates. Among the main points that critics emphasize is that BAföG allowances have not kept up with the actual living costs, particularly amid rising housing prices and increasing inflation \citep{meier_bafog_2024, meier_zur_2024, staack_von_2017, gwosc_krisenbewaltigung_2022}. As of recent, some policy amendments have been made (such as the 29\( ^{\text{th} } \) BAföG amendment in 2024) in an attempt to incrementally adjust the support rates, but these attempts have to some extent been met with criticism for being inadequate. For example, student expenditures for 2024 are projected to average around 969 EUR per month, significantly more than the maximum BAföG rate of 812 EUR, even after these adjustments \citep{meier_bafog_2024}.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Barriers to take-up and psychological factors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Additionally, the complexity and lack of transparency in BAföG application procedures further discourage students from applying, which in turn increases NTU rates. Many students find the eligibility criteria unclear, which creates uncertainty about whether or not they qualify for financial support. But these barriers aren’t just administrative, they’re also psychological. Feelings of stigma, or discomfort with applying for what is perceived as a welfare type of benefit, play a role in that as well. So, while economic factors matter, the decision not to apply is often also shaped by information deficits and psychological factors \citep{gwosc_krisenbewaltigung_2022, staack_von_2017}.
 
-This growing awareness of BAföG’s limitations has resulted in demands for more thorough impact evaluations and deeper structural reforms. As \cite{meier_bafog_2024} point out, despite annual public expenditure of approximately three billion EUR, there is still a lack of solid empirical assessment of the effectiveness and efficiency of the system. This knowledge gap has a limiting effect on the ability to make evidence based policy decisions, leading instead to reforms shaped by political compromise instead of objective analysis. Some researchers, like \cite{gwosc_krisenbewaltigung_2022}, argue that changing this might even require a shift from the current needs-based model (Fürsorgeprinzip), which requires students to prove their financial hardship, to a more inclusive, universal support model (Versorgungsprinzip). International comparisons indicate that participation rates in countries with universal support systems are substantially higher, which suggests that systemic change could lead to improvements for Germany in this regard.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Policy debate and need for reform
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+This growing awareness of BAföG’s limitations has resulted in demands for more thorough impact evaluations and deeper structural reforms. As \cite{meier_bafog_2024} point out, despite annual public expenditure of approximately three billion EUR (see Table \ref{table:payout_over_time}), there is still a lack of solid empirical assessment of the effectiveness and efficiency of the system. This knowledge gap has a limiting effect on the ability to make evidence based policy decisions, leading instead to reforms shaped by political compromise instead of objective analysis. Some researchers, like \cite{gwosc_krisenbewaltigung_2022}, argue that changing this might even require a shift from the current needs-based model (Fürsorgeprinzip), which requires students to prove their financial hardship, to a more inclusive, universal support model (Versorgungsprinzip). International comparisons indicate that participation rates in countries with universal support systems are substantially higher, which suggests that systemic change could lead to improvements for Germany in this regard.
 
 The urgency to address NTU is becoming ever more apparent, especially in the context of recent economic challenges, such as rising housing costs and inflation, factors that disproportionately impact students. Critics of BAföG argue that the issues extend beyond just low support rates. They point to structural issues, particularly the mix of grants and loans. For many students, especially those from economically disadvantaged families, the prospect of going into debt is enough to deter them from applying at all \citep{staack_von_2017, gwosc_krisenbewaltigung_2022}.
 
-In summary, the increasing NTU of BAföG has become a central issue in the wider policy discussion on accessibility of education. Addressing these problems will require targeted policy reforms, clearer and more transparent application processes and greater reliance on evidence based analysis. Implementing changes like that is crucial to ensure that public funds for student aid are used in an equitable and effective manner, and thus helping to maximize educational opportunities for students from all backgrounds.
 
-\textcolor{red}{Add text where we say something like: "the layout of the paper is as follows..."}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Study objectives and structure of the thesis
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In summary, the growing non-take-up of BAföG has become a key issue in the broader policy debate on educational access. 
+Tackling this problem will require targeted reforms, clearer and more transparent application processes, and a stronger commitment to evidence-based policymaking. 
+Making these kinds of changes is essential to ensure that public funds for student aid are distributed fairly and used effectively, ultimately helping to expand educational opportunities for students from all backgrounds.
 
-\textcolor{red}{"Clearly state your research questions/objectives explicitly at the end of the introduction"}
+This thesis takes a closer look at how many students in Germany are eligible for BAföG, but don't actually receive it. 
+Using microsimulation techniques based on SOEP data from 2007--2021, we estimate the eligibility and compare that to the reported take-up to get non-take-up rates. 
+
+We also look into which kinds of students are more or less likely to apply and what factors seem to influence those decisions, whether it’s the expected size of the subsidy, information barriers, or broader attitudes towards government support.
+
+The rest of the thesis is structured as follows. 
+The next chapter reviews the theoretical and empirical background, focusing on student aid and the concept of non-take-up. 
+Chapter 3 provides an overview of international student aid systems and then zooms in on how BAföG works in Germany. 
+Chapter 4 describes the dataset and how we constructed the sample. 
+Chapter 5 outlines the methodology, including how the eligibility simulation works and how we model non-take-up behaviour. 
+Chapter 6 presents the results, and the final chapter discusses what these findings mean in practice and how they might be relevant for policy reform.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% What we find -- conclusions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
