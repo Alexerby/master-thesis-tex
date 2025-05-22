@@ -40,11 +40,16 @@ The following section outlines the purpose, methodological approach, and main co
 For an overview of the approach see Figure \ref{fig:pipeline-overview}.
 
 \subsubsection{Purpose and Scope}
-The microsimulation pipeline is designed to calculate a theoretical BAföG eligibility status and award amount for students in the SOEP-Core sample. 
-Its primary purpose is to compare these simulated entitlements with reported BAföG take-up, as reported in SOEP.
+The microsimulation pipeline is designed to calculate a theoretical BAföG eligibility status and award amount for students in the SOEP-Core sample. Its primary purpose is to compare these simulated entitlements with reported BAföG take-up, as reported in SOEP.
 
 To construct the theoretical values, the model replicates the legal rules and means-testing procedures defined in the Bundesausbildungsförderungsgesetz (BAföG) for the years 2007 to 2021. 
 These rules are applied to individual-level SOEP data, including detailed information on income, assets, housing costs, and household structure.
+
+In contrast to some earlier studies, we focus exclusively on students in higher education and restrict our sample to individuals aged 18 and older. This choice is motivated by a combination of conceptual, practical, and policy-relevant considerations. From a conceptual standpoint, the structure and goals of BAföG can differ between higher education and vocational training, including differences in eligibility criteria, typical household circumstances, and expectations around study duration and labor market transitions. Focusing only on higher education students allows for a more consistent definition of the target population.
+
+Practically, focusing on students aged 18 and older ensures that key variables needed for the simulation, such as income, employment, and assets, are consistently available at the individual level. SOEP collects this information directly only for adult respondents. For individuals under 18, many of these variables are either missing, incomplete, or recorded via proxy responses from parents \citep{soep_pgen_2025, soep_dtc_2005}. Restricting the sample in this way helps improve both consistency and the reliability of the eligibility estimates, since information on key variables is more reliably reported for this group in SOEP. 
+
+From a policy perspective, university students are more frequently the focus of public debate around BAföG reform, especially in relation to issues such as debt aversion, housing costs, and equitable access to higher education. By concentrating on this group, our results are more directly applicable to ongoing policy discussions and recent reforms targeting the higher education sector.
 
 This approach enables a systematic assessment of the alignment between statutory entitlements and actual BAföG participation. 
 Deviations between the modeled and reported outcomes may arise from reporting errors, exceptional administrative decisions, or incomplete data. 
