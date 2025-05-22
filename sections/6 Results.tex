@@ -87,7 +87,7 @@ All in all, the consistency of results across logit, probit, and LPM models sugg
 
 ...
 
-\paragraph{Pseudo R-squared.} In models where the traditional R-squared is not defined, such as binary outcome models like logit and probit, researchers commonly use pseudo R-squared measures to get a sense of model fit. These statistics aim to provide an indication of how well the model explains the observed outcomes, though they are not directly comparable to the R-squared in linear regression. Pseudo R-squared values can help assess the explanatory power of a model, but they should be interpreted with care. Unlike the R-squared in OLS, pseudo R-squared values do not have a clear benchmark and are not directly comparable across different models or datasets. Because of this, they should be viewed more as descriptive tools rather than definitive measures of explanatory power. It is generally recommended to use them alongside other model diagnostics rather than relying on them alone \citep{ozili_acceptable_2023}.
+% \paragraph{Pseudo R-squared.} In models where the traditional R-squared is not defined, such as binary outcome models like logit and probit, researchers commonly use pseudo R-squared measures to get a sense of model fit. These statistics aim to provide an indication of how well the model explains the observed outcomes, though they are not directly comparable to the R-squared in linear regression. Pseudo R-squared values can help assess the explanatory power of a model, but they should be interpreted with care. Unlike the R-squared in OLS, pseudo R-squared values do not have a clear benchmark and are not directly comparable across different models or datasets. Because of this, they should be viewed more as descriptive tools rather than definitive measures of explanatory power. It is generally recommended to use them alongside other model diagnostics rather than relying on them alone \citep{ozili_acceptable_2023}.
 
 %TODO: When we have made a decision on the exact details of the logit/probit and the measure of pseudo R squared then write more about that here (the value we get for pseudo R squared and how it should be interpreted in context of the model)
 
@@ -114,30 +114,33 @@ Students from East Germany are much less likely to forgo BAföG than their West 
 
 Lastly, the estimated theoretical BAföG amount is negatively associated with non-take-up, suggesting that an expected higher amount makes you more likely to apply in the first place.
 
+\textcolor{red}{We haven't interpreted the variables enough here. FIX!}
 
-\subsection{Sensitivity Analysis}
-\subsubsection{Effect of Income Noise on Simulated Take-up Behavior}
-Table~\ref{tab:conditional_probs_noise} reports conditional probabilities relevant to take-up behavior under varying levels of artificially introduced measurement error in income data. 
-Specifically, we inject normally distributed noise with increasing standard deviations (0\%, 10\%, 20\%, 30\%) into the log-transformed income variables before recalculating theoretical BAföG entitlements and resulting non-take-up indicators.
+\subsection{Sensitivity and Specification Analysis}
+\subsubsection{Stability of Simulated Non-Take-Up under Income Noise}
+Table~\ref{tab:conditional_probs_noise} presents conditional probabilities of take-up behavior under varying levels of artificially introduced measurement error in income. 
+To assess the stability of our non-take-up classification, we introduce normally distributed noise to the log-transformed income variables prior to recalculating theoretical BAföG entitlements and resulting eligibility indicators. 
+The standard deviation of this noise is varied from 0\% (baseline) to 30\%.
 
 \input{tables/sensitivity_analysis/noise_conditional_probs.tex}
 
-Across all survey years, the probability of observed take-up among those identified as eligible in the simulation (\( \Pr(\mathrm{NTU}=1 \mid M=1) \)) remains remarkably stable. 
-Even under a substantial noise level of 30\%, this key measure fluctuates by only one to two percentage points relative to the baseline. Similarly, the probability of non-eligibility and non-take-up (\( \Pr(\mathrm{NTU}=0 \mid M=0) \)) is virtually unaffected.
+The results show that simulated take-up probabilities are remarkably robust to income misreporting. 
+Across all survey years, the probability of observed take-up among those identified as eligible in the simulation (\( \Pr(\mathrm{NTU}=1 \mid M=1) \)) changes only marginally—even at the highest noise level. 
+Likewise, the probability of non-eligibility and non-take-up (\( \Pr(\mathrm{NTU}=0 \mid M=0) \)) remains virtually unchanged.
 
-This insensitivity suggests that our simulated entitlement outcomes—and consequently our classification of non-take-up—are robust to moderate misreporting or uncertainty in income variables. 
-On one hand, this lends confidence in the reliability of our baseline findings: small deviations in reported incomes do not substantially alter take-up behavior at the population level.
+This stability suggests that small to moderate deviations in reported incomes do not substantially affect eligibility classification or population-level take-up estimates. 
+It also provides indirect evidence on the structure of the BAföG eligibility formula: in many cases, small changes in income may not be sufficient to move individuals across relevant thresholds due to the formula’s discontinuities, flat regions, or built-in buffers.
 
-On the other hand, the limited variation in outcome probabilities, even at higher noise levels, indicates that our simulated shocks may not be large enough to push a substantial number of observations across the eligibility threshold. 
-This is especially plausible given that eligibility is determined by a complex set of rules and thresholds, and the BAföG formula may exhibit discontinuities or flat regions where small income perturbations have little marginal effect.
+In sum, this analysis supports the reliability of our simulation-based approach and shows that the resulting classification of non-take-up is not overly sensitive to plausible levels of income measurement error.
 
-In sum, the results provide reassuring evidence that our estimates of non-take-up are not overly sensitive to plausible measurement error in income data, though they also suggest that stronger perturbations or alternative functional forms would be required to observe any nonlinear threshold effects more clearly.
+\subsubsection{Behaviourally Motivated Eligibility Threshold}
+In addition to the baseline eligibility criterion—which considers any positive entitlement as sufficient for inclusion, we explore an alternative, behaviourally informed threshold. 
+Specifically, we restrict the sample to students with simulated monthly entitlements of at least 200 EUR. 
+This cut off reflects the idea that very small entitlements may not justify the administrative effort or perceived complexity of applying for BAföG and thus may not correspond to practical eligibility from the student’s perspective.
 
-\subsubsection{Robustness to Alternative Eligibility Definition}
-To test the robustness of our findings, we estimate the same models using a more behaviourally meaningful definition of eligibility: we restrict the sample to students with simulated BAföG entitlements of at least 200 EUR per month. 
-This cutoff is motivated by the idea that very low entitlements may not justify the administrative effort of application from the student's perspective and may not reflect true eligibility in a practical sense.
+This alternative specification allows us to assess whether our main findings are sensitive to assumptions about the behavioural salience of entitlements. 
+As reported in Appendix~\ref{appendix:tables}, Table~\ref{tab:logit_probit_lpm_results_200}, the results remain substantively unchanged. 
+The entitlement amount continues to exhibit a negative and significant association with non-take-up, and key predictors such as age, partnership status, and East German background retain both their sign and statistical significance.
 
-Reassuringly, our main findings remain robust under this alternative specification, which can be found in Appendix \ref{appendix:tables}, Table \ref{tab:logit_probit_lpm_results_200}. 
-The simulated entitlement amount continues to have a negative and significant association with non-take-up, and the demographic determinants (such as age, partner status, and East German background) maintain their direction and significance. 
-This strengthens our interpretation that these factors are stable and meaningful predictors of student aid take-up behaviour.
-
+These findings suggest that our model captures stable relationships between observable characteristics and take-up behavior, and that the main drivers of non-take-up are not confined to marginally eligible individuals. 
+Rather, they appear consistent across a broader and more practically meaningful range of the eligible population.
