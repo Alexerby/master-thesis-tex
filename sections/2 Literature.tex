@@ -1,11 +1,12 @@
-\section{Theoretical and Empirical Context}
+\section{Background}
 \label{section:theoretical_empirical_context}
 %TODO: Add similar paper of what other studies have found for non-take up rate www.ssrn.com/abstract=3352378
+Means-tested student aid in Germany (BAföG) is structured so that roughly half of the support comes as a non-repayable grant, while the other half is provided as an interest-free loan, part of which is typically canceled upon meeting certain repayment conditions after graduation. 
+Despite the favourable terms of the program, microsimulation studies show that nearly 40\% of students who are formally eligible never submit an application. 
+This poses serious challenges to both the equity goal of making higher education accessible to all and the efficiency goal of directing public support where it can have the greatest impact \citep{herber_non-take-up_2019}.
 
-Means-tested student aid in Germany (BAföG) can amount to around 38000 EUR over the course of a university degree. Roughly half of this support comes as a non-repayable grant, while the other half is provided as an interest-free loan, a portion of which is typically waived after graduation. Despite the generosity of the program, microsimulation studies show that nearly 40\% of students who are formally eligible never submit an application. This level of non-take-up (NTU) poses serious challenges to both the equity goal of making higher education accessible to all and the efficiency goal of directing public support where it can have the greatest impact \citep{herber_non-take-up_2019}.
-
-In the NTU literature, non-take-up refers to the case where individuals meet legal eligibility requirements but still do not receive the benefit. 
-This is different from “non-enrolment,” where someone never enters the pool of potential recipients in the first place. 
+This phenomenon, known as non-take-up, refers to situations where individuals meet the legal eligibility requirements but do not receive the benefit—often because they do not apply.
+This is different from “non-enrolment”, which also includes individuals that do not meet the eligibility criteria to begin with.
 In the economic context, the decision to claim aid is generally understood as a cost–benefit trade-off: students weigh the expected monetary gain against the costs of claiming, which are typically grouped into three categories: informational, procedural, and psychological. 
 These costs tend to increase when the procedure is complex and not clearly explained \citep{booij_role_2012}. Estimating NTU reliably is not straightforward. It depends on having high-quality data and being able to simulate eligibility rules in detail. Studies on German social assistance, for example, show that even small mistakes in reported income can lead to NTU rates being overstated by up to ten percentage points \citep{frick_claim_2007}.
 
@@ -14,6 +15,7 @@ Standard economic theory predicts that students are more likely to claim benefit
 Estimates of BAföG NTU in Germany cover a broad range. Most studies report rates between 40--70\%, depending on the data, simulation rules, and time period examined \citep{goedeme_concept_2020}. Several microsimulation studies based on data from the German Socio-Economic Panel (SOEP), a large longitudinal survey of private households in Germany, such as \citet{herber_non-take-up_2019} and \citet{bruckmeier_new_2012}, find rates around 35 to 50\%. However, these estimates are based on earlier SOEP waves and do not capture more recent developments. Other analyses point to higher figures, particularly when relying on more recent samples. 
 This variation reflects both methodological differences and the sensitivity of NTU estimates to income measurement, eligibility modeling, and reporting accuracy.
 
+%TODO: Proper citation down below
 Herber and Kalinowski’s microsimulation furthermore finds that a 100 EUR increase in monthly BAföG payments reduces the likelihood of non-application by roughly one percentage point. Their findings also highlight the importance of family context, as students who have a sibling who already claimed BAföG are significantly more likely to apply themselves \citep{frick_claim_2007, bruckmeier_new_2012}. They further find that students raised in former East Germany tend to claim more often, suggesting that local norms and social context also play a role.
 
 Although BAföG has its own specific features, such as the combination of grants and loans, the issue of NTU is not limited to student aid. Many other means-tested welfare programs in Germany face similar challenges. Across different studies, NTU rates remain notably high, typically between 40 and 70\% depending on the program and the way eligibility is measured. To put the BAföG case in a broader context, the selected studies listed in Table~\ref{table:NTU-studies} illustrate both the magnitude of this issue and the diversity of empirical approaches used to estimate NTU rates in Germany.
@@ -32,3 +34,168 @@ Although earlier German studies have produced careful microsimulations of BAföG
 Understanding non-take-up is not only of academic interest but also directly relevant to the objective of the law, which is to ensure that access to education depends on ability rather than social or economic background. Persistently high rates of non-take-up run counter to this objective, as they suggest that a significant share of eligible students are not receiving the support intended for them. By identifying the characteristics associated with non-claiming behaviour and the underlying barriers, this study seeks to inform a more effective and equitable design of student aid policy.
 
 \textcolor{red}{Clarify early on how your study specifically contributes to existing research (update since Herber et al. 2019, using latest SOEP waves)}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+% STUDENT AID SYSTEMS
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{section:student-aid-systems}
+
+\cite{schwarz_study_2004} highlight how, starting in the 1970s, higher education shifted from being reserved for a small group to something more broadly accessible to the general population. This expansion, seen across much of Europe, led to a growing need for public financial support for students. Each country responded differently, some designed broad, universally available aid schemes, while others introduced more narrowly targeted programs. These differences in scope, eligibility, and administration mean that there is no unified European approach to student financial aid.
+
+These differences in how student aid systems are set up don’t just come down to choices made within the education sector, they also reflect different ideas about the role of the state in providing financial support. In countries like Germany, where social policy tends to emphasise personal and family responsibility, financial aid is often tightly means-tested and more narrowly targeted. In contrast, countries in the Nordic region have a stronger tradition of providing universal benefits, and that carries over into how they design their student support systems as well \citep{gwosc_krisenbewaltigung_2022, schwarz_study_2004}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% INTERNATIONAL STUDENT AID SYSTEMS
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{International Student Aid Models} \label{subsection:international-sstudent-aid-models} 
+
+When comparing the proportion of students receiving public financial aid across OECD countries, Germany proves to be one of the nations with the lowest coverage. Other OECD nations with low coverage include Austria, Croatia and Switzerland. What these countries tend to have in common is that public financial aid is narrowly targeted, focusing on students from socio-economically disadvantaged backgrounds. At the other end of the spectrum are countries such as Sweden, Denmark, Australia, and the United States, where a much larger share of students benefit from public financial aid \citep{oecd_education_2024}.
+
+These differences capture the two main design principles when it comes to public student funding, i.e. the welfare principle and the provision principle. The latter one aligns with Germany's BAföG, which is narrowly targeted to specific groups. The welfare principle on the other hand applies to systems where public aid benefits a larger share of the student population (i.e. the Nordic countries) \citep{gwosc_krisenbewaltigung_2022}.
+
+%TODO: Proper citation down below
+Gwosć and van der Beek (2022) conduct an empirical comparison between two groups of countries in Europe, where one group consists of countries that apply the welfare principle and the other of countries that follow the provision principle. The results indicate that countries that follow the latter have a significantly greater share of students that receive public aid on average, and that public aid accounts for a greater proportion of the receiver’s overall earnings. Moreover, the probability of students in these countries reporting serious financial issues is lower. The authors also look into what can roughly be translated into participation equity - which refers to proportionate representation of different social groups in higher education. They find that, to a slight extent, the countries that follow the provision principle do worse than the countries that follow the welfare principle \citep{gwosc_krisenbewaltigung_2022}. This raises the question of whether narrowly targeted systems like BAföG are truly effective in reaching the students who need support most, or whether broader systems, even if less precisely targeted, might ultimately be more successful in improving access.
+
+There is however a common trend in that the main form of student aid across Europe is in the form of grants, i.e. monetary public support that is not to be repaid. These grants can cover general cost of living or more particular needs like tuition fees or accommodation. Student loans are the alternative (or even complement), where public monetary support needs too be repaid, typically after ones studies have been completed. Typically, such loans come with low interest rates (although there are exemptions to this), often lower than interest rates on private loans in a given country \citep{schwarz_study_2004}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% GERMAN STUDENT AID SYSTEMS
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The German Study Aid System} 
+\label{section:the-german-study-aid-system}
+
+The \textbf{Federal Training Assistance Act} (g. Bundesausbildungsförderungsgesetz, BAföG) is a public student aid system supplied by the \textbf{Federal Ministry of Education and Research} (g. Bundesministerium für Bildung und Forschung). BAföG is designed to financially support students, with the primary aim to promote equal opportunities in the education system and unlock educational potential \citep{meier_bafog_2024}. The eligibility criteria for the loan is therefore relatively strict to make sure that only students who are genuinely in need of the loan have access to it.
+
+BAföG replaced various federal state regulations pertaining to attendance at vocational and general education schools that had already been consolidated in the Education Support Act (AföG) in 1969. It also replaced other regulations that were centred around providing assistance to gifted students and were not associated with any legal entitlement. Thus, this was the first law to establish a "legally enforceable right to educational funding” \citep{staack_von_2017}.
+
+Since the beginning, BAföG has adhered to the principle of subsidiarity in its basic conception, which is in line with traditional welfare policies in Germany. That is the principle that smaller local units perform their own tasks and a central authority only provides help when necessary, i.e. has a subsidiary function. In the context of BAföG, this means that first, in order to finance their studies, students must rely on their own income and assets. The next larger social units to be held accountable are spouses or partners, and next the parents become financially responsible. Only after these social units have been exhausted do the mechanisms of the welfare state intervene through BAföG \citep{staack_von_2017}.
+
+BAföG was introduced in 1971 in the form of a 100 percent non-repayable grant and was generally very successful with almost half (44.6\%) receiving the subsidy---a level never reached again. 
+The early success of BAföG came with significant financial burdens for both the federal states and the federal government, prompting a series of reforms—particularly in response to the energy crises of the 1970s. In 1974, a mandatory loan component was introduced, and by 1977, the loan share had increased even further. By the 1980s, BAföG underwent a complete overhaul, the so-called "BAföG Kahlschlag" or BAföG clear-cut, transforming it into a fully subsidised loan program. As a result, the grant portion was eliminated, significantly reducing BAföG's appeal. Due to the rapid decline of students applying for BAföG it was once again overhauled in the 1990s, making it so that half the funding was in form of a grant and half in form of an interest-free loan -- the structure of which is still in force today. Since 2005, the share of the funding that is provided as a grant has been just over 50\% and the share provided as a loan just under 50\%. Further changes were made in 2001 when a repayment cap of 10.000 EUR was introduced  \citep{lost_geschichte_2025, staack_von_2017, meier_zur_2024}.
+
+BAföG continues to face low interest among students today, with one of its major issues being that students are not utilizing it, as it lacks appeal (see table \ref{table:bafoeg_support_landscape} and figure \ref{figure:bafoeg_support}). 
+
+
+\textcolor{red}{"Clearly summarize at the end of 3.2 how the historical shifts might influence current attitudes and NTU rates today."}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DECLINING UPTAKE AND ITS REASONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Declining uptake and its reasons} \label{subsection:declining-uptake}
+Some sources claim that since the introduction of BAföG in 1971, the proportion of students receiving financial aid has fallen from around 50\% to around 15\% as of 2023. Thereof, around 50\% received full funding \citep{meier_zur_2024}. According to the German student survey (g. Die Studierendenbefragung in Deutschland), it even went as low as 12.9\% in the summer semester of 2021\footnote{
+In Germany, the academic year is divided into a winter semester (October to March) and a summer semester (April to September). Most university programs begin in the winter semester.
+} \citep{kroher_studierendenbefragung_2023}. While these figures are based on different sources and survey years, they both point to the same overall trend, a significant and long term decline in the share of students receiving BAföG.
+
+The survey supports the finding that BAföG uptake has declined over time, and furthermore found that uptake has consistently been lower among students with higher parental education levels, which likely reflects income based ineligibility. Furthermore, the study shows that as parental educational attainment increases, funding rates decrease. At the same time, a general decline in funding rates can be observed over time across all groups \citep{kroher_studierendenbefragung_2023}.
+
+\textcolor{red}{"Provide brief, structured bullets summarizing key reasons for NTU clearly for quick reference."}
+
+%TODO: "Consider highlighting any known data gaps or uncertainties clearly here." idk about that though, thoughts Alex?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% STRUCTURAL AND BEHAVRIOUAL EXPLANATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection*{Structural and behavioural explanations}
+\label{subsection:structural-and-behavioural-explanations}
+The decline in BAföG uptake seems to be the result of both structural and behavioural factors. Structurally, the eligibility rules have become relatively stricter over time. For instance, income thresholds have not always kept pace with inflation or with actual cost of living for sudents, which means that fewer students qualify now than in earlier decades \citep{meier_zur_2024}. At the same time, the application process itself can discourage students from applying. The forms are long and complicated, and it is not always clear whether an application will be successful. For students who are already unsure about their eligibility, that uncertainty alone can be enough to put them off \citep{kroher_studierendenbefragung_2023}. This is consistent with findings by \cite{fidan_why_2021}, who show that information gaps and behavioural factors, like students incorrectly assuming they’re ineligible or being confused by the process, play a significant role in explaining non-take-up. Taken together, these elements likely explain both the lower eligibility rates and the growing number of students who could apply in theory, but choose not to.
+
+These patterns also raise questions about how effectively BAföG is reaching the students it is meant to support. In particular, it is worth considering whether informational and structural barriers may be affecting some groups disproportionately, such as students whose parents didn’t attend university or those with a migration background \citep{kroher_studierendenbefragung_2023}.
+
+\subsubsection*{Application rates and reported barriers}
+\label{subsection:application-rates-and-reported-barriers}
+The 22\( ^\text{nd} \) German student survey estimated that just about 80\% of students did not apply for BAföG during the term it was conducted. It also found that around 66\% of students had never applied for BAföG and that a further 10\% of students had also never received BAföG, but had submitted an (unsuccessful) application \citep{kroher_studierendenbefragung_2023}. The survey doesn’t go into detail about why these applications were unsuccessful, but common reasons are likely to include their income being just above the threshold, missing paperwork, or confusion about the eligibility criteria. 
+
+BAföG funded students can then be further divided into those who received BAföG dependent on parental support (9.3\%) and those who received BAföG independently of parental support (3.4\%) \citep{kroher_studierendenbefragung_2023}. The difference comes down to whether a student’s eligibility is based on their parents’ income or assessed independently. Independent status usually applies to students who are older, have children of their own, or have been financially self-sufficient for some time.
+
+These numbers suggest that quite a few students either don’t realise they might be eligible for BAföG or feel discouraged from applying in the first place. The fact that so many have never submitted an application, along with a smaller group who applied but didn’t receive support, points to a mix of both perceived and actual barriers in the system.
+
+Data was also collected on reasons students had for not applying for BAföG. The most commonly stated reason was thinking that parental income was too high, but 73.7\% of non-applicants claimed that as one of the reasons. The second most common reason stated was thinking that own income/assets were too high, with 29.7\% of non-applicants claiming that. The third most common reason stated was fear of debt (21.4\%). Also notable is that 7.8\% of non-applicants stated that expected funding amount would be too low as one of the reasons \citep{kroher_studierendenbefragung_2023}.
+
+\subsubsection*{Funding expiration and completion patterns}
+\label{subsection:funding-expiration-and-completion-patterns}
+
+The study also looked further into the group of former recepients. Out of the students who were not receiving BAföG because their funding had expired, just over 20\% reported that they had exceeded the maximum funding period or standard period of study. The study claims that this is not a surprising result since it is a well documented fact that most students in Germany exceed the standard period of study. Only just over a third of all students complete their studies within the standard period of study, with even almost a quarter exceeding the standard period of study by more than two semesters. Completing a degree within the allocated time is rather the exception than the norm \citep{kroher_studierendenbefragung_2023}.
+
+Other important reasons for the expiration of funding include that a student's own income or assets or those of relatives are too high (23.5\% and 18.6\%, respectively), that a student has changed their field of study (15.6\%), or that the required credit scores could not be provided (12.2\%). However, over 15\% of students whose funding has expired also state that they do not want to incur further debt or that the expected funding amount is too low (14.3\%). The current course of study not being eligible for funding or exceeding age limit play a minor role, accounting for around 7\% and 4\% respectively \citep{kroher_studierendenbefragung_2023}.
+
+\subsubsection*{Interpreting declining funding levels}
+\label{subsection:interpreting-declining-funding-levels}
+
+It’s also worth noting that for many years, the maximum BAföG support rate didn’t keep up with average reported living expenses for students. Data from the Sozialerhebung shows that this gap persisted from at least 2000 to 2017. It wasn’t until the 2022 reform (the 27th BAföG amendment) that the maximum support rate was increased to a level that finally exceeded average reported student expenses for the first time \citep{meier_bafog_2024, meier_zur_2024}. This increase took place after the end of the period covered in this analysis and is therefore not reflected in the data used.
+
+This raises a broader question about how to interpret declining funding rates. A lower share of students receiving BAföG doesn’t necessarily mean that fewer students are in need of support. Some of the decline might reflect general improvements in living standards. Income per capita in Germany has increased over the past two decades, and shifts in demographics and household income levels may mean that some students are no longer eligible under the current rules. This can be viewed as a general prosperity effect. Furthermore, the share of students receiving financial aid is also affected by various behavioural factors, including fluctuations in demand for education and the social composition of prospective students. This proportion does thus not accurately reflect how many students are actually in need of financial aid nor how many of them receive such aid \citep{meier_bafog_2024, meier_zur_2024}.
+
+While a drop in financial aid rates might suggest that fewer students are in need of support, this interpretation has its limits. Rising income levels and changing demographics may explain some of the reduced eligibility, but they don't account for why many students who seem to be eligible choose not to apply. Things like uncertainty about eligibility, the complexity of the system, or whether the amount of support seems worth the effort, all influence take up rates. As previous studies have shown, it’s not just about who qualifies on paper, it’s also about how the system is experienced by students themselves \citep{meier_bafog_2024, meier_zur_2024}.
+
+\textcolor{red}{Look into the Meier sources in these three paragraphs above}
+
+
+\subsubsection{How BAföG Entitlements Are Calculated}
+\label{subsection:how-bafog-entitlement-is-calculated}
+To understand eligibility for BAföG and the amount of support, it is essential to comprehend the means-testing process. 
+The BAföG system calculates entitlements based primarily on the income and assets of both the student and their parents. 
+This involves a detailed review of the applicant’s financial situation, including the income of the parents after accounting for taxes, social security contributions, and other standard allowances. 
+Any income exceeding a predefined threshold is deducted directly from the student’s potential entitlement.
+
+The application process may also require various supporting documents. 
+If the student does not live with their parents, proof of residency, such as a registration certificate or tenancy agreement, is necessary. 
+Similarly, proof of health insurance and, if applicable, documentation of income (e.g., pay slips or scholarship notices) must be provided. 
+Additional forms are required if the student has assets, such as bank statements, or owns a car, in which case, the vehicle’s estimated value must be submitted.
+
+A description of the process is visualized in Figure~\ref{fig:pipeline-overview}, which outlines a simplified version of the calculation of income and asset adjustments for both students and parents.
+For a more detailed simulation example of an individual in our dataset, see Appendix~\ref{appendix:simulation-example}.
+
+%TODO: "A brief, clearly stated bullet-point summary would help guide readers unfamiliar with the complexity of calculations." idk about this one either - what is your take Alex?
+
+\subsubsection{Institutional Design and Policy Instruments} 
+\label{section:institutional-design-and-policy-instruments}
+
+\textcolor{red}{This chapter feels a bit weird and out of place}
+
+\textcolor{red}{"Clarify more explicitly how policy instruments (threshold and support rates) directly relate to NTU—are thresholds misaligned with actual student needs?"}
+
+%\subsubsection*{The Income Exemption Threshold and the Support Rate}
+%\label{subsection:the-income-exemption-threshold-and-the-support-rate}
+
+BAföG uses two main tools in order to achieve its central objectives, the so-called Freibetragsgrenzen, which is the income exemption threshold, and the so-called Bedarfssätze, which is the support rate.
+
+\paragraph{Support Rates.}
+In order to determine the support rates, three main reference points are used: 1) the development of basic social security benefits (”citizens allowance” or Bürgergeld), 2) the development of consumer prices, which reflects the increase in general costs of living, and 3) the specific living expenses of students, which are surveyed every four to five years in the Sozialerhebung (”the social survey”). Additionally, the financial situation of the federal government is taken into account in order to ensure that increases in support rates, income exemption thresholds and social allowances are fiscally feasible \citep{meier_zur_2024}.
+
+\paragraph{Income Exemption Threshold.}
+In reviewing and determining the income exemption threshold, net income (g. arbeitnehmereinkommen) is primarily used as a reference indicator in BAföG reports. The income exemption threshold is also normatively determined by the legislature, i.e. the decision is not based on a fixed rule or an automatic formula, but on policy choices \citep{meier_zur_2024}.
+
+
+%\paragraph{Interactions Between the Income Exemption Threshold and the Support Rate.}
+These tools are interconnected, as raising the income exemption threshold increases the number of students eligible for BAföG. In addition to that, raising the income exemption threshold makes it so that those who previously received only partial support become eligible for more support, and thus raises the amounts granted to this group of students.
+
+According to the law on BAföG (§35) the support rate and the income exemption threshold must be reviewed every two years and, if necessary, re-determined accounting for the cost of living, general economic conditions, trends in income levels and wealth development \citep{bafoeg_law, meier_zur_2024}.
+
+\textcolor{red}{Look into the Meier sources in these paragraphs above}
+
+\input{tables/bafog_law_changes.tex}
+
+%\subsubsection{The Most Common Loan Repayment Models}
+\label{subsection:loan-repayment-plan}
+
+\paragraph{Loan Repayment.} Student loans are generally repaid either through traditional time-based repayment plans (TBRL), where borrowers pay back fixed amounts on a schedule, or income-contingent loans (ICL), where repayments depend on the borrower’s income. 
+
+ICLs are designed to reduce default risk by adjusting repayment amounts according to the individual’s financial situation, providing insurance against low income and supporting social mobility. In contrast, TBRLs can impose heavier burdens on low-income borrowers.
+
+The German BAföG system employs a partially income-contingent repayment scheme, where monthly repayments are capped at a modest level, and any remaining debt after a fixed number of installments is forgiven. This design reflects a compromise between traditional and income-contingent approaches and may influence students’ attitudes toward borrowing and aid uptake.
+
+\textcolor{red}{"Briefly relate repayment structures explicitly to NTU (does the partial income-contingent nature reduce or increase NTU?)."}
+
+
