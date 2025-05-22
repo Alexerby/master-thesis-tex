@@ -2,6 +2,7 @@
 \renewcommand{\thetable}{\thesection \arabic{table}}
 \setcounter{table}{0}
 
+\footnotesize{
 \begin{landscape}
 \section{Tables} \label{appendix:tables}
 \begin{table}[H]
@@ -39,12 +40,13 @@ Sibling received BAföG    & 61.54 & 64.71 & 46.15 & 53.33 & 48.48 & 32.14 & 37.
 \caption{Non-take-up rates by household type, migration background, sex, region, number of siblings, and sibling BAföG history.}
 \end{table}
 \end{landscape}
+}
 
 \begingroup
 \setlength{\tabcolsep}{4pt}
-\renewcommand{\arraystretch}{1.25}
+\renewcommand{\arraystretch}{1}
 \begin{table}[H]
-  \scriptsize
+  \footnotesize
   \centering
   \begin{tabular}{rcc|rr|rr}
   \toprule
@@ -87,14 +89,14 @@ Sibling received BAföG    & 61.54 & 64.71 & 46.15 & 53.33 & 48.48 & 32.14 & 37.
   2023 & 116 & 1.000 & 663 & 663 & 2,863,514 & 2,863,514 \\
   \bottomrule
   \end{tabular}
-  \caption{
+  \caption{\small{
     Average nominal and inflation-adjusted payout under the Federal Training Assistance Act (BAföG) 
     for student recipients (excluding pupils), based on official data published by Destatis.  
     The table includes the Consumer Price Index (CPI, variable \textbf{PREIS1}, base year 2020 = 100) and 
     a derived price factor (column “Factor (2023)”) calculated using these CPI values to express nominal amounts in 2023 euros.  
     The inflation-adjusted average payouts and total financial expenditures were computed using this deflator and are not 
     reported as such in the original Destatis tables.
-  }
+}}
   \label{table:payout_over_time}
   \end{table}
 \endgroup
@@ -102,6 +104,7 @@ Sibling received BAföG    & 61.54 & 64.71 & 46.15 & 53.33 & 48.48 & 32.14 & 37.
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.25}
 \begin{table}
+\footnotesize
 \centering
 \begin{tabular}{rrrrrrrr}
 \toprule

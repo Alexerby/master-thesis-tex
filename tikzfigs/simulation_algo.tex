@@ -22,7 +22,7 @@
     \node[pipelinebox, below=1.5cm of allowances_parent] (excessincome_parent) {Parental excess income};
 
     % New asset branch on left side, separate flow
-    \node[actionbox, below=3cm of soep, font=\footnotesize, align=center] (assets_identify) {Identify Student Assets};
+    \node[actionbox, below=1cm of soep, font=\footnotesize, align=center] (assets_identify) {Identify Student Assets};
     \node[pipelinebox, below=1.5cm of assets_identify] (assets_calc) {Calculate Total Assets};
     \node[pipelinebox, below=1.5cm of assets_calc] (allowances_29) {Apply §29 Allowance};
     \node[pipelinebox, below=1.5cm of allowances_29] (excess_assets) {Student excess assets};
@@ -44,7 +44,7 @@
     \draw[arrow] (allowances_parent.south) -- (excessincome_parent.north);
 
     % Arrows for asset flow
-    \draw[arrow] (soep.south) -- (assets_identify.north);
+    \draw[arrow] (student.south west) -- (assets_identify.north);
     \draw[arrow] (assets_identify.south) -- node[midway, left]{Yes} (assets_calc.north);  % Yes arrow for assets identified
     \draw[arrow] (assets_calc.south) -- (allowances_29.north);
     \draw[arrow] (allowances_29.south) -- (excess_assets.north);
