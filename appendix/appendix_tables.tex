@@ -43,8 +43,8 @@ Sibling received BAföG    & 61.54 & 64.71 & 46.15 & 53.33 & 48.48 & 32.14 & 37.
 }
 
 \begingroup
-\setlength{\tabcolsep}{4pt}
-\renewcommand{\arraystretch}{1}
+% \setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{0.8}
 \begin{table}[H]
   \footnotesize
   \centering
@@ -52,7 +52,7 @@ Sibling received BAföG    & 61.54 & 64.71 & 46.15 & 53.33 & 48.48 & 32.14 & 37.
   \toprule
   Year & \multicolumn{2}{c|}{Consumer Price Index} & \multicolumn{2}{c|}{Average Payout (EUR)} & \multicolumn{2}{c}{Financial Expenditure (EUR 1,000)} \\
   \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(l){6-7}
-  & Index (2020=100) & Price Factor (2023) & Nominal & Real (2023) & Nominal & Real (2023) \\
+  & Index & Price Factor  & Nominal & Real (2023) & Nominal & Real (2023) \\
   \midrule
   1991 & 61 & 1.885 & 290 & 547 & 1,538,590 & 2,900,701 \\
   1992 & 65 & 1.795 & 290 & 521 & 1,539,929 & 2,764,764 \\
@@ -93,7 +93,7 @@ Sibling received BAföG    & 61.54 & 64.71 & 46.15 & 53.33 & 48.48 & 32.14 & 37.
     Average nominal and inflation-adjusted payout under the Federal Training Assistance Act (BAföG) 
     for student recipients (excluding pupils), based on official data published by Destatis.  
     The table includes the Consumer Price Index (CPI, variable \textbf{PREIS1}, base year 2020 = 100) and 
-    a derived price factor (column “Factor (2023)”) calculated using these CPI values to express nominal amounts in 2023 euros.  
+    a derived price factor (column ``Price Factor'') calculated using these CPI values to express nominal amounts in 2023 euros.  
     The inflation-adjusted average payouts and total financial expenditures were computed using this deflator and are not 
     reported as such in the original Destatis tables.
 }}
@@ -101,16 +101,15 @@ Sibling received BAföG    & 61.54 & 64.71 & 46.15 & 53.33 & 48.48 & 32.14 & 37.
   \end{table}
 \endgroup
 
-\setlength{\tabcolsep}{4pt}
-\renewcommand{\arraystretch}{1.25}
 \begin{table}
-\footnotesize
+\renewcommand{\arraystretch}{1.25}
+\small
 \centering
 \begin{tabular}{rrrrrrrr}
 \toprule
 Year & Students & \multicolumn{3}{|c|}{Number of Supported Students} & \multicolumn{3}{c}{Proportion Supported (\%)} \\
 \midrule
- & & Total Supported & Fully Supported & Partially Supported & Total & Fully & Partially \\
+ & & Total & Fully & Partially & Total & Fully & Partially \\
 \midrule
 2023 & 2,868,311 & 501,425 & 245,255 & 256,170 & 17.5 & 8.6 & 8.9 \\
 2022 & 2,920,263 & 489,347 & 244,559 & 244,788 & 16.8 & 8.4 & 8.4 \\
@@ -140,14 +139,14 @@ Year & Students & \multicolumn{3}{|c|}{Number of Supported Students} & \multicol
 1998 & 1,800,651 & 336,355 & 97,539 & 238,810 & 18.7 & 5.4 & 13.3 \\
 \bottomrule
 \end{tabular}
-\caption{
+\caption{\small{
   Number and percentage of students receiving BAföG support.  
   Columns:  
   \textbf{BIL002} = total number of students;  
   \textbf{PER010} = total supported students;  
   \textbf{PER011} = fully supported students;  
   \textbf{PER012} = partially supported students.
-}
+}}
 \label{table:bafoeg_support_landscape}
 \end{table}
 
