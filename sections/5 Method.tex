@@ -14,12 +14,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Method} 
-
-\textcolor{red}{"Brief introductory paragraph clarifying why microsimulation is uniquely suited for this analysis would strengthen this section."}
-
 This study proceeds in two main steps. 
 First, we perform a microsimulation to calculate theoretical BAföG eligibility and award amounts based on statutory rules applied to individual-level survey data. 
-This simulation serves to identify who should be entitled to student aid under the legal framework.
+This simulation serves to identify who is entitled to student aid under the legal framework. Microsimulation is particularly suited here because it accounts for individual differences in backgrounds and family situations, applying complex eligibility rules precisely.
 
 Second, we estimate two binary response models along with a linear probability model to analyze behavioural non-take-up.
 That is, the likelihood that students eligible for BAföG according to the simulation nonetheless do not receive it. 
@@ -31,8 +28,8 @@ These models incorporate relevant socioeconomic and demographic factors to explo
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Microsimulation of Theoretical BAföG Eligibility} 
-To analyze non-take-up of BAföG, it is necessary to identify students who would be eligible for support based on statutory criteria, regardless of whether they actually apply or receive benefits. 
-To this end, we implement a microsimulation model that reconstructs individual eligibility and award amounts using detailed SOEP survey data and the relevant legal rules.
+To analyze non-take-up, we identify eligible students based on statutory criteria, regardless of actual receipt.
+We implement a microsimulation model that reconstructs individual eligibility and award amounts using detailed SOEP survey data and the relevant legal rules.
 The following section outlines the purpose, methodological approach, and main components of this simulation. 
 For an overview of the approach see Figure \ref{fig:pipeline-overview}.
 
