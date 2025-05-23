@@ -2,32 +2,26 @@
 %  APPENDIX – MICROSIMULATION PIPELINE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% -------------------------------------------------------------------------
-%  Introductory motivation 
-% -------------------------------------------------------------------------
-
-
 \newpage
 % ========================================================================
-\section[Microsimulation Pipeline]{Microsimulation Pipeline\footnote{ 
-Code for the simulation can be found in the GitHub repository \cite{bystrom2025msc}}
+\section[Microsimulation Appendix]{Microsimulation Pipeline (Technical Appendix)\footnote{
+This section documents the simulation code and data processing steps. Code is on GitHub \cite{bystrom2025msc}. § denotes legal paragraphs; EStG = Einkommensteuergesetz; BAföG = Bundesausbildungsförderungsgesetz.}
 }
 \label{appendix:microsimulation-pipeline}
 % ========================================================================
 
-This appendix documents the microsimulation pipeline used to construct the analysis dataset from raw SOEP extracts. The goal is to make each step in the process transparent, reproducible, and aligned with the legal and institutional rules governing student aid eligibility in Germany.
+This appendix documents the microsimulation pipeline used to construct the analysis dataset from raw SOEP extracts. The aim is to ensure transparency, reproducibility, and alignment with the legal and institutional framework governing student aid eligibility in Germany.
 
-The pipeline is organized into five main components: a student module, a sociodemographic enrichment module, a student income module, an assets module, and a parental income module. These components interact as illustrated in Figure~\ref{fig:pipeline-overview}.
-
-Figure~\ref{fig:pipeline-overview} maps the complete microsimulation pipeline, from raw SOEP inputs through modular components to the final BAföG calculation. The remainder of this appendix explains each component in detail.
+The pipeline comprises five primary components: the student module, sociodemographic enrichment module, student income module, assets module, and parental income module.
+Each module is detailed below.
 
 % -------------------------------------------------------------------------
 \subsection{Sociodemographic Module}
 % -------------------------------------------------------------------------
 
-This module constructs basic demographic characteristics needed throughout the pipeline. It provides sex, age, federal state, and household type variables. The federal state is used to derive an East/West classification, relevant for BAföG eligibility rules.
+This module constructs core demographic characteristics required throughout the pipeline. It derives sex, age, federal state, and household type. The federal state is used to classify students as residing in East or West Germany, which influences BAföG eligibility.
 
-Key data sources include:
+Key data sources:
 
 \begin{itemize}
   \item \texttt{ppathl}: sex, birth year and month
@@ -35,110 +29,106 @@ Key data sources include:
   \item \texttt{regionl}: federal state of residence
 \end{itemize}
 
-These variables are merged into the student module and used in eligibility filtering, modeling allowances, and regional policy differences.
+These variables are merged into the student module and used for eligibility filtering, modeling allowances, and accounting for regional policy differences.
 
 % -------------------------------------------------------------------------
 \subsection{Student Module}
 % -------------------------------------------------------------------------
 
-The student module is the core unit of the microsimulation. 
-It filters and prepares individuals from SOEP who qualify as students, and populates them with relevant characteristics for BAföG simulation. 
-This includes education status, household composition, parental identifiers, employment, and relationship status.
+The student module is the core of the microsimulation. It identifies individuals in SOEP who qualify as students and enriches their profiles with relevant characteristics for BAföG simulation. These include education status, household composition, parental identifiers, employment, and relationship status.
 
-It integrates inputs from multiple datasets:
+It integrates data from the following sources:
 
 \begin{itemize}
-  \item Education and religion: from \texttt{pl} (\texttt{plg0012\_h}, \texttt{plh0258\_h})
-  \item Living with parents: based on household and parent ID matches in \texttt{ppathl}
-  \item Employment status: from \texttt{pgen} (\texttt{pgemplst})
-  \item Number of children: counted from \texttt{bioparen} where the student appears as parent
-  \item Partnership status: inferred from household records
+  \item Education and religion: \texttt{pl} (\texttt{plg0012\_h}, \texttt{plh0258\_h})
+  \item Living with parents: inferred from household and parental IDs in \texttt{ppathl}
+  \item Employment status: \texttt{pgen} (\texttt{pgemplst})
+  \item Number of children: derived from \texttt{bioparen} (where the student is listed as a parent)
+  \item Partnership status: derived from \texttt{partner} and household records
+  \item Number of siblings: from \texttt{biosib}
 \end{itemize}
 
-The resulting dataset includes all eligible students, ready for downstream processing.
+The output is a filtered and annotated dataset of eligible students, ready for further processing.
 
 % -------------------------------------------------------------------------
 \subsection{Student-Income Module}
 % -------------------------------------------------------------------------
 
-This module computes the student's BAföG-relevant income. It begins with gross labour income and applies the following processing steps:
+This module calculates the student's BAföG-relevant income. Starting with gross labour income, it applies the following steps:
 
 \begin{itemize}
-  \item Merges reported income from the relevant assessment year (typically the previous calendar year)
-  \item Deduction of Werbungskosten (§~9a EStG)
-  \item Social insurance allowance of (§~21 BAföG)
-  \item Calculation and subtraction of income tax, church tax, and solidarity surcharge
-  \item Comparison with personal exemption thresholds (§~23 BAföG)
+  \item Merge reported income from the assessment year (typically the prior calendar year)
+  \item Deduct Werbungskosten as per §~9a EStG
+  \item Apply the social insurance allowance per §~21 BAföG
+  \item Calculate and deduct income tax, church tax, and solidarity surcharge
+  \item Compare resulting income against exemption thresholds per §~23 BAföG
 \end{itemize}
 
-The output is net income above allowances, which may reduce BAföG entitlements.
+The result is net income above allowances, which may reduce BAföG entitlements.
 
 % -------------------------------------------------------------------------
 \subsection{Assets Module}
 % -------------------------------------------------------------------------
 
-The assets module compiles student-owned assets from the \texttt{pwealth} dataset. This includes:
+The assets module compiles asset information from the \texttt{pwealth} dataset. Asset categories include:
 
 \begin{itemize}
-  \item \textbf{Financial assets:} bank accounts, savings, stocks, and bonds (\texttt{f0100a}--\texttt{f0100e})
-  \item \textbf{Real estate:} other property ownership and shares in real estate (\texttt{e0111a}--\texttt{e0111e})
-  \item \textbf{Business assets:} stakes in private businesses or self-employment (\texttt{b0100a}--\texttt{b0100e})
-  \item \textbf{Private insurances:} building loan contracts, life and pension insurance (\texttt{i0100a}--\texttt{i0100e})
-  \item \textbf{Vehicles:} cars, motorcycles, and other personal transport (\texttt{v0100a}--\texttt{v0100e})
-  \item \textbf{Tangible assets:} valuables such as jewelry, art, or furniture (\texttt{t0100a}--\texttt{t0100e})
-  \item \textbf{Liabilities and debts:} total outstanding debt, excluding student loans (\texttt{w0011a}--\texttt{w0011e})
+  \item \textbf{Financial assets:} accounts, savings, stocks, bonds (\texttt{f0100a}–\texttt{f0100e})
+  \item \textbf{Real estate:} owned property or partial stakes (\texttt{e0111a}–\texttt{e0111e})
+  \item \textbf{Business assets:} private businesses or self-employment stakes (\texttt{b0100a}–\texttt{b0100e})
+  \item \textbf{Private insurance:} life, pension, and building loan contracts (\texttt{i0100a}–\texttt{i0100e})
+  \item \textbf{Vehicles:} personal transport (\texttt{v0100a}–\texttt{v0100e})
+  \item \textbf{Tangible assets:} valuables (e.g., jewelry, art, furniture) (\texttt{t0100a}–\texttt{t0100e})
+  \item \textbf{Liabilities:} total outstanding debt, excluding student loans (\texttt{w0011a}–\texttt{w0011e})
 \end{itemize}
 
-All components are aggregated into a student-level asset profile. This value is compared against the legally defined asset allowance to determine whether the individual exceeds the threshold and may be excluded from eligibility.
-
-The legal basis for this assessment is §~29 of the Bundesausbildungsförderungsgesetz (BAföG), which specifies the applicable asset allowances (\emph{Freibeträge vom Vermögen}).
+All asset types are aggregated into a single student-level asset value, which is then compared to the allowance threshold defined in §~29 BAföG (\emph{Freibeträge vom Vermögen}). Students exceeding the threshold may be deemed ineligible.
 
 % -------------------------------------------------------------------------
 \subsection{Parental-Income Module}
 % -------------------------------------------------------------------------
 
-This module estimates the amount that parents are expected to contribute to a student's support. It proceeds as follows:
+This module estimates the parental contribution to student support. It proceeds through:
 
 \begin{itemize}
-  \item Match student with parents using \texttt{bioparen}
-  \item Extract gross income from \texttt{pgen}
-  \item Deduct Werbungskosten and social insurance contributions
-  \item Apply parental tax model and §~25 BAföG allowances (base, sibling, relationship)
+  \item Matching students to parents via \texttt{bioparen}
+  \item Extracting gross income from \texttt{pgen}
+  \item Deducting Werbungskosten and social insurance contributions
+  \item Applying allowances per §~25 BAföG (base allowance, sibling allowance, and partnership status)
 \end{itemize}
 
-If both parents are observed, their contributions are aggregated. The final value is the BAföG-relevant parental contribution.
+If data for both parents is available, their contributions are summed to determine the total parental support obligation.
 
 % -------------------------------------------------------------------------
 \subsection{BAföG Calculation}
 % -------------------------------------------------------------------------
 
-The final module brings together all student and parental variables to compute a theoretical BAföG entitlement. The following logic is applied:
+The final module integrates all variables to compute theoretical BAföG entitlements. The calculation follows this logic:
 
 \begin{itemize}
-  \item Deduct student income from allowances
-  \item Subtract parental contribution
-  \item Exclude students who exceed asset thresholds
+  \item Subtract allowable income from the student’s income
+  \item Subtract estimated parental contribution
+  \item Exclude students who exceed asset limits
 \end{itemize}
 
-This results in an estimated monthly benefit, which can be compared to reported values to analyze take-up behavior and simulate reforms.
-
+The output is an estimated monthly BAföG benefit, which can be used to assess take-up behavior and simulate policy reforms.
 
 
 % -------------------------------------------------------------------------
-\subsection{Variable Dictionary}
+\subsection{Variable Dictionary for Microsimulation Datasets}
 % -------------------------------------------------------------------------
 {\footnotesize
 \begin{longtable}{llll}
 \caption{Variable Dictionary by Dataset} 
- \label{table:variable_dictionary} \\
+\label{table:variable_dictionary} \\
 \toprule
-Dataset & Variable & Description & Data Type (semantic) \\
+Dataset & Variable & Description & Data Type / Scale \\
 \midrule
 \endfirsthead
 
 \multicolumn{4}{l}{\textit{(continued from previous page)}} \\
 \toprule
-Dataset & Variable & Description & Data Type (semantic) \\
+Dataset & Variable & Description & Data Type / Scale \\
 \midrule
 \endhead
 
@@ -148,34 +138,58 @@ Dataset & Variable & Description & Data Type (semantic) \\
 
 \bottomrule
 \endlastfoot
+
+\multicolumn{4}{l}{\textbf{IDENTIFIERS AND CORE DEMOGRAPHICS}} \\
 \texttt{ppathl} & \texttt{pid} & Person identifier & int \\
 \texttt{ppathl} & \texttt{hid} & Household ID & int \\
 \texttt{ppathl} & \texttt{syear} & Survey year & date \\
 \texttt{ppathl} & \texttt{gebjahr} & Year of birth & int \\
-\texttt{ppathl} & \texttt{sex} & Sex & Categorical \\
 \texttt{ppathl} & \texttt{gebmonat} & Month of birth & int \\
+\texttt{ppathl} & \texttt{sex} & Sex & Categorical \\
 \texttt{ppathl} & \texttt{partner} & Partnership status & Categorical \\
 \texttt{ppathl} & \texttt{migback} & Migration background & Categorical \\
-\texttt{biosib} & \texttt{pid} & Person identifier & int \\
-\texttt{biosib} & \texttt{sibpnr1--sibpnr11} & Sibling person numbers & int \\
+\texttt{regionl} & \texttt{hid} & Household ID & int \\
+\texttt{regionl} & \texttt{syear} & Survey year & date \\
+\texttt{regionl} & \texttt{bula} & Federal state (Bundesland) & Categorical \\
+ 
+\midrule
+\multicolumn{4}{l}{\textbf{EDUCATION}} \\
 \texttt{pl} & \texttt{pid} & Person identifier & int \\
 \texttt{pl} & \texttt{syear} & Survey year & date \\
 \texttt{pl} & \texttt{plg0012\_h} & Currently in education & Ordinal \\
+\texttt{pl} & \texttt{plg0014\_v5} & Education level, 1999--2008 & Ordinal \\
+\texttt{pl} & \texttt{plg0014\_v6} & Education level, 2009--2012 & Ordinal \\
+\texttt{pl} & \texttt{plg0014\_v7} & Education level, 2013--2021 & Ordinal \\
+
+\midrule
+\multicolumn{4}{l}{\textbf{RELIGION AND STUDENT AID}} \\
 \texttt{pl} & \texttt{plh0258\_h} & Religion / church membership & Categorical \\
 \texttt{pl} & \texttt{plc0167\_h} & BAföG eligibility & Binary \\
 \texttt{pl} & \texttt{plc0168\_h} & BAföG / scholarship (gross, monthly) & int \\
-\texttt{pl} & \texttt{plg0014\_v5} & Education level, 1999--2008 & Ordinal \\
-\texttt{pl} & \texttt{plg0014\_v6} & Education level, 2009-2012 & Ordinal \\
-\texttt{pl} & \texttt{plg0014\_v7} & Education level, 2013--2021 & Ordinal \\
+\texttt{pequiv} & \texttt{pid} & Person identifier & int \\
+\texttt{pequiv} & \texttt{syear} & Survey year & date \\
+\texttt{pequiv} & \texttt{istuy} & Student grants received & int \\
+
+\midrule
+\multicolumn{4}{l}{\textbf{EMPLOYMENT AND INCOME}} \\
 \texttt{pgen} & \texttt{pid} & Person identifier & int \\
 \texttt{pgen} & \texttt{syear} & Survey year & date \\
 \texttt{pgen} & \texttt{pglabgro} & Labour income (gross) & int \\
 \texttt{pgen} & \texttt{pgemplst} & Employment status & Categorical \\
 \texttt{pgen} & \texttt{pgpartnr} & Partner indicator & int \\
+\texttt{biol} & \texttt{pid} & Person identifier & int \\
+\texttt{biol} & \texttt{syear} & Survey year & date \\
+\texttt{biol} & \texttt{lb0267\_v1} & Employment status & Categorical \\
+
+\midrule
+\multicolumn{4}{l}{\textbf{HOUSING AND RENT}} \\
 \texttt{pkal} & \texttt{pid} & Person identifier & int \\
 \texttt{pkal} & \texttt{syear} & Survey year & date \\
 \texttt{pkal} & \texttt{kal2a02} & Monthly rent including utilities & int \\
 \texttt{pkal} & \texttt{kal2a03\_h} & Housing benefit & int \\
+
+\midrule
+\multicolumn{4}{l}{\textbf{WEALTH AND ASSETS}} \\
 \texttt{pwealth} & \texttt{pid} & Person identifier & int \\
 \texttt{pwealth} & \texttt{syear} & Survey year & date \\
 \texttt{pwealth} & \texttt{f0100a--f0100e} & Financial assets & int \\
@@ -185,23 +199,20 @@ Dataset & Variable & Description & Data Type (semantic) \\
 \texttt{pwealth} & \texttt{v0100a--v0100e} & Vehicles & int \\
 \texttt{pwealth} & \texttt{t0100a--t0100e} & Tangible assets & int \\
 \texttt{pwealth} & \texttt{w0011a--w0011e} & Liabilities and debts & int \\
+
+\midrule
+\multicolumn{4}{l}{\textbf{FAMILY RELATIONSHIPS}} \\
+\texttt{biosib} & \texttt{pid} & Person identifier & int \\
+\texttt{biosib} & \texttt{sibpnr1--sibpnr11} & Sibling person numbers & int \\
 \texttt{bioparen} & \texttt{pid} & Person identifier & int \\
 \texttt{bioparen} & \texttt{fnr} & Father’s person ID & int \\
 \texttt{bioparen} & \texttt{mnr} & Mother’s person ID & int \\
-\texttt{regionl} & \texttt{hid} & Household ID & int \\
-\texttt{regionl} & \texttt{bula} & Federal state (Bundesland) & Categorical \\
-\texttt{regionl} & \texttt{syear} & Survey year & date \\
+
+\midrule
+\multicolumn{4}{l}{\textbf{HOUSEHOLD COMPOSITION}} \\
 \texttt{hgen} & \texttt{hid} & Household ID & int \\
-\texttt{hgen} & \texttt{hgtyp1hh} & Household type & Categorical \\
 \texttt{hgen} & \texttt{syear} & Survey year & date \\
-\texttt{pequiv} & \texttt{pid} & Person identifier & int \\
-\texttt{pequiv} & \texttt{istuy} & Student grants received & int \\
-\texttt{pequiv} & \texttt{syear} & Survey year & date \\
-\texttt{biol} & \texttt{pid} & Person identifier & int \\
-\texttt{biol} & \texttt{pid} & Person identifier & int \\
-\texttt{biol} & \texttt{syear} & Survey year & date \\
-\texttt{biol} & \texttt{lb0267\_v1} & Employment Status & Categorical \\
-\texttt{biol} & \texttt{syear} & Survey year & date \\
-\texttt{biol} & \texttt{lb0285} & Number of Children & int \\
+\texttt{hgen} & \texttt{hgtyp1hh} & Household type & Categorical \\
+
 \end{longtable}
 }

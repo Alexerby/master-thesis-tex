@@ -1,7 +1,7 @@
 \begin{landscape}
 \begin{figure}[htbp]
   \centering
-  \scalebox{1}{
+  \scalebox{0.9}{
   \begin{tikzpicture}[node distance=2.5cm and 3cm, auto]
 
     % Existing nodes for student and parent flows
@@ -22,7 +22,7 @@
     \node[pipelinebox, below=1.5cm of allowances_parent] (excessincome_parent) {Parental excess income};
 
     % New asset branch on left side, separate flow
-    \node[actionbox, below=1cm of soep, font=\footnotesize, align=center] (assets_identify) {Identify Student Assets};
+    \node[actionbox, below=1cm of soep, font=\footnotesize, align=center] (assets_identify) {Student has Assets?};
     \node[pipelinebox, below=1.5cm of assets_identify] (assets_calc) {Calculate Total Assets};
     \node[pipelinebox, below=1.5cm of assets_calc] (allowances_29) {Apply §29 Allowance};
     \node[pipelinebox, below=1.5cm of allowances_29] (excess_assets) {Student excess assets};
@@ -51,13 +51,11 @@
 
   \end{tikzpicture}
 }
-  \caption{Flowchart for the calculation of student and parental income and asset adjustments. This process includes the identification of relevant income and asset sources, subtraction of allowable expenses, and the application of specific allowances under sections \textit{§23} and \textit{§25} of the BAföG law.}
-  \caption*{
-    \small {Notes:  
-  \textbf{WKP}: Werbungskostenpauschale (Standard deduction for work-related expenses)  
-  \textbf{SI}: Sozialversicherung (Social Security)  
-  \textbf{TAX}: Tax (Income Tax)  
-  \textbf{CTAX}: Church Tax}}
+  \caption{Flowchart for the calculation of student and parental income and asset adjustments. This process includes the identification of relevant income and asset sources, subtraction of allowable expenses, and the application of specific allowances under sections \textit{§23}, \textit{§25} and \textit{§29} of BAföG. Abbreviations:
+  \textbf{WKP}: Standard deduction for work-related expenses,
+  \textbf{SI}: Social Security,
+  \textbf{TAX}: Income tax,
+  \textbf{CTAX}: Church Tax.}
   \label{fig:pipeline-overview}
 \end{figure}
 \end{landscape}

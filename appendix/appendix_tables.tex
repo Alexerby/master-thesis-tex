@@ -2,37 +2,36 @@
 \renewcommand{\thetable}{\thesection \arabic{table}}
 \setcounter{table}{0}
 
-\footnotesize{
 \begin{landscape}
+\renewcommand{\arraystretch}{0.8}
 \section{Tables} \label{appendix:tables}
 \begin{table}[H]
+\setlength{\tabcolsep}{4pt} % default is 6pt, lower to 3pt or 2pt
+\small
 \centering
 \label{tab:nontakeup_hgtyp_migback_sex_east_siblings}
 \begin{tabular}{lccccccccccccccc}
 \toprule
-Household Type & 2007 & 2008 & 2009 & 2010 & 2011 & 2012 & 2013 & 2014 & 2015 & 2016 & 2017 & 2018 & 2019 & 2020 & 2021 \\
+Category & 2007 & 2008 & 2009 & 2010 & 2011 & 2012 & 2013 & 2014 & 2015 & 2016 & 2017 & 2018 & 2019 & 2020 & 2021 \\
 \midrule
+\multicolumn{16}{l}{\textbf{Household Type}} \\
 1-Person Household      & 52.38 & 52.38 & 64.71 & 72.22 & 60.00 & 38.71 & 41.18 & 37.93 & 56.00 & 55.56 & 46.67 & 64.29 & 54.55 & 59.38 & 63.33 \\
 Couple Without Children & 80.00 & 50.00 & 75.00 & 100.00 & 75.00 & 50.00 & 63.64 & 88.89 & 36.36 & 85.71 & 69.23 & 46.15 & 60.00 & 90.00 & 71.43 \\
 Couple With Children    & 66.67 & 70.83 & 56.86 & 56.86 & 51.90 & 56.96 & 51.69 & 59.49 & 71.43 & 53.13 & 66.67 & 66.67 & 73.24 & 67.27 & 77.27 \\
 \midrule
-Migration Background & 2007 & 2008 & 2009 & 2010 & 2011 & 2012 & 2013 & 2014 & 2015 & 2016 & 2017 & 2018 & 2019 & 2020 & 2021 \\
-\midrule
+\multicolumn{16}{l}{\textbf{Migration Background}} \\
 No migration background   & 61.22 & 64.41 & 66.10 & 65.08 & 53.33 & 53.47 & 52.44 & 59.04 & 65.85 & 62.32 & 67.39 & 63.04 & 67.11 & 63.29 & 65.43 \\
 With migration background & 58.82 & 61.54 & 47.83 & 50.00 & 54.76 & 45.71 & 46.67 & 49.06 & 60.47 & 47.83 & 54.55 & 65.46 & 68.42 & 64.71 & 70.00 \\
 \midrule
-Sex & 2007 & 2008 & 2009 & 2010 & 2011 & 2012 & 2013 & 2014 & 2015 & 2016 & 2017 & 2018 & 2019 & 2020 & 2021 \\
-\midrule
+\multicolumn{16}{l}{\textbf{Sex}} \\
 Male   & 68.97 & 69.44 & 58.54 & 69.23 & 50.00 & 53.73 & 47.89 & 53.52 & 61.91 & 64.00 & 70.31 & 64.79 & 64.29 & 58.33 & 68.00 \\
 Female & 54.05 & 59.18 & 63.42 & 54.17 & 56.94 & 49.28 & 52.11 & 56.92 & 66.13 & 50.77 & 56.63 & 63.16 & 70.69 & 67.69 & 65.57 \\
 \midrule
-Region & 2007 & 2008 & 2009 & 2010 & 2011 & 2012 & 2013 & 2014 & 2015 & 2016 & 2017 & 2018 & 2019 & 2020 & 2021 \\
-\midrule
+\multicolumn{16}{l}{\textbf{Region}} \\
 West Germany & 73.17 & 69.70 & 67.21 & 62.50 & 56.70 & 59.14 & 50.00 & 59.63 & 67.00 & 62.22 & 67.80 & 67.23 & 70.97 & 71.11 & 72.62 \\
 East Germany & 40.00 & 42.11 & 42.86 & 56.52 & 45.71 & 34.88 & 50.00 & 37.04 & 52.00 & 36.00 & 41.38 & 50.00 & 52.38 & 34.78 & 48.15 \\
 \midrule
-Sibling BAföG history & 2007 & 2008 & 2009 & 2010 & 2011 & 2012 & 2013 & 2014 & 2015 & 2016 & 2017 & 2018 & 2019 & 2020 & 2021 \\
-\midrule
+\multicolumn{16}{l}{\textbf{Sibling BAföG history}} \\
 No sibling received BAföG & 65.52 & 63.33 & 53.85 & 60.87 & 64.87 & 61.29 & 56.76 & 73.17 & 58.97 & 72.41 & 70.27 & 52.50 & 75.68 & 66.67 & 63.33 \\
 Sibling received BAföG    & 61.54 & 64.71 & 46.15 & 53.33 & 48.48 & 32.14 & 37.50 & 56.00 & 68.18 & 44.44 & 44.74 & 63.64 & 60.00 & 43.75 & 55.56 \\
 \bottomrule
@@ -40,10 +39,8 @@ Sibling received BAföG    & 61.54 & 64.71 & 46.15 & 53.33 & 48.48 & 32.14 & 37.
 \caption{Non-take-up rates by household type, migration background, sex, region, number of siblings, and sibling BAföG history.}
 \end{table}
 \end{landscape}
-}
 
 \begingroup
-% \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{0.8}
 \begin{table}[H]
   \footnotesize
