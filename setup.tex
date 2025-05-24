@@ -10,23 +10,32 @@
 \usepackage[hyphens]{url}
 \usepackage{amsmath, amssymb, setspace, float, subcaption, caption, booktabs, pdflscape, dcolumn, titlesec, tocloft, comment, xcolor, longtable, blindtext, rotating, lipsum}
 \usepackage{multicol}
+\usepackage{multibib} 
 \usepackage[flushleft]{threeparttable}
-\usepackage[colorlinks=true]{hyperref}
-\usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage{parskip}
 \usepackage[utf8]{inputenc}
 
-% \definecolor{citecolor}{RGB}{0, 51, 102}
+\definecolor{aeaBlue}{HTML}{0072CE}
 \usepackage[round, authoryear]{natbib}
 \definecolor{refcolor}{RGB}{102,178,255} % light blue
 
+<<<<<<< HEAD
 \hypersetup{
      colorlinks   = true, %If links to papers should be colored
      citecolor    = refcolor, %color of citation text
      urlcolor = refcolor, %if you use an URL, this is how it is colored
     linkcolor = black
 }
+=======
+
+\usepackage[
+    colorlinks=true,
+    linkcolor=black,      % for internal links including ToC
+    citecolor=aeaBlue,       % for citations
+    urlcolor=aeaBlue         % for URLs
+]{hyperref}
+>>>>>>> origin/overleaf-2025-05-24-1312
 
 \input{setup/tikz.tex}
 
@@ -35,11 +44,6 @@
 
 \graphicspath{{figures/}}
 
-
-
-%\bibliographystyle{apalike} 
-\bibliographystyle{plainnat}
-% \bibliographystyle{plain}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Table formatting
@@ -61,7 +65,27 @@
 \numberwithin{equation}{section}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% List Formatting
+% Formatting
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcites{main,other}{Main References, Other References}
+
+% Titles
+\bibliographystyle{plainnat}
+\newcommand{\sectionbreak}{\clearpage} % Break page when encountering new section
+
+% \titleformat{\section}
+%   {\normalfont\huge\bfseries}   % font formatting
+%   {\thesection}{1em}             % section number
+%   {}                             % code before the title
+%
+%
+% \titlespacing*{\section}
+%   {0pt}    % left margin
+%   {0pt}    % space before the title
+%   {2em}    % space after the title (increase this to move the text below down)
+
+% Lists
 \setlist[itemize]{itemsep=0.05em}
 \captionsetup{font=footnotesize}
+

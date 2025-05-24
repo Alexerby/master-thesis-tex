@@ -10,6 +10,7 @@
 %TODO: We need to do sensitivity analysis 
 %TODO: How closely do simulated award amounts match reported distributions? Use appendix distribution
 %TODO: Also use timeline in appendix for the comparison of theoretical to reported
+%TODO: 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -176,22 +177,35 @@ To study the determinants of non-take-up (NTU) of BAföG among theoretically eli
 \begin{equation}
   \Pr(\mathrm{NTU} = 1 \mid \mathbf{X}) = F(\mathbf{X}^\top \boldsymbol{\beta}),
 \end{equation}
-where \( \mathrm{NTU} \) is a binary indicator for non-take-up, \( \mathbf{X} \) is the vector of covariates listed in Table~\ref{tab:descriptive_ntu_all}, and \( F(\cdot) \) is the link function that maps the linear index to a probability.
+where \( \mathrm{NTU} \) is a binary indicator for non-take-up, \( \mathbf{X} \) is the vector of covariates listed in Table~\ref{tab:descriptive_ntu_all}, and \( F(\cdot) \) is a link function that maps the linear index to a probability.\footnote{
+This formulation can be motivated by a latent variable model: \( \mathrm{NTU}^* = \mathbf{X}^\top \boldsymbol{\beta} + \varepsilon \), where \( \mathrm{NTU}^* \) is an unobserved continuous variable and \( \varepsilon \) follows a standard normal distribution (probit) or a logistic distribution (logit). The observed binary outcome is \( \mathrm{NTU} = 1 \) if \( \mathrm{NTU}^* > 0 \), and \( \mathrm{NTU} = 0 \) otherwise.
+}
 
-We consider three common specifications for \( F(\cdot) \):
+We consider three specifications for \( F(\cdot) \), corresponding to commonly used binary choice models. 
+The Probit model uses the cumulative distribution function (CDF) of the standard normal distribution, the Logit model uses the CDF of the standard logistic distribution, and the Linear Probability Model (LPM) uses a linear functional form.
 
-\begin{itemize}
-  \item \textbf{Probit model:} \( F(z) = \Phi(z) \), where \( \Phi(\cdot) \) is the cumulative distribution function (CDF) of the standard normal distribution.
-  \item \textbf{Logit model:} \( F(z) = \Lambda(z) = \frac{1}{1 + \exp(-z)} \), the logistic CDF.
-  \item \textbf{Linear Probability Model (LPM):} \( F(z) = z \), estimated using ordinary least squares (OLS).
-\end{itemize}
+\begin{table}[H]
+\footnotesize
+\centering
+\label{tab:model_specifications}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Model} & \textbf{Link Function \( F(\mathbf{X}^\top \boldsymbol{\beta}) \)} & \textbf{Estimation Method} \\ \midrule
+Probit (Standard Normal CDF) & \( \Phi(\mathbf{X}^\top \boldsymbol{\beta}) \) & Maximum Likelihood \\
+Logit (Standard Logistic CDF) & \( \Lambda(\mathbf{X}^\top \boldsymbol{\beta}) \) & Maximum Likelihood \\
+Linear Probability Model & \( \mathbf{X}^\top \boldsymbol{\beta} \) & Ordinary Least Squares (OLS) \\
+\bottomrule
+\end{tabular}
+\caption{Specifications of the Binary Choice Models}
+\end{table}
 
-All models are estimated on a pooled cross-section of theoretically eligible individuals (\( n = 458 \)), as we restrict the sample to observations with complete parental income information. Although the SOEP is a panel, we do not exploit its longitudinal structure here due to the limited sample size.
+All models are estimated on a pooled cross-section of theoretically eligible individuals (\( n = 458 \)), as we restrict the sample to observations with complete parental income information. 
+Although the SOEP is a panel, we do not exploit its longitudinal structure here due to the limited sample size.
 
 \paragraph{Interpretation and Comparison.} 
 The logit and probit models are nonlinear estimators of the probability of non-take-up, based on an underlying latent index framework. 
 Their coefficients represent changes in the unobserved latent variable and are not directly interpretable in terms of changes in the probability of the observed outcome. 
-To aid interpretation, we report average marginal effects (AMEs), which approximate the average change in the probability of non-take-up associated with a one-unit increase in each covariate.\footnote{The AME for covariate \( X_k \) is computed as the sample analogue of the population moment \( \mathbb{E}[f(\mathbf{X}^\top \boldsymbol{\beta}) \cdot \beta_k] \), where \( f(\cdot) \) is the derivative of the link function \( F(\cdot) \). Specifically,
+To facilitate interpretation, we report average marginal effects (AMEs), which approximate the average change in the probability of non-take-up associated with a one-unit increase in each covariate.\footnote{The AME for covariate \( X_k \) is computed as the sample analogue of the population moment \( \mathbb{E}[f(\mathbf{X}^\top \boldsymbol{\beta}) \cdot \beta_k] \), where \( f(\cdot) \) is the derivative of the link function \( F(\cdot) \). Specifically,
 \[
     \widehat{\text{AME}}_k 
     = \frac{1}{n} \sum_{i=1}^n f(\mathbf{X}_i^\top \hat{\boldsymbol{\beta}}) \cdot \hat{\beta}_k
@@ -199,10 +213,10 @@ To aid interpretation, we report average marginal effects (AMEs), which approxim
 \]
 where \( \mathbb{E}_n[\cdot] \) denotes the empirical expectation over the sample.}
 
-In practice, logit and probit models typically yield similar qualitative results, with differences largely driven by the tails of the distribution. We report both for completeness and robustness.
+In practice, logit and probit models typically yield similar qualitative results, with differences largely driven by the tails of the distribution. We report both for completeness.
 
-The LPM serves as a linear benchmark. While it has known limitations (e.g., heteroskedastic errors and potentially implausible predicted probabilities), it offers transparent interpretation and is widely used in applied work. Coefficients can be interpreted directly as marginal effects, and extensions such as fixed effects or instrumental variables are straightforward to implement.
-
+The LPM serves as a linear benchmark. 
+While it can produce predicted probabilities outside the \([0,1]\) range and has some limitations in modelling binary outcomes, it provides a simple and transparent interpretation as coefficients directly represents the marginal effects.
 
 \subsubsection{Key Predictors of Non-Take-Up}
 Our model includes a set of explanatory variables informed by existing literature and the institutional context of BAföG. 
@@ -212,42 +226,48 @@ While our primary goal is to estimate the association between these factors and 
 
 The rationale for including several of these variables is further elaborated below, drawing on prior research and theoretical considerations. In particular, the inclusion of factors like risk attitudes, family experience with the application process, and regional socialization helps account for variation in informational access, institutional trust, and attitudes toward public support.
 
-\paragraph{Risk appetite, impulsiveness and patience.} In this analysis, a variable for students' self-assessed willingness to take risks is included. 
-Even though BAföG offers relatively safe and generous conditions, some students might still be hesitant to take on any form of debt if they are generally risk-averse. 
-By including this variable, we aim to capture whether differences in individual risk preferences help explain why some eligible students choose not to apply.
+\paragraph{Risk appetite, impulsiveness and patience.}  
+To understand why some eligible students don’t apply for BAföG, we consider their willingness to take risks.  
+Even though BAföG comes with relatively safe and generous terms, risk-averse students might still shy away from taking on any debt.  
+By including this measure, we aim to see if risk preferences explain some of the non-take-up behaviour.  
 
-\cite{herber_non-take-up_2019} also include a risk preference variable in their study, mainly to control for the possibility that risk attitudes could affect take-up behavior or influence how other factors, like impatience, play a role. 
-They do not find a strong effect of risk aversion on BAföG take-up, but they still argue it is useful to control for. 
-In a similar way, we include this variable to improve our model and to see whether risk aversion plays any role in students’ decisions to reject BAföG.
+\cite{herber_non-take-up_2019} also control for risk attitudes in their study, mainly to check if risk aversion influences take-up or interacts with traits like impatience.  
+While they find no strong effect, they argue it’s important to keep it in the model — and we follow their lead here.  
 
-Furthermore, we include a control variable for impulsiveness, measured using a scale constructed by SOEP from responses to several relevant survey questions.
-Similarly, we control for patience using a scale based on a different set of questions from the SOEP questionnaire.
-Including these behavioral traits allows us to account for the possibility that impulsiveness or patience may influence students’ decision-making processes and thus help explain variation in BAföG take-up among eligible students.
+Alongside risk appetite, we account for impulsiveness and patience using scales constructed by SOEP based on several survey questions.  
+These behavioural traits might shape how students make financial decisions, so including them helps capture more of the individual variation behind BAföG take-up.
 
-\paragraph{East German socialization.}  A variable indicating whether the student lives in East Germany is included to account for potential differences in attitudes toward state support rooted in historical and regional context. \cite{alesina_good-bye_2007} show that individuals from the former GDR tend to have stronger preferences for redistribution and a greater belief in the role of the state in providing social services, and that these differences in preferences can persist for one to two generations after reunification. Current residence in East Germany may reflect continued exposure to these norms and institutions and can serve as a reasonable proxy for this form of socialization. Since the variable is statistically significant at the 5\% level in our model, we interpret it as capturing persistent regional differences in how students view and respond to publicly provided financial support like BAföG.
+\paragraph{East German socialisation.}  
+Whether a student lives in East Germany could shape their attitudes toward state support, reflecting historical and cultural influences.  
+Research by \cite{alesina_good-bye_2007} shows that former GDR residents tend to favour redistribution more and trust state support even generations after reunification.  
+So, we use this regional indicator as a proxy for such socialisation effects.  
+Since it turns out significant in our model, it likely captures meaningful differences in how students view and respond to BAföG.
 
-\paragraph{Sibling prior experience with BAföG.} An indicator for whether the student has an older sibling who previously received BAföG is included to capture potential differences in access to informal support and familiarity with the application process. Students with siblings who have already gone through the steps of applying may be more aware of eligibility rules and practical requirements. \cite{herber_non-take-up_2019} highlight that such sibling experience can help reduce informational and procedural barriers, making it more likely that students follow through with the application. This variable is intended to reflect how previous exposure to the system within the family can shape students’ confidence and ability to navigate what is often perceived as a complex process.
+\paragraph{Sibling prior experience with BAföG.}  
+Having an older sibling who previously received BAföG might ease the application process by providing guidance and familiarity.  
+According to Herber et al. (2019), this kind of family experience can lower informational and procedural barriers, making it easier for students to follow through.  
+Including this factor helps us see if such informal support within families influences take-up decisions.
 
-\paragraph{Migration background.} Two variable for indirect and direct migration background is included to explore whether differences in familiarity with the BAföG system may influence take-up. 
-Some students may come from households with less exposure to German administrative processes or financial aid structures, which could affect their understanding of eligibility or the application itself. 
-In addition, studies show that individuals with a migration background in Germany often have lower financial literacy, which may make it harder to evaluate financial aid options like BAföG \citep{Tsegay_2024}. 
-Including this variable helps capture potential structural or informational factors that may contribute to lower take-up rates among eligible students. 
+\paragraph{Migration background.}  
+We distinguish between direct and indirect migration backgrounds to explore whether less familiarity with the German aid system affects take-up.  
+Students from migrant households might face additional challenges understanding eligibility or navigating the application, partly due to lower financial literacy documented in recent studies \citep{Tsegay_2024}.  
+Accounting for migration background helps us uncover structural or informational hurdles that could contribute to lower BAföG uptake.
 
-\paragraph{Parental education.}
-To assess whether parental education influences BAföG take-up rates, we include a control variable that identifies students whose parents hold at least a bachelor’s degree as having a higher education background. 
-This classification allows us to examine the potential effect of parental educational attainment on students’ likelihood of applying for and receiving BAföG support.
+\paragraph{Parental education.}  
+Parental education often shapes students’ educational and financial behaviours.  
+We flag students whose parents hold at least a bachelor’s degree as coming from higher-educated households to test whether this background affects BAföG application patterns.
 
-\paragraph{Siblings who have claimed BAföG.}
-We include a control variable indicating whether any of the respondent’s siblings have previously claimed BAföG. 
-The presence of a sibling with prior BAföG experience may provide informational advantages or influence the individual’s own decision-making process regarding BAföG take-up.
+\paragraph{Siblings who have claimed BAföG.}  
+Beyond older siblings, any sibling with prior BAföG experience could provide valuable insights or encouragement.  
+This variable lets us check if broader family exposure to BAföG matters.
 
-\paragraph{Age, sex, and partnership status.}
-We include control variables for age, sex (female), and partnership status (has partner) to account for demographic factors that may influence BAföG take-up. 
-Age is controlled for, as students’ likelihood of applying for financial aid may change with their stage of study or broader life circumstances. 
-For instance, older students may encounter different financial pressures or possess greater familiarity with administrative processes compared to younger students.
-Sex is included to capture potential gender differences in educational choices, financial decision-making, or access to information about student aid. 
-Partnership status is considered, as having a partner could affect an individual’s household resources, financial planning, or the sharing of information relevant to student aid. 
-By controlling for these demographic characteristics, we aim to ensure that our analysis more accurately isolates the effects of other variables of interest.
+\paragraph{Age, sex, and partnership status.}  
+Finally, we control for basic demographics that may influence financial aid decisions.  
+Age reflects where students are in their studies or life course, which can change their financial needs or familiarity with administrative procedures.  
+Sex (female) captures potential gender-related differences in financial choices or access to information.  
+And partnership status accounts for how having a partner might affect household resources, financial planning, or information sharing relevant to BAföG take-up.
+
+% By controlling for these demographic characteristics, we aim to ensure that our analysis more accurately isolates the effects of other variables of interest.
 
 
 

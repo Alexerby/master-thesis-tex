@@ -69,9 +69,9 @@ Housing Allowance & Standard flat rate applied for non-parental housing & 250 \\
 \end{table}
 
 \subsubsection{Insurance Supplement}
-Students with statutory health and long-term care insurance are entitled to receive flat-rate supplements as defined in §~13a(1) BAföG. These rates vary by time period and are adjusted periodically by legal amendment.
+Students with statutory health and long-term care insurance are entitled to receive flat-rate supplements as defined in §~13a(1) BAföG. These rates vary by time period and are adjusted periodically by legal amendments.
 
-For survey year 2018, the applicable values—according to the 2020-08-01 rates still valid at the time—were:
+For survey year 2018, the applicable values, according to the 2020-08-01 rates still valid at the time, were:
 \begin{itemize}
     \item 61 EUR for health insurance (§~13a(1) Nr.~1 BAföG)
     \item 25 EUR for long-term care insurance (§~13a(1) Nr.~2 BAföG)
@@ -86,9 +86,10 @@ These two components sum to 86 EUR, which is assigned as the total insurance sup
 \toprule
 \textbf{Component} & \textbf{Explanation} & \textbf{Value (EUR)} \\
 \midrule
-Insurance Supplement & Sum of flat-rate statutory insurance allowances & 86 \\
 \quad Health insurance & §~13a(1) Nr.~1 BAföG (statutory health insurance) & 61 \\
 \quad Care insurance & §~13a(1) Nr.~2 BAföG (statutory long-term care insurance) & 25 \\
+\midrule
+Insurance Supplement & Sum of flat-rate statutory insurance allowances & 86 \\
 \bottomrule
 \end{tabular}
 \caption{Insurance supplement (\texttt{insurance\_supplement}) for pid 20156903. Rates valid for the 2018 survey year.}
@@ -152,12 +153,17 @@ The personal allowance specified in §~23(1) Nr.~1 BAföG for the year 2018 was 
 \midrule
 Gross monthly income & From SOEP variable \texttt{kal2a03\_h} & 523 \\
 Working months (previous year) & From SOEP variable \texttt{kal2a02} & 12 \\
+\midrule
 Gross annual income & Estimated income before deductions & 6,276 \\
+\midrule
 Werbungskostenpauschale & Work-related fixed deduction (§~21(2) BAföG) & 290 \\
 Sozialversicherungs-Pauschale & 17.2\% statutory deduction & 1,133.79 \\
+\midrule
 Net annual income & Income after deductions & 4,152.21 \\
 Net monthly income & Annual net income divided by 12 & 346.02 \\
+\midrule
 Personal allowance & §~23(1) Nr.~1 BAföG (2018) & 290 \\
+\midrule
 \textbf{Student excess income} & Amount exceeding allowance & \textbf{56.02} \\
 \bottomrule
 \end{tabular}
@@ -339,7 +345,7 @@ Because both parents are financially active, the applicable allowance is the joi
 \texttt{total\_allowance} = 1{,}715~\text{EUR}
 \]
 
-The remaining income after allowance is:
+The remaining income after basic allowance is:
 
 \[
 \texttt{joint\_income\_less\_ba} = 2{,}326.52 - 1{,}715 = 611.52~\text{EUR}
@@ -394,6 +400,7 @@ Remaining after allowance & $2{,}326.52 - 1{,}715$ & 611.52 \\
 Sibling deduction & $2 \times 260$ (§~25(3) BAföG) & 520 \\
 Remaining after siblings & $611.52 - 520$ & 91.52 \\
 Additional allowance & 60\% of remaining income (§~25(4)) & 54.91 \\
+\midrule
 \textbf{Excess parental income} & Final contribution to be deducted & \textbf{36.61} \\
 \bottomrule
 \end{tabular}
@@ -434,6 +441,7 @@ Eligible debts (offsetting) & 0 \\
 \bottomrule
 \end{tabular}
 \caption{Declared asset categories for pid 20156903 in 2018.}
+\caption*{\textit{Note:} These assets are linearly interpolated from 2017 and 2022 survey waves.}
 \label{table:bafoeg_declared_assets}
 \end{table}
 
@@ -462,6 +470,7 @@ The contribution from assets is computed as the difference between net assets an
 \midrule
 Net assets & Total assets minus eligible debts & 7,940 \\
 Asset allowance & §~29 BAföG (U30 threshold in 2018) & 7,500 \\
+\midrule
 \textbf{Excess asset contribution} & Final deduction from BAföG entitlement & \textbf{440} \\
 \bottomrule
 \end{tabular}
@@ -533,11 +542,12 @@ Excess asset contribution & §~29 BAföG & 440.00 \\
 \end{table}
 
 \paragraph{Note on Eligibility Status}
-
-This student qualifies for BAföG under the legal eligibility criteria defined by income, asset, and need thresholds. While their theoretical eligibility status is coded as \texttt{1} (eligible), they did not receive or report any BAföG support in the SOEP dataset:
+This student qualifies for BAföG under the legal eligibility criteria defined by income, asset, and need thresholds. 
+While their theoretical eligibility status is coded as \texttt{1} (eligible), they did not receive or report any BAföG support in the SOEP dataset:
 
 \begin{itemize}
     \item \texttt{received\_bafög} = 0 EUR
     \item \texttt{reported\_bafög} = 0 EUR
     \item \texttt{theoretical\_eligibility} = 1 (eligible)
 \end{itemize}
+therefore classifying this student as a ``non-take up'' observation.
