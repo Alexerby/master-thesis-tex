@@ -28,37 +28,37 @@ These models incorporate relevant socioeconomic and demographic factors to explo
 % Microsimulation
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Microsimulation of Theoretical BAföG Eligibility} 
-To analyze non-take-up, we identify eligible students based on statutory criteria, regardless of actual receipt.
-We implement a microsimulation model that reconstructs individual eligibility and award amounts using detailed SOEP survey data and the relevant legal rules.
-The following section outlines the purpose, methodological approach, and main components of this simulation. 
-For an overview of the approach see Figure \ref{fig:pipeline-overview}.
+\subsection{Microsimulation of Theoretical BAföG Eligibility}
+
+To analyze non-take-up, we identify eligible students based on statutory criteria, irrespective of actual receipt. 
+We implement a microsimulation model that reconstructs individual eligibility and award amounts using detailed SOEP survey data and applicable legal rules. 
+Figure~\ref{fig:pipeline-overview} provides an overview of the approach.
 
 \input{tikzfigs/simulation_algo.tex}
 
-% \subsubsection{Purpose and Scope}
-The microsimulation pipeline is designed to calculate a theoretical BAföG eligibility status and award amount for students in the SOEP-Core sample. Its primary purpose is to compare these simulated entitlements with reported BAföG take-up, as reported in SOEP.
+The microsimulation pipeline calculates theoretical BAföG eligibility and award amounts for students in the SOEP-Core sample, allowing comparison with self-reported BAföG take-up.
 
-To construct the theoretical values, the model replicates the legal rules and means-testing procedures defined in BAföG 
-\citep{bafoeg_law} for the years 2007 to 2021. 
-These rules are applied to individual-level SOEP data, including detailed information on income, assets, housing costs, and household structure.
+The model replicates the legal rules and means-testing procedures outlined in BAföG \citep{bafoeg_law} for 2007–2021, applying them to individual-level data on income, assets, housing costs, and household structure.
 
-In contrast to some earlier studies, we focus exclusively on students in higher education and restrict our sample to individuals aged 18 and older. This choice is motivated by a combination of conceptual, practical, and policy-relevant considerations. From a conceptual standpoint, the structure and goals of BAföG can differ between higher education and vocational training, including differences in eligibility criteria, typical household circumstances, and expectations around study duration and labor market transitions. Focusing only on higher education students allows for a more consistent definition of the target population.
+Unlike earlier studies, we focus solely on higher education students aged 18 and older. This ensures a consistent target group, as BAföG eligibility and structure differ between higher education and vocational training. 
+Limiting the sample to adults also improves data quality, since key variables are reliably reported only for respondents aged 18+, while data for minors are often incomplete or proxy-reported \citep{soep_pgen_2025, soep_dtc_2005}.
 
-Practically, focusing on students aged 18 and older ensures that key variables needed for the simulation, such as income, employment, and assets, are consistently available at the individual level. SOEP collects this information directly only for adult respondents. For individuals under 18, many of these variables are either missing, incomplete, or recorded via proxy responses from parents \citep{soep_pgen_2025, soep_dtc_2005}. Restricting the sample in this way helps improve both consistency and the reliability of the eligibility estimates, since information on key variables is more reliably reported for this group in SOEP. 
-
-From a policy perspective, university students are more frequently the focus of public debate around BAföG reform, especially in relation to issues such as debt aversion, housing costs, and equitable access to higher education. By concentrating on this group, our results are more directly applicable to ongoing policy discussions and recent reforms targeting the higher education sector.
+From a policy perspective, university students are central to current debates on BAföG reform, particularly regarding debt aversion, housing costs, and equitable access. Focusing on this group enhances the relevance of our findings for ongoing policy discussions.
 
 This approach enables a systematic assessment of the alignment between statutory entitlements and actual BAföG participation. 
-Deviations between the modeled and reported outcomes may arise from reporting errors, exceptional administrative decisions, or incomplete data. 
-Full documentation of the simulation logic and input structure is provided in Appendix ~\ref{appendix:microsimulation-pipeline} and ~\ref{appendix:simulation-example}.
+Differences between simulated and reported outcomes may reflect reporting errors, administrative exceptions, or incomplete data. 
+For a detailed example of the full calculation logic applied to an actual observation, see Appendix~\ref{appendix:simulation-example}.
 
-\paragraph{Deviation from official outcomes.}
-Even when closely following the legal rules, the simulation can differ from actual BAföG decisions due to missing household details or unobserved individual circumstances. 
-Still, it offers a consistent and transparent benchmark for analysing take-up over time.
+\paragraph{Limitations and accuracy.}
+While our simulation closely follows the legal framework, discrepancies with actual BAföG decisions can arise due to unobserved factors, missing household details, or administrative exceptions not captured in the data. 
+Nonetheless, the microsimulation provides a consistent, transparent, and policy-relevant benchmark for analysing eligibility and take-up patterns over time.
 
-While many SOEP variables approximate administrative data, its still the most suitable dataset for examining the BAföG non-take-up rate. 
-The eligibility measure used here reflects the legal framework and is sufficiently accurate for a systematic analysis of non-take-up and its underlying factors.
+Although some SOEP variables are approximations rather than exact administrative records, the dataset remains the most comprehensive source for studying BAföG non-take-up. 
+Our eligibility measure, grounded in statutory rules, offers sufficient accuracy to support a systematic analysis of take-up behaviour and its determinants.
+
+Notably, measurement error in reported income is the variable most likely to influence our simulation results. 
+To assess the robustness of our eligibility classification to such errors, we conduct a sensitivity analysis by introducing varying levels of normally distributed noise to the log-transformed income variables prior to recalculating theoretical BAföG entitlements. 
+This approach helps evaluate how income misreporting might impact our findings.
 
 
 \subsubsection{Identifying the Non-Take-Up Rate and Beta Error}
