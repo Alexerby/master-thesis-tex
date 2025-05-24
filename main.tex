@@ -1,7 +1,6 @@
 \documentclass[12pt, a4paper]{article}
 \input{setup}
 
-
 \date{Seminar date}
 \begin{document}
 
@@ -43,10 +42,11 @@ Additionally, we find a notable difference in take-up rates between East and Wes
 %REFERENCES
 \newpage
 \begin{flushleft}
+    \renewcommand{\baselinestretch}{1.1}
     \small
-  \titleformat{\section}{\normalfont\huge\bfseries}{\thesection}{1em}{} 
-  \addcontentsline{toc}{section}{References} 
-  \bibliography{bibliography, bafogandg, estg, solzg}
+    \titleformat{\section}{\normalfont\huge\bfseries}{\thesection}{1em}{} 
+    \addcontentsline{toc}{section}{References} 
+    \bibliography{bibliography, bafogandg, estg, solzg}
 \end{flushleft}
 
 %APPENDICES
