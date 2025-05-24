@@ -1,57 +1,31 @@
 \section{Discussion}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Introduction to what we are investigating
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-This paper examines the non-take-up (NTU) of Germany’s BAföG student aid program, focusing on why eligible students forgo what is effectively ``free money'', a combination of a 50\% grant and a 50\% interest-free loan.
+This paper first implements a microsimulation of BAföG eligibility and take-up under varying noise levels (Table~\ref{tab:conditional_probs_noise}), then employs logit, probit, and linear probability models (Table~\ref{tab:logit_probit_lpm_results}) to identify the determinants of non-take-up. 
 
-To investigate the individual-level determinants of BAföG non-take-up, we use microdata from the German Socio-Economic Panel (SOEP), which provides rich information on students' family background, financial situation, and behavioural traits relevant to financial aid decisions. 
-Although SOEP has a panel structure, we treat the data as a pooled cross-section and assume the relationship between explanatory variables and non-take-up is stable across years.
+Our microsimulation shows that, across years 2007–2021 and under plausible measurement error, the probability of non-take-up remains high (around 60\%). 
+Our econometric models help explain this pattern by identifying predictors of non-take-up: a higher simulated BAföG amount is associated with significantly lower non-take-up, and factors such as age, partnership status, and migration background emerge as robust correlates. 
+In contrast, psychological traits such as impulsiveness, debt aversion, and risk appetite are not statistically significant, suggesting that structural and informational barriers—not behavioural predispositions—are the key drivers.
 
-We estimate three types of binary response models: a logit model, a probit model, and a linear probability model (LPM). 
-These models allow us to assess the relationship between individual characteristics and the likelihood of non-take-up. 
-Logit and probit models are used to account for the nonlinear nature of binary outcomes, while the LPM offers a straightforward linear benchmark and facilitates interpretation. 
-Standard errors are clustered at the individual level to account for potential intra-respondent correlation in the presence of repeated observations.
-Table~\ref{tab:logit_probit_lpm_results} presents the results from these three specifications, including estimated coefficients and average marginal effects where applicable.
+Although Germany’s student aid offers favourable terms and uses strict means-testing to target those truly in need, the analysis suggests it is not necessarily the most financially disadvantaged students who benefit. 
+Instead, those with higher social capital and a more favourable view of government intervention are more likely to make use of the support.
 
+Importantly, non-take-up is not a uniform phenomenon. 
+While it might be tempting to attribute low take-up to personal traits, our results show no statistical significance for impulsiveness, debt aversion, or risk appetite. 
+This suggests that structural and informational barriers—such as application complexity, lack of awareness, or uncertainty about eligibility—play the primary role. 
+Reducing non-take-up will therefore require a combination of administrative simplification, clearer communication and targeted outreach.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Summary of key findings and interpretation
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Our results indicate that the most relevant explanatory variables for BAföG non-take-up are demographic characteristics, such as age, having a partner, and migration background. 
-These factors suggest that individual life circumstances and aspects of social capital may influence both awareness of the program and the perceived need for financial aid.
-
-Moreover, the significant role of East German background points to potential regional differences in attitudes toward state support. 
-This could reflect divergent historical experiences and institutional trust, where East German students may be more inclined to view public assistance as legitimate, while in West Germany, stigma surrounding the uptake of state-subsidized aid may still persist.
-
-In contrast, we find no evidence that behavioural traits such as patience, impulsiveness, or risk appetite significantly influence non-take-up. 
-This suggests that psychological or personality-related factors are not the primary drivers behind the decision to forgo applying for BAföG.
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Policy implications or practical relevance
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Policy Implications}
-Addressing the issue of non-take-up of social benefits is politically sensitive. 
-Promoting policies that increase benefit take-up is often perceived as advocating for higher public expenditure, which may face resistance, even if the objective is to improve access and fairness within existing frameworks.
 
-However, the very purpose of BAföG is to ensure that financial constraints do not prevent access to higher education. 
-Our findings suggest that the current system places a considerable administrative burden on applicants, which may deter eligible students, especially those entitled to smaller amounts from applying. 
-(\textcolor{red}{Maria: Source for the amount of hours it takes to apply!})
-This is at odds with the program's intention to support students from less affluent backgrounds.
+Addressing non-take-up of social benefits is politically sensitive. Policies promoting increased take-up are often seen as calls for higher public spending and can face resistance—even when aimed at improving fairness within existing budgets.
 
-If the primary goal is to target financial need effectively, policymakers should consider simplifying the means-testing procedure to reduce unnecessary barriers. 
-While some form of income assessment remains essential to ensure targeted support, the process should not be so complex or burdensome that it discourages eligible students from applying. 
-Simplified procedures, increased use of pre-filled data from tax records, or more automated eligibility checks could help strike a better balance between precision and accessibility.
+BAföG’s core goal is to prevent financial constraints from blocking access to higher education. Yet, our findings indicate that the application process places a heavy administrative burden on students, particularly deterring those eligible for smaller amounts. This outcome contradicts the programme’s mission to support less affluent students.
 
-Ultimately, non-take-up driven by administrative complexity represents a failure of design rather than intent. 
-A more user-friendly system could improve both the efficiency and equity of BAföG, ensuring that support reaches those who need it most—without necessarily requiring increased overall expenditure.
+To better target financial need, policymakers should simplify the means-testing process. While income verification is essential for precise targeting, the procedure must not be so complex or time-consuming that it discourages eligible applicants. A system this complicated naturally favours applicants with greater social capital and motivation over those who need support most.
+
+Currently, applying demands detailed disclosure of fourteen income types and sixteen categories of assets and debts. Moreover, parents complete a comprehensive four-page form about income and siblings \citep{fidan_why_2021}. This complexity likely excludes economically disadvantaged families who may lack the resources or motivation to navigate the process.
+
+Simplification—such as increased use of pre-filled tax data and automated eligibility checks—could balance accuracy with accessibility.
+
+Ultimately, non-take-up caused by administrative complexity reflects a design flaw rather than a failure of intent. A more user-friendly BAföG could improve both equity and efficiency, ensuring aid reaches those most in need without increasing overall costs.
 
 
 
@@ -61,16 +35,6 @@ A more user-friendly system could improve both the efficiency and equity of BAf�
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Limitations of the study
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-As previously mentioned, this study only takes to 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
