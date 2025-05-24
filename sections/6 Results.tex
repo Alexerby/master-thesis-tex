@@ -8,14 +8,11 @@
 \subsection{Microsimulation: Non-take-up rates}
 %TODO: "Provide graphical visualization (time trend of NTU rates and beta errors) directly within the text for immediate visual impact." - could that be clever @Alex
 
-Our microsimulation results indicate that the non-take-up-rate of BAföG, among theoretically eligible students ranged from approximately 50--70\% across the survey years 2007--2021, with an average of 59.7\%  (Table \ref{table:microsimulation-ntu}). These estimates are broadly in line with previous findings on non-take-up of social benefits in Germany, which generally falls between 40--67\%, depending on the program and time period (see Table \ref{table:NTU-studies}). 
-While our estimates are broadly consistent with prior research, they are noticeably higher than the 36--40\% non-take-up rate for BAföG reported by \cite{herber_non-take-up_2019}, who also use SOEP survey data, but for the period 2002--2013.
+Our microsimulation results indicate that the non-take-up rate of BAföG, among theoretically eligible students, ranged from approximately 50--70\% across the survey years 2007--2021, with an average of 60\% (Table~\ref{table:microsimulation-ntu}). These estimates are broadly in line with previous findings on non-take-up of social benefits in Germany, which generally fall between 40--67\%, depending on the program and time period (see Table~\ref{table:NTU-studies}). While our estimates are broadly consistent with prior research, they are noticeably higher than the 36--40\% non-take-up rate for BAföG reported by \cite{herber_non-take-up_2019}, who also use SOEP survey data, but for the period 2002--2013.
 
+This discrepancy may be attributable to several factors, including differences in the estimation of theoretical eligibility. These factors include the specific SOEP variables used to capture income and reported BAföG receipt, the time periods under study (with our analysis covering 2007--2021, compared to \cite{herber_non-take-up_2019}, which covers 2002--2013), as well as other differences in the microsimulation design and modeling approach. Importantly, the overall accuracy of our model in classifying receipt status---defined as the share of correctly predicted recipients and non-recipients---is 72\% (based on Equation~\ref{eq:accuracy_microsimulation}). While not perfect, this level of accuracy is consistent with expectations given the complexity of the BAföG system and the limitations of self-reported survey data.
 
 \input{tables/non_takeup.tex}
-
-This discrepancy may be attributable to several factors, including differences in the estimation of theoretical eligibility. These factors include the specific SOEP variables used to capture income and reported BAföG receipt, the time periods under study (with our analysis covering 2007--2021, compared to \cite{herber_non-take-up_2019}, which covers 2002--2013), as well as other differences in the microsimulation design and modeling approach.
-
 
 While there is some variation in non-take-up across years, NTU remains consistently quite high throughout the period. 
 The rate fluctuates between a low of 50\% in 2013 and a high of around 68\% in 2019. 
@@ -44,7 +41,7 @@ Taken together, the results suggest that a large share of eligible students do n
 
 
 \subsubsection{Stability of Simulated Non-Take-Up under Income Noise}
-Table~\ref{tab:conditional_probs_noise} reports conditional probabilities of take-up behaviour under varying levels of artificially introduced measurement error in income. 
+Table~\ref{tab:conditional_probs_noise_weighted_reduced} reports conditional probabilities of take-up behaviour under varying levels of artificially introduced measurement error in income. 
 To evaluate the robustness of our non-take-up classification, we add normally distributed noise to the log-transformed income variables before recalculating theoretical BAföG entitlements and eligibility indicators. 
 The standard deviation of this noise ranges from 0\% (baseline) to 30\%.
 

@@ -29,7 +29,6 @@ These models incorporate relevant socioeconomic and demographic factors to explo
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Microsimulation of Theoretical BAföG Eligibility}
-
 To analyze non-take-up, we identify eligible students based on statutory criteria, irrespective of actual receipt. 
 We implement a microsimulation model that reconstructs individual eligibility and award amounts using detailed SOEP survey data and applicable legal rules. 
 Figure~\ref{fig:pipeline-overview} provides an overview of the approach.
@@ -48,10 +47,6 @@ From a policy perspective, university students are central to current debates on
 This approach enables a systematic assessment of the alignment between statutory entitlements and actual BAföG participation. 
 Differences between simulated and reported outcomes may reflect reporting errors, administrative exceptions, or incomplete data. 
 For a detailed example of the full calculation logic applied to an actual observation, see Appendix~\ref{appendix:simulation-example}.
-
-\paragraph{Limitations and accuracy.}
-While our simulation closely follows the legal framework, discrepancies with actual BAföG decisions can arise due to unobserved factors, missing household details, or administrative exceptions not captured in the data. 
-Nonetheless, the microsimulation provides a consistent, transparent, and policy-relevant benchmark for analysing eligibility and take-up patterns over time.
 
 Although some SOEP variables are approximations rather than exact administrative records, the dataset remains the most comprehensive source for studying BAföG non-take-up. 
 Our eligibility measure, grounded in statutory rules, offers sufficient accuracy to support a systematic analysis of take-up behaviour and its determinants.
@@ -109,61 +104,75 @@ The pipeline begins by assembling a harmonized dataset of student-level observat
 This is achieved by filtering for individuals who are enrolled in education, fall within the relevant survey years, and are at least 18 years old. 
 To ensure a valid estimation of parental contributions, the dataset is further restricted to cases where income data from both legal parents are observable in the panel in order to reduce bias and ensure validity of estimated parental contributions.
 
-The resulting student-level dataframe integrates sociodemographic variables including sex, age, partnership status, number of siblings, number of children, household composition, and federal state of residence. 
+\paragraph{Calculating Own Income.} 
+This student-level dataset serves as the core of the simulation pipeline, providing the central structure to which all additional information is appended. 
+It integrates sociodemographic variables, including sex, age, partnership status, number of siblings, number of children, household composition, and federal state of residence. 
 Gross student income is also appended at this stage. 
-Net student income is derived from gross values by applying year-specific rules for income tax, solidarity surcharge, church tax (where applicable), and standard deductions (e.g., Werbungskostenpauschale), in accordance with §§\,21–23 BAföG \citep{bafoeg_law}.
+Net student income is derived from gross values by applying year-specific rules for income tax, solidarity surcharge, and church tax where applicable, as well as standard deductions such as the Werbungskostenpauschale (in accordance with §§~21–23 BAföG; \citep{bafoeg_law}). 
 This net income will later be used to compute the student’s excess income as part of the BAföG need assessment.
 
-\paragraph{Need calculation and theoretical entitlement.}
-In the final stage, the simulation model calculates the student's funding need by summing the statutory base need, housing allowance, and health insurance supplement, as defined in §\,13 BAföG \citep{bafoeg_law}. 
-From this total, the model subtracts any excess income attributable to the student, their parents, and their assets. 
-The resulting amount determines the theoretical monthly BAföG entitlement.
-
-A positive entitlement does not automatically imply eligibility: the model also applies age-based eligibility criteria. 
-Students are only considered theoretically eligible if they meet the age requirements defined in the law, typically under 30 for undergraduate studies and under 35 for graduate-level programs. 
-The final output includes both the simulated monthly award and a binary eligibility flag, which are used for comparison against self-reported values in SOEP. 
-Detailed examples of this calculation and relevant thresholds are provided in Appendix~\ref{appendix:simulation-example}.
-
-
-\paragraph{Estimating Parental Contributions.}
+\paragraph{Calculating Parental Contributions.}
 Accurate parental income information is essential for constructing a credible BAföG means test. 
 To ensure consistency in the simulation, the analysis is restricted to students for whom income data from both legal parents are available within the household files. 
 This means that cases where one or both parents cannot be identified or linked within the dataset—such as due to absence, non-response, or household separation—are excluded from the simulation sample.
 
 The simulation pipeline aggregates and evaluates parental income to estimate the expected contribution toward the student’s BAföG entitlement. 
 For each student, the incomes of both legal parents—identified within the household and linked through SOEP family structure data—are retrieved and converted into annual net income. 
-These values account for deductions such as income tax, solidarity surcharge, and church tax, where applicable.
+The net income of parents are retrieved the same way as the students own income (applying income tax, solidarity surcharge, standard deductions and church tax).
 
 Net incomes from both parents are combined into a joint parental income measure. 
-From this, the model subtracts statutory allowances as defined in §§\,24–25 BAföG \citep{bafoeg_law}, which vary depending on the number of parents, number of dependent children, and year-specific legal thresholds. 
+From this, the model subtracts statutory allowances (as defined in §§\,24–25 BAföG \citep{bafoeg_law}), which vary depending on the number of parents, number of dependent children, and year-specific legal thresholds. 
 Additional deductions are applied if the student has siblings who might also be eligible for support. 
-The result is a measure of excess parental income, which feeds directly into the theoretical award calculation in the next stage.
+The result is a measure of excess parental income, which feeds directly into the theoretical award calculation.
 
-A complete breakdown of the income transformation, applicable thresholds, and illustrative examples is provided in Appendix~\ref{appendix:simulation-example}.
 
-\paragraph{Asset Test.}
-SOEP collects asset data only every five years, with available data for the years 2007, 2012, 2017, and 2022. 
-This results in missing information for the intermediate survey waves. 
-To address this, we imputed missing asset values using linear interpolation in both directions. 
-While more advanced imputation methods exist, linear interpolation offers a straightforward and reasonable approach to create a continuous asset measure for the microsimulation.
+\paragraph{Measuring Assets.}
+SOEP collects asset data only every five years (2007, 2012, 2017, and 2022), leaving gaps in between. 
+To address this, we used linear interpolation to estimate missing values. 
+Although asset values may not always change linearly, this straightforward method allows us to create a continuous asset measure suitable for the microsimulation.
 
-The simulation includes an asset test to assess whether students hold financial resources above the statutory exemption thresholds. 
-For each student, information on financial assets, real estate, business holdings, private insurances, vehicles, and other tangible property is combined, and reported debts are subtracted to derive total net assets.
-
-Since asset data in SOEP are only collected every five years, missing observations for non-surveyed years are filled using linear interpolation. 
-This approach allows for year-specific asset estimates that remain consistent with observed data and ensures full coverage across the entire simulation period.
-
-Total assets are then compared against exemption thresholds defined in §\,29 BAföG \citep{bafoeg_law}, which vary by age, partnership status, and number of dependent children. 
-Any amount exceeding the applicable allowance is classified as excess assets and contributes to reducing the student's calculated need. 
+The simulation applies an asset test to evaluate whether students possess financial resources exceeding statutory exemption thresholds. 
+For each student, net assets are calculated by aggregating financial assets, real estate, business holdings, private insurances, vehicles, and other tangible property, minus reported debts. 
+These total net assets are then compared against the exemption limits set out in §\,29 BAföG \citep{bafoeg_law}, which depend on age, partnership status, and number of dependent children. 
+Any amount above the relevant threshold is considered excess and reduces the student's calculated need.
 
 \paragraph{Modelling taxes.}
-Full tax‑return simulations, as in \cite{herber_non-take-up_2019}, require detailed information (e.\,g.\ deductions, extraordinary expenses) that the SOEP does not always provide.  
-We therefore approximate net parental income with the statutory bracket formulas of §\,32a EStG—updated for every year since 2002 
-\textcolor{red}{WHY SAY 2002 IF WE ARE LOOKING AT 2007-2021?} \citep{estg_law,estg_2025,estg_2024,estg_2023,estg_2022,estg_2021,estg_2020,estg_2019,estg_2018,estg_2017,estg_2016,estg_2015,estg_2014,estg_2013,estg_2012,estg_2007,estg_2006,estg_lohninfo_2012}.  
+Full tax-return simulations, such as those in \cite{herber_non-take-up_2019}, require detailed information (e.g., deductions, extraordinary expenses) that the SOEP does not always provide.  
+Therefore, we approximate net parental income using the statutory tax bracket formulas of §\,32a EStG, updated annually since 2007 \citep{estg_law,estg_2025,estg_2024,estg_2023,estg_2022,estg_2021,estg_2020,estg_2019,estg_2018,estg_2017,estg_2016,estg_2015,estg_2014,estg_2013,estg_2012,estg_2007,estg_2006}.
 
-\textcolor{red}{In our analysis, we compute individual net income for students (as well as their parents, partners and siblings where relevant) by applying relevant tax and transfer rules to each person’s reported gross income. We then simulate deductions such as income tax and social security contributions, which allows us to estimate net income in a consistent way, taking into account both personal characteristics and the policy environment in each year.}
+\paragraph{Need calculation and theoretical entitlement.}
+In the final stage, the simulation model determines the student's funding need by combining the statutory base need, housing allowance, and health insurance supplement, as specified in §\,13 BAföG \cite{bafoeg_law}. 
+From this total amount, any excess income of the student, their parents, and any excess assets are deducted.The remainder represents the student's theoretical monthly BAföG entitlement. 
 
-\textcolor{red}{I think there is a term for this in microsimulation literature, add it here for clarification}
+In its simplest form, this can be expressed as:
+
+\begin{equation}
+    \text{Entitlement} = \text{Need} - \text{Excess Income} - \text{Excess Assets}
+\end{equation}
+
+A positive entitlement does not automatically imply eligibility: the model also applies age-based eligibility criteria. 
+Students are only considered theoretically eligible if they meet the age requirements defined in the law, typically under 30 for undergraduate studies and under 35 for graduate-level programs. 
+The final output includes both the simulated monthly award and a binary eligibility flag, which are used for comparison against self-reported values in SOEP. 
+Detailed examples of this calculation and relevant thresholds are provided in Appendix~\ref{appendix:simulation-example}.
+
+\subsubsection{Eligibility misclassification and beta errors}
+A key limitation in simulating benefit take-up is the presence of beta errors cases where individuals report receiving BAföG but are classified as ineligible by the model. 
+These mismatches often arise from measurement errors in the underlying data, particularly in income reporting, rather than from incorrect self-reports of benefit receipt \citep{frick_claim_2007, janssens_takemod_2022}. 
+Because the analysis relies on self-reported survey data, both income and benefit receipt are subject to potential inaccuracies. 
+Without access to administrative records, it is not possible to determine whether such discrepancies reflect true model misclassification or reporting error.
+
+Although the simulation closely follows the legal framework, discrepancies with actual BAföG decisions may also result from unobserved factors, missing household information, or administrative exceptions not captured in the data. Nonetheless, it offers a consistent, transparent, and policy-relevant benchmark for analysing eligibility and take-up patterns over time.
+
+To assess the reliability of the simulation, we implement two complementary strategies. 
+First, we conduct a sensitivity analysis by adding normally distributed noise to the log-transformed income variables, evaluating how plausible levels of income misreporting affect non-take-up estimates and classification outcomes. 
+
+Second, we report and interpret the share of false negatives (beta errors) as an indicator of potential model misclassification.
+
+\begin{equation} \label{eq:accuracy_microsimulation}
+    \text{Accuracy} = \frac{\text{True Positives} + \text{True Negatives}}{\text{Total number of cases}}
+\end{equation}
+
+While these measures cannot fully eliminate uncertainty, they provide a basis for evaluating the robustness of the results and identifying areas where eligibility classification may be less reliable. The findings should therefore be interpreted with caution, particularly in light of prior evidence that even modest levels of misreporting can substantially affect take-up analyses \citep{pudney_impact_2001}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -269,41 +278,5 @@ And partnership status accounts for how having a partner might affect household 
 
 % By controlling for these demographic characteristics, we aim to ensure that our analysis more accurately isolates the effects of other variables of interest.
 
-
-
-\subsection{Model limitations}
-\label{subsection:model_limitations}
-
-\textcolor{red}{Alex: I moved limitations to here. We need to look into what limitations are relevant. We are undermining our model too much still.}
-
-\paragraph{Addressing beta errors in eligibility simulations.}
-In simulating benefit non-take-up, beta errors occur when individuals report receiving a benefit but are classified by the model as ineligible. 
-These mismatches typically reflect limitations in the input data, particularly income and assets.
-Since the data in this study is self-reported, inaccuracies may occur in both income and benefit receipt.
-Without administrative records, it is not possible to confirm whether a student was truly eligible or actually received the benefit. 
-Some studies suggest that beta errors are more often caused by issues in the income or asset data used for eligibility simulation, rather than incorrect reporting of benefit receipt \citep{frick_claim_2007, janssens_takemod_2022}. 
-
-To address these limitations, several strategies are used in the literature. 
-These include conducting sensitivity checks by adjusting income levels and applying post-simulation corrections to reclassify borderline cases \citep{herber_non-take-up_2019}. 
-Some studies also emphasize the value of combining different data sources where possible, such as using more detailed survey modules on assets or household composition to improve the accuracy of eligibility simulations \citep{janssens_takemod_2022}. 
-
-Although beta errors cannot be completely avoided, it is important to recognise their potential impact on the results. 
-In this thesis, particular attention is paid to identifying where beta errors may occur and considering how they might influence the findings. 
-Sensitivity checks are applied where relevant to assess the robustness of the findings and to reduce the risk of misinterpretation. %TODO: No no sensitivity checks are applied so far.
-
-\paragraph{Measurement Errors in Income Data}
-A persistent challenge in empirical research is the presence of measurement errors in income data, which can bias the estimation of policy outcomes. 
-In the context of our study, accurate measurement of both parental and student incomes is crucial, as these variables are the primary determinants of the theoretical BAföG entitlement to be calculated.
-
-To assess the impact of potential income misreporting or data imperfections, we conduct a sensitivity analysis by introducing normally distributed noise to the log-transformed income variables. 
-Logging is applied to address the right-skewness in the income distributions (see Figure~\ref{fig:income-distributions}). 
-By simulating random measurement errors in logged income, we can evaluate how such noise affects the estimated non-take-up rates and the reliability (i.e., beta errors) of the simulation outcomes.
-
-This approach allows us to better understand the robustness of our results to plausible inaccuracies in income reporting, and highlights the importance of data quality in studies of means-tested student aid.
-
-\paragraph{Income misreporting.}
-When studying benefit take-up using a probit model, there are two common sources of bias that are important to keep in mind: measurement error in income and incorrect reporting of benefit receipt. Income is a key factor in determining eligibility for means-tested programs like BAföG, but it is often self-reported and can be measured with error. If the income recorded in the data does not reflect individuals' true income, some people may be wrongly classified as eligible or ineligible. This can lead to biased estimates and misleading conclusions about the factors that influence take-up \citep{pudney_impact_2001}.
-
-\paragraph{Take-up misreporting.} Another issue is that benefit receipt itself is sometimes misreported. For example, people might say they did not receive aid when they actually did, or the other way around. This kind of misclassification makes it harder to accurately model the take-up decision. As shown in \cite{pudney_impact_2001}, even relatively small errors in either income or benefit receipt can have a big impact on the results. This highlights the importance of being aware of potential measurement problems when interpreting the findings from probit models.
 
 
