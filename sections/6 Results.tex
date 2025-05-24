@@ -13,9 +13,7 @@
 
 \section{Results}
 \subsection{Microsimulation: Non-take-up rates}
-Our microsimulation results indicate that the non-take-up-rate of BAföG, among theoretically eligible students ranged from approximately 50--70\% across the survey years 2007--2021, with an average of 60\%  (Table \ref{table:microsimulation-ntu}). 
-
-%"Provide graphical visualization (time trend of NTU rates and beta errors) directly within the text for immediate visual impact." - could that be clever @Alex
+%TODO: "Provide graphical visualization (time trend of NTU rates and beta errors) directly within the text for immediate visual impact." - could that be clever @Alex
 
 Our microsimulation results indicate that the non-take-up-rate of BAföG, among theoretically eligible students ranged from approximately 50--70\% across the survey years 2007--2021, with an average of 59.7\%  (Table \ref{table:microsimulation-ntu}). These estimates are broadly in line with previous findings on non-take-up of social benefits in Germany, which generally falls between 40--67\%, depending on the program and time period (see Table \ref{table:NTU-studies}). 
 While our estimates are broadly consistent with prior research, they are noticeably higher than the 36--40\% non-take-up rate for BAföG reported by \cite{herber_non-take-up_2019}, who also use SOEP survey data, but for the period 2002--2013.
@@ -25,28 +23,10 @@ While our estimates are broadly consistent with prior research, they are noticea
 
 This discrepancy may be attributable to several factors, including differences in the estimation of theoretical eligibility. These factors include the specific SOEP variables used to capture income and reported BAföG receipt, the time periods under study (with our analysis covering 2007--2021, compared to \cite{herber_non-take-up_2019}, which covers 2002--2013), as well as other differences in the microsimulation design and modeling approach.
 
-\textcolor{red}{Elaborate further on this in discussion chapter}
 
 While there is some variation in non-take-up across years, NTU remains consistently quite high throughout the period. 
 The rate fluctuates between a low of 50\% in 2013 and a high of around 68\% in 2019. 
 This pattern is clearly illustrated in Figure~\ref{fig:ntu_bounds_over_years}, which shows a visible decline from 2010 to 2013, followed by a gradual upward trend leading up to 2019. 
-The increase in NTU in the years preceding 2019 could potentially reflect behavioural or institutional factors such as changes in awareness, perceived complexity, or attitudes toward debt. 
-It could also be partly driven by policy changes. 
-Several BAföG reforms were introduced during this period — including increases in grant amounts and adjustments to income thresholds — which may have influenced both eligibility and the perceived attractiveness of the program. 
-Since the simulation accounts for these legal changes, the results shown in the figure capture not only behavioural responses but also how reforms may have affected take-up incentives over time.
-
-\textcolor{red}{Maybe further elaborations belong in the discussion part?}
-
-The third column in Table~\ref{table:microsimulation-ntu} shows the estimated beta error, which is the share of students who are classified as ineligible by the simulation but report receiving BAföG. 
-On average, the beta error is about 15\% across the full period. 
-This level of misclassification is in line with what other studies face when working with survey data, where income reporting and timing mismatches are common issues \citep{frick_claim_2007}. 
-While this level of beta error is not negligible, the simulation seems to capture eligibility status fairly well overall, even if some noise is unavoidable.
-
-Taken together, the results suggest that a large share of eligible students do not take up BAföG, and that this has been the case fairly consistently over time. The high average non-take-up rate, around 60\%, points to persistent barriers such as lack of information or procedural hurdles. The financial attractiveness of BAföG may also be a factor. Although support amounts were increased at several points, the need-based allowances have consistently failed to keep pace with the actual cost of living for students \citep{staack_von_2017}. This could help explain why some students perceive the benefit as not worth the effort of applying. These findings underline the importance of outreach efforts and suggest that further reforms may be needed to make the program more accessible and appealing.
-
-%TODO: Refer to the table of the distributions of reported bafög vs theoretical, see appendix for table.
-
-
 
 \begin{figure}[htbp]
   \centering
@@ -55,66 +35,46 @@ Taken together, the results suggest that a large share of eligible students do n
   \label{fig:ntu_bounds_over_years}
 \end{figure}
 
+The increase in NTU in the years preceding 2019 could potentially reflect behavioural or institutional factors such as changes in awareness, perceived complexity, or attitudes toward debt. 
+It could also be partly driven by policy changes. 
+Several BAföG reforms were introduced during this period---including increases in grant amounts and adjustments to income thresholds---which may have influenced both eligibility and the perceived attractiveness of the program. 
+Since the simulation accounts for these legal changes, the results shown in the figure capture not only behavioural responses but also how reforms may have affected take-up incentives over time.
 
-\subsection{Determinants of Non-take-up}
 
-%TODO: Add some text here? 
-% Could refer back to the method chapter where we go over the control variables
 
-\textcolor{red}{"Clarify explicitly why you chose average marginal effects (AME) for interpreting Logit/Probit, emphasizing their intuitive appeal over raw coefficients."}
+The third column in Table~\ref{table:microsimulation-ntu} shows the estimated beta error, which is the share of students who are classified as ineligible by the simulation but report receiving BAföG. 
+On average, the beta error is about 15\% across the full period. 
+This level of misclassification is in line with what other studies face when working with survey data, where income reporting and timing mismatches are common issues \citep{frick_claim_2007}. 
+While this level of beta error is not negligible, the simulation seems to capture eligibility status fairly well overall, even if some noise is unavoidable.
 
-\textcolor{red}{"Address explicitly in the discussion the puzzling aspect of income effects (noted confusion around AMEs), perhaps suggesting potential reasons for this inconsistency or ambiguity."}
+Taken together, the results suggest that a large share of eligible students do not take up BAföG, and that this has been the case fairly consistently over time. The high average non-take-up rate, around 60\%, points to persistent barriers such as lack of information or procedural hurdles. The financial attractiveness of BAföG may also be a factor. Although support amounts were increased at several points, the need-based allowances have consistently failed to keep pace with the actual cost of living for students \citep{staack_von_2017}. This could help explain why some students perceive the benefit as not worth the effort of applying. These findings underline the importance of outreach efforts and suggest that further reforms may be needed to make the program more accessible and appealing.
 
-\subsubsection{Binary Choice Model}
 
-To check the robustness of our findings, both logit and probit models are estimated and their average marginal effects (AMEs) are compared. 
-As shown in Table~\ref{tab:logit_probit_lpm_results}, the results are very similar across the two models. 
-The estimated effects have the same signs, similar magnitudes and are statistically significant in both cases. 
-In particular, the simulated BAföG amount has a negative association with the probability of non-take-up. 
-A 100~EUR increase in the simulated entitlement is linked to a decrease in the likelihood of non-take-up by about 2.9 to 3.0 percentage points. 
-This supports the idea that students are more likely to apply when the potential benefit is higher.
 
-To check the robustness of our findings, both logit and probit models are estimated and their average marginal effects (AMEs) are compared. As shown in Table~\ref{tab:logit_probit_lpm_results}, the results are very similar across the two models. The estimated effects have the same signs, similar magnitudes and are statistically significant in both cases. In particular, the simulated BAföG amount has a negative association with the probability of non-take-up. A 100~EUR increase in the simulated entitlement is linked to a decrease in the likelihood of non-take-up by about 2.9 to 3.0 percentage points. This supports the idea that students are more likely to apply when the potential benefit is higher.
+\subsection{Determinants of Non-take-up: Binary Choice Models}
+Table \ref{tab:logit_probit_lpm_results} gives an overview of coefficients and average marginal effects (AME's)\footnote{Where applicable.} of our Logit, Probit and Linear Probability Model. 
 
-As an additional check, we estimate a linear probability model (LPM), reported in Table~\ref{tab:logit_probit_lpm_results}. 
-Although the LPM comes with known limitations, it allows for a straightforward interpretation of coefficients. 
-The key results remain consistent. The marginal effect of the BAföG amount is estimated to be minus 2.1 percentage points per 100~EUR, and the direction and significance of the main explanatory variables remain stable.
+As shown in Table \ref{tab:logit_probit_lpm_results}, all three models consistently indicate that a 100 EUR increase in the simulated BAföG entitlement reduces the probability of being a non-recipient by approximately 2--3\% percentage points. 
+While the Logit and Probit models require average marginal effects for direct probability interpretation due to their nonlinear link functions, the Linear Probability Model coefficients represent approximate percentage point changes directly. 
+Differences in magnitude between models are minor and expected given their distinct functional forms.
 
 \input{tables/regression_table.tex}
 
-All in all, the consistency of results across logit, probit, and LPM models suggests that the findings aren't sensitive to the choice of estimation method. This increases confidence in the reliability of the identified determinants of non-take-up.
+Looking at the demographic and socioeconomic predictors, we find that older individuals and those with a registered partner are significantly more likely to forego BAföG despite being eligible. 
+The estimated effect of age is consistently positive and statistically significant across all models. 
+The average marginal effects from the Logit and Probit models suggest that each additional year of age increases the probability of non-take-up by approximately 1.8 percentage points, while the coefficient from the Linear Probability Model indicates a somewhat larger effect of 3.7 percentage points. 
+Similarly, having a registered partner is associated with a notably higher likelihood of non-take-up—around 26 percentage points according to the marginal effects. 
+These patterns likely reflect lower BAföG entitlements among these groups, reducing the perceived benefit of applying. Moreover, individuals with direct or indirect migration backgrounds are significantly less likely to refuse BAföG.
 
+Furthermore, all three models suggest that whether an individual lives at home or has moved out of their parents' house does not, in itself, have a statistically significant effect on the likelihood of BAföG take-up. 
+By contrast, informational factors appear to play a more substantial role: the presence of a sibling who has previously received BAföG is associated with a significantly lower probability of non-take-up—by approximately 10 percentage points across all three models. 
+This finding highlights the importance of informational spillovers within families in shaping take-up behaviour. 
+The models further indicate that individuals with an East German background are significantly more likely to take up BAföG, with the probability of non-take-up reduced by approximately 23 to 25 percentage points across all specifications. 
+By contrast, parental education appears to have no meaningful influence on take-up: the estimated coefficients are statistically insignificant and the AMEs are close to zero across all models, suggesting no substantive effect.
 
-...
+Finally, we do not find any statistically significant effects of the behavioural predictors—patience, impulsiveness, and self-assessed risk appetite—on the probability of non-take-up. 
+Across all models, the estimated coefficients are small and not distinguishable from zero, suggesting that these behavioural traits do not systematically influence BAföG take-up decisions in our sample.
 
-% \paragraph{Pseudo R-squared.} In models where the traditional R-squared is not defined, such as binary outcome models like logit and probit, researchers commonly use pseudo R-squared measures to get a sense of model fit. These statistics aim to provide an indication of how well the model explains the observed outcomes, though they are not directly comparable to the R-squared in linear regression. Pseudo R-squared values can help assess the explanatory power of a model, but they should be interpreted with care. Unlike the R-squared in OLS, pseudo R-squared values do not have a clear benchmark and are not directly comparable across different models or datasets. Because of this, they should be viewed more as descriptive tools rather than definitive measures of explanatory power. It is generally recommended to use them alongside other model diagnostics rather than relying on them alone \citep{ozili_acceptable_2023}.
-
-%TODO: When we have made a decision on the exact details of the logit/probit and the measure of pseudo R squared then write more about that here (the value we get for pseudo R squared and how it should be interpreted in context of the model)
-
-
-
-
-...
-
-\paragraph{Interpretation of Average Marginal Effects from the Probit Model.} All interpretations below are based on the average marginal effects (AMEs) from the Probit model presented in Table 3.
-
-Student age is found to be significantly associated with NTU of BAföG. 
-On average, each additional year of age increases the probability of NTU by 2.8 percentage points, holding all other variables constant. 
-Similarly, student income has a significant effect, as a 100 EUR increase in gross monthly income is associated with a 1.2 percentage point increase in the probability of NTU, suggesting that higher-earning students may be less inclined to rely on BAföG support. 
-
-%TODO: Note: look better into why AME is positive for student income and negative parental income. It could be interpreted in the way that students that work are highly motivated individuals, "on average" more so than those who don't, which could make them more likely to make it through the rigorous application process. Herber et al. say something like that.
-
-Other variables that have to do with family background were also found to have an effect. 
-For example, having an older sibling who previously received BAföG reduces the probability of NTU by 9.6 percentage points on average, suggesting that familiarity with the system encourages take-up. 
-Migration background is significant only for students with an indirect migration background (those born in Germany to foreign-born parents). 
-For this group, the probability of NTU is 8 percentage points lower on average compared to those without a migration background.  
-Gender, partnership status, and household size do not appear to significantly affect NTU.
-
-Students from East Germany are much less likely to forgo BAföG than their West German counterparts. The results show that having an East German background decreases the probability of NTU by about 25.9 percentage points, on average. This substantial difference could reflect regional variation in attitudes towards public support or perceived entitlement.
-
-Lastly, the estimated theoretical BAföG amount is negatively associated with non-take-up, suggesting that an expected higher amount makes you more likely to apply in the first place.
-
-\textcolor{red}{We haven't interpreted the variables enough here. FIX!}
 
 \subsection{Sensitivity and Specification Analysis}
 \subsubsection{Stability of Simulated Non-Take-Up under Income Noise}
