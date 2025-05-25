@@ -60,9 +60,10 @@ For a detailed example of the full calculation logic applied to an actual observ
 
 % Maybe ref all our data sources, the statutory and soep
 \subsubsection{Simulation Methodology}
-The pipeline begins by assembling a harmonized dataset of student-level observations from SOEP-Core and manually harmonizing variables which are not harmonized already.
+The pipeline begins by assembling a harmonized dataset of student-level observations from SOEP-Core and manually harmonizing variables that are not already standardized. 
 This is achieved by filtering for individuals who are enrolled in education, fall within the relevant survey years, and are at least 18 years old. 
-To ensure a valid estimation of parental contributions, the dataset is further restricted to cases where income data from both legal parents are observable in the panel in order to reduce bias and ensure validity of estimated parental contributions.
+To ensure a valid estimation of parental contributions, the dataset is further restricted to cases where income data from both legal parents are observable in the panel, thereby reducing bias and improving the accuracy of eligibility estimates. 
+The most important statutory input parameters used throughout the simulation, such as needs rates, income disregards, and deduction formulas, are documented in Appendix~\ref{appendix:input_params}.
 
 \paragraph{Calculating Own Income.} 
 This student-level dataset serves as the core of the simulation pipeline, providing the central structure to which all additional information is appended. 
