@@ -68,7 +68,7 @@ To ensure a valid estimation of parental contributions, the dataset is further r
 This student-level dataset serves as the core of the simulation pipeline, providing the central structure to which all additional information is appended. 
 It integrates sociodemographic variables, including sex, age, partnership status, number of siblings, number of children, household composition, and federal state of residence. 
 Gross student income is also appended at this stage. 
-Net student income is derived from gross values by applying year-specific rules for income tax, solidarity surcharge, and church tax where applicable, as well as standard deductions such as the Werbungskostenpauschale (in accordance with §§~21–23 BAföG; \citep{bafoeg_law}). 
+Net student income is derived from gross values by applying year-specific rules for income tax, solidarity surcharge, and church tax where applicable, as well as standard deductions such as the Werbungskostenpauschale.\footnote{In accordance with §§~21–23 BAföG; see \citet{bafoeg_law}.} 
 This net income will later be used to compute the student’s excess income as part of the BAföG need assessment.
 
 \paragraph{Calculating Parental Contributions.}
@@ -81,7 +81,7 @@ For each student, the incomes of both legal parents—identified within the hous
 The net income of parents are retrieved the same way as the students own income (applying income tax, solidarity surcharge, standard deductions and church tax).
 
 Net incomes from both parents are combined into a joint parental income measure. 
-From this, the model subtracts statutory allowances (as defined in \textit{§§}\,24–25 BAföG \citep{bafoeg_law}), which vary depending on the number of parents, number of dependent children, and year-specific legal thresholds. 
+From this, the model subtracts statutory allowances,\footnote{Defined in \textit{§§}\,24–25 BAföG; see \citet{bafoeg_law}.} which vary depending on the number of parents, number of dependent children, and year-specific legal thresholds. 
 Additional deductions are applied if the student has siblings who might also be eligible for support. 
 The result is a measure of excess parental income, which feeds directly into the theoretical award calculation.
 
@@ -93,16 +93,16 @@ Although asset values may not always change linearly, this straightforward metho
 
 The simulation applies an asset test to evaluate whether students possess financial resources exceeding statutory exemption thresholds. 
 For each student, net assets are calculated by aggregating financial assets, real estate, business holdings, private insurances, vehicles, and other tangible property, minus reported debts. 
-These total net assets are then compared against the exemption limits set out in §\,29 BAföG \citep{bafoeg_law}, which depend on age, partnership status, and number of dependent children. 
+These total net assets are then compared against the exemption limits,\footnote{Set out in §\,29 BAföG; see \citet{bafoeg_law}.} which depend on age, partnership status, and number of dependent children. 
 Any amount above the relevant threshold is considered excess and reduces the student's calculated need.
 
 \paragraph{Modelling taxes.}
 Full tax-return simulations, such as those in \cite{herber_non-take-up_2019}, require detailed information (e.g., deductions, extraordinary expenses) that the SOEP does not always provide.  
-Therefore, we approximate net parental income using the statutory tax bracket formulas of §\,32a EStG, updated annually since 2007 \citep{estg_law,estg_2025,estg_2024,estg_2023,estg_2022,estg_2021,estg_2020,estg_2019,estg_2018,estg_2017,estg_2016,estg_2015,estg_2014,estg_2013,estg_2012,estg_2007,estg_2006}.
+Therefore, we approximate net parental income using the statutory tax bracket formulas,\footnote{As defined in §\,32a EStG and updated annually since 2007; see \citet{estg_law,estg_2025,estg_2024,estg_2023,estg_2022,estg_2021,estg_2020,estg_2019,estg_2018,estg_2017,estg_2016,estg_2015,estg_2014,estg_2013,estg_2012,estg_2007,estg_2006}.} updated annually since 2007.
 
 \paragraph{Need calculation and theoretical entitlement.}
-In the final stage, the simulation model determines the student's funding need by combining the statutory base need, housing allowance, and health insurance supplement, as specified in §\,13 BAföG \cite{bafoeg_law}. 
-From this total amount, any excess income of the student, their parents, and any excess assets are deducted.The remainder represents the student's theoretical monthly BAföG entitlement. 
+In the final stage, the simulation model determines the student's funding need by combining the statutory base need, housing allowance, and health insurance supplement.\footnote{Specified in §\,13 BAföG; see \citet{bafoeg_law}.} 
+From this total amount, any excess income of the student, their parents, and any excess assets are deducted. The remainder represents the student's theoretical monthly BAföG entitlement.
 
 In its simplest form, this can be expressed as:
 
