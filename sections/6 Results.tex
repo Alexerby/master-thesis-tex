@@ -5,16 +5,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Results}
+
+%TODO: Do we add some text here or is this okay?
+
 \subsection{Microsimulation: Non-take-up rates}
 %TODO: "Provide graphical visualization (time trend of NTU rates and beta errors) directly within the text for immediate visual impact." - could that be clever @Alex
 
 Our microsimulation results indicate that the non-take-up rate of BAföG, among theoretically eligible students, ranged from approximately 50--70\% across the survey years 2007--2021, with an average of 60\% (Table~\ref{table:microsimulation_ntu}). These estimates are broadly in line with previous findings on non-take-up of social benefits in Germany, which generally fall between 40--67\%, depending on the program and time period (see Table~\ref{table:NTU-studies}). While our estimates are broadly consistent with prior research, they are noticeably higher than the 36--40\% non-take-up rate for BAföG reported by \cite{herber_non-take-up_2019}, who also use SOEP survey data, but for the period 2002--2013.
 
-This discrepancy may be attributable to several factors, including differences in the estimation of theoretical eligibility. These factors include the specific SOEP variables used to capture income and reported BAföG receipt, the time periods under study (with our analysis covering 2007--2021, compared to \cite{herber_non-take-up_2019}, which covers 2002--2013), as well as other differences in the microsimulation design and modeling approach. Importantly, the overall accuracy of our model in classifying receipt status---defined as the share of correctly predicted recipients and non-recipients---is 72\% (based on Equation~\ref{eq:accuracy_microsimulation}). While not perfect, this level of accuracy is consistent with expectations given the complexity of the BAföG system and the limitations of self-reported survey data.
+Several factors may help explain the difference in estimated non-take-up rates. These factors include the specific SOEP variables used to capture income and reported BAföG receipt, as well as differences in the time periods covered (2007 to 2021 in our study versus 2002 to 2013 in \cite{herber_non-take-up_2019}). Other aspects of the microsimulation design and modeling approach may also contribute to the variation. Importantly, the overall accuracy of our model in classifying receipt status is 72\%, as defined by the share of correctly predicted recipients and non-recipients (see Equation~\ref{eq:accuracy_microsimulation}). While not perfect, this level of accuracy is consistent with expectations given the complexity of the BAföG system and the limitations of self-reported survey data.
+
+%TODO: can we also say here that this is comparable to some other research that has done this? is that the case? I feel like it might make our case stronger maybe?
+
+%TODO: Also maybe add that the share of all students who take up BAföG has gone down even further since Herbers study (which only covers up to 2013). So in the period between 2013-2021 take up rates declined even further, which presumably also contributes further to our higher average number.
 
 \input{tables/non_takeup.tex}
 
-While there is some variation in non-take-up across years, NTU remains consistently quite high throughout the period. 
+While there is some variation in non-take-up across years, it remains consistently quite high throughout the period. 
 The rate fluctuates between a low of 50\% in 2013 and a high of around 68\% in 2019. 
 This pattern is clearly illustrated in Figure~\ref{fig:ntu_bounds_over_years}, which shows a visible decline from 2010 to 2013, followed by a gradual upward trend leading up to 2019. 
 
@@ -25,18 +32,21 @@ This pattern is clearly illustrated in Figure~\ref{fig:ntu_bounds_over_years}, w
   \label{fig:ntu_bounds_over_years}
 \end{figure}
 
-The increase in NTU in the years preceding 2019 could potentially reflect behavioural or institutional factors such as changes in awareness, perceived complexity, or attitudes toward debt. 
+The increase in non-take-up in the years preceding 2019 could potentially reflect behavioural or institutional factors such as changes in awareness, perceived complexity, or attitudes toward debt. 
 It could also be partly driven by policy changes. 
-Several BAföG reforms were introduced during this period---including increases in grant amounts and adjustments to income thresholds---which may have influenced both eligibility and the perceived attractiveness of the program. 
-Since the simulation accounts for these legal changes, the results shown in the figure capture not only behavioural responses but also how reforms may have affected take-up incentives over time.
+Several BAföG reforms were introduced during this period, including increases in grant amounts and adjustments to income thresholds, which may have influenced both eligibility and the perceived attractiveness of the program. 
+Since the simulation accounts for these legal changes, the results shown in the figure capture not only behavioural responses, but also how reforms may have affected take-up incentives over time.
+
+%TODO: does this belong in the discussion?
 
 The third column in Table~\ref{table:microsimulation_ntu} shows the estimated beta error, which is the share of students who are classified as ineligible by the simulation but report receiving BAföG. 
 On average, the beta error is about 15\% across the full period. 
-This level of misclassification is in line with what other studies face when working with survey data, where income reporting and timing mismatches are common issues \citep{frick_claim_2007}. 
+This degree of misclassification is similar to what has been observed in other studies using survey data, where issues such as income reporting errors and timing mismatches are common \citep{frick_claim_2007}.
 While this level of beta error is not negligible, the simulation seems to capture eligibility status fairly well overall, even if some noise is unavoidable.
 
 Taken together, the results suggest that a large share of eligible students do not take up BAföG, and that this has been the case fairly consistently over time. The high average non-take-up rate, around 60\%, points to persistent barriers such as lack of information or procedural hurdles. The financial attractiveness of BAföG may also be a factor. Although support amounts were increased at several points, the need-based allowances have consistently failed to keep pace with the actual cost of living for students \citep{staack_von_2017}. This could help explain why some students perceive the benefit as not worth the effort of applying. These findings underline the importance of outreach efforts and suggest that further reforms may be needed to make the program more accessible and appealing.
 
+%TODO: does this also belong in the discussion?
 
 \subsubsection{Stability of Simulated Non-Take-Up under Income Noise}
 Table~\ref{tab:conditional_probs_noise_weighted_reduced} reports conditional probabilities of take-up behaviour under varying levels of artificially introduced measurement error in income. 
