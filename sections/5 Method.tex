@@ -44,22 +44,22 @@ We identify eligible students based on statutory criteria, regardless of whether
 The microsimulation model implements the legal rules and means-testing procedures set out in BAföG \citep{bafoeg_law} for the years 2007 to 2021. For each student in the SOEP-Core sample, the model uses information on income, assets, and household structure for the student as well as for others who are expected to help support them, such as parents, spouses, or siblings. The process involves calculating gross and net incomes according to the relevant tax rules, applying asset limits and deductions, and then determining eligibility and award amounts using the statutory formulas. In this way, the model aims to reflect how eligibility decisions are made in practice. The result is a theoretical eligibility and award amount for each student, which can be directly compared to self-reported BAföG take-up.
 
 Unlike earlier studies, we focus solely on higher education students aged 18 and older. This ensures a consistent target group, as BAföG eligibility and structure differ between higher education and vocational training. 
-Limiting the sample to adults also improves data quality, since key variables are reliably reported only for respondents aged 18+, while data for minors are often incomplete or proxy-reported \citep{soep_pgen_2025, soep_dtc_2005}. From a policy perspective, university students are central to current debates on BAföG reform, particularly regarding debt aversion, housing costs, and equitable access. Focusing on this group enhances the relevance of our findings for ongoing policy discussions.
-
+Restricting the sample to adults also enhances data quality, as key variables tend to be reported more reliably by adults, whereas data for minors are often incomplete or reported by proxies \citep{soep_pgen_2025, soep_dtc_2005}.
+From a policy perspective, university students are central to current debates on BAföG reform, particularly regarding debt aversion, housing costs, and equitable access. 
+Focusing on this group enhances the relevance of our findings for ongoing policy discussions.
 This approach enables a systematic assessment of the alignment between statutory entitlements and actual BAföG participation. 
-Differences between simulated and reported outcomes may reflect reporting errors, administrative exceptions, or incomplete data. 
 For a detailed example of the full calculation logic applied to an actual observation, see Appendix~\ref{appendix:simulation-example}.
 
-Although some SOEP variables are approximations rather than exact administrative records, the dataset remains the most comprehensive source for studying BAföG non-take-up. 
-Our eligibility measure, grounded in statutory rules, offers sufficient accuracy to support a systematic analysis of take-up behaviour and its determinants.
-
-Notably, measurement error in reported income is the variable most likely to influence our simulation results. 
-To assess the robustness of our eligibility classification to such errors, we conduct a sensitivity analysis by introducing varying levels of normally distributed noise to the log-transformed income variables prior to recalculating theoretical BAföG entitlements. This approach helps evaluate how income misreporting might impact our findings.
+% Although some SOEP variables are approximations rather than exact administrative records, the dataset remains the most comprehensive source for studying BAföG non-take-up. 
+% Our eligibility measure, grounded in statutory rules, offers sufficient accuracy to support a systematic analysis of take-up behaviour and its determinants.
+%
+% Notably, measurement error in reported income is the variable most likely to influence our simulation results. 
+% To assess the robustness of our eligibility classification to such errors, we conduct a sensitivity analysis by introducing varying levels of normally distributed noise to the log-transformed income variables prior to recalculating theoretical BAföG entitlements. This approach helps evaluate how income misreporting might impact our findings.
 
 %TODO: This chapter kind of ends in a weird way, where do we present the result from this sensitivity analysis for example?
 
 % Maybe ref all our data sources, the statutory and soep
-\subsubsection{Simulation Pipeline}
+\subsubsection{Simulation Methodology}
 The pipeline begins by assembling a harmonized dataset of student-level observations from SOEP-Core and manually harmonizing variables which are not harmonized already.
 This is achieved by filtering for individuals who are enrolled in education, fall within the relevant survey years, and are at least 18 years old. 
 To ensure a valid estimation of parental contributions, the dataset is further restricted to cases where income data from both legal parents are observable in the panel in order to reduce bias and ensure validity of estimated parental contributions.
@@ -81,7 +81,7 @@ For each student, the incomes of both legal parents—identified within the hous
 The net income of parents are retrieved the same way as the students own income (applying income tax, solidarity surcharge, standard deductions and church tax).
 
 Net incomes from both parents are combined into a joint parental income measure. 
-From this, the model subtracts statutory allowances (as defined in §§\,24–25 BAföG \citep{bafoeg_law}), which vary depending on the number of parents, number of dependent children, and year-specific legal thresholds. 
+From this, the model subtracts statutory allowances (as defined in \textit{§§}\,24–25 BAföG \citep{bafoeg_law}), which vary depending on the number of parents, number of dependent children, and year-specific legal thresholds. 
 Additional deductions are applied if the student has siblings who might also be eligible for support. 
 The result is a measure of excess parental income, which feeds directly into the theoretical award calculation.
 
@@ -115,21 +115,39 @@ Students are only considered theoretically eligible if they meet the age require
 The final output includes both the simulated monthly award and a binary eligibility flag, which are used for comparison against self-reported values in SOEP. 
 Detailed examples of this calculation and relevant thresholds are provided in Appendix~\ref{appendix:simulation-example}.
 
-\subsubsection{Eligibility Misclassification and Beta Errors}
+\subsubsection{Measuring Non-Take-Up and Eligibility Classification Errors}
 
-We define non-take-up of BAföG in line with Nelson and Nieuwenhuis (2019), as the circumstance when a person is eligible for welfare, but does not receive it. This is in line with terminology commonly used in literature on welfare take up rates. Non take up rate is thus the number of people who are eligible, but do not receive it, divided by the total number of people eligible. Formally, this is expressed as:
+We define non-take-up of BAföG (NTU) in line with \cite{nelson_towards_2021} as the circumstance when a person is eligible for welfare but does not receive it. Conversely, take-up (TU) refers to eligible individuals who do receive BAföG. This terminology is commonly used in the literature on welfare take-up rates. 
+
+The non-take-up rate is thus the number of eligible individuals who do not receive BAföG divided by the total number of eligible individuals. Formally, this is expressed as
 
 \begin{equation}
-\Pr(\text{NTU} = 1 \mid M = 1) = \frac{\sum_{i=1}^{N} \mathbf{1}\{R_i = 0 \ \text{and} \ M_i = 1\}}{\sum_{i=1}^{N} \mathbf{1}\{M_i = 1\}}, \quad\text{where}
+\Pr(\text{NTU} = 1 \mid M = 1) = \frac{\sum_{i=1}^{N} \mathbf{1}\{R_i = 0 \ \text{and} \ M_i = 1\}}{\sum_{i=1}^{N} \mathbf{1}\{M_i = 1\}},
 \end{equation}
+
+where the indicator function is defined as
 
 \begin{equation}
   \mathbf{1}\{\cdot\} =
   \begin{cases}
-  1 & \text{if individual } i \text{ is eligible but does not take up BAföG}, \\
-  0 & \text{otherwise}.
+    1 & \text{if the condition inside the braces is true}, \\
+    0 & \text{otherwise},
   \end{cases}
-\label{eq:indicator-function-ntu}
+\end{equation}
+
+and the binary variables \(R_i\) and \(M_i\) are defined as
+
+\begin{equation}
+\begin{aligned}
+R_i &= \begin{cases}
+1 & \text{if individual } i \text{ reports receiving BAföG in SOEP}, \\[4pt]
+0 & \text{otherwise}
+\end{cases} \\
+M_i &= \begin{cases}
+1 & \text{if individual } i \text{ is classified as eligible in our model}, \\[4pt]
+0 & \text{otherwise}
+\end{cases}
+\end{aligned}
 \end{equation}
 
 A key limitation in simulating benefit take-up is the potential for misclassification. Even when the legal framework is closely replicated, differences between simulated and actual BAföG decisions can occur. These differences can arise from factors that are unobserved or not accurately measured in the survey data, as well as from administrative exceptions or complexities that the model does not fully capture \citep{frick_claim_2007, janssens_takemod_2022}. Because the analysis relies on self-reported survey data, both income and benefit receipt are subject to potential inaccuracies. Without access to administrative records, it is difficult to determine whether such cases reflect true model misclassification or reporting error.
