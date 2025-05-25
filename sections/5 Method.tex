@@ -50,12 +50,6 @@ Focusing on this group enhances the relevance of our findings for ongoing policy
 This approach enables a systematic assessment of the alignment between statutory entitlements and actual BAföG participation. 
 For a detailed example of the full calculation logic applied to an actual observation, see Appendix~\ref{appendix:simulation-example}.
 
-% Although some SOEP variables are approximations rather than exact administrative records, the dataset remains the most comprehensive source for studying BAföG non-take-up. 
-% Our eligibility measure, grounded in statutory rules, offers sufficient accuracy to support a systematic analysis of take-up behaviour and its determinants.
-%
-% Notably, measurement error in reported income is the variable most likely to influence our simulation results. 
-% To assess the robustness of our eligibility classification to such errors, we conduct a sensitivity analysis by introducing varying levels of normally distributed noise to the log-transformed income variables prior to recalculating theoretical BAföG entitlements. This approach helps evaluate how income misreporting might impact our findings.
-
 %TODO: This chapter kind of ends in a weird way, where do we present the result from this sensitivity analysis for example?
 
 % Maybe ref all our data sources, the statutory and soep
@@ -167,7 +161,10 @@ where \( \mathbf{1}\{\cdot\} \) is the indicator function defined as
 \end{cases}
 \]
 
-To assess the reliability of the simulation, we use two strategies. First, a sensitivity analysis is performed by adding normally distributed noise to the log-transformed income variables, to evaluate how income misreporting could affect non-take-up estimates. Second, we interpret the share of false positives (beta errors) as an indicator of potential misclassification. Overall model accuracy is measured as:
+To assess the reliability of the simulation, we use two strategies. First, a sensitivity analysis is performed by adding normally distributed noise to the log-transformed income variables, to evaluate how income misreporting could affect non-take-up estimates.\footnote{
+We apply the log transformation to the incomes to approximate a normal distribution, as the income data is right-skewed. See Appendix~\ref{appendix:figures}, Figure~\ref{fig:income-distributions}.
+}
+Second, we interpret the share of false positives (beta errors) as an indicator of potential misclassification. Overall model accuracy is measured as:
 
 \begin{equation} \label{eq:accuracy_microsimulation}
 	\text{Accuracy} = \frac{\text{True Positives} + \text{True Negatives}}{\text{Total number of cases}}
