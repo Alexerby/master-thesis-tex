@@ -115,15 +115,12 @@ Students are only considered theoretically eligible if they meet the age require
 The final output includes both the simulated monthly award and a binary eligibility flag, which are used for comparison against self-reported values in SOEP. 
 Detailed examples of this calculation and relevant thresholds are provided in Appendix~\ref{appendix:simulation-example}.
 
-\subsubsection{Identifying the Non-Take-Up Rate and Beta Error}
-%TODO: Not referenced correctly
-We define non-take-up of BAföG in line with Nelson and Nieuwenhuis (2019), as the circumstance when a person is eligible for welfare, but does not receive it. This is in line with terminology commonly used in literature on welfare take up rates. Non take up rate is thus the number of people who are eligible, but do not receive it, divided by the total number of people eligible. 
+\subsubsection{Eligibility Misclassification and Beta Errors}
 
-
-Formally, this is expressed as:
+We define non-take-up of BAföG in line with Nelson and Nieuwenhuis (2019), as the circumstance when a person is eligible for welfare, but does not receive it. This is in line with terminology commonly used in literature on welfare take up rates. Non take up rate is thus the number of people who are eligible, but do not receive it, divided by the total number of people eligible. Formally, this is expressed as:
 
 \begin{equation}
-\Pr(\text{NTU} = 1 \mid M = 1) = \frac{\sum_{i=1}^{N} \mathbf{1}\{R_i = 0 \ \text{and} \ M_i = 1\}}{\sum_{i=1}^{N} \mathbf{1}\{M_i = 1\}}, \quad\text{where} 
+\Pr(\text{NTU} = 1 \mid M = 1) = \frac{\sum_{i=1}^{N} \mathbf{1}\{R_i = 0 \ \text{and} \ M_i = 1\}}{\sum_{i=1}^{N} \mathbf{1}\{M_i = 1\}}, \quad\text{where}
 \end{equation}
 
 \begin{equation}
@@ -135,16 +132,10 @@ Formally, this is expressed as:
 \label{eq:indicator-function-ntu}
 \end{equation}
 
+A key limitation in simulating benefit take-up is the potential for misclassification. Even when the legal framework is closely replicated, differences between simulated and actual BAföG decisions can occur. These differences can arise from factors that are unobserved or not accurately measured in the survey data, as well as from administrative exceptions or complexities that the model does not fully capture \citep{frick_claim_2007, janssens_takemod_2022}. Because the analysis relies on self-reported survey data, both income and benefit receipt are subject to potential inaccuracies. Without access to administrative records, it is difficult to determine whether such cases reflect true model misclassification or reporting error.
 
-%paragraph{Beta Error (Type II Error).}  
-It is worth noting, however, that these situations are often more complex. 
-In some cases, individuals may receive BAföG even though they are not eligible. 
-This can occur due to fraud or simply as a result of administrative errors. 
-Such cases introduce the concept of beta errors (also known as type II errors). 
-A beta error refers to the probability that a student receives BAföG despite being classified as ineligible by our model. 
-It captures false positives in the eligibility classification; cases where students who should not qualify according to the simulation nonetheless receive financial support.
+Some individuals may receive BAföG despite being classified as ineligible by the model. These cases, known as false positives, or sometimes as beta errors or type II errors, often reflect the same reporting errors, missing information or administrative exceptions described above. Formally, the beta error rate is given by:
 
-Formally, it is expressed as:
 \begin{equation}
 \Pr(\text{TU} = 1 \mid M = 0) = \frac{\sum_{i=1}^{N} \mathbf{1}\{R_i = 1 \ \text{and} \ M_i = 0\}}{\sum_{i=1}^{N} \mathbf{1}\{M_i = 0\}},
 \end{equation}
@@ -157,30 +148,18 @@ where \( \mathbf{1}\{\cdot\} \) is the indicator function defined as
 \end{cases}
 \]
 
-% TODO: this section also ends quite abruptly
-% TODO: Move this section (5.1.1 identifying NTU and beta error) or even merge it with section 5.1.3 "Eligibility misclassification and beta errors". Would flow more naturally to go from the 5.1 subchapter about the microsimulation to 5.1.2 the simulation pipeline, then it is also in kind of chronological order, from us assembling all the background data to us analysing the result of that in terms of the eligibility misclassification, beta errors etc.
-% TODO: MERGE 5.1.2 AND 5.1.3
-
-% Maybe ref all our data sources, the statutory and soep
-
-\subsubsection{Eligibility Misclassification and Beta Errors}
-A key limitation in simulating benefit take-up is the presence of beta errors cases where individuals report receiving BAföG but are classified as ineligible by the model. 
-These mismatches often arise from measurement errors in the underlying data, particularly in income reporting, rather than from incorrect self-reports of benefit receipt \citep{frick_claim_2007, janssens_takemod_2022}. 
-Because the analysis relies on self-reported survey data, both income and benefit receipt are subject to potential inaccuracies. 
-Without access to administrative records, it is not possible to determine whether such discrepancies reflect true model misclassification or reporting error.
-
-Although the simulation closely follows the legal framework, discrepancies with actual BAföG decisions may also result from unobserved factors, missing household information, or administrative exceptions not captured in the data. Nonetheless, it offers a consistent, transparent, and policy-relevant benchmark for analysing eligibility and take-up patterns over time.
-
-To assess the reliability of the simulation, we implement two complementary strategies. 
-First, we conduct a sensitivity analysis by adding normally distributed noise to the log-transformed income variables, evaluating how plausible levels of income misreporting affect non-take-up estimates and classification outcomes. 
-
-Second, we report and interpret the share of false negatives (beta errors) as an indicator of potential model misclassification.
+To assess the reliability of the simulation, we use two strategies. First, a sensitivity analysis is performed by adding normally distributed noise to the log-transformed income variables, to evaluate how income misreporting could affect non-take-up estimates. Second, we interpret the share of false positives (beta errors) as an indicator of potential misclassification. Overall model accuracy is measured as:
 
 \begin{equation} \label{eq:accuracy_microsimulation}
-    \text{Accuracy} = \frac{\text{True Positives} + \text{True Negatives}}{\text{Total number of cases}}
+	\text{Accuracy} = \frac{\text{True Positives} + \text{True Negatives}}{\text{Total number of cases}}
 \end{equation}
 
-While these measures cannot fully eliminate uncertainty, they provide a basis for evaluating the robustness of the results and identifying areas where eligibility classification may be less reliable. The findings should therefore be interpreted with caution, particularly in light of prior evidence that even modest levels of misreporting can substantially affect take-up analyses \citep{pudney_impact_2001}.
+While these measures cannot fully eliminate uncertainty, they provide a basis for assessing the robustness of the results and identifying areas where eligibility classification may be less reliable. The findings should be interpreted with caution, as prior research has shown that even modest levels of misreporting can substantially affect take-up analyses \citep{pudney_impact_2001}. 
+
+Nonetheless, by systematically applying the legal framework to detailed individual data, the simulation offers a consistent and transparent benchmark for studying eligibility and take-up, helping to inform both academic research and policy discussions despite the inherent limitations of survey-based analysis.
+
+%TODO: should we not present the findings from this accuracy measure here? Then we can better reason in the last paragraph that this is still a good model
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -190,7 +169,8 @@ While these measures cannot fully eliminate uncertainty, they provide a basis fo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Binary Choice Model}
 
-To study the determinants of non-take-up (NTU) of BAföG among theoretically eligible students, we estimate a binary choice model of the form
+After having identified theoretically eligible students and measured non-take-up (NTU) of BAföG, the focus now shifts to exploring the factors that drive this outcome. To do so, we estimate a binary choice model of the form
+
 \begin{equation}
   \Pr(\mathrm{NTU} = 1 \mid \mathbf{X}) = F(\mathbf{X}^\top \boldsymbol{\beta}),
 \end{equation}
@@ -216,10 +196,9 @@ Linear Probability Model & \( \mathbf{X}^\top \boldsymbol{\beta} \) & Ordinary L
 \caption{Specifications of the Binary Choice Models}
 \end{table}
 
-All models are estimated on a pooled cross-section of theoretically eligible individuals (\( n = 458 \)), as we restrict the sample to observations with complete parental income information. 
-Although the SOEP is a panel, we do not exploit its longitudinal structure here due to the limited sample size.
+While the SOEP is a panel dataset with information collected from individuals across multiple years, the sample size of eligible students is too small to support reliable longitudinal analysis. For this reason, all models are estimated on a pooled cross-section of theoretically eligible individuals (\( n = 458 \)). The sample is restricted to observations with complete parental income information.
 
-\paragraph{Interpretation and Comparison.} 
+%\paragraph{Interpretation and Comparison.} 
 The logit and probit models are nonlinear estimators of the probability of non-take-up, based on an underlying latent index framework. 
 Their coefficients represent changes in the unobserved latent variable and are not directly interpretable in terms of changes in the probability of the observed outcome. 
 To facilitate interpretation, we report average marginal effects (AMEs), which approximate the average change in the probability of non-take-up associated with a one-unit increase in each covariate.\footnote{The AME for covariate \( X_k \) is computed as the sample analogue of the population moment \( \mathbb{E}[f(\mathbf{X}^\top \boldsymbol{\beta}) \cdot \beta_k] \), where \( f(\cdot) \) is the derivative of the link function \( F(\cdot) \). Specifically,
@@ -230,59 +209,39 @@ To facilitate interpretation, we report average marginal effects (AMEs), which a
 \]
 where \( \mathbb{E}_n[\cdot] \) denotes the empirical expectation over the sample.}
 
-In practice, logit and probit models typically yield similar qualitative results, with differences largely driven by the tails of the distribution. We report both for completeness.
-
-The LPM serves as a linear benchmark. 
-While it can produce predicted probabilities outside the \([0,1]\) range and has some limitations in modelling binary outcomes, it provides a simple and transparent interpretation as coefficients directly represents the marginal effects.
+In practice, logit and probit models typically yield similar qualitative results, with differences largely driven by the tails of the distribution. We report both for completeness. The LPM then serves as a linear benchmark. While it has some limitations in modeling binary outcomes, such as producing predicted probabilities outside the \([0,1]\) range, it provides a simple and transparent interpretation, as coefficients directly represent the marginal effects.
 
 \subsubsection{Key Predictors of Non-Take-Up}
 Our model includes a set of explanatory variables informed by existing literature and the institutional context of BAföG. 
 These variables capture a range of factors that may influence students' decisions about applying for financial aid, including demographic characteristics, socioeconomic background, and selected behavioural traits. 
-In particular, we incorporate variables such as risk preferences, migration background, and prior family experience with BAföG to reflect differences in access to information, attitudes toward borrowing, and familiarity with the application process. 
-While our primary goal is to estimate the association between these factors and non-take-up among eligible students, the inclusion of conceptually relevant variables also helps to account for sources of heterogeneity that might otherwise bias the estimated effects of financial incentives.
 
-The rationale for including several of these variables is further elaborated below, drawing on prior research and theoretical considerations. In particular, the inclusion of factors like risk attitudes, family experience with the application process, and regional socialization helps account for variation in informational access, institutional trust, and attitudes toward public support.
+In particular, the model includes variables for risk preferences, migration background, prior family experience with BAföG, and regional socialization. These variables are selected to capture differences in access to information, institutional trust, familiarity with the application process, and attitudes toward public support. While our primary goal is to estimate the association between these factors and non-take-up among eligible students, the inclusion of conceptually relevant variables also helps to account for sources of heterogeneity that might otherwise bias the estimated effects of financial incentives.
 
-\paragraph{Risk appetite, impulsiveness and patience.}  
-To understand why some eligible students don’t apply for BAföG, we consider their willingness to take risks.  
-Even though BAföG comes with relatively safe and generous terms, risk-averse students might still shy away from taking on any debt.  
-By including this measure, we aim to see if risk preferences explain some of the non-take-up behaviour.  
+The rationale for including several of these variables is further elaborated below, drawing on prior research and theoretical considerations. 
 
-\cite{herber_non-take-up_2019} also control for risk attitudes in their study, mainly to check if risk aversion influences take-up or interacts with traits like impatience.  
-While they find no strong effect, they argue it’s important to keep it in the model — and we follow their lead here.  
+\paragraph{Age, sex, and partnership status.}
+First, we control for basic demographics that may influence financial aid decisions. Age is included as it can correlate with students’ life circumstances or progression through higher education, potentially influencing their financial situation or familiarity with administrative procedures. Sex (female) is included to account for possible gender-related patterns in financial decision-making or access to information. Partnership status is also considered, as having a partner might affect household resources, support, or information exchange that could be relevant for BAföG take-up.
 
-Alongside risk appetite, we account for impulsiveness and patience using scales constructed by SOEP based on several survey questions.  
-These behavioural traits might shape how students make financial decisions, so including them helps capture more of the individual variation behind BAföG take-up.
+\paragraph{Migration background.}
+Recent research has found that students from migrant households often have lower levels of financial literacy, which can create additional challenges in understanding eligibility requirements and navigating the BAföG application process \citep{Tsegay_2024}. In the analysis, both direct and indirect migration backgrounds are taken into account to consider whether varying levels of familiarity with the German aid system are related to take-up. Including migration background in this way helps to identify potential structural or informational barriers that could contribute to lower BAföG uptake.
+
+\paragraph{Living with parents.}
+Living with parents can lower students’ living expenses and provide additional support, which may reduce both the need for financial aid and the likelihood of applying for BAföG. Including this variable helps account for differences in household circumstances that could influence non-take-up among eligible students.
+
+\paragraph{Sibling prior experience with BAföG.}
+Having a sibling who has previously received BAföG may provide students with practical knowledge and guidance during the application process. \cite{herber_non-take-up_2019} suggest that this type of family experience can help reduce informational and procedural barriers, potentially encouraging eligible students to apply. Including this variable allows us to examine whether informal support within families influences take-up decisions.
 
 \paragraph{East German socialisation.}  
-Whether a student lives in East Germany could shape their attitudes toward state support, reflecting historical and cultural influences.  
-Research by \cite{alesina_good-bye_2007} shows that former GDR residents tend to favour redistribution more and trust state support even generations after reunification.  
-So, we use this regional indicator as a proxy for such socialisation effects.  
-Since it turns out significant in our model, it likely captures meaningful differences in how students view and respond to BAföG.
-
-\paragraph{Sibling prior experience with BAföG.}  
-Having an older sibling who previously received BAföG might ease the application process by providing guidance and familiarity.  
-According to Herber et al. (2019), this kind of family experience can lower informational and procedural barriers, making it easier for students to follow through.  
-Including this factor helps us see if such informal support within families influences take-up decisions.
-
-\paragraph{Migration background.}  
-We distinguish between direct and indirect migration backgrounds to explore whether less familiarity with the German aid system affects take-up.  
-Students from migrant households might face additional challenges understanding eligibility or navigating the application, partly due to lower financial literacy documented in recent studies \citep{Tsegay_2024}.  
-Accounting for migration background helps us uncover structural or informational hurdles that could contribute to lower BAföG uptake.
+A student’s social and regional background may influence their attitudes toward government intervention due to historical and cultural context. Research by \cite{alesina_good-bye_2007} finds that individuals with an East German background tend to be more supportive of redistribution and more trusting of public assistance, even years after reunification. In our analysis, we include a regional indicator for current residence in East Germany as a proxy for these socialisation effects. Its significance in our model suggests that this proxy captures meaningful differences in how students perceive and respond to BAföG.
 
 \paragraph{Parental education.}  
-Parental education often shapes students’ educational and financial behaviours.  
-We flag students whose parents hold at least a bachelor’s degree as coming from higher-educated households to test whether this background affects BAföG application patterns.
+Parental education often shapes students’ educational and financial behaviours. We flag students whose parents hold at least a bachelor’s degree as coming from higher-educated households to test whether this background affects BAföG application patterns.
 
-\paragraph{Siblings who have claimed BAföG.}  
-Beyond older siblings, any sibling with prior BAföG experience could provide valuable insights or encouragement.  
-This variable lets us check if broader family exposure to BAföG matters.
+\paragraph{Risk appetite, impulsiveness and patience.}  
 
-\paragraph{Age, sex, and partnership status.}  
-Finally, we control for basic demographics that may influence financial aid decisions.  
-Age reflects where students are in their studies or life course, which can change their financial needs or familiarity with administrative procedures.  
-Sex (female) captures potential gender-related differences in financial choices or access to information.  
-And partnership status accounts for how having a partner might affect household resources, financial planning, or information sharing relevant to BAföG take-up.
+To understand why some eligible students do not apply for BAföG, we consider their willingness to take risks. Even though BAföG offers relatively safe and generous terms, risk-averse students might still avoid taking on any debt. Including this measure allows us to test whether risk preferences can help explain patterns of non-take-up. \cite{herber_non-take-up_2019} also include risk attitudes in their analysis, primarily to assess whether risk aversion affects take-up or interacts with traits such as impatience. Although they do not find a strong effect, they suggest that risk attitudes remain relevant for understanding application behavior. Based on this reasoning, risk attitudes are included as a control in our model as well.
+
+In addition to risk appetite, we account for impulsiveness and patience using scales constructed by SOEP based on several survey questions. These behavioral traits might influence how students make financial decisions, so including them helps capture additional sources of variation in BAföG take-up.
 
 % By controlling for these demographic characteristics, we aim to ensure that our analysis more accurately isolates the effects of other variables of interest.
 
