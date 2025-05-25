@@ -1,0 +1,163 @@
+\newpage
+\section{Main Input Parameters for Theoretical BAföG Entitlement Calculations}
+
+This appendix presents the key legal parameter tables used in the theoretical BAföG entitlement calculations. 
+The data has been compiled from various legal sources and amendments \cite{bafoeg_law, bafoeg20, bafoeg21, bafoeg22, bafoeg23, bafoeg24, bafoeg25, bafoeg26, bafoeg27, bafoeg28}. 
+Unless stated otherwise, values are given in euros and reflect monthly amounts. Where necessary, values have been forward filled in the microsimulation to maintain continuity over time.
+
+The process of compiling these parameters served as an essential foundation for our analysis and, more broadly, enabled our entry into this research area. 
+Given the fragmented nature of BAföG legislation over time, assembling a clean, structured dataset was a prerequisite for meaningful empirical work. 
+We hope that this documentation can serve as a resource for future researchers interested in modeling the German student aid system or conducting policy evaluation in this domain.
+
+\vspace{1em}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{lXXXX}
+\toprule
+\textbf{Valid from} & \textbf{§ 13 (1) 1} & \textbf{§ 13 (1) 2} & \textbf{§ 13 (2) 1} & \textbf{§ 13 (2) 2} \\
+\midrule
+2024-07-25 & 442 & 475 & 59 & 380 \\
+2022-07-22 & 421 & 452 & 59 & 360 \\
+2020-08-01 & 398 & 427 & 56 & 325 \\
+2019-07-16 & 391 & 419 & 55 & 325 \\
+2016-08-01 & 372 & 399 & 52 & 250 \\
+2010-10-01 & 348 & 373 & 49 & 224 \\
+2008-10-01 & 341 & 366 & 48 & 146 \\
+2002-01-01 & 310 & 333 & 44 & 133 \\
+\bottomrule
+\end{tabularx}
+\caption{Monthly standard needs rates under § 13 BAföG for students, by validity date. Amounts vary by accommodation type and insurance status.}
+\label{tab:bafog_values_13}
+\end{table}
+
+\vspace{1em}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{lXXXXXX}
+\toprule
+\textbf{Valid from} & \textbf{§ 13a (1) 1} & \textbf{§ 13a (1) 2} & \textbf{§ 13a (2) 1} & \textbf{§ 13a (2) 2} & \textbf{§ 13a (3) 1} & \textbf{§ 13a (3) 2} \\
+\midrule
+2024-08-01 & 102 & 35 & 185 & 48 & 102 & 35 \\
+2022-08-01 & 94  & 28 & 168 & 38 & 94  & 28 \\
+2022-07-15 & 84  & 25 & 155 & 34 & 84  & 25 \\
+2020-08-01 & 84  & 25 & 155 & 34 & 84  & 25 \\
+2016-08-01 & 71  & 15 & 155 & 34 & 84  & 25 \\
+2010-10-01 & 62  & 11 & 155 & 34 & 84  & 25 \\
+2008-10-01 & 50  & 9  & 155 & 34 & 84  & 25 \\
+2002-01-01 & 47  & 8  & 155 & 34 & 84  & 25 \\
+\bottomrule
+\end{tabularx}
+\caption{Monthly allowances under § 13a BAföG for health and long-term care insurance contributions, by validity date. Amounts vary by insurance type and student status.}
+\label{tab:bafog_values_13a}
+\end{table}
+
+\vspace{1em}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{lX}
+\toprule
+\textbf{Year} & \textbf{§ 21 (2) 1} \\
+\midrule
+2022 & 0.223 \\
+2021 & 0.213 \\
+2012 & 0.213 \\
+2001 & 0.210 \\
+\bottomrule
+\end{tabularx}
+\caption{Deduction rates under § 21 (2) 1 BAföG for income from employment subject to pension insurance, used to approximate social security contributions in the means test, by year.}
+\caption*{\textit{Note:} Table only shows years in which the rate changed. Intermediate years are forward filled.}
+\label{tab:bafog_rates}
+\end{table}
+
+\vspace{1em}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{lXXX}
+\toprule
+\textbf{Valid from} & \textbf{§ 23 (1) 1} & \textbf{§ 23 (1) 2} & \textbf{§ 23 (1) 3} \\
+\midrule
+2024-07-19 & 353 & 850 & 770 \\
+2022-07-16 & 330 & 805 & 730 \\
+2021-08-01 & 330 & 665 & 605 \\
+2020-08-01 & 330 & 630 & 570 \\
+2019-07-09 & 330 & 610 & 555 \\
+2015-01-01 & 290 & 570 & 520 \\
+2010-10-24 & 290 & 535 & 485 \\
+2008-08-01 & 290 & 520 & 470 \\
+2007-12-24 & 255 & 520 & 470 \\
+2002-01-01 & 255 & 480 & 435 \\
+\bottomrule
+\end{tabularx}
+\caption{Monthly income disregards (Freibeträge) under § 23 (1) BAföG for the student, by validity date. Columns refer to students living alone, with a child, or with a spouse/partner.}
+\label{tab:bafog_values_23}
+\end{table}
+
+\vspace{1em}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{l *{4}{>{\centering\arraybackslash}X} >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+\toprule
+\textbf{Valid from} & \textbf{§ 25 (1) 1} & \textbf{§ 25 (1) 2} & \textbf{§ 25 (3) 1} & \textbf{§ 25 (3) 2} & \textbf{§ 25 (4) 1} & \textbf{§ 25 (4) 2} \\
+\midrule
+2024-07-19 & 2540 & 1690 & 850 & 770 & 50\% & 5\% \\
+2022-07-16 & 2415 & 1605 & 805 & 730 & 50\% & 5\% \\
+2021-08-01 & 2000 & 1330 & 665 & 605 & 50\% & 5\% \\
+2020-08-01 & 1890 & 1260 & 630 & 570 & 50\% & 5\% \\
+2019-07-09 & 1835 & 1225 & 610 & 555 & 50\% & 5\% \\
+2015-01-01 & 1715 & 1145 & 570 & 520 & 50\% & 5\% \\
+2010-10-24 & 1605 & 1070 & 535 & 485 & 50\% & 5\% \\
+2007-12-24 & 1555 & 1040 & 520 & 470 & 50\% & 5\% \\
+2002-01-01 & 1440 & 520  & 480 & 435 & 50\% & 5\% \\
+\bottomrule
+\end{tabularx}
+\caption{Income exemptions under § 25 BAföG for parents and spouses or partners, by validity date. Columns show fixed allowances and percentage deductions used in the means test.}
+\label{tab:bafog_values_25}
+\end{table}
+
+\subsection{Other Relevant Input Parameters}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{l >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+\toprule
+\textbf{In force} & \textbf{§ 32a Abs. 5 \& 6 (joint)} & \textbf{Otherwise (single)} \\
+\midrule
+2026 & 40700 & 20350 \\
+2023 & 36260 & 18130 \\
+2021 & 33912 & 16956 \\
+2020 & 1944  & 972 \\
+\bottomrule
+\end{tabularx}
+\caption{Solidarity surcharge (Soli) exemption thresholds under § 32a Abs. 5 \& 6 EStG, by year of entry into force. Joint refers to married couples filing jointly; single to individual taxpayers.}
+\label{tab:solz_thresholds}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{l >{\centering\arraybackslash}X}
+\toprule
+\textbf{Year} & \textbf{Werbungskostenpauschale} \\
+\midrule
+2024 & 1230 \\
+2022 & 1200 \\
+2021 & 1000 \\
+2010 & 920  \\
+2003 & 1044 \\
+\bottomrule
+\end{tabularx}
+\caption{Annual employee deduction for work-related expenses (Werbungskostenpauschale) under § 9a Satz 1 Nr. 1a EStG, by year of change. Intermediate years are forward filled in the microsimulation.}
+\label{tab:werbungskostenpauschale}
+\end{table}
