@@ -36,15 +36,15 @@ The base need (\texttt{base\_need}) is a flat-rate amount representing the month
 For all eligible university students during the relevant period, the base need was set at 399 EUR. Since the student in this case study meets the criteria for university-level BAföG support, this full amount is assigned without adjustment.
 
 \begin{table}[H]
-\scriptsize
+\footnotesize
 \centering
-\begin{tabular}{llr}
+\begin{tabularx}{\textwidth}{lXr}
 \toprule
 \textbf{Component} & \textbf{Explanation} & \textbf{Value (EUR)} \\
 \midrule
 Base Need & Flat-rate monthly amount for university students & 399 \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \caption{Base need (\texttt{base\_need}) for pid 20156903, in accordance with §~13(1) Nr.~1 BAföG.}
 \label{table:bafoeg_base_need}
 \end{table}
@@ -55,15 +55,15 @@ The housing allowance (\texttt{housing\_allowance}) compensates students for liv
 In this example, the student was classified as living independently. While the statutory maximum at the time was 399 EUR, the simulation applies a standardized flat amount of 250 EUR to align with data quality and institutional thresholds reflected in the SOEP housing variables.
 
 \begin{table}[H]
-\scriptsize
+\footnotesize
 \centering
-\begin{tabular}{llr}
+\begin{tabularx}{\textwidth}{lXr}
 \toprule
 \textbf{Component} & \textbf{Explanation} & \textbf{Value (EUR)} \\
 \midrule
 Housing Allowance & Standard flat rate applied for non-parental housing & 250 \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \caption{Housing allowance (\texttt{housing\_allowance}) for pid 20156903, based on §~13(1) Nr.~2 BAföG.}
 \label{table:bafoeg_housing}
 \end{table}
@@ -80,9 +80,9 @@ For survey year 2018, the applicable values, according to the 2020-08-01 rates s
 These two components sum to 86 EUR, which is assigned as the total insurance supplement for this individual.
 
 \begin{table}[H]
-\scriptsize
+\footnotesize
 \centering
-\begin{tabular}{llr}
+\begin{tabularx}{\textwidth}{lXr}
 \toprule
 \textbf{Component} & \textbf{Explanation} & \textbf{Value (EUR)} \\
 \midrule
@@ -91,7 +91,7 @@ These two components sum to 86 EUR, which is assigned as the total insurance sup
 \midrule
 Insurance Supplement & Sum of flat-rate statutory insurance allowances & 86 \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \caption{Insurance supplement (\texttt{insurance\_supplement}) for pid 20156903. Rates valid for the 2018 survey year.}
 \label{table:bafoeg_insurance}
 \end{table}
@@ -145,9 +145,9 @@ The personal allowance specified in §~23(1) Nr.~1 BAföG for the year 2018 was 
 \]
 
 \begin{table}[H]
-\scriptsize
+\footnotesize
 \centering
-\begin{tabular}{llr}
+\begin{tabularx}{\textwidth}{lXr}
 \toprule
 \textbf{Component} & \textbf{Explanation} & \textbf{Value (EUR)} \\
 \midrule
@@ -166,7 +166,7 @@ Personal allowance & §~23(1) Nr.~1 BAföG (2018) & 290 \\
 \midrule
 \textbf{Student excess income} & Amount exceeding allowance & \textbf{56.02} \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \caption{Calculation of student’s excess income (\texttt{excess\_income\_stu}) for pid 20156903.}
 \label{table:bafoeg_excess_income_stu}
 \end{table}
@@ -224,9 +224,9 @@ The solidarity surcharge applies since taxable income exceeds the 2018 exemption
 \]
 
 \begin{table}[H]
-\scriptsize
+\footnotesize
 \centering
-\begin{tabular}{llr}
+\begin{tabularx}{\textwidth}{lXr}
 \toprule
 \textbf{Component} & \textbf{Explanation} & \textbf{Value (EUR)} \\
 \midrule
@@ -243,7 +243,7 @@ Solidarity surcharge & 5.5\% of income tax (capped) & 333 \\
 Net annual income (\texttt{inc\_net}) & After all taxes & 25,872 \\
 Net monthly income & $25{,}872 \div 12$ & 2,156 \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \caption{Income derivation for father (pid = 20156901) in 2018.}
 \label{table:bafoeg_parent_father}
 \end{table}
@@ -297,9 +297,9 @@ Because the income falls well below the basic exemption threshold, no income tax
 \]
 
 \begin{table}[H]
-\scriptsize
+\footnotesize
 \centering
-\begin{tabular}{llr}
+\begin{tabularx}{\textwidth}{lXr}
 \toprule
 \textbf{Component} & \textbf{Explanation} & \textbf{Value (EUR)} \\
 \midrule
@@ -316,7 +316,7 @@ Solidarity surcharge & Below threshold & 0 \\
 Net annual income (\texttt{inc\_net}) & After all taxes & 2,046.20 \\
 Net monthly income & $2{,}046.20 \div 12$ & 170.52 \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \caption{Income derivation for mother (pid = 20156902) in 2018.}
 \label{table:bafoeg_parent_mother}
 \end{table}
@@ -388,9 +388,9 @@ The final contribution from parental income is the remaining amount after all de
 \]
 
 \begin{table}[H]
-\scriptsize
+\footnotesize
 \centering
-\begin{tabular}{llr}
+\begin{tabularx}{\textwidth}{lXr}
 \toprule
 \textbf{Component} & \textbf{Explanation} & \textbf{Value (EUR)} \\
 \midrule
@@ -403,7 +403,7 @@ Additional allowance & 60\% of remaining income (§~25(4)) & 54.91 \\
 \midrule
 \textbf{Excess parental income} & Final contribution to be deducted & \textbf{36.61} \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \caption{Calculation of joint parental excess income for pid 20156903 (2018).}
 \label{table:bafoeg_joint_income}
 \end{table}
@@ -421,9 +421,9 @@ Students whose personal assets exceed a legally defined exemption threshold are 
 The student’s asset-related information for the 2018 survey year is as follows:
 
 \begin{table}[H]
-\scriptsize
+\footnotesize
 \centering
-\begin{tabular}{lr}
+\begin{tabularx}{\textwidth}{Xr}
 \toprule
 \textbf{Asset Category} & \textbf{Value (EUR)} \\
 \midrule
@@ -439,7 +439,7 @@ Eligible debts (offsetting) & 0 \\
 \textbf{Debts} & 0 \\
 \textbf{Net assets} & 7,940 \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \caption{Declared asset categories for pid 20156903 in 2018.}
 \caption*{\textit{Note:} These assets are linearly interpolated from 2017 and 2022 survey waves.}
 \label{table:bafoeg_declared_assets}
@@ -462,9 +462,9 @@ The contribution from assets is computed as the difference between net assets an
 \]
 
 \begin{table}[H]
-\scriptsize
+\footnotesize
 \centering
-\begin{tabular}{llr}
+\begin{tabularx}{\textwidth}{lXr}
 \toprule
 \textbf{Component} & \textbf{Explanation} & \textbf{Value (EUR)} \\
 \midrule
@@ -473,7 +473,7 @@ Asset allowance & §~29 BAföG (U30 threshold in 2018) & 7,500 \\
 \midrule
 \textbf{Excess asset contribution} & Final deduction from BAföG entitlement & \textbf{440} \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \caption{Excess asset calculation for pid 20156903 in 2018.}
 \label{table:bafoeg_excess_assets}
 \end{table}
@@ -516,9 +516,9 @@ The following deductions apply:
 \]
 
 \begin{table}[H]
-\scriptsize
+\footnotesize
 \centering
-\begin{tabular}{llr}
+\begin{tabularx}{\textwidth}{lXr}
 \toprule
 \textbf{Component} & \textbf{Explanation} & \textbf{Value (EUR)} \\
 \midrule
@@ -536,7 +536,7 @@ Excess asset contribution & §~29 BAföG & 440.00 \\
 \midrule
 \textbf{Theoretical BAföG award} & \textbf{Maximum eligible amount} & \textbf{202.38} \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \caption{Final theoretical BAföG award for pid 20156903 in 2018.}
 \label{table:bafoeg_final_award}
 \end{table}
