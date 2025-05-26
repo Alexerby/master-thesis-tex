@@ -7,28 +7,30 @@
     % Existing nodes for student and parent flows
     \node[datasetbox] (soep) {SOEP-Core};
     \node[pipelinebox, right=of soep] (student) {Student selection};
+    \node[pipelinebox, above=1cm of student] (siblings) {Identify siblings};
     \node[pipelinebox, right=of student] (parent) {Parent selection};
-    \node[pipelinebox, below=1.2cm of student] (grossincome) {Gross Income Student};
-    \node[pipelinebox, below=1.5cm of grossincome] (subtract) {Subtract WKP, SI, TAX, CTAX};  % Moved under Gross Income
-    \node[pipelinebox, below=1.5cm of subtract] (allowances) {Apply §23 Allowances};
+    \node[pipelinebox, below=1.2cm of student] (grossincome) {Gross income student};
+    \node[pipelinebox, below=1.5cm of grossincome] (subtract) {Subtract WKP, SI, TAX, CTAX};
+    \node[pipelinebox, below=1.5cm of subtract] (allowances) {Apply §23 allowance};
     \node[pipelinebox, below=1.5cm of allowances] (excessincome) {Student excess income};
 
     % Parent income arrows and nodes
     \node[actionbox, below=1.5cm of parent] (bothparents) {Both parents in SOEP?};
-    \node[actionbox, right=3cm of bothparents] (dropstudent) {Drop Student};
-    \node[pipelinebox, below=2cm of bothparents] (grossincome2) {Gross Income};
+    \node[actionbox, right=2cm of bothparents] (dropstudent) {Drop student};
+    \node[pipelinebox, below=2cm of bothparents] (grossincome2) {Gross income};
     \node[pipelinebox, right=3cm of grossincome2, font=\footnotesize] (subtract_parent) {Subtract WKP, SI, TAX, CTAX};
-    \node[pipelinebox, below=1.5cm of subtract_parent] (allowances_parent) {Apply §25 Allowances};
+    \node[pipelinebox, below=1.5cm of subtract_parent] (allowances_parent) {Apply §25 allowance};
     \node[pipelinebox, below=1.5cm of allowances_parent] (excessincome_parent) {Parental excess income};
 
     % New asset branch on left side, separate flow
-    \node[actionbox, below=1cm of soep, font=\footnotesize, align=center] (assets_identify) {Student has Assets?};
+    \node[actionbox, below=1cm of soep, font=\footnotesize, align=center] (assets_identify) {Student has assets?};
     \node[pipelinebox, below=1.5cm of assets_identify] (assets_calc) {Calculate Total Assets};
-    \node[pipelinebox, below=1.5cm of assets_calc] (allowances_29) {Apply §29 Allowance};
+    \node[pipelinebox, below=1.5cm of assets_calc] (allowances_29) {Apply §29 allowance};
     \node[pipelinebox, below=1.5cm of allowances_29] (excess_assets) {Student excess assets};
 
     % Arrows for income flows
     \draw[arrow] (soep) -- (student);
+    \draw[arrow] (siblings) -- (student);
     \draw[arrow] (student) -- (parent);
     \draw[arrow] (student.south) -- (grossincome.north);
     \draw[arrow] (grossincome.south) -- (subtract.north);  % Adjusted for new position
@@ -37,25 +39,26 @@
 
     % Parent income arrows and decisions
     \draw[arrow] (parent.south) -- (bothparents.north);
-    \draw[arrow] (bothparents.south) -- node[midway, left]{Yes} (grossincome2.north);
-    \draw[arrow] (bothparents.east) -- node[midway, above]{No} (dropstudent.west);
+    \draw[arrow, dashed] (bothparents.south) -- node[midway, left]{Yes} (grossincome2.north);
+    \draw[arrow, dashed] (bothparents.east) -- node[midway, above]{No} (dropstudent.west);
     \draw[arrow] (grossincome2.east) -- (subtract_parent.west);
     \draw[arrow] (subtract_parent.south) -- (allowances_parent.north);
     \draw[arrow] (allowances_parent.south) -- (excessincome_parent.north);
 
     % Arrows for asset flow
     \draw[arrow] (student.south west) -- (assets_identify.north);
-    \draw[arrow] (assets_identify.south) -- node[midway, left]{Yes} (assets_calc.north);  % Yes arrow for assets identified
+    \draw[arrow, dashed] (assets_identify.south) -- node[midway, left]{Yes} (assets_calc.north);  % Yes arrow for assets identified
     \draw[arrow] (assets_calc.south) -- (allowances_29.north);
     \draw[arrow] (allowances_29.south) -- (excess_assets.north);
+
 
   \end{tikzpicture}
 }
   \caption{Flowchart for the calculation of student and parental income and asset adjustments. This process includes the identification of relevant income and asset sources, subtraction of allowable expenses, and the application of specific allowances under sections \textit{§23}, \textit{§25} and \textit{§29} of BAföG. Abbreviations:
-  \textbf{WKP}: Standard deduction for work-related expenses,
-  \textbf{SI}: Social Security,
-  \textbf{TAX}: Income tax,
-  \textbf{CTAX}: Church Tax.}
+  \emph{WKP}: Standard deduction for work-related expenses,
+  \emph{SI}: Social Security,
+  \emph{TAX}: Income tax,
+  \emph{CTAX}: Church Tax.}
   \label{fig:pipeline-overview}
 \end{figure}
 \end{landscape}
