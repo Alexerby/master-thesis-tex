@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  APPENDIX – MICROSIMULATION PIPELINE
+%  APPENDIX – MICROSIMULATION PIPELINE (Revised Table)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage
@@ -9,101 +9,97 @@
 % ========================================================================
 
 {\footnotesize
-\begin{longtable}{llll}
-\caption{Variable Dictionary by Dataset} 
+\begin{longtable}{lll}
+\caption{Variable Dictionary by Dataset (Excluding Data Type)}
 \label{table:variable_dictionary} \\
 \toprule
-Dataset & Variable & Description & Data Type / Scale \\
+Dataset & Variable & Description \\
 \midrule
 \endfirsthead
 
-\multicolumn{4}{l}{\textit{(continued from previous page)}} \\
+\multicolumn{3}{l}{\textit{(continued from previous page)}} \\
 \toprule
-Dataset & Variable & Description & Data Type / Scale \\
+Dataset & Variable & Description \\
 \midrule
 \endhead
 
 \bottomrule
-\multicolumn{4}{r}{\textit{(continued on next page)}} \\
+\multicolumn{3}{r}{\textit{(continued on next page)}} \\
 \endfoot
 
 \bottomrule
 \endlastfoot
 
-\multicolumn{4}{l}{\textbf{IDENTIFIERS AND CORE DEMOGRAPHICS}} \\
-\texttt{ppathl} & \texttt{pid} & Person identifier & int \\
-\texttt{ppathl} & \texttt{hid} & Household ID & int \\
-\texttt{ppathl} & \texttt{syear} & Survey year & date \\
-\texttt{ppathl} & \texttt{gebjahr} & Year of birth & int \\
-\texttt{ppathl} & \texttt{gebmonat} & Month of birth & int \\
-\texttt{ppathl} & \texttt{sex} & Sex & Categorical \\
-\texttt{ppathl} & \texttt{partner} & Partnership status & Categorical \\
-\texttt{ppathl} & \texttt{migback} & Migration background & Categorical \\
-\texttt{regionl} & \texttt{hid} & Household ID & int \\
-\texttt{regionl} & \texttt{syear} & Survey year & date \\
-\texttt{regionl} & \texttt{bula} & Federal state (Bundesland) & Categorical \\
- 
-\midrule
-\multicolumn{4}{l}{\textbf{EDUCATION}} \\
-\texttt{pl} & \texttt{pid} & Person identifier & int \\
-\texttt{pl} & \texttt{syear} & Survey year & date \\
-\texttt{pl} & \texttt{plg0012\_h} & Currently in education & Ordinal \\
-\texttt{pl} & \texttt{plg0014\_v5} & Education level, 1999--2008 & Ordinal \\
-\texttt{pl} & \texttt{plg0014\_v6} & Education level, 2009--2012 & Ordinal \\
-\texttt{pl} & \texttt{plg0014\_v7} & Education level, 2013--2021 & Ordinal \\
+\multicolumn{3}{l}{\textbf{IDENTIFIERS AND CORE DEMOGRAPHICS}} \\
+\texttt{ppathl} & \texttt{pid} & Person identifier \\
+\texttt{ppathl} & \texttt{hid} & Household ID \\
+\texttt{ppathl} & \texttt{syear} & Survey year \\
+\texttt{ppathl} & \texttt{gebjahr} & Year of birth \\
+\texttt{ppathl} & \texttt{gebmonat} & Month of birth \\
+\texttt{ppathl} & \texttt{sex} & Sex \\
+\texttt{ppathl} & \texttt{partner} & Partnership status \\
+\texttt{ppathl} & \texttt{migback} & Migration background \\
+\texttt{regionl} & \texttt{hid} & Household ID \\
+\texttt{regionl} & \texttt{syear} & Survey year \\
+\texttt{regionl} & \texttt{bula} & Federal state (Bundesland) \\
 
 \midrule
-\multicolumn{4}{l}{\textbf{RELIGION AND STUDENT AID}} \\
-\texttt{pl} & \texttt{plh0258\_h} & Religion / church membership & Categorical \\
-\texttt{pl} & \texttt{plc0167\_h} & BAföG eligibility & Binary \\
-\texttt{pl} & \texttt{plc0168\_h} & BAföG / scholarship (gross, monthly) & int \\
-\texttt{pequiv} & \texttt{pid} & Person identifier & int \\
-\texttt{pequiv} & \texttt{syear} & Survey year & date \\
-\texttt{pequiv} & \texttt{istuy} & Student grants received & int \\
+\multicolumn{3}{l}{\textbf{EDUCATION}} \\
+\texttt{pl} & \texttt{pid} & Person identifier \\
+\texttt{pl} & \texttt{syear} & Survey year \\
+\texttt{pl} & \texttt{plg0012\_h} & Currently in education \\
+\texttt{pl} & \texttt{plg0014\_v5} & Education level, 1999--2008 \\
+\texttt{pl} & \texttt{plg0014\_v6} & Education level, 2009--2012 \\
+\texttt{pl} & \texttt{plg0014\_v7} & Education level, 2013--2021 \\
 
 \midrule
-\multicolumn{4}{l}{\textbf{EMPLOYMENT AND INCOME}} \\
-\texttt{pgen} & \texttt{pid} & Person identifier & int \\
-\texttt{pgen} & \texttt{syear} & Survey year & date \\
-\texttt{pgen} & \texttt{pglabgro} & Labour income (gross) & int \\
-\texttt{pgen} & \texttt{pgemplst} & Employment status & Categorical \\
-\texttt{pgen} & \texttt{pgpartnr} & Partner indicator & int \\
-\texttt{biol} & \texttt{pid} & Person identifier & int \\
-\texttt{biol} & \texttt{syear} & Survey year & date \\
-\texttt{biol} & \texttt{lb0267\_v1} & Employment status & Categorical \\
+\multicolumn{3}{l}{\textbf{RELIGION AND STUDENT AID}} \\
+\texttt{pl} & \texttt{plh0258\_h} & Religion / church membership \\
+\texttt{pl} & \texttt{plc0167\_h} & BAföG eligibility \\
+\texttt{pl} & \texttt{plc0168\_h} & BAföG / scholarship (gross, monthly) \\
 
 \midrule
-\multicolumn{4}{l}{\textbf{HOUSING AND RENT}} \\
-\texttt{pkal} & \texttt{pid} & Person identifier & int \\
-\texttt{pkal} & \texttt{syear} & Survey year & date \\
-\texttt{pkal} & \texttt{kal2a02} & Monthly rent including utilities & int \\
-\texttt{pkal} & \texttt{kal2a03\_h} & Housing benefit & int \\
+\multicolumn{3}{l}{\textbf{EMPLOYMENT AND INCOME}} \\
+\texttt{pgen} & \texttt{pid} & Person identifier \\
+\texttt{pgen} & \texttt{syear} & Survey year \\
+\texttt{pgen} & \texttt{pgemplst} & Employment status \\
+\texttt{pgen} & \texttt{pgpartnr} & Partner indicator \\
+\texttt{biol} & \texttt{pid} & Person identifier \\
+\texttt{biol} & \texttt{syear} & Survey year \\
+\texttt{biol} & \texttt{lb0267\_v1} & Employment status \\
 
 \midrule
-\multicolumn{4}{l}{\textbf{WEALTH AND ASSETS}} \\
-\texttt{pwealth} & \texttt{pid} & Person identifier & int \\
-\texttt{pwealth} & \texttt{syear} & Survey year & date \\
-\texttt{pwealth} & \texttt{f0100a--f0100e} & Financial assets & int \\
-\texttt{pwealth} & \texttt{e0111a--e0111e} & Real estate (net value shares) & int \\
-\texttt{pwealth} & \texttt{b0100a--b0100e} & Business assets & int \\
-\texttt{pwealth} & \texttt{i0100a--i0100e} & Private insurances & int \\
-\texttt{pwealth} & \texttt{v0100a--v0100e} & Vehicles & int \\
-\texttt{pwealth} & \texttt{t0100a--t0100e} & Tangible assets & int \\
-\texttt{pwealth} & \texttt{w0011a--w0011e} & Liabilities and debts & int \\
+\multicolumn{3}{l}{\textbf{HOUSING AND RENT}} \\
+\texttt{pkal} & \texttt{pid} & Person identifier \\
+\texttt{pkal} & \texttt{syear} & Survey year \\
+\texttt{pkal} & \texttt{kal2a02} & Monthly rent including utilities \\
+\texttt{pkal} & \texttt{kal2a03\_h} & Housing benefit \\
 
 \midrule
-\multicolumn{4}{l}{\textbf{FAMILY RELATIONSHIPS}} \\
-\texttt{biosib} & \texttt{pid} & Person identifier & int \\
-\texttt{biosib} & \texttt{sibpnr1--sibpnr11} & Sibling person numbers & int \\
-\texttt{bioparen} & \texttt{pid} & Person identifier & int \\
-\texttt{bioparen} & \texttt{fnr} & Father’s person ID & int \\
-\texttt{bioparen} & \texttt{mnr} & Mother’s person ID & int \\
+\multicolumn{3}{l}{\textbf{WEALTH AND ASSETS}} \\
+\texttt{pwealth} & \texttt{pid} & Person identifier \\
+\texttt{pwealth} & \texttt{syear} & Survey year \\
+\texttt{pwealth} & \texttt{f0100a--f0100e} & Financial assets \\
+\texttt{pwealth} & \texttt{e0111a--e0111e} & Real estate (net value shares) \\
+\texttt{pwealth} & \texttt{b0100a--b0100e} & Business assets \\
+\texttt{pwealth} & \texttt{i0100a--i0100e} & Private insurances \\
+\texttt{pwealth} & \texttt{v0100a--v0100e} & Vehicles \\
+\texttt{pwealth} & \texttt{t0100a--t0100e} & Tangible assets \\
+\texttt{pwealth} & \texttt{w0011a--w0011e} & Liabilities and debts \\
 
 \midrule
-\multicolumn{4}{l}{\textbf{HOUSEHOLD COMPOSITION}} \\
-\texttt{hgen} & \texttt{hid} & Household ID & int \\
-\texttt{hgen} & \texttt{syear} & Survey year & date \\
-\texttt{hgen} & \texttt{hgtyp1hh} & Household type & Categorical \\
+\multicolumn{3}{l}{\textbf{FAMILY RELATIONSHIPS}} \\
+\texttt{biosib} & \texttt{pid} & Person identifier \\
+\texttt{biosib} & \texttt{sibpnr1--sibpnr11} & Sibling person numbers \\
+\texttt{bioparen} & \texttt{pid} & Person identifier \\
+\texttt{bioparen} & \texttt{fnr} & Father’s person ID \\
+\texttt{bioparen} & \texttt{mnr} & Mother’s person ID \\
+
+\midrule
+\multicolumn{3}{l}{\textbf{HOUSEHOLD COMPOSITION}} \\
+\texttt{hgen} & \texttt{hid} & Household ID \\
+\texttt{hgen} & \texttt{syear} & Survey year \\
+\texttt{hgen} & \texttt{hgtyp1hh} & Household type \\
 
 \end{longtable}
 }
