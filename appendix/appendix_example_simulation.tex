@@ -126,6 +126,7 @@ Two statutory deductions are applied to estimate net taxable income:
 
 \paragraph{Step 3: Applying Income Tax}
 The BAföG calculator applies German income tax tables to compute statutory income tax liabilities. In this case, the taxable income falls below the basic allowance threshold (9,000 EUR in 2018), so no income tax, church tax, or solidarity surcharge is applied:
+
 \begin{itemize}
     \item Income tax: 0 EUR
     \item Church tax: 0 EUR
@@ -208,9 +209,12 @@ Next, a 21.3\% deduction is applied to the income after Werbungskosten:
 
 The parent is assessed as an individual (not jointly filed). Based on the 2018 tax table and a taxable income of 32,267 EUR, the following taxes are applied:
 
-- \textbf{Income tax:} 6,062 EUR (per simulation based on §~32a EStG)
-- \textbf{Church tax:} 0 EUR (not church-affiliated in SOEP)
-- \textbf{Solidarity surcharge (Soli):} 333 EUR
+\begin{itemize}
+    \item \textbf{Income tax:} 6,062 EUR (per simulation based on §~32a EStG)
+    \item \textbf{Church tax:} 0 EUR (not church-affiliated in SOEP)
+    \item \textbf{Solidarity surcharge (Soli):} 333 EUR
+\end{itemize}
+
 
 The solidarity surcharge applies since taxable income exceeds the 2018 exemption threshold of 972 EUR (§~32a Abs.~5 \& 6 EStG, pre-2020 version). The surcharge is 5.5\% of income tax, capped by taper rules.
 
@@ -355,8 +359,12 @@ The remaining income after basic allowance is:
 
 The student has two siblings who are eligible for sibling-related deductions. According to the 2015 allowance table:
 
-- The sibling deduction per eligible sibling is 260 EUR
-- Total deduction: $2 \times 260 = 520$ EUR
+\begin{itemize}
+    \item The sibling deduction per eligible sibling is 260 EUR
+    \item Total deduction: $2 \times 260 = 520$ EUR
+\end{itemize}
+
+
 
 \[
 \texttt{joint\_income\_less\_ba\_and\_sib} = 611.52 - 520 = 91.52~\text{EUR}
@@ -366,8 +374,12 @@ The student has two siblings who are eligible for sibling-related deductions. Ac
 
 In addition, §~25(4) BAföG entitles parents to a percentage-based deduction on the remaining income. According to the allowance rules:
 
-- A base allowance of 50\% of the remainder applies
-- Plus 5\% per sibling with a positive deduction
+\begin{itemize}
+    \item A base allowance of 50\% of the remainder applies
+    \item Plus 5\% per sibling with a positive deduction
+\end{itemize}
+
+
 
 Thus, the applied rate is:
 
