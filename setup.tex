@@ -59,7 +59,17 @@
 % Formatting
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcites{main,other}{Main References, Other References}
+% Table of Contents
+\usepackage{tocloft}
+\setlength{\cftbeforesecskip}{0pt}      % Remove vertical space before sections
+\setlength{\cftbeforesubsecskip}{0pt}   % Remove vertical space before subsections
+\setlength{\cftaftertoctitleskip}{10pt} % Optional: reduce spacing after "Contents" title
+
+\renewcommand{\cftsecfont}{\small}
+\renewcommand{\cftsubsecfont}{\small}
+\renewcommand{\cftsecpagefont}{\small}
+\renewcommand{\cftsubsecpagefont}{\small}
+
 
 % Bibliography
 \bibliographystyle{plainnat}
