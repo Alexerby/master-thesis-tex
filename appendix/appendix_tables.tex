@@ -86,14 +86,11 @@ Sibling received BAföG    & 61.54 & 64.71 & 46.15 & 53.33 & 48.48 & 32.14 & 37.
   2023 & 116 & 1.000 & 663 & 663 & 2,863,514 & 2,863,514 \\
   \bottomrule
   \end{tabular}
-  \caption{\small{
-    Average nominal and inflation-adjusted payout under the Federal Training Assistance Act (BAföG) 
-    for student recipients (excluding pupils), based on official data published by Destatis.  
-    The table includes the Consumer Price Index (CPI, variable \textbf{PREIS1}, base year 2020 = 100) and 
-    a derived price factor (column ``Price Factor'') calculated using these CPI values to express nominal amounts in 2023 euros.  
-    The inflation-adjusted average payouts and total financial expenditures were computed using this deflator and are not 
-    reported as such in the original Destatis tables.
-}}
+    \caption{\small{
+      Average nominal and inflation-adjusted BAföG payouts for student recipients (excluding pupils), based on official data from \cite{destatis_bafoeg_data}.  
+      The table includes the Consumer Price Index (CPI, variable \texttt{PREIS1}, base year 2020 = 100) and a derived price factor used to convert nominal amounts into 2023 euros.  
+      Inflation-adjusted averages and total expenditures were calculated with this deflator and are not directly reported in the original Destatis tables.
+    }}
   \label{table:payout_over_time}
   \end{table}
 \endgroup
@@ -137,12 +134,7 @@ Year & Students & \multicolumn{3}{|c|}{Number of Supported Students} & \multicol
 \bottomrule
 \end{tabular}
 \caption{\small{
-  Number and percentage of students receiving BAföG support.  
-  Columns:  
-  \textbf{BIL002} = total number of students;  
-  \textbf{PER010} = total supported students;  
-  \textbf{PER011} = fully supported students;  
-  \textbf{PER012} = partially supported students.
+        Number and percentage of students receiving BAföG support using numbers from \cite{destatis_bafoeg_data}. 
 }}
 \label{table:bafoeg_support_landscape}
 \end{table}

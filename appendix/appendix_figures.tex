@@ -3,11 +3,10 @@
 \renewcommand{\thefigure}{\thesection \arabic{figure}}
 \setcounter{figure}{0}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Student and Parental Incomes Figures
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
   \centering
   % Parental joint excess income distribution
   \begin{subfigure}[t]{0.42\linewidth}
@@ -25,6 +24,76 @@
   \caption{Simulated mean excess income for parents and students.}
   \label{fig:income-distributions}
 \end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Distribution Comparison: Theoretical vs Reported BAföG Awards
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!htbp]
+  \centering
+  % Simulated theoretical BAföG award distribution
+  \begin{subfigure}[t]{0.42\linewidth}
+    \includegraphics[width=\linewidth]{distributions/theo.png}
+    \caption{Distribution of simulated BAföG entitlements based on microsimulation.}
+    \label{fig:simulated_distribution}
+  \end{subfigure}
+  \hfill
+  % Observed reported BAföG receipt distribution
+  \begin{subfigure}[t]{0.42\linewidth}
+    \includegraphics[width=\linewidth]{distributions/reported.png}
+    \caption{Distribution of reported BAföG receipt in SOEP survey data.}
+    \label{fig:reported_distribution}
+  \end{subfigure}
+  \caption{Comparison of theoretical BAföG award simulation with actual reported take-up.}
+  \label{fig:bafoeg_distribution_comparison}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Timeline Comparison: Theoretical vs Reported BAföG Awards
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!htbp]
+  \centering
+  % Timeline: Simulated theoretical BAföG awards over time
+  \begin{subfigure}[t]{0.42\linewidth}
+    \includegraphics[width=\linewidth]{timeline/theo.png}
+    \caption{Timeline of simulated BAföG entitlements based on microsimulation.}
+    \label{fig:simulated_timeline}
+  \end{subfigure}
+  \hfill
+  % Timeline: Observed reported BAföG receipt over time
+  \begin{subfigure}[t]{0.42\linewidth}
+    \includegraphics[width=\linewidth]{timeline/reported.png}
+    \caption{Timeline of reported BAföG receipt in SOEP survey data.}
+    \label{fig:reported_timeline}
+  \end{subfigure}
+  \caption{Comparison of theoretical BAföG award simulation with actual reported take-up over time.}
+  \label{fig:bafoeg_timeline_comparison}
+\end{figure}
+
+
+
+% \begin{figure}[H]
+%   \centering
+%   \begin{minipage}[t]{0.42\textwidth}
+%     \centering
+%     \includegraphics[width=0.95\linewidth]{fraction_of_enrolled_students_receiving_bafog.png}
+%     \caption{
+%       Fraction of enrolled students in Germany receiving partial, full, or combined BAföG support (loans and grants). Based on official statistics from Destatis. \textit{Own illustration}.
+%     }
+%     \label{figure:bafoeg_support}
+%   \end{minipage}%
+%   \hfill
+%   \begin{minipage}[t]{0.42\textwidth}
+%     \centering
+%     \includegraphics[width=0.95\linewidth]{payout_over_time.png}
+%     \caption{
+%       Average nominal and real monthly BAföG payout for students (excluding pupils), based on Destatis time series. \textit{Own illustration}.
+%     }
+%     \label{figure:payout_over_time}
+%   \end{minipage}
+%
+% \end{figure}
+
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % % Student and Parental Excess Incomes Figures
@@ -47,69 +116,3 @@
 %   \caption{Simulated mean excess income for parents (\subref{fig:parental-excess}) and students (\subref{fig:student-excess}).}
 %   \label{fig:excess-income}
 % \end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Distribution Comparison: Theoretical vs Reported BAföG Awards
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[htbp]
-  \centering
-  % Simulated theoretical BAföG award distribution
-  \begin{subfigure}[t]{0.42\linewidth}
-    \includegraphics[width=\linewidth]{distributions/theo.png}
-    \caption{Simulated distribution of theoretical BAföG awards based on microsimulation.}
-    \label{fig:simulated_distribution}
-  \end{subfigure}
-  \hfill
-  % Observed reported BAföG receipt distribution
-  \begin{subfigure}[t]{0.42\linewidth}
-    \includegraphics[width=\linewidth]{distributions/reported.png}
-    \caption{Observed distribution of reported BAföG receipt in SOEP survey data.}
-    \label{fig:reported_distribution}
-  \end{subfigure}
-  \caption{Comparison of theoretical BAföG award simulation with actual reported take-up.}
-  \label{fig:bafoeg_distribution_comparison}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Timeline Comparison: Theoretical vs Reported BAföG Awards
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[htbp]
-  \centering
-  % Timeline: Simulated theoretical BAföG awards over time
-  \begin{subfigure}[t]{0.42\linewidth}
-    \includegraphics[width=\linewidth]{timeline/theo.png}
-    \caption{Simulated distribution of theoretical BAföG awards based on microsimulation.}
-    \label{fig:simulated_timeline}
-  \end{subfigure}
-  \hfill
-  % Timeline: Observed reported BAföG receipt over time
-  \begin{subfigure}[t]{0.42\linewidth}
-    \includegraphics[width=\linewidth]{timeline/reported.png}
-    \caption{Observed distribution of reported BAföG receipt in SOEP survey data.}
-    \label{fig:reported_timeline}
-  \end{subfigure}
-  \caption{Comparison of theoretical BAföG award simulation with actual reported take-up over time.}
-  \label{fig:bafoeg_timeline_comparison}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}[t]{0.42\textwidth}
-    \centering
-    \includegraphics[width=0.95\linewidth]{fraction_of_enrolled_students_receiving_bafog.png}
-    \caption{
-      Fraction of enrolled students in Germany receiving partial, full, or combined BAföG support (loans and grants). Based on official statistics from Destatis. \textit{Own illustration}.
-    }
-    \label{figure:bafoeg_support}
-  \end{minipage}%
-  \hfill
-  \begin{minipage}[t]{0.42\textwidth}
-    \centering
-    \includegraphics[width=0.95\linewidth]{payout_over_time.png}
-    \caption{
-      Average nominal and real monthly BAföG payout for students (excluding pupils), based on Destatis time series. \textit{Own illustration}.
-    }
-    \label{figure:payout_over_time}
-  \end{minipage}
-
-\end{figure}
