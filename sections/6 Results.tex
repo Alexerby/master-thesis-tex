@@ -81,20 +81,37 @@ Differences in magnitude between models are minor and expected given their disti
 
 \input{tables/regression_table.tex}
 
-Looking at the demographic and socioeconomic predictors, we find that older individuals and those with a registered partner are significantly more likely to forego BAföG despite being eligible. 
-The estimated effect of age is consistently positive and statistically significant across all models. 
-The average marginal effects from the Logit and Probit models suggest that each additional year of age increases the probability of non-take-up by approximately 1.8 percentage points, while the coefficient from the Linear Probability Model indicates a somewhat larger effect of 3.7 percentage points. 
-Similarly, the presence of a registered partner corresponds to a substantially higher likelihood of non-take-up, with marginal effects indicating an increase of around 26 percentage points. 
-These patterns likely reflect lower BAföG entitlements among these groups, reducing the perceived benefit of applying. 
-Moreover, individuals with direct or indirect migration backgrounds are significantly less likely to refuse BAföG.
+% Looking at the demographic and socioeconomic predictors, we find that older individuals and those with a registered partner are significantly more likely to forego BAföG despite being eligible. 
 
-Furthermore, all three models suggest that whether an individual lives at home or has moved out from their parents does not, in itself, have a statistically significant effect on the likelihood of BAföG take-up. 
+The model suggests that age is also a strong predictor of non-take-up in our models: each additional year of age increases the probability of not claiming BAföG by approximately 1.8 percentage points (Logit/Probit AMEs), and 3.7 percentage points in the LPM. 
+This positive relationship is consistent with \cite{konijn_quantifying_2023}, who find higher non-take-up with age in the Netherlands. 
+In contrast, \cite{herber_non-take-up_2019} report no significant age effect for BAföG in Germany, and \cite{fuchs_austria_2007} find lower non-take-up among older individuals in Austria.\footnote{Fuchs (2007) find a significant negative age effect only in the selection stage of their Heckman model.}
+\cite{frick_claim_2007} do not report a consistent or significant effect of age across specifications.
+
+Similarly, the presence of a registered partner corresponds to a substantially higher likelihood of non-take-up, with marginal effects indicating an increase of around 26 (16 in LPM) percentage points. 
+These patterns may reflect lower BAföG entitlements among these groups, reducing the perceived benefit of applying. 
+
+
+Moreover, individuals with direct or indirect migration backgrounds are significantly less likely to refuse BAföG. 
+This aligns with \cite{herber_non-take-up_2019} for Germany\footnote{Though not statistically significant.} and \cite{konijn_quantifying_2023} for student aid in the Netherlands. 
+By contrast, \cite{fuchs_austria_2007} find no significant effect for social assistance in Austria. 
+Similarly, \cite{frick_claim_2007} report mixed results for Germany, with a significant effect only in their Heckman selection model.
+
+Furthermore, all three models suggests that whether an individual lives at home or has moved out from their parents does not, in itself, have a statistically significant effect on the likelihood of BAföG take-up. 
 By contrast, informational factors appear to play a more substantial role: having a sibling who has previously received BAföG is associated with a significantly lower probability of non-take-up, by approximately 10 percentage points across all three models. 
 This finding highlights the importance of informational spillovers within families in shaping take-up behaviour. 
-The models further indicate that individuals with an East German background are significantly more likely to take up BAföG, with the probability of non-take-up reduced by approximately 23 to 25 percentage points across all specifications. 
+
+The models further indicate that individuals with an East German background are significantly more likely to take up BAföG, with non-take-up probabilities reduced by approximately 23 to 25 percentage points across all specifications. 
+This finding is consistent with \cite{herber_non-take-up_2019} and \cite{harnisch_nontakeup_2019}, who also report higher take-up rates among individuals from East Germany. 
+Detailed descriptive statistics can be found in Appendix~\ref{appendix:tables}, Table~\ref{table:take-up-rates-grouped}.
+
 By contrast, parental education appears to have no meaningful influence on take-up, as the estimated coefficients are statistically insignificant and the AMEs are close to zero across all models, suggesting no substantive effect.
 
-Finally, we do not find any statistically significant effects of the behavioural predictors. Specifically, patience, impulsiveness, and self-assessed risk appetite do not have a significant impact on the probability of non-take-up.
+Finally, we do not find any statistically significant effects of the behavioural predictors. 
+Specifically, patience, impulsiveness, and self-assessed risk appetite do not have a significant impact on the probability of non-take-up. 
+This is in line with \cite{herber_non-take-up_2019}, who also report no significant main effects. 
+However, they find statistical significance when interacting impatience and impulsiveness. 
+We tested a similar interaction term but found no significant effect. 
 Across all models, the estimated coefficients are small and not distinguishable from zero, suggesting that these behavioural traits do not systematically influence BAföG take-up decisions in our sample.
 
 
@@ -102,4 +119,4 @@ Across all models, the estimated coefficients are small and not distinguishable 
 Our baseline analysis includes all students with any positive simulated BAföG entitlement. 
 To check whether our results are driven by those with very small entitlements, who might not consider applying to be worth the effort, we rerun the models restricting the sample to students with simulated monthly entitlements of at least 200 EUR.
 
-As shown in Appendix~\ref{appendix:tables}, Table~\ref{tab:logit_probit_lpm_results_200}, the main findings hold up. The negative link between entitlement size and non-take-up remains strong and significant. Similarly, age, partnership status, and East German background continue to show consistent effects. This indicates that the main findings are not just driven by students with minimal entitlements, but also reflect broader patterns in take-up behaviour among those eligible for more substantial benefits.
+As shown in Appendix~\ref{appendix:tables}, Table~\ref{tab:logit_probit_lpm_results_200}, the main findings hold. The negative link between entitlement size and non-take-up remains strong and significant. Similarly, age, partnership status, and East German background continue to show consistent effects. This indicates that the main findings are not just driven by students with minimal entitlements, but also reflect broader patterns in take-up behaviour among those eligible for more substantial benefits.
