@@ -13,7 +13,7 @@
 
 Our microsimulation results indicate that the non-take-up rate of BAföG, among theoretically eligible students, ranged from approximately 50--70\% across the survey years 2007--2021, with an average of 60\% (Table~\ref{table:microsimulation_ntu}). These estimates are broadly in line with previous findings on non-take-up of social benefits in Germany, which generally fall between 40--67\%, depending on the program and time period (see Table~\ref{table:NTU-studies}). While our estimates are broadly consistent with prior research, they are noticeably higher than the 36--40\% non-take-up rate for BAföG reported by \cite{herber_non-take-up_2019}, who also use SOEP survey data, but for the period 2002--2013.
 
-Several factors may help explain the difference in estimated non-take-up rates. These factors include the specific SOEP variables used to capture income and reported BAföG receipt, as well as differences in the time periods covered (2007 to 2021 in our study versus 2002 to 2013 in \cite{herber_non-take-up_2019}). Other aspects of the microsimulation design and modelling approach may also contribute to the variation. Importantly, the overall accuracy of our model in classifying receipt status is 72\%, as defined by the share of correctly predicted recipients and non-recipients (see Equation~\ref{eq:accuracy_microsimulation}). While not perfect, this level of accuracy is consistent with expectations given the complexity of the BAföG system and the limitations of self-reported survey data.
+Several factors may help explain the difference in estimated non-take-up rates. These factors include the specific SOEP variables used to capture income and reported BAföG receipt, as well as differences in the time periods covered (2007 to 2021 in our study versus 2002 to 2013 in \cite{herber_non-take-up_2019}). Other aspects of the microsimulation design and modelling approach may also contribute to the variation. Importantly, the overall accuracy of our model in classifying receipt status is 72\%, as defined by the share of correctly predicted recipients and non-recipients (see equation~\ref{eq:accuracy_microsimulation}). While not perfect, this level of accuracy is consistent with expectations given the complexity of the BAföG system and the limitations of self-reported survey data.
 
 %TODO: can we also say here that this is comparable to some other research that has done this? is that the case? I feel like it might make our case stronger maybe?
 
@@ -35,7 +35,7 @@ This pattern is clearly illustrated in Figure~\ref{fig:ntu_bounds_over_years}, w
 The increase in non-take-up in the years preceding 2021 could potentially reflect behavioural or institutional factors such as changes in awareness, perceived complexity, or attitudes toward debt. 
 It could also be partly driven by policy changes. 
 Several BAföG reforms were introduced during this period, including increases in grant amounts and adjustments to income thresholds, which may have influenced both eligibility and the perceived attractiveness of the program. 
-Since the simulation accounts for these legal changes, the results shown in the figure capture not only behavioural responses, but also how reforms may have affected take-up incentives over time.
+Since the simulation accounts for these legal changes, the results capture not only behavioural responses, but also how reforms may have affected take-up incentives over time.
 
 %TODO: does this belong in the discussion?
 
@@ -66,7 +66,7 @@ Across all survey years, the probability of non-take-up changes only slightly, e
 This robustness indicates that small to moderate errors in reported income do not significantly impact eligibility classification or population-level take-up estimates. 
 It also reflects characteristics of the BAföG eligibility formula, where income thresholds, flat regions, and buffers reduce the sensitivity to minor income fluctuations.
 
-In summary, this analysis reinforces the reliability of our microsimulation approach, demonstrating that the classification of non-take-up is not overly sensitive to realistic levels of income measurement error.
+In summary, this analysis reinforces the reliability of our microsimulation approach, demonstrating that the classification of non-take-up is not overly sensitive to realistic levels of income measurement errors.
 
 
 
@@ -84,8 +84,9 @@ Differences in magnitude between models are minor and expected given their disti
 Looking at the demographic and socioeconomic predictors, we find that older individuals and those with a registered partner are significantly more likely to forego BAföG despite being eligible. 
 The estimated effect of age is consistently positive and statistically significant across all models. 
 The average marginal effects from the Logit and Probit models suggest that each additional year of age increases the probability of non-take-up by approximately 1.8 percentage points, while the coefficient from the Linear Probability Model indicates a somewhat larger effect of 3.7 percentage points. 
-Similarly, having a registered partner is associated with a notably higher likelihood of non-take-up, or around 26 percentage points according to the marginal effects. 
-These patterns likely reflect lower BAföG entitlements among these groups, reducing the perceived benefit of applying. Moreover, individuals with direct or indirect migration backgrounds are significantly less likely to refuse BAföG.
+Similarly, the presence of a registered partner corresponds to a substantially higher likelihood of non-take-up, with marginal effects indicating an increase of around 26 percentage points. 
+These patterns likely reflect lower BAföG entitlements among these groups, reducing the perceived benefit of applying. 
+Moreover, individuals with direct or indirect migration backgrounds are significantly less likely to refuse BAföG.
 
 Furthermore, all three models suggest that whether an individual lives at home or has moved out from their parents does not, in itself, have a statistically significant effect on the likelihood of BAföG take-up. 
 By contrast, informational factors appear to play a more substantial role: having a sibling who has previously received BAföG is associated with a significantly lower probability of non-take-up, by approximately 10 percentage points across all three models. 
@@ -99,6 +100,6 @@ Across all models, the estimated coefficients are small and not distinguishable 
 
 \subsubsection{Restricting to Higher Entitlements}
 Our baseline analysis includes all students with any positive simulated BAföG entitlement. 
-To check whether our results are driven by those with very small entitlements, who might not consider applying to be worth the effort, we rerun the models restricting the sample to students with monthly entitlements of at least 200 EUR.
+To check whether our results are driven by those with very small entitlements, who might not consider applying to be worth the effort, we rerun the models restricting the sample to students with simulated monthly entitlements of at least 200 EUR.
 
 As shown in Appendix~\ref{appendix:tables}, Table~\ref{tab:logit_probit_lpm_results_200}, the main findings hold up. The negative link between entitlement size and non-take-up remains strong and significant. Similarly, age, partnership status, and East German background continue to show consistent effects. This indicates that the main findings are not just driven by students with minimal entitlements, but also reflect broader patterns in take-up behaviour among those eligible for more substantial benefits.
