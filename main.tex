@@ -4,7 +4,9 @@
 \date{Seminar date}
 \begin{document}
 
-% TITLE PAGE 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TITLE PAGE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{title}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -35,6 +37,10 @@ Additionally, we find a notable difference in take-up rates between East and Wes
 
 \newpage
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ACKNOWLEDGEMENTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{center}
     \textbf{Acknowledgements}
 \end{center}
@@ -64,21 +70,24 @@ Her feedback was valuable in shaping the direction and clarity of our work.
 \input{sections/6 Results}
 \input{sections/7. Discussion}
 
-%REFERENCES
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% REFERENCES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \begin{flushleft}
     \renewcommand{\baselinestretch}{1.1}
     \small
     \titleformat{\section}{\normalfont\huge\bfseries}{\thesection}{1em}{} 
     \addcontentsline{toc}{section}{References} 
-    \bibliography{bibliography, bafogandg, estg, solzg}
+    \bibliography{bibliography, bafogandg, estg}
 \end{flushleft}
 
 %APPENDICES
 \newpage
 \appendix
-\setcounter{page}{1} %Restarts page counting to 1
-\pagenumbering{roman} %Differentiates the appendix page numbers from the main article
+\setcounter{page}{1}        % Restarts page counting to 1
+\pagenumbering{roman}       % Differentiates the appendix page numbers from the main article
 
 \titleformat{\section}{\centering\normalfont\normalsize\bfseries}{Appendix \thesection: }{0em}{}
 \input{appendix/appendix_tables}
@@ -88,9 +97,9 @@ Her feedback was valuable in shaping the direction and clarity of our work.
 \input{appendix/appendix_input_params}
 
 \newpage
-\pagenumbering{arabic} % Return to standard page numbering (optional)
-\renewcommand{\thesection}{\arabic{section}} % Reset section numbering format if needed
-\setcounter{section}{0} % Reset section counter if using \section in ai_statement
+\pagenumbering{arabic}                          % Return to standard page numbering (optional)
+\renewcommand{\thesection}{\arabic{section}}    % Reset section numbering format if needed
+\setcounter{section}{0}                         % Reset section counter if using \section in ai_statement
 
 
 \input{ai_statement}
