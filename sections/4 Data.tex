@@ -22,33 +22,21 @@ It is a nationally representative longitudinal study that collects data from aro
 The survey includes respondents aged 17 and older and provides rich individual- and household-level information on income, education, labour market activity, household structure, and demographics. 
 This study uses the SOEP-Core sample, the central and most comprehensive module of the dataset. While general purpose surveys like SOEP are not specifically designed to measure non-take-up, they have the advantage of covering both benefit receipt and the before mentioned characteristics needed to estimate eligibility \citep{mechelen_who_2017}.
 
-We restrict our analysis to the period between 2007 and 2021, as this is the range for which we were able to consistently collect and harmonize the necessary statutory parameters from official BAföG regulations \citep{bafoeg_law}. This includes annual updates to base need rates, income allowances, asset thresholds, and other legally defined components relevant to BAföG eligibility and award determination.\footnote{
-  See Appendix \ref{appendix:simulation-example} for an example of how these rules are applied.
-}
-Earlier years were excluded due to inconsistencies or incomplete availability of comparable legal documentation. 
-By focusing on this window, we ensure that the simulation model is fully grounded in verifiable legal norms and reflects the actual policy environment faced by students during this time.
-
-The SOEP, with its detailed household structure, allows us to link students to their parents, siblings, and, in many cases, partners. 
-Using this data, we construct a dataset that combines rich information at both the student and household level. 
-This includes a wide range of socio-demographic, economic, and relational characteristics for students and their families.
-
 \subsection{Sample Description}
-Our final dataset comprises \(5{,}889\) student-year observations, each representing a student in a given survey year, drawn from a harmonized sample based on SOEP-Core data covering 2007 to 2022. 
-The panel is unbalanced, as students are observed for varying numbers of years depending on education duration, dropout behavior, and survey participation.
+We restrict our analysis to the period between 2007 and 2021, as this corresponds to the range for which we were able to consistently collect and harmonize the necessary statutory parameters from official BAföG regulations \citep{bafoeg_law}. These parameters include annual updates to base need rates, income allowances, asset thresholds, and other legally defined components relevant to BAföG eligibility and award determination.\footnote{
+  See Appendix \ref{appendix:simulation-example} for an example illustrating how these rules are applied.
+}
+Earlier years were excluded due to inconsistencies or incomplete availability of comparable legal documentation. By focusing on this window, we ensure that the simulation model is fully grounded in verifiable legal norms and accurately reflects the policy environment faced by students during this period.
 
-While some students appear only once, others are followed across multiple years of their educational trajectory. 
-Each observation includes rich information on sociodemographic background, enrolment status, income and assets, housing situation, and reported BAföG receipt. 
-Variables used in the simulation are consistently available across the full period.
+The SOEP, with its detailed household structure, enables us to link students to their parents, siblings, and, in many cases, partners. Using this data, we construct a dataset combining rich information at both the student and household levels, including a wide range of socio-demographic, economic, and relational characteristics.
 
+Our final dataset comprises \(5{,}889\) student-year observations, each representing a student in a given survey year, drawn from a harmonized sample based on SOEP-Core data spanning 2007 to 2022. The panel is unbalanced, as students are observed for varying numbers of years depending on education duration, dropout behavior, and survey participation.
 
-While the SOEP survey is nationally representative, this analytic subsample is conditional on survey respondents who were enrolled in education and met the inclusion criteria of the simulation pipeline. 
-A descriptive overview of key variables is provided in Appendix ~\ref{appendix:variable_dictionary}, Table~\ref{table:variable_dictionary}.
+While some students appear only once, others are followed across multiple years of their educational trajectory. Each observation includes comprehensive information on sociodemographic background, enrolment status, income and assets, housing situation, and reported BAföG receipt. Variables used in the simulation are consistently available throughout the entire period.
+
+To ensure accurate simulation of BAföG eligibility and awards, we restrict the sample to students for whom we can identify income information for both parents. 
+
+Although the SOEP survey is nationally representative, this analytic subsample is conditional on respondents enrolled in education and meeting the inclusion criteria of the simulation pipeline. A descriptive overview of key variables is provided in Appendix~\ref{appendix:variable_dictionary}, Table~\ref{table:variable_dictionary}.
 
 \input{tables/descriptive_variables.tex}
-
-%TODO: Maria has some text from some paper on exactly this: "Note: The mean simulated BAf¨oG in the full sample is lower because it includes all observations with a simulated amount of zero"
-
-% \subsection{Limitations}
-% Although the SOEP provides comprehensive socioeconomic data, such general purpose surveys come with some limitations. First, there are potential biases due to non response bias and undercoverage. Non response may also be correlated with non take up, which can distort estimates. Second, measurement errors can be a concern, especially in regards to income, asset reporting, and welfare receipt. Respondents may misreport their income or confuse the benefits they receive, leading to inaccurate estimates of eligibility and take up. Third, mismatches in the timing and definition of income used in surveys compared to what administrations use to assess eligibility can result in classification errors. Lastly, general purpose surveys often lack detailed information about reasons for non take up, making it difficult to distinguish between, for example, lack of awareness and administrative barriers \citep{mechelen_who_2017}. In addition to these general issues, there are also several limitations that are specific to the data available in this study and the way eligibility is modeled. These are outlined below.
-
 

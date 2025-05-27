@@ -35,26 +35,31 @@ These models incorporate relevant socioeconomic and demographic factors to explo
 
 Microsimulation is a modelling approach that uses detailed individual-level data to apply policy rules directly to each observation. Instead of relying on representative averages, this method captures how specific characteristics and circumstances influence outcomes across the population \citep{klevmarken_microsimulation_2022}.
 
-Given the complexity of BAföG eligibility rules, the need to simulate tax rules when calculating individual incomes, and the importance of capturing individual backgrounds, microsimulation is well suited to this analysis. Our model reconstructs eligibility and award amounts by applying both the statutory BAföG criteria and relevant tax regulations to detailed SOEP survey data. This approach ensures that net incomes for students and their parents, which are central to means-testing under BAföG, are calculated in accordance with actual legal requirements.
+Given the complexity of BAföG eligibility rules, the need to simulate tax rules when calculating individual incomes, and the importance of capturing individual backgrounds, microsimulation is well suited to this analysis. 
+Our model reconstructs eligibility and award amounts by applying both the statutory BAföG criteria and relevant tax regulations to detailed SOEP survey data. 
+This approach ensures that net incomes for students and their parents, which are central to means-testing under BAföG, are calculated in accordance with statutory rules.
 
 We identify eligible students based on statutory criteria, regardless of whether they actually received aid. Figure~\ref{fig:pipeline-overview} provides an overview of the steps in the microsimulation pipeline.
 
 \input{tikzfigs/simulation_algo.tex}
 
-The microsimulation model implements the legal rules and means-testing procedures set out in BAföG \citep{bafoeg_law} for the years 2007 to 2021. For each student in the SOEP-Core sample, the model uses information on income, assets, and household structure for the student as well as for others who are expected to help support them, such as parents, spouses, or siblings. The process involves calculating gross and net incomes according to the relevant tax rules, applying asset limits and deductions, and then determining eligibility and award amounts using the statutory formulas. In this way, the model aims to reflect how eligibility decisions are made in practice. The result is a theoretical eligibility and award amount for each student, which can be directly compared to self-reported BAföG take-up.
+The microsimulation model implements the legal rules and means-testing procedures set out in BAföG \citep{bafoeg_law} for the years 2007 to 2021. 
+For each student in the SOEP-Core sample, the model uses information on income, assets, and household structure for the student as well as for others who are expected to help support them, such as the parents and spouse, if any. 
+The process involves calculating net incomes according to the relevant tax rules, applying asset limits and deductions, and then determining eligibility and award amounts using the statutory formulas. 
+In this way, the model aims to reflect how eligibility decisions are made in practice. The result is a theoretical eligibility and award amount for each student, which can be directly compared to self-reported BAföG take-up.
+For a detailed example of how the full calculation logic applies in practice, see Appendix~\ref{appendix:simulation-example}.
 
-Unlike earlier studies, we focus solely on higher education students aged 18 and older. This ensures a consistent target group, as BAföG eligibility and structure differ between higher education and vocational training. 
-Restricting the sample to adults also enhances data quality, as key variables tend to be reported more reliably by adults, whereas data for minors are often incomplete or reported by proxies \citep{soep_pgen_2025, soep_dtc_2005}.
-From a policy perspective, university students are central to current debates on BAföG reform, particularly regarding debt aversion, housing costs, and equitable access. 
-Focusing on this group enhances the relevance of our findings for ongoing policy discussions.
-This approach enables a systematic assessment of the alignment between statutory entitlements and actual BAföG participation. 
-For a detailed example of the full calculation logic applied to an actual observation, see Appendix~\ref{appendix:simulation-example}.
+% Unlike earlier studies, we focus solely on higher education students aged 18 and older. This ensures a consistent target group, as BAföG eligibility and structure differ between higher education and vocational training. 
+% Restricting the sample to adults also enhances data quality, as key variables tend to be reported more reliably by adults, whereas data for minors are often incomplete or reported by proxies \citep{soep_pgen_2025, soep_dtc_2005}.
+% From a policy perspective, university students are central to current debates on BAföG reform, particularly regarding debt aversion, housing costs, and equitable access. 
+% Focusing on this group enhances the relevance of our findings for ongoing policy discussions.
+% This approach enables a systematic assessment of the alignment between statutory entitlements and actual BAföG participation. 
 
 %TODO: This chapter kind of ends in a weird way, where do we present the result from this sensitivity analysis for example?
 
 % Maybe ref all our data sources, the statutory and soep
 \subsubsection{Simulation Methodology}
-The pipeline begins by assembling a harmonized dataset of student-level observations from SOEP-Core and manually harmonizing variables that are not already standardized. 
+The pipeline begins by assembling a harmonized dataset of student-level observations from SOEP-Core and manually harmonizing variables that are not already harmonized. 
 This is achieved by filtering for individuals who are enrolled in education, fall within the relevant survey years, and are at least 18 years old. 
 To ensure a valid estimation of parental contributions, the dataset is further restricted to cases where income data from both legal parents are observable in the panel, thereby reducing bias and improving the accuracy of eligibility estimates. 
 The most important statutory input parameters used throughout the simulation, such as needs rates, income disregards, and deduction formulas, are documented in Appendix~\ref{appendix:input_params}.
@@ -63,20 +68,19 @@ The most important statutory input parameters used throughout the simulation, su
 This student-level dataset serves as the core of the simulation pipeline, providing the central structure to which all additional information is appended. 
 It integrates sociodemographic variables, including sex, age, partnership status, number of siblings, number of children, household composition, and federal state of residence. 
 Gross student income is also appended at this stage. 
-Net student income is derived from gross values by applying year-specific rules for income tax, solidarity surcharge, and church tax where applicable, as well as standard deductions such as the Werbungskostenpauschale.\footnote{In accordance with §§~21–23 BAföG; see \citet{bafoeg_law}.} 
+Net student income is derived from gross values by applying year-specific rules for income tax, solidarity surcharge, and church tax where applicable, as well as standard deductions.\footnote{
+Standard deductions as defined in §§~21–23 of the BAföG law; see \citet{bafoeg_law} for details.
+} 
 This net income will later be used to compute the student’s excess income as part of the BAföG need assessment.
 
 \paragraph{Calculating Parental Contributions.}
 Accurate parental income information is essential for constructing a credible BAföG means test. 
-To ensure consistency in the simulation, the analysis is restricted to students for whom income data from both legal parents are available within the household files. 
-This means that cases where one or both parents cannot be identified or linked within the dataset—such as due to absence, non-response, or household separation—are excluded from the simulation sample.
-
 The simulation pipeline aggregates and evaluates parental income to estimate the expected contribution toward the student’s BAföG entitlement. 
-For each student, the incomes of both legal parents—identified within the household and linked through SOEP family structure data—are retrieved and converted into annual net income. 
-The net income of parents are retrieved the same way as the students own income (applying income tax, solidarity surcharge, standard deductions and church tax).
+For each student, the incomes of both legal parents, identified within the household and linked through SOEP family structure data, are retrieved and converted into annual net income. 
+The net income of parents is retrieved the same way as the student's own income (applying income tax, solidarity surcharge, standard deductions, and church tax).
 
 Net incomes from both parents are combined into a joint parental income measure. 
-From this, the model subtracts statutory allowances,\footnote{Defined in \textit{§§}\,24–25 BAföG; see \citet{bafoeg_law}.} which vary depending on the number of parents, number of dependent children, and year-specific legal thresholds. 
+From this, the model subtracts statutory allowances,\footnote{As defined in §§\,24--25 BAföG; see \citet{bafoeg_law}.} which vary depending on whether one or both parents are present, the number of dependent children, and year-specific legal thresholds.
 Additional deductions are applied if the student has siblings who might also be eligible for support. 
 The result is a measure of excess parental income, which feeds directly into the theoretical award calculation.
 
@@ -211,12 +215,12 @@ Linear Probability Model & \( \mathbf{X}^\top \boldsymbol{\beta} \) & Ordinary L
 \caption{Specifications of the Binary Choice Models}
 \end{table}
 
-While the SOEP is a panel dataset with information collected from individuals across multiple years, the sample size of eligible students is too small to support reliable longitudinal analysis. For this reason, all models are estimated on a pooled cross-section of theoretically eligible individuals (\( n = 458 \)). The sample is restricted to observations with complete parental income information.
+While the SOEP is a panel dataset with information collected from individuals across multiple years, the sample size of eligible students is too small to support reliable longitudinal analysis. For this reason, all models are estimated on a pooled cross-section of theoretically eligible individuals (\( n = 458 \)).
 
 %\paragraph{Interpretation and Comparison.} 
 The logit and probit models are nonlinear estimators of the probability of non-take-up, based on an underlying latent index framework. 
 Their coefficients represent changes in the unobserved latent variable and are not directly interpretable in terms of changes in the probability of the observed outcome. 
-To facilitate interpretation, we report average marginal effects (AMEs), which approximate the average change in the probability of non-take-up associated with a one-unit increase in each covariate.\footnote{The AME for covariate \( X_k \) is computed as the sample analogue of the population moment \( \mathbb{E}[f(\mathbf{X}^\top \boldsymbol{\beta}) \cdot \beta_k] \), where \( f(\cdot) \) is the derivative of the link function \( F(\cdot) \). Specifically,
+To facilitate interpretation, we report average marginal effects (AME), which approximate the average change in the probability of non-take-up associated with a one-unit increase in each covariate.\footnote{The AME for covariate \( X_k \) is computed as the sample analogue of the population moment \( \mathbb{E}[f(\mathbf{X}^\top \boldsymbol{\beta}) \cdot \beta_k] \), where \( f(\cdot) \) is the derivative of the link function \( F(\cdot) \). Specifically,
 \[
     \widehat{\text{AME}}_k 
     = \frac{1}{n} \sum_{i=1}^n f(\mathbf{X}_i^\top \hat{\boldsymbol{\beta}}) \cdot \hat{\beta}_k
